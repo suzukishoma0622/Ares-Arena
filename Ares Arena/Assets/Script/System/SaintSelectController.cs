@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SaintSelectController : MonoBehaviour
 {
@@ -9,14 +10,26 @@ public class SaintSelectController : MonoBehaviour
     public TMP_Text SaintExplain;
     public TMP_Text SaintHP;
     public Image SaintBar;
+    public GameObject FadeOut;
     int[] SaintTraitNum = {1, 1, 1, 2, 2, 2, 3, 3, 3};
+    int Choosing;
+    int Saint1;
+    int Saint2;
+
+    public AudioSource BGM;
+    public AudioSource SE;
+    public AudioClip OkSE;
+    bool IsVolumeFade;
     void Start()
     {
         
     }
     void Update()
     {
-        
+        if (IsVolumeFade)
+        {
+            BGM.volume -= Time.deltaTime * 2f;
+        }
     }
     public void Select(int i)
     {
@@ -95,5 +108,40 @@ public class SaintSelectController : MonoBehaviour
                 SaintBar.color = new Color(0f, 1f, 0f, 1f);
                 break;
         }
+        Choosing = i;
+    }
+    public void SaintChoose(int i)
+    {
+        switch(i)
+        {
+            case 1:
+                if (Choosing != Saint2)
+                {
+                    Saint1 = Choosing;
+                    PlayerPrefs.SetInt("Saint1", Choosing);
+                }
+                break;
+            case 2:
+                if (Choosing != Saint1)
+                {
+                    Saint2 = Choosing;
+                    PlayerPrefs.SetInt("Saint2", Choosing);
+                }
+                break;
+        }
+        PlayerPrefs.Save();
+    }
+    public void RunStart()
+    {
+        if (Saint1 != 0)
+        {
+            FadeOut.SetActive(true);
+            Invoke("SceneMove", 2f);
+        }
+    }
+    void SceneMove()
+    {
+        SceneManager.LoadScene("Arena");
+        IsVolumeFade = true;
     }
 }
