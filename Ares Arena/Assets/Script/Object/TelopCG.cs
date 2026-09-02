@@ -7,20 +7,20 @@ public class TelopCG : MonoBehaviour
     bool IsSwitch;
     void Start()
     {
-        Invoke("D", display);
+        Invoke("d", display);
     }
     void Update()
     {
         if(IsSwitch)
         {
-            GetComponent<CanvasGroup>().alpha -= speed;
+            GetComponent<CanvasGroup>().alpha -= speed * Time.deltaTime;
         }
         else
         {
-            GetComponent<CanvasGroup>().alpha += speed;
+            GetComponent<CanvasGroup>().alpha += speed * Time.deltaTime;
         }
     }
-    void D()
+    void d()
     {
         IsSwitch = true;
     }

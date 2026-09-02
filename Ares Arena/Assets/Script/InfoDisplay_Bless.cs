@@ -1,0 +1,785 @@
+using UnityEngine;
+using TMPro;
+
+public class InfoDisplay_Bless : MonoBehaviour
+{
+    public InfoDisplay Iscript;
+    public GameObject DisplayObj;
+    public int BlessNum;
+    public TMP_Text NameText;
+    public TMP_Text DescriptionText;
+    int Language;
+    private void Start()
+    {
+        Language = PlayerPrefs.GetInt("Language", 2);
+    }
+    void Update()
+    {
+        switch (BlessNum)
+        {
+            case 1:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "守護者";
+                        DescriptionText.text = $"最大HPが{15 * (1 + Iscript.Bless[54])}%増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Guardian";
+                        DescriptionText.text = $"Maximum HP increases by {15 * (1 + Iscript.Bless[54])}%.";
+                        break;
+                }
+                break;
+            case 2:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "皮膚硬化";
+                        DescriptionText.text = $"戦闘開始時、最大HPの{30 * (1 + Iscript.Bless[54])}%にあたるシールドを得る。";
+                        break;
+                    case 2:
+                        NameText.text = "Skin Hardening";
+                        DescriptionText.text = $"At the start of battle, gain a shield equal to {30 * (1 + Iscript.Bless[54])}% of maximum HP.";
+                        break;
+                }
+                break;
+            case 3:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "超回復体";
+                        DescriptionText.text = $"HPを回復するたび、回復量の{10 * (1 + Iscript.Bless[54])}%にあたる最大HP増加を得る。";
+                        break;
+                    case 2:
+                        NameText.text = "Super Recovering";
+                        DescriptionText.text = $"Each time recover HP, gain a maximum HP increase equal to {10 * (1 + Iscript.Bless[54])}% of the amount recovered.";
+                        break;
+                }
+                break;
+            case 4:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "頑強なる肉体";
+                        DescriptionText.text = $"戦闘終了時、最大HPの{10 * (1 + Iscript.Bless[54])}%を回復する。";
+                        break;
+                    case 2:
+                        NameText.text = "Robust Body";
+                        DescriptionText.text = $"At the end of battle, restore {10 * (1 + Iscript.Bless[54])}% of your maximum HP.";
+                        break;
+                }
+                break;
+            case 5:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "深淵の石";
+                        DescriptionText.text = "サファイアをセレスタイトと置き換える。";
+                        break;
+                    case 2:
+                        NameText.text = "Abyssal Stone";
+                        DescriptionText.text = "Replace Sapphire with Celestite.";
+                        break;
+                }
+                break;
+            case 6:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "第六指";
+                        DescriptionText.text = $"ターン開始時、ハンド数+{1 * (1 + Iscript.Bless[54])}。";
+                        break;
+                    case 2:
+                        NameText.text = "Sixth finger";
+                        DescriptionText.text = $"At the start of your turn, Hand +{1 * (1 + Iscript.Bless[54])}.";
+                        break;
+                }
+                break;
+            case 7:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "小さな宝石箱";
+                        DescriptionText.text = "エメラルドをペリドットと置き換える。";
+                        break;
+                    case 2:
+                        NameText.text = "Small Jewelry box";
+                        DescriptionText.text = "Replace Emerald with Peridot.";
+                        break;
+                }
+                break;
+            case 8:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "研磨";
+                        DescriptionText.text = $"全てのスターター宝石の効果が{1 * (1 + Iscript.Bless[54])}増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Polishing";
+                        DescriptionText.text = $"The effect of all starter gems increases by {1 * (1 + Iscript.Bless[54])}.";
+                        break;
+                }
+                break;
+            case 9:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "恍惚";
+                        DescriptionText.text = $"3回目までの戦闘終了時、HPを{15 * (1 + Iscript.Bless[54])}%回復する。";
+                        break;
+                    case 2:
+                        NameText.text = "Ecstasy";
+                        DescriptionText.text = $"After the first 3 battles, recover {15 * (1 + Iscript.Bless[54])}% of your HP.";
+                        break;
+                }
+                break;
+            case 10:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "第三の眼";
+                        DescriptionText.text = $"ハンドする毎にHPを{2 * (1 + Iscript.Bless[54])}回復する。";
+                        break;
+                    case 2:
+                        NameText.text = "Third Eye";
+                        DescriptionText.text = $"Restores {2 * (1 + Iscript.Bless[54])} HP each time handed.";
+                        break;
+                }
+                break;
+            case 11:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "啓示";
+                        DescriptionText.text = $"毎回ショップのランダムな商品{1 * (1 + Iscript.Bless[54])}つに割引が発生する。";
+                        break;
+                    case 2:
+                        NameText.text = "Revelation";
+                        DescriptionText.text = $"A discount is applied to {1 * (1 + Iscript.Bless[54])} random item in the shop each time.";
+                        break;
+                }
+                break;
+            case 12:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "富豪";
+                        DescriptionText.text = $"メダルを{2 * (1 + Iscript.Bless[54])}枚獲得する。";
+                        break;
+                    case 2:
+                        NameText.text = "Rich";
+                        DescriptionText.text = $"Gain {2 * (1 + Iscript.Bless[54])} Medals.";
+                        break;
+                }
+                break;
+            case 13:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "肉体制御";
+                        DescriptionText.text = $"HPが25%以下の状態で戦闘を終了した時、HPを{40 * (1 + Iscript.Bless[54])}%まで回復する。";
+                        break;
+                    case 2:
+                        NameText.text = "Body control";
+                        DescriptionText.text = $"When a battle ends with HP at 25% or less, HP is restored to {40 * (1 + Iscript.Bless[54])}%.";
+                        break;
+                }
+                break;
+            case 14:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "狂戦士";
+                        DescriptionText.text = $"最大HPが{25 * (1 + Iscript.Bless[54])}%増加する。HPを50%失う。";
+                        break;
+                    case 2:
+                        NameText.text = "Berserker";
+                        DescriptionText.text = $"Maximum HP increases by {25 * (1 + Iscript.Bless[54])}%. Lose 50% of HP.";
+                        break;
+                }
+                break;
+            case 15:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "暴虐の赤石";
+                        DescriptionText.text = "ルビーをガーネットと置き換える。";
+                        break;
+                    case 2:
+                        NameText.text = "Redstone of Tyranny";
+                        DescriptionText.text = "Replace Ruby with Garnet.";
+                        break;
+                }
+                break;
+            case 16:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "怪力";
+                        DescriptionText.text = $"敵にダメージを与えた時、その値が{1 * (1 + Iscript.Bless[54])}増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Superhuman Strength";
+                        DescriptionText.text = $"When dealing damage to an enemy, that value increases by {1 * (1 + Iscript.Bless[54])}.";
+                        break;
+                }
+                break;
+            case 17:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "破砕";
+                        DescriptionText.text = $"シールドを持つ敵に与えるダメージが{2 + Iscript.Bless[54]}倍になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Crushing";
+                        DescriptionText.text = $"Damage dealt to shielded enemies is x{2 + Iscript.Bless[54]}.";
+                        break;
+                }
+                break;
+            case 18:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "復讐の炎";
+                        DescriptionText.text = $"リベンジに必要なダメージが{15 * (1 + Iscript.Bless[54])}%減少する。";
+                        break;
+                    case 2:
+                        NameText.text = "Flames of Revenge";
+                        DescriptionText.text = $"The damage required for Revenge is reduced by {15 * (1 + Iscript.Bless[54])}%.";
+                        break;
+                }
+                break;
+            case 25:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "免疫力";
+                        DescriptionText.text = "弱体化の解除速度が2倍になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Immunity";
+                        DescriptionText.text = "The speed at Weak are removed is doubled.";
+                        break;
+                }
+                break;
+            case 26:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "激昂";
+                        DescriptionText.text = "ダメージを受ける毎にリベンジを追加で25%チャージする。";
+                        break;
+                    case 2:
+                        NameText.text = "Rage";
+                        DescriptionText.text = "Charge Revenge by an additional 25% each time damage is taken.";
+                        break;
+                }
+                break;
+            case 27:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "錬金術";
+                        DescriptionText.text = "取得時、ランダムな宝石3つを入手する。";
+                        break;
+                    case 2:
+                        NameText.text = "Alchemy";
+                        DescriptionText.text = "Obtain three random gems upon acquisition.";
+                        break;
+                }
+                break;
+            case 28:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "背水の陣";
+                        DescriptionText.text = "HPが50%以下でターンを開始したとき、ハンド数+2。";
+                        break;
+                    case 2:
+                        NameText.text = "Back to the wall";
+                        DescriptionText.text = "When starting a turn with 50% or less HP, hand +2.";
+                        break;
+                }
+                break;
+            case 29:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "情熱";
+                        DescriptionText.text = "名前に「クォーツ」を含む宝石の効果が1.5倍になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Passion";
+                        DescriptionText.text = "The effects of gemstones with \"Quartz\" in their name are increased by 1.5 times.";
+                        break;
+                }
+                break;
+            case 30:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "神聖";
+                        DescriptionText.text = "名前に「アメシスト」を含む宝石を消去する毎に、HPを3回復する。";
+                        break;
+                    case 2:
+                        NameText.text = "Sacred";
+                        DescriptionText.text = "Restore 3 HP each time you clear a gemstone with \"Amethyst\" in its name.";
+                        break;
+                }
+                break;
+            case 31:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "深呼吸";
+                        DescriptionText.text = "ダメージを受けた次のターン、受けたダメージの20%にあたるシールドを得る。";
+                        break;
+                    case 2:
+                        NameText.text = "Deep Breath";
+                        DescriptionText.text = "On the turn after taking damage, gain a shield equal to 20% of the damage received.";
+                        break;
+                }
+                break;
+            case 32:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "富と栄光";
+                        DescriptionText.text = "戦闘終了時、追加で1枚のメダルを獲得できる。";
+                        break;
+                    case 2:
+                        NameText.text = "Wealth and Glory";
+                        DescriptionText.text = "Gain one additional medal at the end of the battle.";
+                        break;
+                }
+                break;
+            case 33:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "渇望";
+                        DescriptionText.text = "トランジションレベルで鍛えた時、追加で最大HP+10%。";
+                        break;
+                    case 2:
+                        NameText.text = "Craving";
+                        DescriptionText.text = "When training at the transition level, gain an additional +10% Max HP.";
+                        break;
+                }
+                break;
+            case 34:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "先読み";
+                        DescriptionText.text = "スキルを使用せずにターンを終了すると、次のターン、ハンド数+4。";
+                        break;
+                    case 2:
+                        NameText.text = "Foresight";
+                        DescriptionText.text = "If you end your turn without using a skill, hand +4.";
+                        break;
+                }
+                break;
+            case 35:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "縫合";
+                        DescriptionText.text = "ターン開始時、HPを2%回復する。";
+                        break;
+                    case 2:
+                        NameText.text = "Suture";
+                        DescriptionText.text = "At the start of the turn, restore 2% HP.";
+                        break;
+                }
+                break;
+            case 36:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "加速";
+                        DescriptionText.text = "6チェーン以上繋げると、チェーンが追加で2増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Acceleration";
+                        DescriptionText.text = "Connecting a chain of 6 or more increases the chain count by an additional 2.";
+                        break;
+                }
+                break;
+            case 37:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "稀有";
+                        DescriptionText.text = "一番左のスロットに装備された宝石の出現率が半分に減少する。";
+                        break;
+                    case 2:
+                        NameText.text = "Rarefall";
+                        DescriptionText.text = "The appearance rate of the gem equipped in the leftmost slot is reduced by half.";
+                        break;
+                }
+                break;
+            case 38:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "五月雨";
+                        DescriptionText.text = "一番右のスロットに装備された宝石の出現率が2倍に増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "May rain";
+                        DescriptionText.text = "The appearance rate of the gem equipped in the rightmost slot is doubled.";
+                        break;
+                }
+                break;
+            case 39:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "補強";
+                        DescriptionText.text = "シールドを得る毎に、追加で1シールドを得る。";
+                        break;
+                    case 2:
+                        NameText.text = "Reinforcement";
+                        DescriptionText.text = "Whenever you gain a shield, gain an additional 1 shield.";
+                        break;
+                }
+                break;
+            case 40:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "地平線";
+                        DescriptionText.text = "5ハンドまで次のターンに持ち越すことが出来るようになる。";
+                        break;
+                    case 2:
+                        NameText.text = "Horizon";
+                        DescriptionText.text = "You will be able to carry over up to 5 hand to the next turn.";
+                        break;
+                }
+                break;
+            case 41:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "瞬発";
+                        DescriptionText.text = "チェーンが2の状態から始まる。";
+                        break;
+                    case 2:
+                        NameText.text = "Momentum";
+                        DescriptionText.text = "It starts with the chain at a state of 2.";
+                        break;
+                }
+                break;
+            case 42:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "狂奔";
+                        DescriptionText.text = "常にHPが1として見なされる。";
+                        break;
+                    case 2:
+                        NameText.text = "Madness";
+                        DescriptionText.text = "HP is always treated as 1.";
+                        break;
+                }
+                break;
+            case 43:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "鍛造";
+                        DescriptionText.text = "ダメージを受ける毎に最大HPが10増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Forging";
+                        DescriptionText.text = "Maximum HP increases by 10 each time you take damage.";
+                        break;
+                }
+                break;
+            case 44:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "成金";
+                        DescriptionText.text = "休憩する毎にメダルを2枚獲得する。";
+                        break;
+                    case 2:
+                        NameText.text = "Nouveau riche";
+                        DescriptionText.text = "Gain 2 medals each time you take a rest.";
+                        break;
+                }
+                break;
+            case 45:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "鋼体";
+                        DescriptionText.text = "取得時、最大HPが150増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Steel Body";
+                        DescriptionText.text = "Increases maximum HP by 150 upon acquisition.";
+                        break;
+                }
+                break;
+            case 46:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "熱変換";
+                        DescriptionText.text = "敵の攻撃をシールドで防ぎきる毎に、HPを4%回復する。";
+                        break;
+                    case 2:
+                        NameText.text = "Heat Conversion";
+                        DescriptionText.text = "Recover 4% of your HP each time you fully block an enemy attack with your shield.";
+                        break;
+                }
+                break;
+            case 47:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "安全装置";
+                        DescriptionText.text = "ターン終了時、シールド値が8%増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Safety Device";
+                        DescriptionText.text = "At the end of the turn, the shield value increases by 8%.";
+                        break;
+                }
+                break;
+            case 48:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "調律";
+                        DescriptionText.text = "5の倍数チェーンを達成する毎に、4シールドを得る。";
+                        break;
+                    case 2:
+                        NameText.text = "Tuning";
+                        DescriptionText.text = "Gain 4 Shield each time you achieve a chain that is a multiple of 5.";
+                        break;
+                }
+                break;
+            case 49:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "万能薬";
+                        DescriptionText.text = "HPの回復効果が25%増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Panacea";
+                        DescriptionText.text = "HP recovery effects are increased by 25%.";
+                        break;
+                }
+                break;
+            case 50:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "奇策";
+                        DescriptionText.text = "次の戦闘において、敵のHPが50%減少する。ボスとエリートにはこの効果が適用されない。\r\n";
+                        break;
+                    case 2:
+                        NameText.text = "Clever Scheme";
+                        DescriptionText.text = "In the next battle, the enemy's HP is reduced by 50%. This effect does not apply to boss or elites.";
+                        break;
+                }
+                break;
+            case 51:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "安定性";
+                        DescriptionText.text = "100シールドまで次のターンに持ち越すことが出来るようになる。";
+                        break;
+                    case 2:
+                        NameText.text = "Stability";
+                        DescriptionText.text = "You will be able to carry over up to 100 shield to the next turn.";
+                        break;
+                }
+                break;
+            case 52:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "集光";
+                        DescriptionText.text = "ターン開始時、ランダムな宝石2つをプリズムに変化させる。";
+                        break;
+                    case 2:
+                        NameText.text = "Light Focusing";
+                        DescriptionText.text = "At the start of the turn, transform two random gems into Prisms.";
+                        break;
+                }
+                break;
+            case 53:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "明媚";
+                        DescriptionText.text = "プリズムを6つ生成した状態で戦闘を開始する。";
+                        break;
+                    case 2:
+                        NameText.text = "Mesmerizing";
+                        DescriptionText.text = "Start the battle with six prisms generated.";
+                        break;
+                }
+                break;
+            case 54:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "天賦";
+                        DescriptionText.text = "スターター祝福の効果を2倍にする。";
+                        break;
+                    case 2:
+                        NameText.text = "Natural Talent";
+                        DescriptionText.text = "Doubles the effect of the Starter Blessing.";
+                        break;
+                }
+                break;
+            case 55:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "万全";
+                        DescriptionText.text = "ボスとの戦闘開始時、HPを全回復する。";
+                        break;
+                    case 2:
+                        NameText.text = "Fulfillment";
+                        DescriptionText.text = "Fully restores HP at the start of the battle with the boss.";
+                        break;
+                }
+                break;
+            case 56:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "緊急回避";
+                        DescriptionText.text = "残りHPが50%以上の状態で致命の一撃を受けた場合、HP1で生き残る。";
+                        break;
+                    case 2:
+                        NameText.text = "Emergency Avoidance";
+                        DescriptionText.text = "If you receive a fatal blow while your remaining HP is 50% or higher, you survive with 1 HP.";
+                        break;
+                }
+                break;
+            case 57:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "助走";
+                        DescriptionText.text = "前のハンドのチェーンが2以下だった場合、次のハンドのチェーンは4の状態から始まる。";
+                        break;
+                    case 2:
+                        NameText.text = "Approach Run";
+                        DescriptionText.text = "If the chain of the previous hand was 2 or less, the chain of the next hand starts at 4.";
+                        break;
+                }
+                break;
+            case 58:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "好奇心";
+                        DescriptionText.text = "次のトランジションレベルにおいて、ショップの全ての商品価格が半額になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Curiosity";
+                        DescriptionText.text = "During the next transition level, the prices of all items in the shop will be cut in half.";
+                        break;
+                }
+                break;
+            case 59:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "先導";
+                        DescriptionText.text = "戦闘開始時、敵に200ダメージを与える。";
+                        break;
+                    case 2:
+                        NameText.text = "Leading";
+                        DescriptionText.text = "At the start of battle, deal 200 damage to the enemy.";
+                        break;
+                }
+                break;
+            case 60:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "衝動";
+                        DescriptionText.text = "HPが100%の状態でダメージを受けると、数値に関わらずリベンジが使用可能になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Impulse";
+                        DescriptionText.text = "If you take damage while at 100% HP, Revenge becomes available regardless of the damage amount.";
+                        break;
+                }
+                break;
+            case 61:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "器用";
+                        DescriptionText.text = "戦闘開始時、ハンド数+2。";
+                        break;
+                    case 2:
+                        NameText.text = "Handy";
+                        DescriptionText.text = "At the start of battle, Hand +2.";
+                        break;
+                }
+                break;
+            case 62:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "好戦";
+                        DescriptionText.text = "ターン開始時、リベンジを10%チャージする。";
+                        break;
+                    case 2:
+                        NameText.text = "Belligerence";
+                        DescriptionText.text = "At the start of the turn, charge Revenge by 10%.";
+                        break;
+                }
+                break;
+            case 63:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "減退";
+                        DescriptionText.text = "スターター宝石の出現確率が通常の2分の1になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Ebb";
+                        DescriptionText.text = "The appearance rate of starter gems is reduced to half the normal rate.";
+                        break;
+                }
+                break;
+            case 64:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "鉄人";
+                        DescriptionText.text = "リベンジを発動する毎に、50シールドを得る。";
+                        break;
+                    case 2:
+                        NameText.text = "Ironman";
+                        DescriptionText.text = "Gain 50 Shield each time Revenge is activated.";
+                        break;
+                }
+                break;
+        }
+        GetComponent<Animator>().Play($"Bless{BlessNum}");
+    }
+    public void OnDisplay()
+    {
+        DisplayObj.SetActive(true);
+    }
+    public void OffDisplay()
+    {
+        DisplayObj.SetActive(false);
+    }
+}

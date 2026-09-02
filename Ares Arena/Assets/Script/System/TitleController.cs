@@ -28,6 +28,7 @@ public class TitleController : MonoBehaviour
     public AudioSource BGM;
     public AudioSource SE;
     public AudioClip OkSE;
+    public AudioClip RunStartSE;
     bool IsVolumeFade;
 
     bool IsCamera;
@@ -162,7 +163,7 @@ public class TitleController : MonoBehaviour
         }
         if(IsCamera)
         {
-            TitleBG.position = Vector3.MoveTowards(TitleBG.position, FocusPos.position, Time.deltaTime * 2800f);
+            TitleBG.position = Vector3.MoveTowards(TitleBG.position, FocusPos.position, Time.deltaTime * 1000f);
             TitleBG.transform.localScale += new Vector3(Time.deltaTime * 3f, Time.deltaTime * 3f, 0f);
         }
     }
@@ -202,9 +203,11 @@ public class TitleController : MonoBehaviour
     public void RunStart()
     {
         SE.PlayOneShot(OkSE);
+        SE.PlayOneShot(RunStartSE);
         FadeOut.SetActive(true);
         Invoke("SceneMove", 2f);
         IsCamera = true;
+        IsVolumeFade = true;
     }
     public void EndGame()
     {
@@ -241,6 +244,7 @@ public class TitleController : MonoBehaviour
         }
         PlayerPrefs.SetInt("Language", Language);
         PlayerPrefs.Save();
+        SE.PlayOneShot(OkSE);
     }
     public void InDelete()
     {
