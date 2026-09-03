@@ -629,11 +629,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "アレキサンドライト";
-                        DescriptionText.text = "32ダメージを与える。最大HPを1失う。";
+                        DescriptionText.text = "32ダメージを与える。最大HPを2失う。";
                         break;
                     case 2:
                         NameText.text = "Alexandrite";
-                        DescriptionText.text = "Deal 32 damage. Lose 1 max HP.";
+                        DescriptionText.text = "Deal 32 damage. Lose 2 max HP.";
                         break;
                 }
                 break;
