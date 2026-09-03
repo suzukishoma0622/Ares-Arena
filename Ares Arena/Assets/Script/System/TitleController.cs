@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class TitleController : MonoBehaviour
@@ -13,8 +14,9 @@ public class TitleController : MonoBehaviour
     public CanvasGroup StartModeCG;
     public GameObject OptionObj;
     public CanvasGroup OptionCG;
-    public TMP_Text VolumeText;
-    public Slider VolumeSlider;
+    public GameObject QuitCG;
+    public TMP_Text[] VolumeText;
+    public Slider[] VolumeSlider;
     public TMP_Text LanguageText;
     public Slider DeleteSlider;
     public CanvasGroup DeleteCG;
@@ -25,6 +27,7 @@ public class TitleController : MonoBehaviour
     int Difficulty = 0;
     int Language;
 
+    public AudioMixer Mixer;
     public AudioSource BGM;
     public AudioSource SE;
     public AudioClip OkSE;
@@ -41,8 +44,12 @@ public class TitleController : MonoBehaviour
         PlayerPrefs.SetInt("Tutorial", 0);
         PlayerPrefs.Save();
         Language = PlayerPrefs.GetInt("Language", 2);
-        VolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
-        VolumeText.text = (VolumeSlider.value * 100f).ToString("0") + "%";
+        Mixer.GetFloat("Master_Volume", out float mastervolume);
+        VolumeSlider[0].value = Mathf.Pow(10, mastervolume / 20);
+        Mixer.GetFloat("BGM_Volume", out float bgmvolume);
+        VolumeSlider[1].value = Mathf.Pow(10, bgmvolume / 20);
+        Mixer.GetFloat("SE_Volume", out float sevolume);
+        VolumeSlider[2].value = Mathf.Pow(10, sevolume / 20);
         switch (Language)
         {
             case 1:
@@ -103,6 +110,14 @@ public class TitleController : MonoBehaviour
                     {
                         OptionObj.SetActive(false);
                     }
+                    if (QuitCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        QuitCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        QuitCG.SetActive(false);
+                    }
                     break;
                 case 1:
                     StartModeObj.SetActive(true);
@@ -134,9 +149,27 @@ public class TitleController : MonoBehaviour
                         TitleButtonObj.SetActive(false);
                     }
                     break;
+                case 3:
+                    QuitCG.SetActive(true);
+                    if (QuitCG.GetComponent<CanvasGroup>().alpha < 1f)
+                    {
+                        QuitCG.GetComponent<CanvasGroup>().alpha += Time.deltaTime * 3f;
+                    }
+                    if (TitleButtonCG.alpha > 0f)
+                    {
+                        TitleButtonCG.alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        TitleButtonObj.SetActive(false);
+                    }
+                    break;
             }
         }
-        VolumeText.text = (VolumeSlider.value * 100f).ToString("0") + "%";
+        for(int i = 0; i < 3; i++)
+        {
+            VolumeText[i].text = (VolumeSlider[i].value * 100f).ToString("0") + "%";
+        }
         if(IsDelete)
         {
             DeleteSlider.value += Time.deltaTime * 0.33f;
@@ -156,7 +189,6 @@ public class TitleController : MonoBehaviour
             DeleteSlider.value -= Time.deltaTime * 2f;
             DeleteCG.alpha -= Time.deltaTime * 1f;
         }
-        AudioListener.volume = VolumeSlider.value;
         if(IsVolumeFade)
         {
             BGM.volume -= Time.deltaTime * 2f;
@@ -224,11 +256,6 @@ public class TitleController : MonoBehaviour
         SceneManager.LoadScene("TitleLogo");
         IsVolumeFade = true;
     }
-    public void VolumeSave()
-    {
-        PlayerPrefs.SetFloat("MasterVolume", VolumeSlider.value);
-        PlayerPrefs.Save();
-    }
     public void LanguageChange()
     {
         switch(Language)
@@ -253,5 +280,38 @@ public class TitleController : MonoBehaviour
     public void OutDelete()
     {
         IsDelete = false;
+    }
+    public void SetMaster()
+    {
+        if (VolumeSlider[0].value <= 0f)
+        {
+            Mixer.SetFloat("Master_Volume", -80f);
+        }
+        else
+        {
+            Mixer.SetFloat("Master_Volume", Mathf.Log10(VolumeSlider[0].value) * 20f);
+        }
+    }
+    public void SetBGM()
+    {
+        if (VolumeSlider[1].value <= 0f)
+        {
+            Mixer.SetFloat("BGM_Volume", -80f);
+        }
+        else
+        {
+            Mixer.SetFloat("BGM_Volume", Mathf.Log10(VolumeSlider[1].value) * 20f);
+        }
+    }
+    public void SetSE()
+    {
+        if (VolumeSlider[2].value <= 0f)
+        {
+            Mixer.SetFloat("SE_Volume", -80f);
+        }
+        else
+        {
+            Mixer.SetFloat("SE_Volume", Mathf.Log10(VolumeSlider[2].value) * 20f);
+        }
     }
 }

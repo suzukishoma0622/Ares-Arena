@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class InfoDisplay : MonoBehaviour
@@ -48,6 +50,15 @@ public class InfoDisplay : MonoBehaviour
     public AudioClip[] BGMPool3;
 
     float ExitNum;
+
+    bool IsPause;
+    public GameObject PauseObj;
+    public TMP_Text[] VolumeText;
+    public Slider[] VolumeSlider;
+    public AudioMixer Mixer;
+    bool IsVolumeFade;
+    public GameObject FadeObj;
+
     void Start()
     {
         Crown = PlayerPrefs.GetInt("Crown", 0);
@@ -146,10 +157,24 @@ public class InfoDisplay : MonoBehaviour
         BattleBGM.generator = BGMPool1[BGnum];
         SilentBGM.generator = BGMPool2[BGnum];
         BossBGM.generator = BGMPool3[BGnum];
+        Mixer.GetFloat("Master_Volume", out float mastervolume);
+        VolumeSlider[0].value = Mathf.Pow(10, mastervolume / 20);
+        Mixer.GetFloat("BGM_Volume", out float bgmvolume);
+        VolumeSlider[1].value = Mathf.Pow(10, bgmvolume / 20);
+        Mixer.GetFloat("SE_Volume", out float sevolume);
+        VolumeSlider[2].value = Mathf.Pow(10, sevolume / 20);
     }
     void Update()
     {
-        switch(BGMnum)
+        for (int i = 0; i < 3; i++)
+        {
+            VolumeText[i].text = (VolumeSlider[i].value * 100f).ToString("0") + "%";
+        }
+        if (IsVolumeFade)
+        {
+            BGM.volume -= Time.deltaTime * 2f;
+        }
+        switch (BGMnum)
         {
             case 0:
                 BattleBGM.volume -= Time.deltaTime;
@@ -205,6 +230,22 @@ public class InfoDisplay : MonoBehaviour
             {
                 SceneManager.LoadScene("Title");
             }
+        }
+        if(Input.GetMouseButtonDown(1))
+        {
+            if(IsPause)
+            {
+                IsPause = false;
+                PauseObj.SetActive(false);
+                Time.timeScale = 1f;
+            }
+            else
+            {
+                IsPause = true;
+                PauseObj.SetActive(true);
+                Time.timeScale = 0f;
+            }
+            SE.PlayOneShot(OKSE);
         }
     }
     public void BlessAdd(int i)
@@ -279,5 +320,56 @@ public class InfoDisplay : MonoBehaviour
                 }
                 break;
         }
+    }
+    public void SetMaster()
+    {
+        if (VolumeSlider[0].value <= 0f)
+        {
+            Mixer.SetFloat("Master_Volume", -80f);
+        }
+        else
+        {
+            Mixer.SetFloat("Master_Volume", Mathf.Log10(VolumeSlider[0].value) * 20f);
+        }
+    }
+    public void SetBGM()
+    {
+        if (VolumeSlider[1].value <= 0f)
+        {
+            Mixer.SetFloat("BGM_Volume", -80f);
+        }
+        else
+        {
+            Mixer.SetFloat("BGM_Volume", Mathf.Log10(VolumeSlider[1].value) * 20f);
+        }
+    }
+    public void SetSE()
+    {
+        if (VolumeSlider[2].value <= 0f)
+        {
+            Mixer.SetFloat("SE_Volume", -80f);
+        }
+        else
+        {
+            Mixer.SetFloat("SE_Volume", Mathf.Log10(VolumeSlider[2].value) * 20f);
+        }
+    }
+    public void GiveUp()
+    {
+        SE.PlayOneShot(OKSE);
+        FadeObj.SetActive(true);
+        Invoke("SceneMove", 2f);
+        IsVolumeFade = true;
+        Time.timeScale = 1f;
+    }
+    void SceneMove()
+    {
+        SceneManager.LoadScene("Title");
+    }
+    public void Resume()
+    {
+        IsPause = false;
+        PauseObj.SetActive(false);
+        Time.timeScale = 1f;
     }
 }

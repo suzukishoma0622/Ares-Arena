@@ -563,8 +563,19 @@ public class SaintSelectController : MonoBehaviour
             Invoke("SceneMove", 2f);
         }
     }
+    public void BackTitle()
+    {
+        FadeOut.SetActive(true);
+        IsVolumeFade = true;
+        SE.PlayOneShot(OkSE);
+        Invoke("TitleMove", 2f);
+    }
     void SceneMove()
     {
         SceneManager.LoadScene("Arena");
+    }
+    void TitleMove()
+    {
+        SceneManager.LoadScene("Title");
     }
 }
