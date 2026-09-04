@@ -178,7 +178,7 @@ public class Enemy_FilamentMilitar : MonoBehaviour
     void Act1_2()
     {
         IsDebuff = true;
-        Bind += 60 + Bscript.AbilityLevel * 20;
+        Bind += Mathf.FloorToInt((60 + Bscript.AbilityLevel * 20) * StrengthRate);
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
         AJ = Random.Range(0, 2);
     }
@@ -206,7 +206,7 @@ public class Enemy_FilamentMilitar : MonoBehaviour
     }
     void Act3_2()
     {
-        Bind += 50 + Bscript.Iscript.Crown * 5;
+        Bind += Mathf.FloorToInt((50 + Bscript.AbilityLevel * 5) * StrengthRate);
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
         AJ = Random.Range(0, 2);
     }

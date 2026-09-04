@@ -26,6 +26,7 @@ public class RestManager : MonoBehaviour
     public int[] GemBox;
     public GameObject[] GemButton;
     public InfoDisplay_Gem[] GemInfo;
+    public GameObject EquipButton;
 
     int Medal;
     public TMP_Text MedalText;
@@ -470,6 +471,7 @@ public class RestManager : MonoBehaviour
             GemSlotHL.SetActive(false);
         }
         Iscript.SE.PlayOneShot(GemSE);
+        EquipButton.SetActive(true);
     }
     public void GemEquip(int i)
     {
@@ -488,6 +490,7 @@ public class RestManager : MonoBehaviour
             GemBoxHL.SetActive(false);
             GemSlotHL.SetActive(false);
             Iscript.SE.PlayOneShot(GemSE);
+            EquipButton.SetActive(false);
         }
     }
     public void AlchemyGem()

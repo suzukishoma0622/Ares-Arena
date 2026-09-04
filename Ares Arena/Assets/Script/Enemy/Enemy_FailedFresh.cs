@@ -198,8 +198,8 @@ public class Enemy_FailedFresh : MonoBehaviour
                     Invoke("ActEnd", 1.8f);
                     break;
                 case 0:
-                    Act4_1();
-                    Invoke("Act4_2", 0.4f);
+                    Act5_1();
+                    Invoke("Act5_2", 0.4f);
                     Invoke("ActEnd", 1.4f);
                     break;
             }

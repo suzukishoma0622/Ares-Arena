@@ -17,11 +17,7 @@ public class EnemyHealth : MonoBehaviour
     public Enemy_CaptainScissors Cscript;
     void Start()
     {
-        if (Iscript.Bless[50] == 1 && Iscript.CurrentRound <= 5)
-        {
-            Bscript.EnemyHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * 0.5f);
-            Iscript.Bless[50] = 2;
-        }
+        Invoke("Bless_CleverScheme", 0.1f);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -141,6 +137,14 @@ public class EnemyHealth : MonoBehaviour
             {
                 Bscript.EnemyHP = Bscript.EnemyMaxHP;
             }
+        }
+    }
+    private void Bless_CleverScheme()
+    {
+        if (Iscript.Bless[50] == 1 && Iscript.CurrentRound <= 5)
+        {
+            Bscript.EnemyHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * 0.5f);
+            Iscript.Bless[50] = 2;
         }
     }
 }
