@@ -79,6 +79,8 @@ public class PuzzleManager : MonoBehaviour
     public bool IsFrozenHound;
     public bool IsFilamentMilitar;
     public Enemy_FilamentMilitar Fscript;
+    public bool IsGemSlasher;
+    public Enemy_GemSlasher Gscript;
     
     public int DayBreak;
     public int Gem54 = 32;
@@ -852,6 +854,13 @@ public class PuzzleManager : MonoBehaviour
                 if(IsFrozenHound)
                 {
                     JewelNum[i] = 306;
+                }
+                if(IsGemSlasher)
+                {
+                    if(Gscript.StolenGem == j)
+                    {
+                        JewelNum[i] = 309;
+                    }
                 }
                 if (JewelNum[i] == 22)
                 {

@@ -1633,6 +1633,19 @@ public class InfoDisplay_Gem : MonoBehaviour
                         break;
                 }
                 break;
+            case 309:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ダミージェム";
+                        DescriptionText.text = "効果なし。";
+                        break;
+                    case 2:
+                        NameText.text = "Dummy Gem";
+                        DescriptionText.text = "No Effects.";
+                        break;
+                }
+                break;
         }
         if (GetComponent<Animator>() != null)
         {
