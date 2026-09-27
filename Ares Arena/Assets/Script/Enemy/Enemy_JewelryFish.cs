@@ -36,22 +36,13 @@ public class Enemy_JewelryFish : MonoBehaviour
         Language = PlayerPrefs.GetInt("Language", 2);
         StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1300;
+                Bscript.EnemyMaxHP = 1350;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 1360;
-                break;
-            case 3:
-                Bscript.EnemyMaxHP = 1420;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 1480;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1540;
+                Bscript.EnemyMaxHP = 1440;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -62,20 +53,20 @@ public class Enemy_JewelryFish : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = $"{Mathf.FloorToInt((140 + Bscript.Iscript.Crown * 10) * StrengthRate)}ダメージを与える。{Mathf.FloorToInt((200 + Bscript.Iscript.Crown * 20) * StrengthRate)}シールドを得る。";
+                AttackText[0].text = $"{Mathf.FloorToInt((140 + Bscript.AttackLevel * 10) * StrengthRate)}ダメージを与える。{Mathf.FloorToInt((200 + Bscript.HPLevel * 20) * StrengthRate)}シールドを得る。";
                 AttackText[1].text = "誘導電流2を得る。";
-                AttackText[2].text = $"{Mathf.FloorToInt((120 + Bscript.Iscript.Crown * 5) * StrengthRate)}ダメージを与える。";
+                AttackText[2].text = $"{Mathf.FloorToInt((120 + Bscript.AttackLevel * 10) * StrengthRate)}ダメージを与える。";
                 DebuffName.text = "静電気";
-                DebuffDesc.text = $"対象となったマスの宝石を消すと、{10 + Bscript.AbilityLevel * 5}シールドを失う。";
+                DebuffDesc.text = $"対象となったマスの宝石を消すと、{6 + Bscript.AbilityLevel * 2}シールドを失う。";
                 BuffName.text = "誘導電流";
                 BuffDesc.text = $"ハンドする毎に、盤上の{StaticElectricity}箇所に静電気を付与する。";
                 break;
             case 2:
-                AttackText[0].text = $"Deals {Mathf.FloorToInt((140 + Bscript.Iscript.Crown * 10) * StrengthRate)} damage. Gain {Mathf.FloorToInt((300 + Bscript.Iscript.Crown * 40) * StrengthRate)} Shield.";
+                AttackText[0].text = $"Deals {Mathf.FloorToInt((140 + Bscript.AttackLevel * 10) * StrengthRate)} damage. Gain {Mathf.FloorToInt((200 + Bscript.HPLevel *20) * StrengthRate)} Shield.";
                 AttackText[1].text = $"Gain 2 InducedCurrent.";
-                AttackText[2].text = $"Deals {Mathf.FloorToInt((120 + Bscript.Iscript.Crown * 5) * StrengthRate)} damage.";
+                AttackText[2].text = $"Deals {Mathf.FloorToInt((120 + Bscript.AttackLevel * 10) * StrengthRate)} damage.";
                 DebuffName.text = "Static Electricity";
-                DebuffDesc.text = $"Casting the gem on the targeted tile causes you to lose {10 + Bscript.AbilityLevel * 5} Shield.";
+                DebuffDesc.text = $"Casting the gem on the targeted tile causes you to lose {6 + Bscript.AbilityLevel * 2} Shield.";
                 BuffName.text = "Induced Current";
                 BuffDesc.text = $"Each time you hand, apply Static Electricity to {StaticElectricity} spots on the board.";
                 break;
@@ -145,7 +136,7 @@ public class Enemy_JewelryFish : MonoBehaviour
             Staticnum[i] = 0;
             Destroy(StaticDisplay[i]);
             Bscript.Iscript.SE.PlayOneShot(EnemySE[3]);
-            Bscript.PlayerShield -= 10 + Bscript.AbilityLevel * 5;
+            Bscript.PlayerShield -= 6 + Bscript.AbilityLevel * 2;
             if(Bscript.PlayerShield < 0)
             {
                 Bscript.PlayerShield = 0;
@@ -190,11 +181,11 @@ public class Enemy_JewelryFish : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((140 + Bscript.Iscript.Crown * 10) * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((140 + Bscript.AttackLevel * 10) * StrengthRate);
         GameObject g2 = Instantiate(AttackObj[1]);
         g2.transform.position = this.transform.position;
         g2.GetComponent<BlockTrail>().GoPlayer = false;
-        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((200 + Bscript.Iscript.Crown * 20) * StrengthRate);
+        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((200 + Bscript.HPLevel * 20) * StrengthRate);
     }
     void Act2_1()
     {
@@ -234,6 +225,6 @@ public class Enemy_JewelryFish : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((120 + Bscript.Iscript.Crown * 5) * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((120 + Bscript.AttackLevel * 10) * StrengthRate);
     }
 }

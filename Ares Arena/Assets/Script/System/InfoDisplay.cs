@@ -28,6 +28,7 @@ public class InfoDisplay : MonoBehaviour
     public Animator Crownanim;
 
     public int Crown;
+    public int Boss;
 
     public AudioSource BGM;
     public AudioSource SE;
@@ -59,9 +60,13 @@ public class InfoDisplay : MonoBehaviour
     bool IsVolumeFade;
     public GameObject FadeObj;
 
+    public int Bless20;
+    public int Bless24;
+
     void Start()
     {
         Crown = PlayerPrefs.GetInt("Crown", 0);
+        Boss = Random.Range(0, 5);
         if (Crown == 0)
         {
             Crownanim.gameObject.SetActive(false);
@@ -126,29 +131,45 @@ public class InfoDisplay : MonoBehaviour
             case 13:
                 PlayerMaxHP = 350;
                 break;
-
+            case 14:
+                PlayerMaxHP = 380;
+                break;
         }
-        PlayerHP = PlayerMaxHP;
+        if((Saint == 1 && Crown >= 2) || (Saint == 5 && Crown >= 3) || (Saint == 6 && Crown >= 4) || (Saint == 9 && Crown >= 5) || (Saint == 13 && Crown >= 5))
+        {
+            PlayerMaxHP = Mathf.FloorToInt(PlayerMaxHP * 0.9f);
+        }
+        if ((Saint == 1 && Crown >= 3) || (Saint == 3 && Crown >= 4))
+        {
+            PlayerHP = Mathf.FloorToInt(PlayerMaxHP * 0.75f);
+        }
+        else
+        {
+            PlayerHP = PlayerMaxHP;
+        }
+        if ((Saint == 3 && Crown >= 2) || (Saint == 5 && Crown >= 4) || (Saint == 8 && Crown >= 4) || (Saint == 10 && Crown >= 4) || (Saint == 11 && Crown >= 2)
+            || (Saint == 13 && Crown >= 3) || (Saint == 14 && Crown >= 3))
+        {
+            PlayerHPRate *= 1.2f;
+        }
         HP2 = PlayerHP;
         for (int i = 0; i < 20; i++)
         {
             PlayerPrefs.SetInt($"GemBox{i}", -1);
         }
-        if (Crown > 0)
-        {
-            PlayerPrefs.SetInt("Medal", Mathf.FloorToInt(Crown / 2) + 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("Medal", 0);
-        }
+        PlayerPrefs.SetInt("Medal", 0);
         PlayerPrefs.SetInt("StarterCount", 0);
         PlayerPrefs.SetInt("Gem53", 5);
         PlayerPrefs.SetInt("Gem70", 50);
+        PlayerPrefs.SetInt("Gem133", 10);
         PlayerPrefs.SetInt("SentryRevenge", 0);
         for(int i = 0; i < 4; i++)
         {
             PlayerPrefs.SetInt($"Potion{i}", 0);
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            PlayerPrefs.SetInt($"Droid{i}", 1);
         }
         PlayerPrefs.Save();
         BGnum = Random.Range(0, BGMPool1.Length);
@@ -263,6 +284,8 @@ public class InfoDisplay : MonoBehaviour
         BlessObj[BlessGain].GetComponent<InfoDisplay_Bless>().BlessNum = i;
         BlessGain += 1;
         SE.PlayOneShot(BlessSE);
+        PlayerPrefs.SetInt($"BlessUnlock{i}", 1);
+        PlayerPrefs.Save();
         switch(i)
         {
             case 1:
@@ -281,15 +304,18 @@ public class InfoDisplay : MonoBehaviour
                 PlayerPrefs.Save();
                 break;
             case 14:
-                PlayerMaxHP = Mathf.FloorToInt(PlayerMaxHP * 1.25f);
-                PlayerHP = Mathf.FloorToInt(PlayerHP * 0.625f);
-                PlayerHPRate *= 1.25f;
+                PlayerMaxHP = Mathf.FloorToInt(PlayerMaxHP * 1.3f);
+                PlayerHP = Mathf.FloorToInt(PlayerHP * 0.65f);
+                PlayerHPRate *= 1.3f;
                 break;
             case 15:
                 JewelNum[0] = 5;
                 break;
             case 18:
                 PlayerHPRate *= 0.85f;
+                break;
+            case 24:
+                Bless24 += 2;
                 break;
             case 45:
                 PlayerMaxHP += 150;
@@ -317,6 +343,10 @@ public class InfoDisplay : MonoBehaviour
                 if (Bless[18] == 1)
                 {
                     PlayerHPRate *= 0.85f;
+                }
+                if (Bless[24] == 1)
+                {
+                    Bless24 += 2;
                 }
                 break;
         }

@@ -40,22 +40,13 @@ public class Enemy_DarkMage : MonoBehaviour
         Language = PlayerPrefs.GetInt("Language", 2);
         StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1310;
+                Bscript.EnemyMaxHP = 1350;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 1360;
-                break;
-            case 3:
-                Bscript.EnemyMaxHP = 1410;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 1460;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1510;
+                Bscript.EnemyMaxHP = 1440;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -67,8 +58,8 @@ public class Enemy_DarkMage : MonoBehaviour
         {
             case 1:
                 AttackText[0].text = "盤上の" + (10 + Bscript.AbilityLevel * 2).ToString() + "箇所を暗闇状態にする。";
-                AttackText[1].text = ((180 + Bscript.Iscript.Crown * 15) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。弱体化" + (15 + Bscript.AbilityLevel * 5).ToString() + "を付与する。";
-                AttackText[2].text = (100 * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。20%の攻撃激化を得る。";
+                AttackText[1].text = ((180 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。弱体化" + (15 + Bscript.AbilityLevel * 5).ToString() + "を付与する。";
+                AttackText[2].text = ((100 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。20%の攻撃激化を得る。";
                 DebuffName.text = "弱体化";
                 DebuffDesc.text = "次に消去する" + Pscript.Debuff_Weak + "個の宝石の効果が50%減少する。";
                 BuffName.text = "攻撃激化";
@@ -76,8 +67,8 @@ public class Enemy_DarkMage : MonoBehaviour
                 break;
             case 2:
                 AttackText[0].text = (10 + Bscript.AbilityLevel * 2).ToString() + " locations on the board makes blind.";
-                AttackText[1].text = "Deal " + ((180 + Bscript.Iscript.Crown * 15) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflict Weak " + (15 + Bscript.AbilityLevel * 5).ToString() +  ".";
-                AttackText[2].text = "Deal " + (100 * AttackRate * StrengthRate).ToString("0") + " Damage. Gain a 20% Intensified.";
+                AttackText[1].text = "Deal " + ((180 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflict Weak " + (15 + Bscript.AbilityLevel * 5).ToString() +  ".";
+                AttackText[2].text = "Deal " + ((100 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + " Damage. Gain a 20% Intensified.";
                 DebuffName.text = "Weak";
                 DebuffDesc.text = "The effect of the next " + Pscript.Debuff_Weak + " gems you cast will be reduced by 50%.";
                 BuffName.text = "Intensified";
@@ -252,7 +243,7 @@ public class Enemy_DarkMage : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((180 + Bscript.Iscript.Crown * 15) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((180 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate);
     }
     void Act2_3()
     {
@@ -272,7 +263,7 @@ public class Enemy_DarkMage : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(100 * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((100 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate);
     }
     void Act3_3()
     {

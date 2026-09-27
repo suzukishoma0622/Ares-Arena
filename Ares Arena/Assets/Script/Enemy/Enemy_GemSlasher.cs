@@ -34,22 +34,13 @@ public class Enemy_GemSlasher : MonoBehaviour
         Language = PlayerPrefs.GetInt("Language", 2);
         StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1440;
+                Bscript.EnemyMaxHP = 1480;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 1510;
-                break;
-            case 3:
-                Bscript.EnemyMaxHP = 1580;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 1650;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1720;
+                Bscript.EnemyMaxHP = 1590;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -60,14 +51,14 @@ public class Enemy_GemSlasher : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = $"{(140 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate}ダメージを与える。ランダムな宝石1つを盗む。";
-                AttackText[1].text = $"{(50 + Bscript.Iscript.Crown * 4) * AttackRate * StrengthRate}ダメージを3回与える。弱体化{25 + Bscript.AbilityLevel * 5}を付与する。";
+                AttackText[0].text = $"{140 * AttackRate * StrengthRate}ダメージを与える。ランダムな宝石1つを盗む。";
+                AttackText[1].text = $"{(50 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate}ダメージを3回与える。弱体化{25 + Bscript.AbilityLevel * 5}を付与する。";
                 DebuffName.text = "弱体化";
                 DebuffDesc.text = "次に消去する" + Pscript.Debuff_Weak + "個の宝石の効果が50%減少する。";
                 break;
             case 2:
-                AttackText[0].text = $"Deal {(140 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate} Damage. Steal 1 type of Gem.";
-                AttackText[1].text = $"Deal {(50 + Bscript.Iscript.Crown * 4) * AttackRate * StrengthRate} Damage 3 times. Inflict Weak {25 + Bscript.AbilityLevel * 5}.";
+                AttackText[0].text = $"Deal {140 * AttackRate * StrengthRate} Damage. Steal 1 type of Gem.";
+                AttackText[1].text = $"Deal {(50 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate} Damage 3 times. Inflict Weak {25 + Bscript.AbilityLevel * 5}.";
                 DebuffName.text = "Weak";
                 DebuffDesc.text = "The effect of the next " + Pscript.Debuff_Weak + " gems you cast will be reduced by 50%.";
                 break;
@@ -170,7 +161,7 @@ public class Enemy_GemSlasher : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((140 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(140 * AttackRate * StrengthRate);
         IsDebuff = true;
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
         if(StolenGem >= 0)
@@ -226,7 +217,7 @@ public class Enemy_GemSlasher : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((50 + Bscript.Iscript.Crown * 4) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((50 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate);
     }
     void Act2_3()
     {

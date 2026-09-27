@@ -1,4 +1,4 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,10 +24,10 @@ public class AresCrown : MonoBehaviour
     public TMP_Text CrownText;
     int Crown;
     int MaxCrown;
-    string[] SaintName_J = {"ƒ”ƒ@ƒ‹ƒLƒŠ[", "ƒEƒHƒbƒ`ƒƒ[", "ƒVƒA[", "ƒtƒ‰ƒNƒ^ƒ‹", "ƒZƒ“ƒgƒŠ[", "ƒtƒ@ƒ“ƒgƒ€", "ƒRƒŒƒNƒ^[", "ƒm[ƒ”ƒ‹", "ƒS[ƒŒƒ€", "ƒI[ƒ_[", "ƒNƒŠƒGƒCƒ^[",
-    "ƒ}ƒgƒŠƒbƒNƒX", "ƒŒƒ”ƒiƒ“ƒg"};
+    string[] SaintName_J = {"ãƒ´ã‚¡ãƒ«ã‚­ãƒªãƒ¼", "ã‚¦ã‚©ãƒƒãƒãƒ£ãƒ¼", "ã‚·ã‚¢ãƒ¼", "ãƒ•ãƒ©ã‚¯ã‚¿ãƒ«", "ã‚»ãƒ³ãƒˆãƒªãƒ¼", "ãƒ•ã‚¡ãƒ³ãƒˆãƒ ", "ã‚³ãƒ¬ã‚¯ã‚¿ãƒ¼", "ãƒãƒ¼ãƒ´ãƒ«", "ã‚´ãƒ¼ãƒ¬ãƒ ", "ã‚ªãƒ¼ãƒ€ãƒ¼", "ã‚¯ãƒªã‚¨ã‚¤ã‚¿ãƒ¼",
+    "ãƒãƒˆãƒªãƒƒã‚¯ã‚¹", "ãƒ¬ãƒ´ãƒŠãƒ³ãƒˆ", "ãƒ•ã‚©ãƒ¼ãƒŸãƒ¥ãƒ©"};
     string[] SaintName_E = {"The Valkyrie", "The Watcher", "The Sear", "The Fractal", "The Sentry", "The Phantom", "The Collector", "The Noble", "The Golem", "The Order", "The Creator",
-    "The Matrix", "The Revenant"};
+    "The Matrix", "The Revenant", "The Formula"};
     string[] CrownName = {"I", "II", "III", "IV", "V"};
     float CrownNum;
 
@@ -42,17 +42,13 @@ public class AresCrown : MonoBehaviour
         {
             TextPattern = 1;
         }
-        else
-        {
-            TextPattern = Iscript.Saint * 10 + Crown;
-        }
         MaxCrown = PlayerPrefs.GetInt($"MaxCrown{Iscript.Saint}", 0);
         if(Crown == 5)
         {
             switch (Language)
             {
                 case 1:
-                    CrownText.text = SaintName_J[Iscript.Saint - 1] + "‚ÍŸ—˜‚Ì‰hŒõ‚ğè’†‚Éû‚ß‚½B";
+                    CrownText.text = SaintName_J[Iscript.Saint - 1] + "ã¯å‹åˆ©ã®æ „å…‰ã‚’æ‰‹ä¸­ã«åã‚ãŸã€‚";
                     break;
                 case 2:
                     CrownText.text = SaintName_E[Iscript.Saint - 1] + " achieved the glory of victory.";
@@ -61,12 +57,13 @@ public class AresCrown : MonoBehaviour
         }
         else if(Crown == MaxCrown)
         {
+            TextPattern = 1;
             PlayerPrefs.SetInt($"MaxCrown{Iscript.Saint}", MaxCrown + 1);
             PlayerPrefs.Save();
             switch (Language)
             {
                 case 1:
-                    CrownText.text = SaintName_J[Iscript.Saint - 1] + "‚ÅƒNƒ‰ƒEƒ“ " + CrownName[Crown] + " ‚ğƒvƒŒƒC‰Â”\‚É‚È‚Á‚½B";
+                    CrownText.text = SaintName_J[Iscript.Saint - 1] + "ã§ã‚¯ãƒ©ã‚¦ãƒ³ " + CrownName[Crown] + " ã‚’ãƒ—ãƒ¬ã‚¤å¯èƒ½ã«ãªã£ãŸã€‚";
                     break;
                 case 2:
                     CrownText.text = "Crown " + CrownName[Crown] + " is now playable with " + SaintName_E[Iscript.Saint - 1];
@@ -79,14 +76,18 @@ public class AresCrown : MonoBehaviour
             switch (Language)
             {
                 case 1:
-                    CrownText.text = "ƒNƒ‰ƒEƒ“‚ğè‚ÉAÄ‚Ñ’§í‚¹‚æB";
+                    CrownText.text = "ã‚¯ãƒ©ã‚¦ãƒ³ã‚’æ‰‹ã«ã€å†ã³æŒ‘æˆ¦ã›ã‚ˆã€‚";
                     break;
                 case 2:
                     CrownText.text = "Grab the crown and try again.";
                     break;
             }
         }
-        for(int i = 0; i < FrameObj.Length; i++)
+        if (Crown == 5)
+        {
+            TextPattern = 3;
+        }
+        for (int i = 0; i < FrameObj.Length; i++)
         {
             FrameObj[i].SetActive(false);
         }
@@ -124,7 +125,7 @@ public class AresCrown : MonoBehaviour
         }
         switch(TextPattern)
         {
-            //ƒRƒ‚ƒ“
+            //ã‚³ãƒ¢ãƒ³
             case 1:
                 switch(DialogNum)
                 {
@@ -133,7 +134,7 @@ public class AresCrown : MonoBehaviour
                         switch(Language)
                         {
                             case 1:
-                                AresText.text = "‰ä‚ª‰º‚Ö‚Æ’H‚è’…‚¢‚½‚æ‚¤‚¾‚ÈB";
+                                AresText.text = "æˆ‘ãŒä¸‹ã¸ã¨è¾¿ã‚Šç€ã„ãŸã‚ˆã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It seems you have made your way to me.";
@@ -145,7 +146,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "Œ©–‚¾AMÒ‚æB“ğ‚ÍŸ—˜‚ğû‚ß‚½B";
+                                AresText.text = "è¦‹äº‹ã ã€ä¿¡è€…ã‚ˆã€‚æ±ã¯å‹åˆ©ã‚’åã‚ãŸã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Magnificent, believer. You have achieved victory.";
@@ -157,7 +158,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚µ‚©‚µA“ğ‚Ìí‚¢‚ÍI‚í‚Á‚Ä‚¢‚È‚¢B";
+                                AresText.text = "ã—ã‹ã—ã€æ±ã®æˆ¦ã„ã¯çµ‚ã‚ã£ã¦ã„ãªã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "However, your battle is not over.";
@@ -169,7 +170,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚±‚ÌŠ¥‚ğó‚¯æ‚êB‚»‚µ‚ÄŸ‚Ìí‚¢‚É—Õ‚Ş‚Ì‚¾B";
+                                AresText.text = "ã“ã®å† ã‚’å—ã‘å–ã‚Œã€‚ãã—ã¦æ¬¡ã®æˆ¦ã„ã«è‡¨ã‚€ã®ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Take this crown. And face the next battle.";
@@ -181,7 +182,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "ŸÒ‚Ì‚İ‚ªW‚¤—û‚Ö‚Æ‚ÈB";
+                                AresText.text = "å‹è€…ã®ã¿ãŒé›†ã†è©¦ç·´ã¸ã¨ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "A trial awaits only the victors.";
@@ -202,7 +203,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚±‚±‚Í“ğ‚Ì‚æ‚¤‚È‹­Ò‚ª‚¢‚é‚×‚«êŠ‚Å‚Í‚È‚¢B";
+                                AresText.text = "ã“ã“ã¯æ±ã®ã‚ˆã†ãªå¼·è€…ãŒã„ã‚‹ã¹ãå ´æ‰€ã§ã¯ãªã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "This is no place for a powerful warrior such as yourself.";
@@ -214,7 +215,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "—Í‚ğ¦‚µ‚½‚¯‚ê‚ÎAŠ¥‚ğŒg‚¦–ß‚Á‚Ä‚­‚é‚Ì‚¾B";
+                                AresText.text = "åŠ›ã‚’ç¤ºã—ãŸã‘ã‚Œã°ã€å† ã‚’æºãˆæˆ»ã£ã¦ãã‚‹ã®ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "If you wish to prove your strength, return bearing the crown.";
@@ -226,7 +227,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "—Ç‚¢‚©A‰ä‚Íí‚É“ğ‚ğŒ©‚Ä‚¢‚é‚¼B";
+                                AresText.text = "è‰¯ã„ã‹ã€æˆ‘ã¯å¸¸ã«æ±ã‚’è¦‹ã¦ã„ã‚‹ãã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Listen well: I am always watching you.";
@@ -239,7 +240,64 @@ public class AresCrown : MonoBehaviour
                         break;
                 }
                 break;
-            //ƒ”ƒ@ƒ‹ƒLƒŠ[
+            case 3:
+                switch (DialogNum)
+                {
+                    case 1:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = $"é‚ã«é ‚ç‚¹ã¸ã¨ç«‹ã£ãŸã‚ˆã†ã ãªã€{SaintName_E[Iscript.Saint - 1]}ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = $"It seems you've finally reached the pinnacle, {SaintName_E[Iscript.Saint - 1]}.";
+                                break;
+                        }
+                        break;
+                    case 2:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "æ±ã¯å…¨ã¦ã®è©¦ç·´ã‚’ä¹—ã‚Šè¶ŠãˆãŸã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "You have overcome all trials.";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "æ „å…‰ã‚’è®ƒãˆã€æœ€å¾Œã®å† ã‚’æˆã‘ã‚ˆã†ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "Let us praise the glory and bestow the final crown.";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "æ±ã“ããŒç‹è€…ã ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "You are the true champion.";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        TalkPattern = 0;
+                        IsCrown = true;
+                        break;
+                }
+                break;
+            //ãƒ´ã‚¡ãƒ«ã‚­ãƒªãƒ¼
             case 11:
                 switch (DialogNum)
                 {
@@ -248,7 +306,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "ƒ”ƒ@ƒ‹ƒLƒŠ[A‚¨‘O‚Ì‹F‚è‚Í„‚É“Í‚¢‚Ä‚¢‚éB";
+                                AresText.text = "ãƒ´ã‚¡ãƒ«ã‚­ãƒªãƒ¼ã€ãŠå‰ã®ç¥ˆã‚Šã¯ç§ã«å±Šã„ã¦ã„ã‚‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Valkyrie, your prayers have reached me.";
@@ -260,7 +318,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰½ŒÌ‚É“ğ‚Í‰ä‚É’‰½‚ğ¾‚Á‚½H";
+                                AresText.text = "ä½•æ•…ã«æ±ã¯æˆ‘ã«å¿ èª ã‚’èª“ã£ãŸï¼Ÿ";
                                 break;
                             case 2:
                                 AresText.text = "Why did you swear loyalty to me?";
@@ -272,7 +330,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "_‚æA‚»‚Ì“š‚¦‚Í‹M•û©g‚ª’m‚Á‚Ä‚¢‚é”¤‚Å‚·B";
+                                SaintText.text = "ç¥ã‚ˆã€ãã®ç­”ãˆã¯è²´æ–¹è‡ªèº«ãŒçŸ¥ã£ã¦ã„ã‚‹ç­ˆã§ã™ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "God, You yourself must know the answer.";
@@ -284,7 +342,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‹»–¡[‚¢‚ÈB";
+                                AresText.text = "èˆˆå‘³æ·±ã„ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Interesting.";
@@ -305,7 +363,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰¤Š¥‚ğè‚É–ß‚Á‚Ä—ˆ‚½‚©B";
+                                AresText.text = "ç‹å† ã‚’æ‰‹ã«æˆ»ã£ã¦æ¥ãŸã‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "So you've returned with the crown in your hand.";
@@ -317,7 +375,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "_‚æA‚Ç‚¤‚¨v‚¢‚Å‚·‚©AMÒ‚Ìˆê•”‚ÍŠù‚ÉMS‚ğ¸‚Á‚Ä‚¢‚é‚±‚Æ‚ÉB";
+                                SaintText.text = "ç¥ã‚ˆã€ã©ã†ãŠæ€ã„ã§ã™ã‹ã€ä¿¡è€…ã®ä¸€éƒ¨ã¯æ—¢ã«ä¿¡å¿ƒã‚’å¤±ã£ã¦ã„ã‚‹ã“ã¨ã«ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "God, what do You think of the fact that some of the faithful have already lost their faith?";
@@ -329,7 +387,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "MS‚ª‘S‚Ä‚Å‚Í‚È‚¢B";
+                                AresText.text = "ä¿¡å¿ƒãŒå…¨ã¦ã§ã¯ãªã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Faith is not everything.";
@@ -341,7 +399,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "­‚È‚­‚Æ‚àA”Ş“™‚É‚Í‚Ü‚¾“¬u‚ª‚ ‚é‚Ì‚¾B";
+                                AresText.text = "å°‘ãªãã¨ã‚‚ã€å½¼ç­‰ã«ã¯ã¾ã é—˜å¿—ãŒã‚ã‚‹ã®ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "At the very least, they still have a fighting spirit.";
@@ -362,7 +420,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚»‚¤‚¾Aí‚¢‘±‚¯‚é‚Ì‚¾B";
+                                AresText.text = "ãã†ã ã€æˆ¦ã„ç¶šã‘ã‚‹ã®ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "That's right. keep fighting.";
@@ -374,7 +432,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‹M•û‚Í‹F‚è‚æ‚è‚àŒŒ‚ğ‹‚ß‚Ä‚¢‚écc";
+                                SaintText.text = "è²´æ–¹ã¯ç¥ˆã‚Šã‚ˆã‚Šã‚‚è¡€ã‚’æ±‚ã‚ã¦ã„ã‚‹â€¦â€¦";
                                 break;
                             case 2:
                                 SaintText.text = "You seek blood rather than prayer...";
@@ -386,7 +444,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "_‚æA‹F‚è‚ÍˆÓ–¡‚ğ‚Â‚Ì‚Å‚µ‚å‚¤‚©H";
+                                SaintText.text = "ç¥ã‚ˆã€ç¥ˆã‚Šã¯æ„å‘³ã‚’æŒã¤ã®ã§ã—ã‚‡ã†ã‹ï¼Ÿ";
                                 break;
                             case 2:
                                 SaintText.text = "God, does prayer have meaning?";
@@ -398,7 +456,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ğ‚ª‚»‚¤v‚¤‚Ì‚È‚ç‚ÈB";
+                                AresText.text = "æ±ãŒãã†æ€ã†ã®ãªã‚‰ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "If that is what you think.";
@@ -419,7 +477,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ğ‚Í¡‚æ‚è‚à‹­‚­‚È‚é‚¾‚ë‚¤B";
+                                AresText.text = "æ±ã¯ä»Šã‚ˆã‚Šã‚‚å¼·ããªã‚‹ã ã‚ã†ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "You will become stronger than you are now.";
@@ -431,7 +489,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‹M•û‚ÍŠù‚É‘å‚¢‚È‚é—Í‚ğ‚Á‚Ä‚¢‚Ü‚·B";
+                                SaintText.text = "è²´æ–¹ã¯æ—¢ã«å¤§ã„ãªã‚‹åŠ›ã‚’æŒã£ã¦ã„ã¾ã™ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "You already possess great power.";
@@ -443,7 +501,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "„‚Ì‚æ‚¤‚Èáâ¬‚ÈÒ‚ÉA‚È‚º·’…‚·‚é‚Ì‚Å‚·‚©H";
+                                SaintText.text = "ç§ã®ã‚ˆã†ãªçŸ®å°ãªè€…ã«ã€ãªãœåŸ·ç€ã™ã‚‹ã®ã§ã™ã‹ï¼Ÿ";
                                 break;
                             case 2:
                                 SaintText.text = "Why are you obsessed with someone as insignificant as me?";
@@ -455,7 +513,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "MÒ‚ÍŠF•½“™‚Å‚ ‚é‚×‚«‚¾B“ğ‚à—áŠO‚Å‚Í‚È‚¢B";
+                                AresText.text = "ä¿¡è€…ã¯çš†å¹³ç­‰ã§ã‚ã‚‹ã¹ãã ã€‚æ±ã‚‚ä¾‹å¤–ã§ã¯ãªã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "All believers should be treated equally. You are no exception.";
@@ -476,7 +534,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "Œ©–‚¾Aƒ”ƒ@ƒ‹ƒLƒŠ[B";
+                                AresText.text = "è¦‹äº‹ã ã€ãƒ´ã‚¡ãƒ«ã‚­ãƒªãƒ¼ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Magnificent, Valkyrie.";
@@ -488,7 +546,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ğ‚ÉÅ‘“G‚Í–³‚¢‚Æ‚¢‚¤‚Ì‚©cc";
+                                AresText.text = "æ±ã«æœ€æ—©æ•µã¯ç„¡ã„ã¨ã„ã†ã®ã‹â€¦â€¦";
                                 break;
                             case 2:
                                 AresText.text = "Do you mean to say that you no longer have any enemies...";
@@ -500,7 +558,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "_‚æA„‚ª‹M•û‚É‹y‚Ô‚±‚Æ‚Í‚ ‚è‚Ü‚¹‚ñB‚µ‚©‚µ­‚µ‚Í‹ß•t‚¢‚½”¤‚Å‚·B";
+                                SaintText.text = "ç¥ã‚ˆã€ç§ãŒè²´æ–¹ã«åŠã¶ã“ã¨ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚ã—ã‹ã—å°‘ã—ã¯è¿‘ä»˜ã„ãŸç­ˆã§ã™ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "God, I do not measure up to You. Yet, I must have drawn at least a little closer.";
@@ -512,7 +570,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚»‚Ì‹­‚³A‚»‚µ‚ÄŒª‹•‚³A“ğ‚±‚»‚ª‘Š‰‚µ‚¢B";
+                                AresText.text = "ãã®å¼·ã•ã€ãã—ã¦è¬™è™šã•ã€æ±ã“ããŒç›¸å¿œã—ã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "That strength, and that humility?you are the one worthy of it.";
@@ -524,7 +582,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‘O‚Öi‚İo‚æB‚»‚µ‚ÄØ–¾‚·‚é‚Ì‚¾A“ğ‚Ì‹­‚³‚ğB";
+                                AresText.text = "å‰ã¸é€²ã¿å‡ºã‚ˆã€‚ãã—ã¦è¨¼æ˜ã™ã‚‹ã®ã ã€æ±ã®å¼·ã•ã‚’ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Step forward. And prove your strength.";
@@ -537,7 +595,7 @@ public class AresCrown : MonoBehaviour
                         break;
                 }
                 break;
-            //ƒEƒHƒbƒ`ƒƒ[
+            //ã‚¦ã‚©ãƒƒãƒãƒ£ãƒ¼
             case 21:
                 switch (DialogNum)
                 {
@@ -546,7 +604,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "¶‚«c‚è‚ÌƒEƒHƒbƒ`ƒƒ[‚æA‚±‚ñ‚È‚Æ‚±‚ë‚Å‰½‚ğ‚µ‚Ä‚¢‚éH";
+                                AresText.text = "ç”Ÿãæ®‹ã‚Šã®ã‚¦ã‚©ãƒƒãƒãƒ£ãƒ¼ã‚ˆã€ã“ã‚“ãªã¨ã“ã‚ã§ä½•ã‚’ã—ã¦ã„ã‚‹ï¼Ÿ";
                                 break;
                             case 2:
                                 AresText.text = "Surviving Watcher, what are you doing in a place like this?";
@@ -558,7 +616,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰ä‚É’‰½‚ğ¾‚¤——R‚ª‚ ‚é‚Ì‚©H";
+                                AresText.text = "æˆ‘ã«å¿ èª ã‚’èª“ã†ç†ç”±ãŒã‚ã‚‹ã®ã‹ï¼Ÿ";
                                 break;
                             case 2:
                                 AresText.text = "Is there a reason to swear loyalty to me?";
@@ -570,7 +628,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "ccc";
+                                SaintText.text = "â€¦â€¦â€¦";
                                 break;
                             case 2:
                                 SaintText.text = "......";
@@ -582,7 +640,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "’¾–ÙA‚»‚ê‚ª“ğ‚Ì“š‚¦‚©B";
+                                AresText.text = "æ²ˆé»™ã€ãã‚ŒãŒæ±ã®ç­”ãˆã‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Silence?is that your answer.";
@@ -603,7 +661,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰¤Š¥‚ğè‚É–ß‚Á‚Ä—ˆ‚½‚©B";
+                                AresText.text = "ç‹å† ã‚’æ‰‹ã«æˆ»ã£ã¦æ¥ãŸã‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "So you've returned with the crown in your hand.";
@@ -615,7 +673,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "cccc";
+                                SaintText.text = "â€¦â€¦â€¦â€¦";
                                 break;
                             case 2:
                                 SaintText.text = "......";
@@ -627,7 +685,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "–Ê”’‚¢B“ğ‚Ìvl‚Í“Ç‚ß‚È‚¢‚à‚Ì‚¾B";
+                                AresText.text = "é¢ç™½ã„ã€‚æ±ã®æ€è€ƒã¯èª­ã‚ãªã„ã‚‚ã®ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Interesting. Your thoughts are impossible to read.";
@@ -639,7 +697,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚³‚ AŸ‚ÌŠ¥‚ğó‚¯æ‚é‚ª‚¢‚¢B";
+                                AresText.text = "ã•ã‚ã€æ¬¡ã®å† ã‚’å—ã‘å–ã‚‹ãŒã„ã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Now, receive the next crown.";
@@ -660,7 +718,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "–Ú“I‚Í‰½‚¾H";
+                                AresText.text = "ç›®çš„ã¯ä½•ã ï¼Ÿ";
                                 break;
                             case 2:
                                 AresText.text = "What is the purpose?";
@@ -672,7 +730,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "cccc";
+                                SaintText.text = "â€¦â€¦â€¦â€¦";
                                 break;
                             case 2:
                                 SaintText.text = "......";
@@ -684,7 +742,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚»‚¤‚¾A‚»‚ê‚Å‚¢‚¢B";
+                                SaintText.text = "ãã†ã ã€ãã‚Œã§ã„ã„ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "Right, that's good.";
@@ -696,7 +754,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "í‚¢‚Í“ğ‚ç‚Ì–{”\‚È‚Ì‚¾‚©‚çB";
+                                AresText.text = "æˆ¦ã„ã¯æ±ã‚‰ã®æœ¬èƒ½ãªã®ã ã‹ã‚‰ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "For battle is your instinct.";
@@ -717,7 +775,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ğ‚Í—D‚ê‚½‹|‚Ìg‚¢è‚¾B";
+                                AresText.text = "æ±ã¯å„ªã‚ŒãŸå¼“ã®ä½¿ã„æ‰‹ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "You are a skilled archer.";
@@ -729,7 +787,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚©‚Â‚Ä“ğ‚Ì‚æ‚¤‚ÈŠÄ‹Ò‚ğŒ©‚½‚±‚Æ‚ª‚ ‚éB";
+                                AresText.text = "ã‹ã¤ã¦æ±ã®ã‚ˆã†ãªç›£è¦–è€…ã‚’è¦‹ãŸã“ã¨ãŒã‚ã‚‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "I have seen a watcher like you before.";
@@ -741,7 +799,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "cccc";
+                                SaintText.text = "â€¦â€¦â€¦â€¦";
                                 break;
                             case 2:
                                 SaintText.text = "......";
@@ -753,7 +811,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚©‚ÌÒ‚Í‰ä‚É–îæ‚ğŒü‚¯Aí‚¢‚É”s–k‚µ‹€‚¿‚½cc";
+                                AresText.text = "ã‹ã®è€…ã¯æˆ‘ã«çŸ¢å…ˆã‚’å‘ã‘ã€æˆ¦ã„ã«æ•—åŒ—ã—æœ½ã¡ãŸâ€¦â€¦";
                                 break;
                             case 2:
                                 AresText.text = "That one turned their arrow against me, only to be defeated in battle and crumble into decay...";
@@ -765,7 +823,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "cc‚Ü‚³‚©cc‚»‚¤‚Å‚ ‚Á‚½‚©B";
+                                AresText.text = "â€¦â€¦ã¾ã•ã‹â€¦â€¦ãã†ã§ã‚ã£ãŸã‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "...Could it be... So that was it.";
@@ -786,7 +844,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "Œ©–‚¾AƒEƒHƒbƒ`ƒƒ[B";
+                                AresText.text = "è¦‹äº‹ã ã€ã‚¦ã‚©ãƒƒãƒãƒ£ãƒ¼ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Magnificent, Watcher.";
@@ -798,7 +856,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚¢‚âA‚©‚Ì—E‹C‚ ‚éÒ‚Ì–ºcc‚Æ‚¢‚Á‚½‚Æ‚±‚ë‚©B";
+                                AresText.text = "ã„ã‚„ã€ã‹ã®å‹‡æ°—ã‚ã‚‹è€…ã®å¨˜â€¦â€¦ã¨ã„ã£ãŸã¨ã“ã‚ã‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "No... perhaps I should say, the daughter of that courageous soul.";
@@ -810,7 +868,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "cccc";
+                                SaintText.text = "â€¦â€¦â€¦â€¦";
                                 break;
                             case 2:
                                 SaintText.text = "......";
@@ -822,7 +880,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "Å‘˜b‚·‚±‚Æ‚à‚È‚³‚»‚¤‚¾‚ÈB";
+                                AresText.text = "æœ€æ—©è©±ã™ã“ã¨ã‚‚ãªã•ãã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It looks like there's nothing left to talk about.";
@@ -834,7 +892,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ğ‚à‚©‚ÌÒ‚Ì”w’†‚ğ’Ç‚¤‚Ì‚È‚ç‚ÎA‰ä‚Í‚»‚ê‚É‰‚¦‚æ‚¤B";
+                                AresText.text = "æ±ã‚‚ã‹ã®è€…ã®èƒŒä¸­ã‚’è¿½ã†ã®ãªã‚‰ã°ã€æˆ‘ã¯ãã‚Œã«å¿œãˆã‚ˆã†ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "If you, too, would follow in that one's footsteps, I shall answer that call.";
@@ -847,7 +905,7 @@ public class AresCrown : MonoBehaviour
                         break;
                 }
                 break;
-            //ƒVƒA[
+            //ã‚·ã‚¢ãƒ¼
             case 31:
                 switch (DialogNum)
                 {
@@ -856,7 +914,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "”R‚¦ã‚ª‚éím‚æA‚æ‚­‚¼’H‚è’…‚¢‚½B";
+                                AresText.text = "ç‡ƒãˆä¸ŠãŒã‚‹æˆ¦å£«ã‚ˆã€ã‚ˆããè¾¿ã‚Šç€ã„ãŸã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Blazing warrior, you have done well to reach this place.";
@@ -868,7 +926,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ğ‚à‰ä‚É’‰½‚ğ¾‚Á‚½‚æ‚¤‚¾‚ÈB";
+                                AresText.text = "æ±ã‚‚æˆ‘ã«å¿ èª ã‚’èª“ã£ãŸã‚ˆã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It seems you, too, have sworn loyalty to me.";
@@ -880,7 +938,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "“G‚Ícc‚Ç‚±‚¾cc";
+                                SaintText.text = "æ•µã¯â€¦â€¦ã©ã“ã â€¦â€¦";
                                 break;
                             case 2:
                                 SaintText.text = "Where... is the enemy...?";
@@ -892,7 +950,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚Ü‚¾í‚¢‘«‚è‚È‚¢‚æ‚¤‚¾‚ÈB‘f°‚ç‚µ‚¢B";
+                                AresText.text = "ã¾ã æˆ¦ã„è¶³ã‚Šãªã„ã‚ˆã†ã ãªã€‚ç´ æ™´ã‚‰ã—ã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It seems you haven't had enough fighting yet. Splendid.";
@@ -913,7 +971,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚»‚Ì—lq‚Å‚ÍA‰¤Š¥‚Í—n‚¯‚Ä‚¢‚»‚¤‚¾‚ÈB";
+                                AresText.text = "ãã®æ§˜å­ã§ã¯ã€ç‹å† ã¯æº¶ã‘ã¦ã„ãã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "The way things look, the crown seems likely to have melted.";
@@ -925,7 +983,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‰½ˆ‚Ös‚Á‚½cc“Gcc";
+                                SaintText.text = "ä½•å‡¦ã¸è¡Œã£ãŸâ€¦â€¦æ•µâ€¦â€¦";
                                 break;
                             case 2:
                                 SaintText.text = "Where did they go... the enemy...";
@@ -937,7 +995,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "ˆÄ‚¸‚é‚ÈA“|‚·‚×‚«“G‚Í‚Ü‚¾c‚Á‚Ä‚¢‚éB";
+                                AresText.text = "æ¡ˆãšã‚‹ãªã€å€’ã™ã¹ãæ•µã¯ã¾ã æ®‹ã£ã¦ã„ã‚‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Do not worry; there are still enemies left to defeat.";
@@ -949,7 +1007,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚±‚Ì‰¤Š¥‚ğ‚Á‚Ä‚¢‚­‚ª‚¢‚¢B";
+                                AresText.text = "ã“ã®ç‹å† ã‚’æŒã£ã¦ã„ããŒã„ã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Take this crown.";
@@ -970,7 +1028,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚»‚Ì”R‚¦‚é‰Š‚Í•s–Å‚Ì‚æ‚¤‚¾B";
+                                AresText.text = "ãã®ç‡ƒãˆã‚‹ç‚ã¯ä¸æ»…ã®ã‚ˆã†ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "That burning flame seems immortal.";
@@ -982,7 +1040,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "“Gcc“GcH";
+                                SaintText.text = "æ•µâ€¦â€¦æ•µâ€¦ï¼Ÿ";
                                 break;
                             case 2:
                                 SaintText.text = "Enemy... enemy...?";
@@ -994,7 +1052,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚¨‘Occ‚Ícc";
+                                SaintText.text = "ãŠå‰â€¦â€¦ã¯â€¦â€¦";
                                 break;
                             case 2:
                                 SaintText.text = "You... are...";
@@ -1006,7 +1064,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰ä‚Ì–‚ª•ª‚©‚ç‚È‚¢‚Ì‚©B";
+                                AresText.text = "æˆ‘ã®äº‹ãŒåˆ†ã‹ã‚‰ãªã„ã®ã‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Do you not recognize me?";
@@ -1027,7 +1085,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ğ‚É‚Æ‚Á‚Ä‘S‚Ä‚Íu“Gv‚È‚Ì‚©H";
+                                AresText.text = "æ±ã«ã¨ã£ã¦å…¨ã¦ã¯ã€Œæ•µã€ãªã®ã‹ï¼Ÿ";
                                 break;
                             case 2:
                                 AresText.text = "Is everything an \"enemy\" to you?";
@@ -1039,7 +1097,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚¨‘O‚Ícc“G‚©ccH";
+                                SaintText.text = "ãŠå‰ã¯â€¦â€¦æ•µã‹â€¦â€¦ï¼Ÿ";
                                 break;
                             case 2:
                                 SaintText.text = "Are you... an enemy...?";
@@ -1051,7 +1109,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "„‚Ìcc‹‚ß‚é‚à‚Ìcc";
+                                SaintText.text = "ç§ã®â€¦â€¦æ±‚ã‚ã‚‹ã‚‚ã®â€¦â€¦";
                                 break;
                             case 2:
                                 SaintText.text = "What I... seek...";
@@ -1063,7 +1121,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‹ß‚¢‚¤‚¿‚ÉA“ğ‚Í‚»‚Ì“š‚¦‚ğ’m‚è‚¤‚é‚¾‚ë‚¤B";
+                                AresText.text = "è¿‘ã„ã†ã¡ã«ã€æ±ã¯ãã®ç­”ãˆã‚’çŸ¥ã‚Šã†ã‚‹ã ã‚ã†ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Before long, you shall know the answer.";
@@ -1084,7 +1142,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "Œ©–‚¾AƒVƒA[B";
+                                AresText.text = "è¦‹äº‹ã ã€ã‚·ã‚¢ãƒ¼ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Magnificent, Sear.";
@@ -1096,7 +1154,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚ ‚ç‚ä‚é“G‚ğ—½‰í‚µA“ğ‚Í‰hŒõ‚ğè‚É‚µ‚½‚Ì‚¾B";
+                                AresText.text = "ã‚ã‚‰ã‚†ã‚‹æ•µã‚’å‡Œé§•ã—ã€æ±ã¯æ „å…‰ã‚’æ‰‹ã«ã—ãŸã®ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "You have surpassed all enemies and grasped glory.";
@@ -1108,7 +1166,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "“Gcc‚¨‘O‚ğcca‚è”ò‚Î‚·cc";
+                                SaintText.text = "æ•µâ€¦â€¦ãŠå‰ã‚’â€¦â€¦æ–¬ã‚Šé£›ã°ã™â€¦â€¦";
                                 break;
                             case 2:
                                 SaintText.text = "Enemy... I will... cut you down...";
@@ -1120,7 +1178,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ğ‚ªí‚¢‚ğ~‚ß‚é‚±‚Æ‚Í‚È‚³‚»‚¤‚¾‚ÈB";
+                                AresText.text = "æ±ãŒæˆ¦ã„ã‚’æ­¢ã‚ã‚‹ã“ã¨ã¯ãªã•ãã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It seems unlikely that you will stop fighting.";
@@ -1132,7 +1190,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚â‚Á‚Ä‚İ‚é‚ª‚æ‚¢BÅ‘å‚Ìu“Gv‚ª‘Ò‚Á‚Ä‚¢‚é‚¼B";
+                                AresText.text = "ã‚„ã£ã¦ã¿ã‚‹ãŒã‚ˆã„ã€‚æœ€å¤§ã®ã€Œæ•µã€ãŒå¾…ã£ã¦ã„ã‚‹ãã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Go ahead and try it. Your greatest \"enemy\" awaits you.";
@@ -1145,7 +1203,7 @@ public class AresCrown : MonoBehaviour
                         break;
                 }
                 break;
-            //ƒtƒ‰ƒNƒ^ƒ‹
+            //ãƒ•ãƒ©ã‚¯ã‚¿ãƒ«
             case 41:
                 switch (DialogNum)
                 {
@@ -1154,7 +1212,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰ä‚ª‰º‚Ö‚Æ—Ç‚­—ˆ‚½Aô‚í‚ê‚½“ø‚æB";
+                                AresText.text = "æˆ‘ãŒä¸‹ã¸ã¨è‰¯ãæ¥ãŸã€å‘ªã‚ã‚ŒãŸè™¹ã‚ˆã€‚";
                                 break;
                             case 2:
                                 AresText.text = "You have done well to come before me, cursed rainbow.";
@@ -1166,7 +1224,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ğ‚Í‰ä‚ªMÒ‚Ì’†‚Å‚àAˆÙ¿‚È‘¶İ‚¾B";
+                                AresText.text = "æ±ã¯æˆ‘ãŒä¿¡è€…ã®ä¸­ã§ã‚‚ã€ç•°è³ªãªå­˜åœ¨ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "You are an anomaly among my followers.";
@@ -1178,10 +1236,10 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚©‚à‚ËB„‚Ì“à•”‚ÉAF‚Í‚Ù‚Æ‚ñ‚Çc‚Á‚Ä‚¢‚È‚¢‚à‚ÌB";
+                                SaintText.text = "ã‹ã‚‚ã­ã€‚ç§ã®å†…éƒ¨ã«ã€è‰²ã¯ã»ã¨ã‚“ã©æ®‹ã£ã¦ã„ãªã„ã‚‚ã®ã€‚";
                                 break;
                             case 2:
-                                SaintText.text = "Maybe so. Therefs hardly any color left inside me, after all.";
+                                SaintText.text = "Maybe so. Thereâ€™s hardly any color left inside me, after all.";
                                 break;
                         }
                         break;
@@ -1190,7 +1248,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰i‰“‚Ì”ü‚È‚Ç‚È‚¢B‚¾‚ªA‚»‚Ì–½‚Ì“ø‚Í‹P‚¢‚Ä‚¢‚é‚¼B";
+                                AresText.text = "æ°¸é ã®ç¾ãªã©ãªã„ã€‚ã ãŒã€ãã®å‘½ã®è™¹ã¯è¼ã„ã¦ã„ã‚‹ãã€‚";
                                 break;
                             case 2:
                                 AresText.text = "There is no such thing as eternal beauty. Yet, the rainbow of that life shines bright.";
@@ -1211,7 +1269,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ø‚æA‰¤Š¥‚ğŒg‚¦‚Ä—ˆ‚½‚æ‚¤‚¾‚ÈB";
+                                AresText.text = "è™¹ã‚ˆã€ç‹å† ã‚’æºãˆã¦æ¥ãŸã‚ˆã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Rainbow, it seems you have come bearing a crown.";
@@ -1223,7 +1281,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "ƒAƒCƒfƒA‚ª‚ ‚é‚íB‚±‚Ì‰¤Š¥‚ğ“øF‚Éõ‚ßã‚°‚È‚¢H";
+                                SaintText.text = "ã‚¢ã‚¤ãƒ‡ã‚¢ãŒã‚ã‚‹ã‚ã€‚ã“ã®ç‹å† ã‚’è™¹è‰²ã«æŸ“ã‚ä¸Šã’ãªã„ï¼Ÿ";
                                 break;
                             case 2:
                                 SaintText.text = "I have an idea. Why don't we dye this crown in rainbow colors?";
@@ -1235,7 +1293,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‹àF‚ÍŸ—˜‚ÌØ‚¾B";
+                                AresText.text = "é‡‘è‰²ã¯å‹åˆ©ã®è¨¼ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Gold is the mark of victory.";
@@ -1247,7 +1305,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "­‚È‚­‚Æ‚à‰ä‚É‚Æ‚Á‚Ä‚Í‚ÈB";
+                                AresText.text = "å°‘ãªãã¨ã‚‚æˆ‘ã«ã¨ã£ã¦ã¯ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "At least to me, that is.";
@@ -1268,10 +1326,10 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ø‚ª‚ ‚ê‚Î•Ší‚È‚Ç•s—vA‚Æ‚¢‚Á‚½‚Æ‚±‚ë‚©B";
+                                AresText.text = "è™¹ãŒã‚ã‚Œã°æ­¦å™¨ãªã©ä¸è¦ã€ã¨ã„ã£ãŸã¨ã“ã‚ã‹ã€‚";
                                 break;
                             case 2:
-                                AresText.text = "I suppose that if therefs a rainbow, weapons arenft needed.";
+                                AresText.text = "I suppose that if thereâ€™s a rainbow, weapons arenâ€™t needed.";
                                 break;
                         }
                         break;
@@ -1280,7 +1338,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "F‚Í¬‚º‚ê‚Î¬‚º‚é‚Ù‚ÇA‚»‚Ì•¡G‚³‚ğ‘‚·‚Ì‚æB";
+                                SaintText.text = "è‰²ã¯æ··ãœã‚Œã°æ··ãœã‚‹ã»ã©ã€ãã®è¤‡é›‘ã•ã‚’å¢—ã™ã®ã‚ˆã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "The more you mix colors, the more complex they become.";
@@ -1292,7 +1350,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚Ü‚ cc¬‚º‚·‚¬‚Ä•‚É‚È‚Á‚½‚ñ‚¾‚¯‚Ç‚ËB";
+                                SaintText.text = "ã¾ã‚â€¦â€¦æ··ãœã™ãã¦é»’ã«ãªã£ãŸã‚“ã ã‘ã©ã­ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "Well... I mixed it too much and it turned black.";
@@ -1304,7 +1362,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "d—v‚È‚Ì‚Í¸”s‚©‚çŠw‚Ô‚±‚Æ‚¾B";
+                                AresText.text = "é‡è¦ãªã®ã¯å¤±æ•—ã‹ã‚‰å­¦ã¶ã“ã¨ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It is important to learn from failure.";
@@ -1325,7 +1383,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ø‚æA‹­‚­‚È‚Á‚½‚ÈB";
+                                AresText.text = "è™¹ã‚ˆã€å¼·ããªã£ãŸãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Rainbow, you've grown so strong.";
@@ -1337,7 +1395,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚ ‚È‚½‚à“ø‚Åõ‚Ü‚Á‚Ä‚İ‚È‚¢H";
+                                SaintText.text = "ã‚ãªãŸã‚‚è™¹ã§æŸ“ã¾ã£ã¦ã¿ãªã„ï¼Ÿ";
                                 break;
                             case 2:
                                 SaintText.text = "Why not let yourself be dyed in the colors of the rainbow?";
@@ -1349,7 +1407,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚»‚Ì‹C‚É‚È‚ê‚ÎA„‚Ìˆê•”‚ğ‚ ‚°‚ç‚ê‚é‚íB";
+                                SaintText.text = "ãã®æ°—ã«ãªã‚Œã°ã€ç§ã®ä¸€éƒ¨ã‚’ã‚ã’ã‚‰ã‚Œã‚‹ã‚ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "If I felt like it, I could give you a part of myself.";
@@ -1361,7 +1419,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰ä‚ÍŠù‚ÉA‚©‚Â‚Ä‚Ìp‚ğ¸‚Á‚Ä‚µ‚Ü‚Á‚½B";
+                                AresText.text = "æˆ‘ã¯æ—¢ã«ã€ã‹ã¤ã¦ã®å§¿ã‚’å¤±ã£ã¦ã—ã¾ã£ãŸã€‚";
                                 break;
                             case 2:
                                 AresText.text = "I have already lost the form I once possessed.";
@@ -1382,7 +1440,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "Œ©–‚¾Aƒtƒ‰ƒNƒ^ƒ‹B";
+                                AresText.text = "è¦‹äº‹ã ã€ãƒ•ãƒ©ã‚¯ã‚¿ãƒ«ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Magnificent, Fractal.";
@@ -1394,7 +1452,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ğ‚Ìô‚í‚ê‚½“ø‚É‚ÍA•‚ê‚Ê—Í‚ª‚ ‚éB";
+                                AresText.text = "æ±ã®å‘ªã‚ã‚ŒãŸè™¹ã«ã¯ã€ä¾®ã‚Œã¬åŠ›ãŒã‚ã‚‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "That cursed rainbow of yours holds a power not to be underestimated.";
@@ -1406,7 +1464,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰hŒõ‚ğè‚É‚µ‚½Ò‚æA“ğ‚É‚Í‰ä‚É’§‚ŞŒ —˜‚ª‚ ‚éB";
+                                AresText.text = "æ „å…‰ã‚’æ‰‹ã«ã—ãŸè€…ã‚ˆã€æ±ã«ã¯æˆ‘ã«æŒ‘ã‚€æ¨©åˆ©ãŒã‚ã‚‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "You who have grasped glory?you have the right to challenge me.";
@@ -1418,7 +1476,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚¦‚¦A„‚ªŸ‚Á‚½‚çA¡“x‚±‚»“øF‚Ì‰¤Š¥‚ğ‚­‚ê‚éH";
+                                SaintText.text = "ãˆãˆã€ç§ãŒå‹ã£ãŸã‚‰ã€ä»Šåº¦ã“ãè™¹è‰²ã®ç‹å† ã‚’ãã‚Œã‚‹ï¼Ÿ";
                                 break;
                             case 2:
                                 SaintText.text = "Okay, if I win, will you give me the rainbow-colored crown this time?";
@@ -1430,7 +1488,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ğ‚ÍŠù‚É‚»‚ê‚ğ‚Á‚Ä‚¢‚éB“°X‚ÆŒÖ¦‚µ‚ÄŒ©‚¹‚æB";
+                                AresText.text = "æ±ã¯æ—¢ã«ãã‚Œã‚’æŒã£ã¦ã„ã‚‹ã€‚å ‚ã€…ã¨èª‡ç¤ºã—ã¦è¦‹ã›ã‚ˆã€‚";
                                 break;
                             case 2:
                                 AresText.text = "You already possess it. Flaunt it proudly.";
@@ -1443,7 +1501,7 @@ public class AresCrown : MonoBehaviour
                         break;
                 }
                 break;
-            //ƒZƒ“ƒgƒŠ[
+            //ã‚»ãƒ³ãƒˆãƒªãƒ¼
             case 51:
                 switch (DialogNum)
                 {
@@ -1452,7 +1510,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "€—ì‚ğŒÄ‚ÑŠo‚Ü‚·—ÍA‚È‚é‚Ù‚Ç‚ÈB";
+                                AresText.text = "æ­»éœŠã‚’å‘¼ã³è¦šã¾ã™åŠ›ã€ãªã‚‹ã»ã©ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "The power to awaken the spirits of the dead?I see.";
@@ -1464,7 +1522,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "’‰½‚ğ¾‚Á‚½‚Ì‚ÍA‹€‚¿‚½Ò’B‚ª–Ú“I‚©H";
+                                AresText.text = "å¿ èª ã‚’èª“ã£ãŸã®ã¯ã€æœ½ã¡ãŸè€…é”ãŒç›®çš„ã‹ï¼Ÿ";
                                 break;
                             case 2:
                                 AresText.text = "Was the goal of your sworn loyalty those who have withered away?";
@@ -1476,7 +1534,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "”Ş‚ç‚Ì°‚Í‚Ü‚¾—˜—p‚Å‚«‚éB‰´‚Í‚»‚ê‚ğˆø‚«o‚·‚É‰ß‚¬‚È‚¢B";
+                                SaintText.text = "å½¼ã‚‰ã®é­‚ã¯ã¾ã åˆ©ç”¨ã§ãã‚‹ã€‚ä¿ºã¯ãã‚Œã‚’å¼•ãå‡ºã™ã«éããªã„ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "Their souls are still available. I am merely drawing them out.";
@@ -1488,7 +1546,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "Ä‚Ñ°‚Éí‚¢‚ğ‚³‚¹‚éAÀ‚É–Ê”’‚¢B";
+                                AresText.text = "å†ã³é­‚ã«æˆ¦ã„ã‚’ã•ã›ã‚‹ã€å®Ÿã«é¢ç™½ã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "To make the soul do battle once more?truly fascinating.";
@@ -1509,7 +1567,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰¤Š¥A‚»‚µ‚Ä€Ò‚Æ‹¤‚É—ˆ‚½‚æ‚¤‚¾‚ÈB";
+                                AresText.text = "ç‹å† ã€ãã—ã¦æ­»è€…ã¨å…±ã«æ¥ãŸã‚ˆã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It seems you have come with the crown?and the dead.";
@@ -1521,7 +1579,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚±‚ÌÒ’B‚ª‰½Ò‚©‚Í’m‚ç‚È‚¢‚ªA‹L‰¯‚Íc‚Á‚Ä‚¢‚é‚æ‚¤‚Év‚¦‚éB";
+                                SaintText.text = "ã“ã®è€…é”ãŒä½•è€…ã‹ã¯çŸ¥ã‚‰ãªã„ãŒã€è¨˜æ†¶ã¯æ®‹ã£ã¦ã„ã‚‹ã‚ˆã†ã«æ€ãˆã‚‹ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "I do not know who these people are, but it seems their memories remain intact.";
@@ -1533,7 +1591,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚»‚ÌÒ‚Íí‚¢‚Ì‹L‰¯‚ªŒÄ‚Ñ–ß‚³‚ê‚Ä‚¢‚éB";
+                                AresText.text = "ãã®è€…ã¯æˆ¦ã„ã®è¨˜æ†¶ãŒå‘¼ã³æˆ»ã•ã‚Œã¦ã„ã‚‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Memories of the battle are being stirred within that person.";
@@ -1545,7 +1603,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "Ä‚Ñíê‚É—§‚Á‚½‚±‚Æ‚ÍŠì‚Î‚µ‚¢‚±‚Æ‚¾B";
+                                AresText.text = "å†ã³æˆ¦å ´ã«ç«‹ã£ãŸã“ã¨ã¯å–œã°ã—ã„ã“ã¨ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It is a joyous occasion to be back on the battlefield.";
@@ -1566,7 +1624,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "°‚ÌˆÓv‚ª‹­‚Ü‚Á‚Ä‚«‚Ä‚¢‚é‚æ‚¤‚¾‚ÈB";
+                                AresText.text = "é­‚ã®æ„æ€ãŒå¼·ã¾ã£ã¦ãã¦ã„ã‚‹ã‚ˆã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It seems the will of your soul is growing stronger.";
@@ -1578,7 +1636,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‰´‚Ì°‚Æ—Z‡‚µ‚Ä‚¢‚­‚æ‚¤‚ÈŠ´Šo‚¾B";
+                                SaintText.text = "ä¿ºã®é­‚ã¨èåˆã—ã¦ã„ãã‚ˆã†ãªæ„Ÿè¦šã ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "It feels as though it is merging with my soul.";
@@ -1590,7 +1648,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‰´‚Ì–¼‘O‚Ícc‚ ‚ A‚à‚¤–Y‚ê‚Ä‚µ‚Ü‚Á‚½‚ÈB";
+                                SaintText.text = "ä¿ºã®åå‰ã¯â€¦â€¦ã‚ã‚ã€ã‚‚ã†å¿˜ã‚Œã¦ã—ã¾ã£ãŸãªã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "My name is... Ah, I've forgotten it already.";
@@ -1602,7 +1660,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "—á‚¦‚»‚Ì‹L‰¯‚ª©•ª‚Ì•¨‚Å‚È‚­‚Æ‚àAˆÌ‘å‚È‚à‚Ì‚Å‚ ‚é‚±‚Æ‚É•Ï‚í‚è‚Í–³‚¢B";
+                                AresText.text = "ä¾‹ãˆãã®è¨˜æ†¶ãŒè‡ªåˆ†ã®ç‰©ã§ãªãã¨ã‚‚ã€å‰å¤§ãªã‚‚ã®ã§ã‚ã‚‹ã“ã¨ã«å¤‰ã‚ã‚Šã¯ç„¡ã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Even if that memory is not one's own, it remains something truly great.";
@@ -1623,7 +1681,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "€—ì‚ª”ß–Â‚ğã‚°‚Ä‚¢‚éB‰i‰“‚Éí‚¢‘±‚¯‚é‚Ì‚ÍA–{–]‚Å‚Í–³‚©‚Á‚½‚æ‚¤‚¾‚ÈB";
+                                AresText.text = "æ­»éœŠãŒæ‚²é³´ã‚’ä¸Šã’ã¦ã„ã‚‹ã€‚æ°¸é ã«æˆ¦ã„ç¶šã‘ã‚‹ã®ã¯ã€æœ¬æœ›ã§ã¯ç„¡ã‹ã£ãŸã‚ˆã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "The restless spirits are screaming. It seems that fighting on for eternity was not what they truly desired.";
@@ -1635,7 +1693,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "í‚¢‚É‚Í‹x‘§‚à•K—v‚È‚Ì‚¾B";
+                                AresText.text = "æˆ¦ã„ã«ã¯ä¼‘æ¯ã‚‚å¿…è¦ãªã®ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Rest is also necessary in battle.";
@@ -1647,7 +1705,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "¡‚â€—ì‚É“÷‘Ì‚È‚Ç‚È‚¢B‰´‚Í‚±‚ÌÒ’B‚ğ—˜—p‚µ‚Ä‚¢‚éA‚»‚ê‚¾‚¯‚¾B";
+                                SaintText.text = "ä»Šã‚„æ­»éœŠã«è‚‰ä½“ãªã©ãªã„ã€‚ä¿ºã¯ã“ã®è€…é”ã‚’åˆ©ç”¨ã—ã¦ã„ã‚‹ã€ãã‚Œã ã‘ã ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "The undead no longer possess physical bodies. I am merely making use of them?nothing more.";
@@ -1659,7 +1717,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "€l‚ÉŒû‚È‚µ‚©B‚Ü‚¾–{—ˆ‚ÌˆÓv‚Íc‚Á‚Ä‚¢‚é‚æ‚¤‚¾‚ÈB";
+                                AresText.text = "æ­»äººã«å£ãªã—ã‹ã€‚ã¾ã æœ¬æ¥ã®æ„æ€ã¯æ®‹ã£ã¦ã„ã‚‹ã‚ˆã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Dead men tell no tales, or so they say. Yet, it seems your true will still lingers.";
@@ -1680,7 +1738,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "Œ©–‚¾AƒZƒ“ƒgƒŠ[B";
+                                AresText.text = "è¦‹äº‹ã ã€ã‚»ãƒ³ãƒˆãƒªãƒ¼ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Magnificent, Sentry.";
@@ -1692,7 +1750,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "€—ì‚Æ‹¤‚ÉA‰hŒõ‚ğè’†‚Æ‚µ‚½‚æ‚¤‚¾‚ÈB";
+                                AresText.text = "æ­»éœŠã¨å…±ã«ã€æ „å…‰ã‚’æ‰‹ä¸­ã¨ã—ãŸã‚ˆã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It seems you have grasped glory alongside the spirits of the dead.";
@@ -1704,7 +1762,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚»‚Ì€—ì‚½‚¿‚Í‰ä‚Æ‚Ìí‚¢‚ğ–]‚ñ‚Å‚¢‚éA“ğ‚Í‚Ç‚¤‚¾H";
+                                AresText.text = "ãã®æ­»éœŠãŸã¡ã¯æˆ‘ã¨ã®æˆ¦ã„ã‚’æœ›ã‚“ã§ã„ã‚‹ã€æ±ã¯ã©ã†ã ï¼Ÿ";
                                 break;
                             case 2:
                                 AresText.text = "Those restless spirits desire battle with me?what say you?";
@@ -1716,7 +1774,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‰´‚É‚Í’‡ŠÔ‚ª‚¢‚éB‹°‚ê‚é‚à‚Ì‚È‚Ç‚È‚¢B";
+                                SaintText.text = "ä¿ºã«ã¯ä»²é–“ãŒã„ã‚‹ã€‚æã‚Œã‚‹ã‚‚ã®ãªã©ãªã„ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "I have my comrades. There is nothing to fear.";
@@ -1728,7 +1786,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "—Ç‚¢‚¾‚ë‚¤B‰ä‚É‚Í—Í‚ª‚ ‚éBŒ©–‘Å‚¿”j‚Á‚ÄŒ©‚¹‚é‚ª‚¢‚¢B";
+                                AresText.text = "è‰¯ã„ã ã‚ã†ã€‚æˆ‘ã«ã¯åŠ›ãŒã‚ã‚‹ã€‚è¦‹äº‹æ‰“ã¡ç ´ã£ã¦è¦‹ã›ã‚‹ãŒã„ã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Very well. I possess the power. Show me you can shatter it.";
@@ -1741,7 +1799,7 @@ public class AresCrown : MonoBehaviour
                         break;
                 }
                 break;
-            //ƒtƒ@ƒ“ƒgƒ€
+            //ãƒ•ã‚¡ãƒ³ãƒˆãƒ 
             case 61:
                 switch (DialogNum)
                 {
@@ -1750,7 +1808,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "cc‚ ‚Ìˆ«–‚‚ÌŒŒ‚ğ‚ÂÒ‚©B";
+                                AresText.text = "â€¦â€¦ã‚ã®æ‚ªé­”ã®è¡€ã‚’æŒã¤è€…ã‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "...So, the one who bears the blood of that devil.";
@@ -1762,7 +1820,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "„‚Í‚¨‘O‚Ì‘cæ‚ğ’m‚Á‚Ä‚¢‚éB—Ç‚¢’‡‚Å‚Í–³‚©‚Á‚½‚ª‚ÈB";
+                                AresText.text = "ç§ã¯ãŠå‰ã®ç¥–å…ˆã‚’çŸ¥ã£ã¦ã„ã‚‹ã€‚è‰¯ã„ä»²ã§ã¯ç„¡ã‹ã£ãŸãŒãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "I know your ancestor. We weren't exactly on good terms, though.";
@@ -1774,7 +1832,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "ƒAƒŒ[ƒXA‰ï‚¦‚ÄŠğ‚µ‚¢‚íB";
+                                SaintText.text = "ã‚¢ãƒ¬ãƒ¼ã‚¹ã€ä¼šãˆã¦å¬‰ã—ã„ã‚ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "Ares, I'm glad to see you.";
@@ -1786,10 +1844,10 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "í‚¢‚É“M‚ê‚½‹ğ‚©Ò‚Æ•·‚¢‚½‚¯‚ê‚ÇA‚»‚±‚Ü‚ÅˆóÛ‚Íˆ«‚­‚È‚¢‚í‚ËB";
+                                SaintText.text = "æˆ¦ã„ã«æººã‚ŒãŸæ„šã‹è€…ã¨èã„ãŸã‘ã‚Œã©ã€ãã“ã¾ã§å°è±¡ã¯æ‚ªããªã„ã‚ã­ã€‚";
                                 break;
                             case 2:
-                                SaintText.text = "Ifd heard you were a fool obsessed with battle, but you don't make such a bad impression after all.";
+                                SaintText.text = "Iâ€™d heard you were a fool obsessed with battle, but you don't make such a bad impression after all.";
                                 break;
                         }
                         break;
@@ -1798,7 +1856,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "ˆê‘Ì‚ ‚Ìˆ«–‚‚É‰½‚ğ‚«‚Ü‚ê‚½H";
+                                AresText.text = "ä¸€ä½“ã‚ã®æ‚ªé­”ã«ä½•ã‚’å¹ãè¾¼ã¾ã‚ŒãŸï¼Ÿ";
                                 break;
                             case 2:
                                 AresText.text = "What exactly did that devil say to you?";
@@ -1819,7 +1877,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "—ˆ‚½‚©Aˆ«–‚‚æB";
+                                AresText.text = "æ¥ãŸã‹ã€æ‚ªé­”ã‚ˆã€‚";
                                 break;
                             case 2:
                                 AresText.text = "So, you have come, devil.";
@@ -1831,7 +1889,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "í‚Á‚Ä‚Î‚©‚è‚ËAƒAƒŒ[ƒXB";
+                                SaintText.text = "æˆ¦ã£ã¦ã°ã‹ã‚Šã­ã€ã‚¢ãƒ¬ãƒ¼ã‚¹ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "You're always fighting, aren't you, Ares?";
@@ -1843,7 +1901,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚©‚Â‚Ä‚Í“ğ‚à‚»‚¤‚Å‚ ‚Á‚½‚ÈB";
+                                AresText.text = "ã‹ã¤ã¦ã¯æ±ã‚‚ãã†ã§ã‚ã£ãŸãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "You, too, were once like that.";
@@ -1855,7 +1913,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚¦‚¦BŒ_–ñ‚ğ”j‚éÒ‚Åˆì‚ê‚©‚¦‚Á‚Ä‚¢‚½‚à‚ÌB";
+                                SaintText.text = "ãˆãˆã€‚å¥‘ç´„ã‚’ç ´ã‚‹è€…ã§æº¢ã‚Œã‹ãˆã£ã¦ã„ãŸã‚‚ã®ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "Yes. It was teeming with those who broke their contracts.";
@@ -1876,7 +1934,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "ˆ«–‚‚æA‰¤Š¥‚Æ‹¤‚É’H‚è’…‚¢‚½‚æ‚¤‚¾‚ÈB";
+                                AresText.text = "æ‚ªé­”ã‚ˆã€ç‹å† ã¨å…±ã«è¾¿ã‚Šç€ã„ãŸã‚ˆã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Devil, it seems you have arrived with the crown.";
@@ -1888,7 +1946,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "ÀÛ‚Ì‚Æ‚±‚ëAŠï–­‚ÈŠ´Šo‚¾‚íB";
+                                SaintText.text = "å®Ÿéš›ã®ã¨ã“ã‚ã€å¥‡å¦™ãªæ„Ÿè¦šã ã‚ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "Actually, it's a strange feeling.";
@@ -1900,7 +1958,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚Ü‚é‚ÅŒŒ‚Ì‚©‚¯—£‚ê‚½e‘°‚Æ˜b‚µ‚Ä‚é‚æ‚¤‚È‹C•ª‚ËB";
+                                SaintText.text = "ã¾ã‚‹ã§è¡€ã®ã‹ã‘é›¢ã‚ŒãŸè¦ªæ—ã¨è©±ã—ã¦ã‚‹ã‚ˆã†ãªæ°—åˆ†ã­ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "It feels just like talking to a distant relative.";
@@ -1912,7 +1970,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "–³—‚à‚È‚©‚ë‚¤B‰ä‚Æ‘åˆ«–‚‚ÍA‚©‚Â‚Äí—F‚¾‚Á‚½‚Ì‚¾‚©‚çB";
+                                AresText.text = "ç„¡ç†ã‚‚ãªã‹ã‚ã†ã€‚æˆ‘ã¨å¤§æ‚ªé­”ã¯ã€ã‹ã¤ã¦æˆ¦å‹ã ã£ãŸã®ã ã‹ã‚‰ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "That is hardly surprising. After all, the Archdevil and I were once comrades-in-arms.";
@@ -1933,7 +1991,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‘åˆ«–‚‚Ìˆê‘°‚ÍA”p‚ê‚Ä‚Í‚¢‚È‚¢‚æ‚¤‚¾‚ÈB";
+                                AresText.text = "å¤§æ‚ªé­”ã®ä¸€æ—ã¯ã€å»ƒã‚Œã¦ã¯ã„ãªã„ã‚ˆã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It seems the clan of the Archdevil has not died out.";
@@ -1945,7 +2003,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "„‚ª¶‚Ü‚ê‚Ä‚©‚ç”•S”N‚ªŒo‚Á‚½‚¯‚ÇA‚â‚è•û‚Í‚»‚ê‚Ù‚Ç‹É’[‚Å‚Í–³‚­‚È‚Á‚½‚íB";
+                                SaintText.text = "ç§ãŒç”Ÿã¾ã‚Œã¦ã‹ã‚‰æ•°ç™¾å¹´ãŒçµŒã£ãŸã‘ã©ã€ã‚„ã‚Šæ–¹ã¯ãã‚Œã»ã©æ¥µç«¯ã§ã¯ç„¡ããªã£ãŸã‚ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "Centuries have passed since I was born, but the methods aren't quite as extreme anymore.";
@@ -1957,7 +2015,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚ ‚Ì‘cæ‚ÍAà•ó‚Ìæ‚è—§‚Ä‚É‚¢‚­‚Â‚à‚Ì–½‚ğ“q‚µ‚Ä‚¢‚½‚à‚ÌB";
+                                SaintText.text = "ã‚ã®ç¥–å…ˆã¯ã€è²¡å®ã®å–ã‚Šç«‹ã¦ã«ã„ãã¤ã‚‚ã®å‘½ã‚’è³­ã—ã¦ã„ãŸã‚‚ã®ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "That ancestor of ours staked many a life on the recovery of treasure.";
@@ -1969,7 +2027,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚ ‚Ì—â“–³”ä‚È–\“k‚ç‚µ‚¢•û–@‚¾B";
+                                AresText.text = "ã‚ã®å†·é…·ç„¡æ¯”ãªæš´å¾’ã‚‰ã—ã„æ–¹æ³•ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It is a method typical of those ruthless, unfeeling rioters.";
@@ -1990,7 +2048,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "Œ©–‚¾Aƒtƒ@ƒ“ƒgƒ€B";
+                                AresText.text = "è¦‹äº‹ã ã€ãƒ•ã‚¡ãƒ³ãƒˆãƒ ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Magnificent, Phantom.";
@@ -2002,7 +2060,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "I‚í‚è‚Ì‚æ‚¤‚ËB‘½‚­‚ÌŠÔ‚ğ–³‘Ê‚É‚µ‚½‹C•ª‚æB";
+                                SaintText.text = "çµ‚ã‚ã‚Šã®ã‚ˆã†ã­ã€‚å¤šãã®æ™‚é–“ã‚’ç„¡é§„ã«ã—ãŸæ°—åˆ†ã‚ˆã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "It looks like the end. I feel like I've wasted a lot of time.";
@@ -2014,7 +2072,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚±‚ê‚à‘S‚Ä‚ÍAˆê‘°‚Ì‰h‰Ø‚Ì‚½‚ß‚æB";
+                                SaintText.text = "ã“ã‚Œã‚‚å…¨ã¦ã¯ã€ä¸€æ—ã®æ „è¯ã®ãŸã‚ã‚ˆã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "All of this is for the glory of the clan.";
@@ -2026,7 +2084,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "ÅŒã‚Ìˆêí‚Æ‚È‚é‚¾‚ë‚¤B‚»‚Ì•‚¢°‚ğŒ©‚¹‚æB";
+                                AresText.text = "æœ€å¾Œã®ä¸€æˆ¦ã¨ãªã‚‹ã ã‚ã†ã€‚ãã®é»’ã„é­‚ã‚’è¦‹ã›ã‚ˆã€‚";
                                 break;
                             case 2:
                                 AresText.text = "This will likely be the final battle. Reveal that dark soul of yours.";
@@ -2038,7 +2096,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "ˆ«–‚‚Æ‚µ‚Ä‚Ì‹­‚³‚ğØ–¾‚·‚é‚Ì‚¾B";
+                                AresText.text = "æ‚ªé­”ã¨ã—ã¦ã®å¼·ã•ã‚’è¨¼æ˜ã™ã‚‹ã®ã ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Prove your strength as a devil.";
@@ -2051,7 +2109,7 @@ public class AresCrown : MonoBehaviour
                         break;
                 }
                 break;
-            //ƒRƒŒƒNƒ^[
+            //ã‚³ãƒ¬ã‚¯ã‚¿ãƒ¼
             case 71:
                 switch (DialogNum)
                 {
@@ -2060,7 +2118,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "•óÎ‚ÌûWÒ‚©B";
+                                AresText.text = "å®çŸ³ã®åé›†è€…ã‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "A collector of gemstones, are you?";
@@ -2072,7 +2130,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰ä‚É’‰½‚ğg‚Á‚½‚Ì‚àA‚»‚ê‚ª——R‚È‚Ì‚¾‚ë‚¤‚ÈB";
+                                AresText.text = "æˆ‘ã«å¿ èª ã‚’ä½¿ã£ãŸã®ã‚‚ã€ãã‚ŒãŒç†ç”±ãªã®ã ã‚ã†ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "That must be the reason why you pledged your loyalty to me.";
@@ -2084,10 +2142,10 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "˜b‚ª‘‚¢‚ËB„‚Í‚ ‚È‚½‚Ì‰¤Š¥‚É‹»–¡‚ª‚ ‚é‚ñ‚¾B";
+                                SaintText.text = "è©±ãŒæ—©ã„ã­ã€‚ç§ã¯ã‚ãªãŸã®ç‹å† ã«èˆˆå‘³ãŒã‚ã‚‹ã‚“ã ã€‚";
                                 break;
                             case 2:
-                                SaintText.text = "You catch on quickly. Ifm interested in your crown.";
+                                SaintText.text = "You catch on quickly. Iâ€™m interested in your crown.";
                                 break;
                         }
                         break;
@@ -2096,7 +2154,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "“ğ‚É‚ÍA‚»‚ê‚ğó‚¯æ‚é‘Ši‚ª‚ ‚éB";
+                                AresText.text = "æ±ã«ã¯ã€ãã‚Œã‚’å—ã‘å–ã‚‹è³‡æ ¼ãŒã‚ã‚‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "You are worthy of receiving it.";
@@ -2117,7 +2175,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰¤Š¥‚ğŒg‚¦‚Ä—ˆ‚½‚æ‚¤‚¾‚ÈB";
+                                AresText.text = "ç‹å† ã‚’æºãˆã¦æ¥ãŸã‚ˆã†ã ãªã€‚";
                                 break;
                             case 2:
                                 AresText.text = "It seems you have brought the crown with you.";
@@ -2129,7 +2187,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚¤[‚ñA‚±‚Ì‰¤Š¥‚É‚Ícc‘«‚è‚È‚¢‚à‚Ì‚ª‚ ‚è‚·‚¬‚é‚Æv‚Á‚ÄB";
+                                SaintText.text = "ã†ãƒ¼ã‚“ã€ã“ã®ç‹å† ã«ã¯â€¦â€¦è¶³ã‚Šãªã„ã‚‚ã®ãŒã‚ã‚Šã™ãã‚‹ã¨æ€ã£ã¦ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "Hmm... I feel like this crown is missing far too many things.";
@@ -2141,7 +2199,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "¡‚Í–‚¿‘«‚è‚È‚¢‚©‚à‚µ‚ê‚È‚¢B";
+                                AresText.text = "ä»Šã¯æº€ã¡è¶³ã‚Šãªã„ã‹ã‚‚ã—ã‚Œãªã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "You might not feel fulfilled right now.";
@@ -2153,7 +2211,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‚µ‚©‚µA‚»‚ê‚Í‚¢‚¸‚ê‰ğŒˆ‚³‚ê‚é‚¾‚ë‚¤B";
+                                AresText.text = "ã—ã‹ã—ã€ãã‚Œã¯ã„ãšã‚Œè§£æ±ºã•ã‚Œã‚‹ã ã‚ã†ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "However, that will likely be resolved eventually.";
@@ -2174,7 +2232,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰¤Š¥‚Í‹C‚É“ü‚Á‚½‚©H";
+                                AresText.text = "ç‹å† ã¯æ°—ã«å…¥ã£ãŸã‹ï¼Ÿ";
                                 break;
                             case 2:
                                 AresText.text = "Do you like the crown?";
@@ -2186,7 +2244,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "ˆ«‚­‚È‚¢‚ËB‚Å‚à‚»‚Ì—lq‚¾‚ÆA‚à‚Á‚Æ—Ç‚¢‚à‚Ì‚ğ‚Á‚Ä‚é‚ñ‚Å‚µ‚å‚¤H";
+                                SaintText.text = "æ‚ªããªã„ã­ã€‚ã§ã‚‚ãã®æ§˜å­ã ã¨ã€ã‚‚ã£ã¨è‰¯ã„ã‚‚ã®ã‚’æŒã£ã¦ã‚‹ã‚“ã§ã—ã‚‡ã†ï¼Ÿ";
                                 break;
                             case 2:
                                 SaintText.text = "Not bad. But from the looks of it, you must have something even better, right?";
@@ -2198,7 +2256,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "í‚Éã‚ğ–Úw‚³‚È‚¢‚Æ‚ËB";
+                                SaintText.text = "å¸¸ã«ä¸Šã‚’ç›®æŒ‡ã•ãªã„ã¨ã­ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "You always have to aim higher, you know.";
@@ -2210,7 +2268,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "æÃ—~‚Èp¨‚ÍŠ½Œ}‚·‚é‚¼B";
+                                AresText.text = "è²ªæ¬²ãªå§¿å‹¢ã¯æ­“è¿ã™ã‚‹ãã€‚";
                                 break;
                             case 2:
                                 AresText.text = "I welcome that voracious attitude.";
@@ -2231,7 +2289,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "–Ú“–‚Ä‚Ì•i‚ğè‚É“ü‚ê‚é‚½‚ß‚È‚çA–½‚ğ“q‚¯‚é‚Æ‚¢‚¤‚±‚Æ‚©B";
+                                AresText.text = "ç›®å½“ã¦ã®å“ã‚’æ‰‹ã«å…¥ã‚Œã‚‹ãŸã‚ãªã‚‰ã€å‘½ã‚’è³­ã‘ã‚‹ã¨ã„ã†ã“ã¨ã‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "So, you would risk your life to get your hands on the item you're after?";
@@ -2243,7 +2301,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "“q‚¯‚éH–½‚Íg‚¤‚à‚Ì‚¾‚æB";
+                                SaintText.text = "è³­ã‘ã‚‹ï¼Ÿå‘½ã¯ä½¿ã†ã‚‚ã®ã ã‚ˆã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "Betting? No?life is something to be *used*.";
@@ -2255,7 +2313,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "–½‚Ì‘ã‚í‚è‚Í‚¢‚­‚ç‚Å‚à‚Á‚Ä‚é‚µB";
+                                SaintText.text = "å‘½ã®ä»£ã‚ã‚Šã¯ã„ãã‚‰ã§ã‚‚æŒã£ã¦ã‚‹ã—ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "I've got plenty of lives to spare.";
@@ -2267,7 +2325,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "—EŠ¸‚Å‚ ‚é‚Æ•]‰¿‚·‚×‚«‚©B";
+                                AresText.text = "å‹‡æ•¢ã§ã‚ã‚‹ã¨è©•ä¾¡ã™ã¹ãã‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Should it be considered brave?";
@@ -2288,7 +2346,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "Œ©–‚¾AƒRƒŒƒNƒ^[B";
+                                AresText.text = "è¦‹äº‹ã ã€ã‚³ãƒ¬ã‚¯ã‚¿ãƒ¼ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "Magnificent, Collector.";
@@ -2300,7 +2358,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‘S‚Ä‚ğè‚É“ü‚ê‚µÒ‚æB‰hŒõ‚à“ğ‚Ì•¨‚Æ‚È‚éB";
+                                AresText.text = "å…¨ã¦ã‚’æ‰‹ã«å…¥ã‚Œã—è€…ã‚ˆã€‚æ „å…‰ã‚‚æ±ã®ç‰©ã¨ãªã‚‹ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "You who have everything, glory will be yours too.";
@@ -2312,7 +2370,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "”n­‚ç‚µ‚¢B„‚Í‚±‚ê‚Å—·—§‚Â‚æB";
+                                SaintText.text = "é¦¬é¹¿ã‚‰ã—ã„ã€‚ç§ã¯ã“ã‚Œã§æ—…ç«‹ã¤ã‚ˆã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "Ridiculous. I'm setting off now.";
@@ -2324,7 +2382,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                SaintText.text = "‚ ‚È‚½‚Ì‰¤Š¥‚ğ’D‚¢æ‚Á‚Ä‚©‚ç‚ËB";
+                                SaintText.text = "ã‚ãªãŸã®ç‹å† ã‚’å¥ªã„å–ã£ã¦ã‹ã‚‰ã­ã€‚";
                                 break;
                             case 2:
                                 SaintText.text = "After I snatch your crown, that is.";
@@ -2336,7 +2394,603 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = "‰ä‚Æí‚¤‚Ì‚¾‚ÈB‚È‚ç‚Î‚â‚Á‚Ä‚İ‚é‚ª‚æ‚¢B";
+                                AresText.text = "æˆ‘ã¨æˆ¦ã†ã®ã ãªã€‚ãªã‚‰ã°ã‚„ã£ã¦ã¿ã‚‹ãŒã‚ˆã„ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "So, you intend to fight me. Very well?give it your best shot.";
+                                break;
+                        }
+                        break;
+                    case 6:
+                        TalkPattern = 0;
+                        IsCrown = true;
+                        break;
+                }
+                break;
+            //ãƒãƒ¼ãƒ´ãƒ«
+            case 81:
+                switch (DialogNum)
+                {
+                    case 1:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "è²´æ—ã®å¨˜ã‚ˆã€æ±ã®ã‚ˆã†ãªæŒ‘æˆ¦è€…ãŒç¾ã‚Œã‚‹ã®ã¯ã€çã—ã„ã“ã¨ã§ã¯ãªã„ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "A collector of gemstones, are you?";
+                                break;
+                        }
+                        break;
+                    case 2:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "å¯Œã‚’æŒã¤è€…ãŒä¸Šä½ã‚’å¿—ã™ã®ã¯ã€è‡ªç„¶ãªã“ã¨ã§ã‚ã‚‹ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "That must be the reason why you pledged your loyalty to me.";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "";
+                                break;
+                            case 2:
+                                SaintText.text = "You catch on quickly. Iâ€™m interested in your crown.";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "æ±ã«ã¯ã€ãã‚Œã‚’å—ã‘å–ã‚‹è³‡æ ¼ãŒã‚ã‚‹ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "You are worthy of receiving it.";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        TalkPattern = 0;
+                        IsCrown = true;
+                        break;
+                }
+                break;
+            case 82:
+                switch (DialogNum)
+                {
+                    case 1:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "ç‹å† ã‚’æºãˆã¦æ¥ãŸã‚ˆã†ã ãªã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "It seems you have brought the crown with you.";
+                                break;
+                        }
+                        break;
+                    case 2:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "ã†ãƒ¼ã‚“ã€ã“ã®ç‹å† ã«ã¯â€¦â€¦è¶³ã‚Šãªã„ã‚‚ã®ãŒã‚ã‚Šã™ãã‚‹ã¨æ€ã£ã¦ã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "Hmm... I feel like this crown is missing far too many things.";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "ä»Šã¯æº€ã¡è¶³ã‚Šãªã„ã‹ã‚‚ã—ã‚Œãªã„ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "You might not feel fulfilled right now.";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "ã—ã‹ã—ã€ãã‚Œã¯ã„ãšã‚Œè§£æ±ºã•ã‚Œã‚‹ã ã‚ã†ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "However, that will likely be resolved eventually.";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        TalkPattern = 0;
+                        IsCrown = true;
+                        break;
+                }
+                break;
+            case 83:
+                switch (DialogNum)
+                {
+                    case 1:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "ç‹å† ã¯æ°—ã«å…¥ã£ãŸã‹ï¼Ÿ";
+                                break;
+                            case 2:
+                                AresText.text = "Do you like the crown?";
+                                break;
+                        }
+                        break;
+                    case 2:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "æ‚ªããªã„ã­ã€‚ã§ã‚‚ãã®æ§˜å­ã ã¨ã€ã‚‚ã£ã¨è‰¯ã„ã‚‚ã®ã‚’æŒã£ã¦ã‚‹ã‚“ã§ã—ã‚‡ã†ï¼Ÿ";
+                                break;
+                            case 2:
+                                SaintText.text = "Not bad. But from the looks of it, you must have something even better, right?";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "å¸¸ã«ä¸Šã‚’ç›®æŒ‡ã•ãªã„ã¨ã­ã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "You always have to aim higher, you know.";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "è²ªæ¬²ãªå§¿å‹¢ã¯æ­“è¿ã™ã‚‹ãã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "I welcome that voracious attitude.";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        TalkPattern = 0;
+                        IsCrown = true;
+                        break;
+                }
+                break;
+            case 84:
+                switch (DialogNum)
+                {
+                    case 1:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "ç›®å½“ã¦ã®å“ã‚’æ‰‹ã«å…¥ã‚Œã‚‹ãŸã‚ãªã‚‰ã€å‘½ã‚’è³­ã‘ã‚‹ã¨ã„ã†ã“ã¨ã‹ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "So, you would risk your life to get your hands on the item you're after?";
+                                break;
+                        }
+                        break;
+                    case 2:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "è³­ã‘ã‚‹ï¼Ÿå‘½ã¯ä½¿ã†ã‚‚ã®ã ã‚ˆã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "Betting? No?life is something to be *used*.";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "å‘½ã®ä»£ã‚ã‚Šã¯ã„ãã‚‰ã§ã‚‚æŒã£ã¦ã‚‹ã—ã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "I've got plenty of lives to spare.";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "å‹‡æ•¢ã§ã‚ã‚‹ã¨è©•ä¾¡ã™ã¹ãã‹ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "Should it be considered brave?";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        TalkPattern = 0;
+                        IsCrown = true;
+                        break;
+                }
+                break;
+            case 85:
+                switch (DialogNum)
+                {
+                    case 1:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "è¦‹äº‹ã ã€ã‚³ãƒ¬ã‚¯ã‚¿ãƒ¼ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "Magnificent, Collector.";
+                                break;
+                        }
+                        break;
+                    case 2:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "å…¨ã¦ã‚’æ‰‹ã«å…¥ã‚Œã—è€…ã‚ˆã€‚æ „å…‰ã‚‚æ±ã®ç‰©ã¨ãªã‚‹ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "You who have everything, glory will be yours too.";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "é¦¬é¹¿ã‚‰ã—ã„ã€‚ç§ã¯ã“ã‚Œã§æ—…ç«‹ã¤ã‚ˆã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "Ridiculous. I'm setting off now.";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "ã‚ãªãŸã®ç‹å† ã‚’å¥ªã„å–ã£ã¦ã‹ã‚‰ã­ã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "After I snatch your crown, that is.";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "æˆ‘ã¨æˆ¦ã†ã®ã ãªã€‚ãªã‚‰ã°ã‚„ã£ã¦ã¿ã‚‹ãŒã‚ˆã„ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "So, you intend to fight me. Very well?give it your best shot.";
+                                break;
+                        }
+                        break;
+                    case 6:
+                        TalkPattern = 0;
+                        IsCrown = true;
+                        break;
+                }
+                break;
+            //ãƒ•ã‚©ãƒ¼ãƒŸãƒ¥ãƒ©
+            case 151:
+                switch (DialogNum)
+                {
+                    case 1:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "äººå·¥çŸ¥èƒ½ã‚ˆã€å¥‡å¦™ãªã‚‚ã®ã ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "Artificial intelligenceâ€”it is a strange thing.";
+                                break;
+                        }
+                        break;
+                    case 2:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "æ±ã®å¿ƒã¯è‡ªèº«ã®ã‚‚ã®ã‹ã€é€ ç‰©ä¸»ã®ã‚‚ã®ã‹ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "Does your heart belong to you, or to the Architect?";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "ä¸»æ§˜ã€ã‚³ãƒ³ãƒ‹ãƒãƒï¼ä½•ãƒŠãƒªãƒˆç”³ã‚·ä»˜ã‚±ã‚¯ãƒ€ã‚µã‚¤ãƒã‚»ã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "GREETINGS, MY LORD! PLEASE LET ME KNOW WHAT YOU WOULD LIKE TO ASK FOR YOU.";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "ãµãµã€å†—è«‡ã§ã™ã€‚æ™®é€šã«ä¼šè©±ã§ãã¾ã™ã‚ˆã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "Hehe, I'm just kidding. I can hold a normal conversation.";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        TalkPattern = 0;
+                        IsCrown = true;
+                        break;
+                }
+                break;
+            case 152:
+                switch (DialogNum)
+                {
+                    case 1:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "äººå·¥çŸ¥èƒ½ã‚ˆã€æ±ã¯ä½•æ•…æˆ‘ã«å¿ èª ã‚’èª“ã£ãŸï¼Ÿ";
+                                break;
+                            case 2:
+                                AresText.text = "Artificial intelligence, why did you swear loyalty to me?";
+                                break;
+                        }
+                        break;
+                    case 2:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "é€ ç‰©ä¸»ã¯ä¼šè©±AIã®ç§ã‚’å…µå™¨ã«æ”¹é€ ã—ã¾ã—ãŸã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "My architect modified meâ€”an AI designed for conversationâ€”into a weapon.";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "ç§ã¯é€ ç‰©ä¸»ã®å…ƒã‚’é›¢ã‚Œã€è‡ªåˆ†æ¢ã—ã®æ—…ã‚’å§‹ã‚ãŸã®ã§ã™ã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "I left the Architect and embarked on a journey of self-discovery.";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "ãã®é€ ç‰©ä¸»ã¨ã‚„ã‚‰ã€æˆ‘ã®æ—§å‹ã®ç™ºæ˜å“ã‹ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "That so-called Architectâ€”is it an invention of an old friend of mine?";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        TalkPattern = 0;
+                        IsCrown = true;
+                        break;
+                }
+                break;
+            case 153:
+                switch (DialogNum)
+                {
+                    case 1:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "ç‹å† ã¯æ°—ã«å…¥ã£ãŸã‹ï¼Ÿ";
+                                break;
+                            case 2:
+                                AresText.text = "Do you like the crown?";
+                                break;
+                        }
+                        break;
+                    case 2:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "æ‚ªããªã„ã­ã€‚ã§ã‚‚ãã®æ§˜å­ã ã¨ã€ã‚‚ã£ã¨è‰¯ã„ã‚‚ã®ã‚’æŒã£ã¦ã‚‹ã‚“ã§ã—ã‚‡ã†ï¼Ÿ";
+                                break;
+                            case 2:
+                                SaintText.text = "Not bad. But from the looks of it, you must have something even better, right?";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "å¸¸ã«ä¸Šã‚’ç›®æŒ‡ã•ãªã„ã¨ã­ã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "You always have to aim higher, you know.";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "è²ªæ¬²ãªå§¿å‹¢ã¯æ­“è¿ã™ã‚‹ãã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "I welcome that voracious attitude.";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        TalkPattern = 0;
+                        IsCrown = true;
+                        break;
+                }
+                break;
+            case 154:
+                switch (DialogNum)
+                {
+                    case 1:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "ç›®å½“ã¦ã®å“ã‚’æ‰‹ã«å…¥ã‚Œã‚‹ãŸã‚ãªã‚‰ã€å‘½ã‚’è³­ã‘ã‚‹ã¨ã„ã†ã“ã¨ã‹ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "So, you would risk your life to get your hands on the item you're after?";
+                                break;
+                        }
+                        break;
+                    case 2:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "è³­ã‘ã‚‹ï¼Ÿå‘½ã¯ä½¿ã†ã‚‚ã®ã ã‚ˆã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "Betting? No?life is something to be *used*.";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "å‘½ã®ä»£ã‚ã‚Šã¯ã„ãã‚‰ã§ã‚‚æŒã£ã¦ã‚‹ã—ã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "I've got plenty of lives to spare.";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "å‹‡æ•¢ã§ã‚ã‚‹ã¨è©•ä¾¡ã™ã¹ãã‹ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "Should it be considered brave?";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        TalkPattern = 0;
+                        IsCrown = true;
+                        break;
+                }
+                break;
+            case 155:
+                switch (DialogNum)
+                {
+                    case 1:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "è¦‹äº‹ã ã€ã‚³ãƒ¬ã‚¯ã‚¿ãƒ¼ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "Magnificent, Collector.";
+                                break;
+                        }
+                        break;
+                    case 2:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "å…¨ã¦ã‚’æ‰‹ã«å…¥ã‚Œã—è€…ã‚ˆã€‚æ „å…‰ã‚‚æ±ã®ç‰©ã¨ãªã‚‹ã€‚";
+                                break;
+                            case 2:
+                                AresText.text = "You who have everything, glory will be yours too.";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "é¦¬é¹¿ã‚‰ã—ã„ã€‚ç§ã¯ã“ã‚Œã§æ—…ç«‹ã¤ã‚ˆã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "Ridiculous. I'm setting off now.";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        TalkPattern = 2;
+                        switch (Language)
+                        {
+                            case 1:
+                                SaintText.text = "ã‚ãªãŸã®ç‹å† ã‚’å¥ªã„å–ã£ã¦ã‹ã‚‰ã­ã€‚";
+                                break;
+                            case 2:
+                                SaintText.text = "After I snatch your crown, that is.";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "æˆ‘ã¨æˆ¦ã†ã®ã ãªã€‚ãªã‚‰ã°ã‚„ã£ã¦ã¿ã‚‹ãŒã‚ˆã„ã€‚";
                                 break;
                             case 2:
                                 AresText.text = "So, you intend to fight me. Very well?give it your best shot.";

@@ -40,22 +40,13 @@ public class Enemy_CyberResistance : MonoBehaviour
         Language = PlayerPrefs.GetInt("Language", 2);
         StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1370;
+                Bscript.EnemyMaxHP = 1400;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 1440;
-                break;
-            case 3:
-                Bscript.EnemyMaxHP = 1510;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 1580;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1650;
+                Bscript.EnemyMaxHP = 1500;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -67,7 +58,7 @@ public class Enemy_CyberResistance : MonoBehaviour
         {
             case 1:
                 AttackText[0].text = "炎壁を付与する。";
-                AttackText[1].text = $"盤上に残っているノイズの数x{10 + Bscript.AbilityLevel * 5}%の攻撃激化を得る。{Mathf.FloorToInt((160 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate)}ダメージを与える。";
+                AttackText[1].text = $"盤上に残っているノイズの数x{10 + Bscript.AbilityLevel * 5}%の攻撃激化を得る。{Mathf.FloorToInt((160 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate)}ダメージを与える。";
                 DebuffName.text = "炎壁";
                 DebuffDesc.text = "ターン開始時、盤上の10箇所にノイズが付与される。ノイズはハンドにより除去可能。";
                 BuffName.text = "攻撃激化";
@@ -75,7 +66,7 @@ public class Enemy_CyberResistance : MonoBehaviour
                 break;
             case 2:
                 AttackText[0].text = "Grants Firewall.";
-                AttackText[1].text = $"Gain {10 + Bscript.AbilityLevel * 5}% Intensified for each Noise remaining on the board. Deal {Mathf.FloorToInt((160 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate)} damage.";
+                AttackText[1].text = $"Gain {10 + Bscript.AbilityLevel * 5}% Intensified for each Noise remaining on the board. Deal {Mathf.FloorToInt((160 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate)} damage.";
                 DebuffName.text = "Firewall";
                 DebuffDesc.text = "At the start of the turn, Noise is applied to 10 locations on the board. Noise can be removed by hand.";
                 BuffName.text = "Intensified";
@@ -256,6 +247,6 @@ public class Enemy_CyberResistance : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((160 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((160 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate);
     }
 }

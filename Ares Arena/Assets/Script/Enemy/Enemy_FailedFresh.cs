@@ -36,22 +36,13 @@ public class Enemy_FailedFresh : MonoBehaviour
     {
         Language = PlayerPrefs.GetInt("Language", 2);
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 6700;
+                Bscript.EnemyMaxHP = 6900;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 7000;
-                break;
-            case 3:
-                Bscript.EnemyMaxHP = 7300;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 7600;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 7900;
+                Bscript.EnemyMaxHP = 7400;
                 break;
         }
     }
@@ -61,20 +52,20 @@ public class Enemy_FailedFresh : MonoBehaviour
         {
             case 1:
                 AttackText[0].text = "腐敗を付与する。";
-                AttackText[1].text = $"{(400 + Bscript.Iscript.Crown * 20) * AttackRate}ダメージを与える。";
+                AttackText[1].text = $"{Mathf.FloorToInt((400 + Bscript.AttackLevel * 40) * AttackRate)}ダメージを与える。";
                 AttackText[2].text = $"ランダムな宝石{10 + Bscript.AbilityLevel * 2}つをフレッシュジェムに変化させる。";
-                AttackText[3].text = $"{(280 + Bscript.Iscript.Crown * 10) * AttackRate}ダメージを与える。弱体化{40 + Bscript.AbilityLevel * 10}を付与する。";
-                AttackText[4].text = $"HPを{800 + Bscript.Iscript.Crown * 40}回復する。20%の攻撃激化を得る。";
+                AttackText[3].text = $"{Mathf.FloorToInt((280 + Bscript.AttackLevel * 20) * AttackRate)}ダメージを与える。弱体化{40 + Bscript.AbilityLevel * 10}を付与する。";
+                AttackText[4].text = $"HPを{Mathf.FloorToInt(800 + Bscript.HPLevel * 100)}回復する。20%の攻撃激化を得る。";
                 DebuffDesc[0].text = "この戦闘中、HPの最大値が70%減少する。";
                 DebuffDesc[1].text = "次に消去する" + Pscript.Debuff_Weak + "個の宝石の効果が50%減少する。";
                 BuffDesc.text = "与えるダメージが" + ((AttackRate - 1f) * 100f).ToString("0") + "%増加する。";
                 break;
             case 2:
                 AttackText[0].text = "Inflict Corruption.";
-                AttackText[1].text = $"Deal {(400 + Bscript.Iscript.Crown * 20) * AttackRate} Damage.";
+                AttackText[1].text = $"Deal {Mathf.FloorToInt((400 + Bscript.AttackLevel * 40) * AttackRate)} Damage.";
                 AttackText[2].text = $"Transforms {10 + Bscript.AbilityLevel * 2} random gems into Fresh Gems.";
-                AttackText[3].text = $"Deal {(28 + Bscript.Iscript.Crown * 10) * AttackRate} Damage. Inflict {40 + Bscript.AbilityLevel * 10} Weak.";
-                AttackText[4].text = $"Restore {800 + Bscript.Iscript.Crown * 40} HP. Gain 20% Intensified.";
+                AttackText[3].text = $"Deal {Mathf.FloorToInt((28 + Bscript.AttackLevel * 20) * AttackRate)} Damage. Inflict {40 + Bscript.AbilityLevel * 10} Weak.";
+                AttackText[4].text = $"Restore {Mathf.FloorToInt(800 + Bscript.HPLevel * 100)} HP. Gain 20% Intensified.";
                 DebuffDesc[0].text = "During this battle, maximum HP is reduced by 70%.";
                 DebuffDesc[1].text = "The effect of the next " + Pscript.Debuff_Weak + " gems you cast will be reduced by 50%.";
                 BuffDesc.text = "Damage dealt is increased by " + ((AttackRate - 1f) * 100f).ToString("0") + "%.";
@@ -239,7 +230,7 @@ public class Enemy_FailedFresh : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((400 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((400 + Bscript.AttackLevel * 40) * AttackRate * StrengthRate);
     }
     void Act3_1()
     {
@@ -281,7 +272,7 @@ public class Enemy_FailedFresh : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((280 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((280 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate);
         Pscript.Debuff_Weak += 40 + Bscript.AbilityLevel * 10;
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
     }
@@ -297,7 +288,7 @@ public class Enemy_FailedFresh : MonoBehaviour
         GameObject g = Instantiate(AttackObj[1]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = false;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((800 + Bscript.Iscript.Crown * 40) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((800 + Bscript.HPLevel * 100) * AttackRate * StrengthRate);
         GameObject g2 = Instantiate(Counter);
         g2.transform.position = this.transform.position;
         switch (Language)

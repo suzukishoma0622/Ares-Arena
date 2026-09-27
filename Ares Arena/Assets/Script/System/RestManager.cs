@@ -51,17 +51,23 @@ public class RestManager : MonoBehaviour
     float TrainNum = 1.2f;
 
     public Animator Map5anim;
+    public Animator Bossanim;
     int Crown;
     public GameObject[] ShopObj;
     public AudioClip GemSE;
     public AudioClip PurchaseSE;
     public AudioClip RestSE;
     public AudioClip SmithSE;
+
+    public int Reroll;
+    public CanvasGroup RerollFlash;
+    public GameObject RerollButton;
+    public TMP_Text RerollText;
     void Start()
     {
         Iscript.BGMnum = 2;
         Crown = PlayerPrefs.GetInt("Crown", 0);
-        if(Crown >= 4)
+        if((Iscript.Saint == 6 && Iscript.Crown >= 5) || (Iscript.Saint == 6 && Iscript.Crown >= 4) || (Iscript.Saint == 10 && Iscript.Crown >= 5))
         {
             Map5anim.Play("Map2");
         }
@@ -129,8 +135,11 @@ public class RestManager : MonoBehaviour
             J2 = Random.Range(0, 3);
         }
         ShopGemValue[J1] += 1;
-        ShopGemValue[J2] -= 1;
         ShopGemValue[J3] -= 1;
+        if (Iscript.Saint != 8 || Iscript.Crown <= 1)
+        {
+            ShopGemValue[J2] -= 1;
+        }
         int J4 = Random.Range(0, 3);
         int J5 = Random.Range(0, 3);
         int J6 = Random.Range(3, 5);
@@ -138,7 +147,10 @@ public class RestManager : MonoBehaviour
         {
             J5 = Random.Range(0, 3);
         }
-        ShopBlessValue[J4] -= 1;
+        if (Iscript.Saint != 8 || Iscript.Crown <= 1)
+        {
+            ShopBlessValue[J4] -= 1;
+        }
         ShopBlessValue[J5] -= 1;
         ShopBlessValue[J6] -= 1;
         if (Iscript.Bless[11] == 1)
@@ -156,6 +168,15 @@ public class RestManager : MonoBehaviour
                 }
             }
         }
+        if(Iscript.Bless[24] == 1)
+        {
+            RerollButton.SetActive(true);
+            RerollText.text = "x" + Iscript.Bless24;
+            if(Iscript.Bless24 == 0)
+            {
+                RerollButton.GetComponent<Button>().interactable = false;
+            }
+        }
         for (int i = 0; i < 5; i++)
         {
             ShopGemanim[i].Play($"Gem{ShopGem[i]}");
@@ -165,16 +186,17 @@ public class RestManager : MonoBehaviour
             ShopBlessValueText[i].text = ShopBlessValue[i].ToString();
             ShopBlessInfo[i].BlessNum = ShopBless[i];
         }
-        if(Crown >= 2)
+        if (Iscript.Bless[23] == 1)
         {
             ShopObj[0].SetActive(true);
             ShopObj[1].SetActive(true);
+            if (Iscript.Bless[54] == 1)
+            {
+                ShopObj[2].SetActive(true);
+                ShopObj[3].SetActive(true);
+            }
         }
-        if (Crown >= 4)
-        {
-            ShopObj[2].SetActive(true);
-            ShopObj[3].SetActive(true);
-        }
+        
         if(Iscript.Bless[58] == 1)
         {
             for (int i = 0; i < 5; i++)
@@ -191,28 +213,29 @@ public class RestManager : MonoBehaviour
             Iscript.TutorialObj[2].SetActive(true);
             Iscript.Tutorial = 0;
         }
+        Bossanim.Play($"Boss{Iscript.Boss}");
     }
     void ShopGemJudge()
     {
         for (int i = 0; i < 5; i++)
         {
-            ShopGem[i] = Random.Range(8, 100);
+            ShopGem[i] = Random.Range(8, 140);
         }
         for (; ShopGem[0] == ShopGem[1];)
         {
-            ShopGem[1] = Random.Range(8, 100);
+            ShopGem[1] = Random.Range(8, 140);
         }
         for (; ShopGem[0] == ShopGem[2] || ShopGem[1] == ShopGem[2];)
         {
-            ShopGem[2] = Random.Range(8, 100);
+            ShopGem[2] = Random.Range(8, 140);
         }
         for (; ShopGem[0] == ShopGem[3] || ShopGem[1] == ShopGem[3] || ShopGem[2] == ShopGem[3];)
         {
-            ShopGem[3] = Random.Range(8, 100);
+            ShopGem[3] = Random.Range(8, 140);
         }
         for (; ShopGem[0] == ShopGem[4] || ShopGem[1] == ShopGem[4] || ShopGem[2] == ShopGem[4] || ShopGem[3] == ShopGem[4];)
         {
-            ShopGem[4] = Random.Range(8, 100);
+            ShopGem[4] = Random.Range(8, 140);
         }
     }
     void ShopBlessJudge()
@@ -304,6 +327,10 @@ public class RestManager : MonoBehaviour
                 ShopBlessCG[i].interactable = false;
             }
         }
+        if(RerollFlash.alpha > 0f)
+        {
+            RerollFlash.alpha -= Time.deltaTime;
+        }
     }
     public void Rest()
     {
@@ -318,6 +345,10 @@ public class RestManager : MonoBehaviour
         {
             Iscript.PlayerMaxHP += Mathf.FloorToInt((Iscript.PlayerMaxHP - Iscript.PlayerHP) * 0.1f);
         }
+        if (Iscript.Bless[19] == 1)
+        {
+            Iscript.PlayerMaxHP += 50 * (1 + Iscript.Bless[54]);
+        }
         if (Iscript.Bless[44] == 1)
         {
             Medal += 2;
@@ -325,7 +356,14 @@ public class RestManager : MonoBehaviour
             PlayerPrefs.SetInt("Medal", Medal);
             PlayerPrefs.Save();
         }
-        Iscript.PlayerHP = Iscript.PlayerMaxHP;
+        if (Iscript.Saint == 3 && Iscript.Crown >= 3)
+        {
+            Iscript.PlayerHP = Iscript.PlayerHP + Mathf.FloorToInt((Iscript.PlayerMaxHP - Iscript.PlayerHP) * 0.75f);
+        }
+        else
+        {
+            Iscript.PlayerHP = Iscript.PlayerMaxHP;
+        }
         HpSlider.value = Iscript.PlayerHP;
         HpText.text = Iscript.PlayerHP + "/" + Iscript.PlayerMaxHP;
     }
@@ -376,13 +414,12 @@ public class RestManager : MonoBehaviour
     {
         if (Iscript.CurrentRound == 7)
         {
-            int Judge = Random.Range(0, BossObj.Length);
-            GameObject g = Instantiate(BossObj[Judge]);
-            g.transform.position = BossObj[Judge].transform.position;
+            GameObject g = Instantiate(BossObj[Iscript.Boss]);
+            g.transform.position = BossObj[Iscript.Boss].transform.position;
             g.SetActive(true);
             Destroy(ParentObj);
         }
-        else if (Iscript.CurrentRound == 6 || (Iscript.CurrentRound == 5 && Crown >= 4))
+        else if (Iscript.CurrentRound == 6 || (Iscript.CurrentRound == 5 && ((Iscript.Saint == 6 && Iscript.Crown >= 5) || (Iscript.Saint == 6 && Iscript.Crown >= 4) || (Iscript.Saint == 10 && Iscript.Crown >= 5))))
         {
             int Judge = Random.Range(0, EliteObj.Length);
             for (; Iscript.ElitePool[Judge] == 1;)
@@ -418,6 +455,7 @@ public class RestManager : MonoBehaviour
             Medal -= ShopGemValue[i];
             MedalText.text = Medal.ToString();
             PlayerPrefs.SetInt("Medal", Medal);
+            PlayerPrefs.SetInt($"GemUnlock{ShopGem[i] + 1}", 1);
             for (int j = 0; j < GemBox.Length; j++)
             {
                 if (GemBox[j] == -1)
@@ -428,6 +466,14 @@ public class RestManager : MonoBehaviour
                     GemInfo[j].GemNum = GemBox[j];
                     PlayerPrefs.SetInt($"GemBox{j}", ShopGem[i]);
                     PlayerPrefs.Save();
+                    if (ShopGem[i] == 134)
+                    {
+                        Iscript.PlayerMaxHP = Mathf.FloorToInt(Iscript.PlayerMaxHP * 0.5f);
+                        if(Iscript.PlayerHP > Iscript.PlayerMaxHP)
+                        {
+                            Iscript.PlayerHP = Iscript.PlayerMaxHP;
+                        }
+                    }
                     break;
                 }
             }
@@ -475,7 +521,7 @@ public class RestManager : MonoBehaviour
     }
     public void GemEquip(int i)
     {
-        if(ChoosedGem != -1)
+        if(ChoosedGem != -1 && Iscript.JewelNum[i] != 106)
         {
             int j = Iscript.JewelNum[i];
             Iscript.JewelNum[i] = GemBox[ChoosedBox];
@@ -495,7 +541,7 @@ public class RestManager : MonoBehaviour
     }
     public void AlchemyGem()
     {
-        int Agem = Random.Range(8, 100);
+        int Agem = Random.Range(8, 140);
         int k = 1;
         for (; k > 0;)
         {
@@ -535,8 +581,112 @@ public class RestManager : MonoBehaviour
                 GemButton[j].GetComponent<Animator>().Play($"Gem{GemBox[j]}");
                 GemInfo[j].GemNum = GemBox[j];
                 PlayerPrefs.SetInt($"GemBox{j}", Agem);
+                PlayerPrefs.SetInt($"GemUnlock{Agem + 1}", 1);
                 PlayerPrefs.Save();
                 break;
+            }
+        }
+    }
+    public void ShopReroll()
+    {
+        if (Iscript.Bless24 > 0)
+        {
+            Iscript.Bless24 -= 1;
+
+            for (int j = 0; j < 5; j++)
+            {
+                ShopGemValue[j] = 3;
+                ShopBlessValue[j] = 3;
+            }
+            int k = 1;
+            for (; k > 0;)
+            {
+                ShopGemJudge();
+                k = 0;
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 20; j++)
+                    {
+                        if (ShopGem[i] == GemBox[j])
+                        {
+                            k += 1;
+                            break;
+                        }
+                    }
+                    for (int j = 0; j < 5; j++)
+                    {
+                        if (ShopGem[i] == Iscript.JewelNum[j])
+                        {
+                            k += 1;
+                            break;
+                        }
+                    }
+                }
+            }
+            int h = 1;
+            for (; h > 0;)
+            {
+                ShopBlessJudge();
+                h = 0;
+                for (int i = 0; i < 5; i++)
+                {
+                    if (Iscript.Bless[ShopBless[i]] == 1)
+                    {
+                        h += 1;
+                        break;
+                    }
+                }
+            }
+            int J1 = Random.Range(0, 3);
+            int J2 = Random.Range(0, 3);
+            int J3 = Random.Range(3, 5);
+            for (; J1 == J2;)
+            {
+                J2 = Random.Range(0, 3);
+            }
+            ShopGemValue[J1] += 1;
+            ShopGemValue[J2] -= 1;
+            ShopGemValue[J3] -= 1;
+            int J4 = Random.Range(0, 3);
+            int J5 = Random.Range(0, 3);
+            int J6 = Random.Range(3, 5);
+            for (; J4 == J5;)
+            {
+                J5 = Random.Range(0, 3);
+            }
+            ShopBlessValue[J4] -= 1;
+            ShopBlessValue[J5] -= 1;
+            ShopBlessValue[J6] -= 1;
+            for (int i = 0; i < 5; i++)
+            {
+                ShopGemanim[i].Play($"Gem{ShopGem[i]}");
+                ShopGemValueText[i].text = ShopGemValue[i].ToString();
+                ShopGemInfo[i].GemNum = ShopGem[i];
+                ShopBlessanim[i].Play($"Bless{ShopBless[i]}");
+                ShopBlessValueText[i].text = ShopBlessValue[i].ToString();
+                ShopBlessInfo[i].BlessNum = ShopBless[i];
+            }
+            if (Iscript.Bless[11] == 1)
+            {
+                for (int m = 0; m < 1 + Iscript.Bless[54]; m++)
+                {
+                    int J11 = Random.Range(0, 6);
+                    if (J11 <= 2)
+                    {
+                        ShopGemValue[J11] -= 1;
+                    }
+                    else
+                    {
+                        ShopBlessValue[J11 - 3] -= 1;
+                    }
+                }
+            }
+
+            RerollFlash.alpha = 1f;
+            RerollText.text = "x" + Iscript.Bless24;
+            if (Iscript.Bless24 == 0)
+            {
+                RerollButton.GetComponent<Button>().interactable = false;
             }
         }
     }

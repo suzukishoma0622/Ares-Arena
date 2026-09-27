@@ -32,22 +32,13 @@ public class Enemy_FrozenHound : MonoBehaviour
     {
         Language = PlayerPrefs.GetInt("Language", 2);
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
                 Bscript.EnemyMaxHP = 2400;
                 break;
             case 2:
                 Bscript.EnemyMaxHP = 2600;
-                break;
-            case 3:
-                Bscript.EnemyMaxHP = 2800;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 3000;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 3200;
                 break;
         }
         Bscript.EnemyHP = Bscript.EnemyMaxHP;
@@ -57,16 +48,16 @@ public class Enemy_FrozenHound : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = $"{(320 + Bscript.Iscript.Crown * 20) * AttackRate}ダメージを与える。";
-                AttackText[1].text = $"{400 + Bscript.Iscript.Crown * 30}シールドを得る。麻痺{4 + Bscript.AbilityLevel}を付与する。";
-                AttackText[2].text = $"{(150 + Bscript.Iscript.Crown * 10) * AttackRate}ダメージを与える。20%の攻撃激化を得る。";
+                AttackText[0].text = $"{Mathf.FloorToInt((320 + Bscript.AttackLevel * 30) * AttackRate)}ダメージを与える。";
+                AttackText[1].text = $"{Mathf.FloorToInt(400 + Bscript.HPLevel * 50)}シールドを得る。麻痺{4 + Bscript.AbilityLevel}を付与する。";
+                AttackText[2].text = $"{Mathf.FloorToInt((150 + Bscript.AttackLevel * 10) * AttackRate)}ダメージを与える。20%の攻撃激化を得る。";
                 DebuffDesc[0].text = "このターン、ハンド数が" + Pscript.Debuff_Lightning + "減少する。";
                 BuffDesc.text = "与えるダメージが" + ((AttackRate - 1f) * 100f).ToString("0") + "%増加する。";
                 break;
             case 2:
-                AttackText[0].text = $"Deals {(320 + Bscript.Iscript.Crown * 20) * AttackRate} Damage.";
-                AttackText[1].text = $"Gain {(400 + Bscript.Iscript.Crown * 30) * AttackRate} Shield. Inflict {4 + Bscript.AbilityLevel} Paralysis.";
-                AttackText[2].text = $"Deals {(150 + Bscript.Iscript.Crown * 10) * AttackRate} Damage. Gain 20% Intensified.";
+                AttackText[0].text = $"Deals {Mathf.FloorToInt((320 + Bscript.AttackLevel * 30) * AttackRate)} Damage.";
+                AttackText[1].text = $"Gain {Mathf.FloorToInt(400 + Bscript.HPLevel * 50)} Shield. Inflict {4 + Bscript.AbilityLevel} Paralysis.";
+                AttackText[2].text = $"Deals {Mathf.FloorToInt((150 + Bscript.AttackLevel * 10) * AttackRate)} Damage. Gain 20% Intensified.";
                 DebuffDesc[0].text = "This turn, the number of hand decreases by " + Pscript.Debuff_Lightning + ".";
                 BuffDesc.text = "Damage dealt is increased by " + ((AttackRate - 1f) * 100f).ToString("0") + "%.";
                 break;
@@ -172,7 +163,7 @@ public class Enemy_FrozenHound : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((320 + Bscript.Iscript.Crown * 20) * AttackRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((320 + Bscript.AttackLevel * 30) * AttackRate);
     }
     void Act2_1()
     {
@@ -186,7 +177,7 @@ public class Enemy_FrozenHound : MonoBehaviour
         GameObject g = Instantiate(AttackObj[1]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = false;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((400 + Bscript.Iscript.Crown * 30));
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(400 + Bscript.HPLevel * 50);
         Pscript.Debuff_Lightning = 4 + Bscript.AbilityLevel;
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
     }
@@ -202,7 +193,7 @@ public class Enemy_FrozenHound : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((150 + Bscript.Iscript.Crown * 10) * AttackRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((150 + Bscript.AttackLevel * 10) * AttackRate);
     }
     void Act3_3()
     {

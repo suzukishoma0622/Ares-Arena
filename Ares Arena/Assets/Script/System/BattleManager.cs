@@ -59,7 +59,8 @@ public class BattleManager : MonoBehaviour
     public int RewardMedal = 3;
     public TMP_Text MedalText;
 
-    public int StatusLevel;
+    public int HPLevel;
+    public int AttackLevel;
     public int AbilityLevel;
 
     public AudioClip StartSE;
@@ -70,6 +71,8 @@ public class BattleManager : MonoBehaviour
 
     public AudioClip DeadBGM;
     public AudioClip DefeatBGM;
+
+    public int Bless22;
     void Start()
     {
         Iscript.SE.PlayOneShot(StartSE);
@@ -234,24 +237,25 @@ public class BattleManager : MonoBehaviour
                         break;
                 }
                 break;
+            case 14:
+                switch (Language)
+                {
+                    case 1:
+                        SaintName.text = "フォーミュラ";
+                        break;
+                    case 2:
+                        SaintName.text = "The Formula";
+                        break;
+                }
+                break;
         }
-        switch(PlayerPrefs.GetInt("Crown", 0))
+        HPLevel = PlayerPrefs.GetInt("EnemyHPLevel", 0);
+        AttackLevel = PlayerPrefs.GetInt("EnemyAttackLevel", 0);
+        AbilityLevel = PlayerPrefs.GetInt("EnemyAbilityLevel", 0);
+        if (Iscript.CurrentRound == 7 && (Iscript.Saint == 1 && Iscript.Crown >= 5) || (Iscript.Saint == 8 && Iscript.Crown >= 5) || (Iscript.Saint == 14 && Iscript.Crown >= 5))
         {
-            case 1:
-                AbilityLevel = 0;
-                break;
-            case 2:
-                AbilityLevel = 0;
-                break;
-            case 3:
-                AbilityLevel = 1;
-                break;
-            case 4:
-                AbilityLevel = 1;
-                break;
-            case 5:
-                AbilityLevel = 2;
-                break;
+            EnemyMaxHP *= Mathf.FloorToInt(EnemyMaxHP * 1.25f);
+            EnemyHP = EnemyMaxHP;
         }
     }
     void Update()
@@ -374,13 +378,29 @@ public class BattleManager : MonoBehaviour
     }
     public void DeadEffect()
     {
-        IsDead = true;
-        CharaFade[0].fade = true;
-        FlashObj[0].SetActive(true);
-        Invoke("D2On", 1.5f);
-        Iscript.SE.PlayOneShot(DeadSE);
-        Iscript.SE.PlayOneShot(DeadBGM);
-        Iscript.BGMnum = 0;
+        if (Iscript.Bless[20] == 1 && Iscript.Bless20 == 0)
+        {
+            GameObject g = Instantiate(Pscript.HealEffect);
+            g.transform.position = Pscript.gameObject.transform.position;
+            g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(Iscript.PlayerMaxHP * 0.2f * (1 + Iscript.Bless[54]));
+            g.GetComponent<BlockTrail>().GoPlayer = true;
+            g.SetActive(true);
+            Iscript.Bless20 = 1;
+            Iscript.SE.PlayOneShot(DeadSE);
+        }
+        else
+        {
+            if (!IsDead)
+            {
+                IsDead = true;
+                CharaFade[0].fade = true;
+                FlashObj[0].SetActive(true);
+                Invoke("D2On", 1.5f);
+                Iscript.SE.PlayOneShot(DeadSE);
+                Iscript.SE.PlayOneShot(DeadBGM);
+                Iscript.BGMnum = 0;
+            }
+        }
     }
     public void DefeatEffect()
     {
@@ -391,7 +411,7 @@ public class BattleManager : MonoBehaviour
         Invoke("S2On", 1.5f);
         if (Iscript.Bless[4] == 1)
         {
-            Iscript.PlayerHP += Mathf.FloorToInt(Iscript.PlayerMaxHP * 0.1f * (1 + Iscript.Bless[54]));
+            Iscript.PlayerHP += Mathf.FloorToInt(Iscript.PlayerMaxHP * 0.12f * (1 + Iscript.Bless[54]));
             if(Iscript.PlayerHP > Iscript.PlayerMaxHP)
             {
                 Iscript.PlayerHP = Iscript.PlayerMaxHP;
@@ -399,7 +419,7 @@ public class BattleManager : MonoBehaviour
         }
         if (Iscript.Bless[9] == 1 && Iscript.CurrentRound <= 3)
         {
-            Iscript.PlayerHP += Mathf.FloorToInt(Iscript.PlayerMaxHP * 0.15f * (1 + Iscript.Bless[54]));
+            Iscript.PlayerHP += Mathf.FloorToInt(Iscript.PlayerMaxHP * 0.18f * (1 + Iscript.Bless[54]));
             if (Iscript.PlayerHP > Iscript.PlayerMaxHP)
             {
                 Iscript.PlayerHP = Iscript.PlayerMaxHP;
@@ -452,7 +472,7 @@ public class BattleManager : MonoBehaviour
     }
     public void RoundEnd()
     {
-        if (!IsDefeat && !IsDead)
+        if (!IsDefeat && !IsDead && (Iscript.Saint != 12 || Pscript.ActiveSkill == 0 || Iscript.Crown <= 1))
         {
             Invoke("R2", 1f);
             IsE = true;
@@ -491,6 +511,10 @@ public class BattleManager : MonoBehaviour
                     g3.GetComponent<BlockTrail>().GoPlayer = true;
                     g3.SetActive(true);
                 }
+            }
+            if(Iscript.Saint == 14)
+            {
+                Pscript.DroidActivate();
             }
         }
     }
@@ -533,6 +557,16 @@ public class BattleManager : MonoBehaviour
         Iscript.Fade = true;
         Invoke("Rest", 1f);
         Iscript.SE.PlayOneShot(Iscript.OKSE);
+        for(int j = 0; j < 5; j++)
+        {
+            if (Iscript.JewelNum[j] == 133)
+            {
+                Pscript.Gem133 += 5;
+                PlayerPrefs.SetInt("Gem133", Pscript.Gem133);
+                PlayerPrefs.Save();
+                break;
+            }
+        }
     }
     void Rest()
     {

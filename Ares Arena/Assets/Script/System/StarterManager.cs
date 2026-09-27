@@ -1,4 +1,4 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 
 public class StarterManager : MonoBehaviour
@@ -29,7 +29,7 @@ public class StarterManager : MonoBehaviour
     {
         Language = PlayerPrefs.GetInt("Language", 2);
         Crown = PlayerPrefs.GetInt("Crown", 0);
-        int Judge = Random.Range(1, 11);
+        int Judge = Random.Range(1, 16);
         FirstContact = PlayerPrefs.GetInt($"FirstContact{StarterNum}", 0);
         if (FirstContact == 0)
         {
@@ -46,43 +46,61 @@ public class StarterManager : MonoBehaviour
                         switch(Judge)
                         {
                             case 0:
-                                Messagetext.text = "’§íŽÒc‚©cc\n" +
-                                    "Ž„‚Ì–¼‚ÍccƒAƒrƒXcAj•Ÿ‚ðcŽö‚¯‚æ‚¤cc";
+                                Messagetext.text = "æŒ‘æˆ¦è€…â€¦ã‹â€¦â€¦\n" +
+                                    "ç§ã®åã¯â€¦â€¦ã‚¢ãƒ“ã‚¹â€¦ã€ç¥ç¦ã‚’â€¦æŽˆã‘ã‚ˆã†â€¦â€¦";
                                 break;
                             case 1:
-                                Messagetext.text = "—EŠ¸c‚È‚écŽÒ‚æccAs‚­‚Ì‚¾cc\n" +
-                                    "ƒAƒŒ[ƒX‚ÌŒ³‚Öcc";
+                                Messagetext.text = "å‹‡æ•¢â€¦ãªã‚‹â€¦è€…ã‚ˆâ€¦â€¦ã€è¡Œãã®ã â€¦â€¦\n" +
+                                    "ã‚¢ãƒ¬ãƒ¼ã‚¹ã®å…ƒã¸â€¦â€¦";
                                 break;
                             case 2:
-                                Messagetext.text = "ƒAƒŒ[ƒXcc“z‚ÌcŽv‚¢’Ê‚è‚Écc\n" +
-                                    "‚³‚¹‚Ä‚Íc‚È‚ç‚È‚¢cc";
+                                Messagetext.text = "ã‚¢ãƒ¬ãƒ¼ã‚¹â€¦â€¦å¥´ã®â€¦æ€ã„é€šã‚Šã«â€¦â€¦\n" +
+                                    "ã•ã›ã¦ã¯â€¦ãªã‚‰ãªã„â€¦â€¦";
                                 break;
                             case 3:
-                                Messagetext.text = "“z‚Écc’‰½‚ðcc¾‚Á‚½cc‚¨‘O‚Íc";
+                                Messagetext.text = "å¥´ã«â€¦â€¦å¿ èª ã‚’â€¦â€¦èª“ã£ãŸâ€¦â€¦ãŠå‰ã¯â€¦";
                                 break;
                             case 4:
-                                Messagetext.text = "–¢‚¾cc–Å‚Ñ‚éc‰^–½‚Écc‚ ‚ç‚¸cc";
+                                Messagetext.text = "æœªã â€¦â€¦æ»…ã³ã‚‹â€¦é‹å‘½ã«â€¦â€¦ã‚ã‚‰ãšâ€¦â€¦";
                                 break;
                             case 5:
-                                Messagetext.text = "j•Ÿ‚ðcŽ‚Á‚Ä‚¢‚¯cc\n" +
-                                    "‚¨‘O‚ðcŽç‚Á‚Äc‚­‚ê‚écc";
+                                Messagetext.text = "ç¥ç¦ã‚’â€¦æŒã£ã¦ã„ã‘â€¦â€¦\n" +
+                                    "ãŠå‰ã‚’â€¦å®ˆã£ã¦â€¦ãã‚Œã‚‹â€¦â€¦";
                                 break;
                             case 6:
-                                Messagetext.text = "ƒAƒŒ[ƒXcc“z‚Ìc–Ú“Icc";
+                                Messagetext.text = "ã‚¢ãƒ¬ãƒ¼ã‚¹â€¦â€¦å¥´ã®â€¦ç›®çš„â€¦â€¦";
                                 break;
                             case 7:
-                                Messagetext.text = "“z‚ç‚Écc‹C‚ð‚Â‚¯‚ëcc\n" +
-                                    "“z‚ç‚àc’‰½‚ðcc¾‚Á‚½cc";
+                                Messagetext.text = "å¥´ã‚‰ã«â€¦â€¦æ°—ã‚’ã¤ã‘ã‚â€¦â€¦\n" +
+                                    "å¥´ã‚‰ã‚‚â€¦å¿ èª ã‚’â€¦â€¦èª“ã£ãŸâ€¦â€¦";
                                 break;
                             case 8:
-                                Messagetext.text = "‚Ü‚½cc‚¨‘O‚©cc—§‚¿ã‚ª‚êcÄ‚Ñcc";
+                                Messagetext.text = "ã¾ãŸâ€¦â€¦ãŠå‰ã‹â€¦â€¦ç«‹ã¡ä¸ŠãŒã‚Œâ€¦å†ã³â€¦â€¦";
                                 break;
                             case 9:
-                                Messagetext.text = "‚¢‚Â‚©c“z‚ðcc–Å‚Ú‚·cŽÒ‚ªcc";
+                                Messagetext.text = "ã„ã¤ã‹â€¦å¥´ã‚’â€¦â€¦æ»…ã¼ã™â€¦è€…ãŒâ€¦â€¦";
                                 break;
                             case 10:
-                                Messagetext.text = "Žó‚¯Žæ‚êccj•Ÿ‚ðcc\n" +
-                                    "‚¨‘O‚Íc‘I‚Î‚ê‚½cc";
+                                Messagetext.text = "å—ã‘å–ã‚Œâ€¦â€¦ç¥ç¦ã‚’â€¦â€¦\n" +
+                                    "ãŠå‰ã¯â€¦é¸ã°ã‚ŒãŸâ€¦â€¦";
+                                break;
+                            case 11:
+                                Messagetext.text = "è«¦ã‚ã¬å¿ƒã‚’â€¦â€¦æŒã¤é™ã‚Šâ€¦â€¦\n" +
+                                    "ç§ã¯â€¦â€¦ãŠå‰ã‚’è¦‹å®ˆã‚ã†â€¦â€¦";
+                                break;
+                            case 12:
+                                Messagetext.text = "ç›®è¦šã‚ã®â€¦â€¦æ™‚ã¯â€¦â€¦æ¥ãŸâ€¦â€¦";
+                                break;
+                            case 13:
+                                Messagetext.text = "æ „å…‰ãŒâ€¦â€¦ãŠå‰ã‚’å¾…ã¤â€¦â€¦\n" +
+                                    "æ±ºã—ã¦â€¦â€¦è¦‹å¤±ã†ãªâ€¦â€¦";
+                                break;
+                            case 14:
+                                Messagetext.text = "æ­»ã¯â€¦â€¦çµ‚ã‚ã‚Šã§ã¯ãªã„â€¦â€¦";
+                                break;
+                            case 15:
+                                Messagetext.text = "ãŠå‰ã¯â€¦â€¦ç¹°ã‚Šè¿”ã—ã¦ã„ã‚‹ã®ã â€¦â€¦\n" +
+                                    "æ­»ã«â€¦â€¦å­¦ã³â€¦â€¦ãã—ã¦æ­»ã¬â€¦â€¦";
                                 break;
                         }
                         break;
@@ -126,6 +144,24 @@ public class StarterManager : MonoBehaviour
                                 Messagetext.text = "Receive it...the blessing...\n" +
                                     "you have been chosen...";
                                 break;
+                            case 11:
+                                Messagetext.text = "As long as you hold onto... an unyielding heart...\n" +
+                                    "I will... watch over you...";
+                                break;
+                            case 12:
+                                Messagetext.text = "The time... for awakening... has come...";
+                                break;
+                            case 13:
+                                Messagetext.text = "Glory... awaits you...\n" +
+                                    "Never... lose sight of it...";
+                                break;
+                            case 14:
+                                Messagetext.text = "Death is... not the end...";
+                                break;
+                            case 15:
+                                Messagetext.text = "You are... repeating it...\n" +
+                                    "dying... learning... and dying...";
+                                break;
                         }
                         break;
                 }
@@ -137,44 +173,64 @@ public class StarterManager : MonoBehaviour
                         switch (Judge)
                         {
                             case 0:
-                                Messagetext.text = "‚ ‚çA’§íŽÒ‚ËH•|‚ª‚ç‚È‚¢‚ÅA‚ ‚È‚½‚Ì–¡•û‚æB\n" +
-                                    "Ž„‚ÍƒGƒLƒ\ƒfƒBƒEƒ€Bj•Ÿ‚Å‚à‚¢‚©‚ªH";
+                                Messagetext.text = "ã‚ã‚‰ã€æŒ‘æˆ¦è€…ã­ï¼Ÿæ€–ãŒã‚‰ãªã„ã§ã€ã‚ãªãŸã®å‘³æ–¹ã‚ˆã€‚\n" +
+                                    "ç§ã¯ã‚¨ã‚­ã‚½ãƒ‡ã‚£ã‚¦ãƒ ã€‚ç¥ç¦ã§ã‚‚ã„ã‹ãŒï¼Ÿ";
                                 break;
                             case 1:
-                                Messagetext.text = "j•Ÿ‚ðŽ‚Á‚Ä‚¢‚«‚È‚³‚¢B‚ ‚È‚½‚Í‰Â”\«‚ð”é‚ß‚Ä‚¢‚é‚íB";
+                                Messagetext.text = "ç¥ç¦ã‚’æŒã£ã¦ã„ããªã•ã„ã€‚ã‚ãªãŸã¯å¯èƒ½æ€§ã‚’ç§˜ã‚ã¦ã„ã‚‹ã‚ã€‚";
                                 break;
                             case 2:
-                                Messagetext.text = "”Þ‚É’‰½‚ð¾‚Á‚½‚Ì‚ËH\n" +
-                                    "‚ ‚È‚½‚Í‚à‚¤“¦‚ê‚ç‚ê‚È‚¢‚í‚æB";
+                                Messagetext.text = "å½¼ã«å¿ èª ã‚’èª“ã£ãŸã®ã­ï¼Ÿ\n" +
+                                    "ã‚ãªãŸã¯ã‚‚ã†é€ƒã‚Œã‚‰ã‚Œãªã„ã‚ã‚ˆã€‚";
                                 break;
                             case 3:
-                                Messagetext.text = "‚»‚ñ‚ÈŠç‚ð‚µ‚È‚¢‚ÅB–Ú‚Æ–Ú‚ð‡‚í‚¹‚Ä‚¨˜b‚µ‚Ü‚µ‚å‚¤H";
+                                Messagetext.text = "ãã‚“ãªé¡”ã‚’ã—ãªã„ã§ã€‚ç›®ã¨ç›®ã‚’åˆã‚ã›ã¦ãŠè©±ã—ã¾ã—ã‚‡ã†ï¼Ÿ";
                                 break;
                             case 4:
-                                Messagetext.text = "‰½‚©ˆù‚ñ‚Å‚¢‚­HŽE‹C‚ª—N‚¢‚Ä‚­‚é‚â‚Â‚ð‚ËB";
+                                Messagetext.text = "ä½•ã‹é£²ã‚“ã§ã„ãï¼Ÿæ®ºæ°—ãŒæ¹§ã„ã¦ãã‚‹ã‚„ã¤ã‚’ã­ã€‚";
                                 break;
                             case 5:
-                                Messagetext.text = "ƒAƒŒ[ƒXH”Þ‚Ì³‘ÌH\n" +
-                                    "‚³‚ ‚ËA‰½‚È‚ñ‚Å‚µ‚å‚¤B";
+                                Messagetext.text = "ã‚¢ãƒ¬ãƒ¼ã‚¹ï¼Ÿå½¼ã®æ­£ä½“ï¼Ÿ\n" +
+                                    "ã•ã‚ã­ã€ä½•ãªã‚“ã§ã—ã‚‡ã†ã€‚";
                                 break;
                             case 6:
-                                Messagetext.text = "ŽE‚µ‚É‚æ‚Á‚Ä’‰½‚ÍŽ¦‚³‚ê‚écc\n" +
-                                    "•ª‚©‚è‚â‚·‚¢‚â‚è•û‚ËB";
+                                Messagetext.text = "æ®ºã—ã«ã‚ˆã£ã¦å¿ èª ã¯ç¤ºã•ã‚Œã‚‹â€¦â€¦\n" +
+                                    "åˆ†ã‹ã‚Šã‚„ã™ã„ã‚„ã‚Šæ–¹ã­ã€‚";
                                 break;
                             case 7:
-                                Messagetext.text = "‚Ü‚½s‚­‚Ì‚ËB\n" +
-                                    "¡“x‚ÍccãŽè‚­‚¢‚­‚Æ‚¢‚¢‚¯‚ÇB";
+                                Messagetext.text = "ã¾ãŸè¡Œãã®ã­ã€‚\n" +
+                                    "ä»Šåº¦ã¯â€¦â€¦ä¸Šæ‰‹ãã„ãã¨ã„ã„ã‘ã©ã€‚";
                                 break;
                             case 8:
-                                Messagetext.text = "‚Ö‚¦AãY—í‚È•óÎ‚ðŽ‚Á‚Ä‚é‚¶‚á‚È‚¢B";
+                                Messagetext.text = "ã¸ãˆã€ç¶ºéº—ãªå®çŸ³ã‚’æŒã£ã¦ã‚‹ã˜ã‚ƒãªã„ã€‚";
                                 break;
                             case 9:
-                                Messagetext.text = "’‰½SH‚»‚ñ‚È‚ÌŠÖŒW‚È‚¢‚íB\n" +
-                                    "Ž„‚½‚¿‚Í‚à‚¤A”Þ‚Ì‚à‚Ì‚È‚Ì‚æB";
+                                Messagetext.text = "å¿ èª å¿ƒï¼Ÿãã‚“ãªã®é–¢ä¿‚ãªã„ã‚ã€‚\n" +
+                                    "ç§ãŸã¡ã¯ã‚‚ã†ã€å½¼ã®ã‚‚ã®ãªã®ã‚ˆã€‚";
                                 break;
                             case 10:
-                                Messagetext.text = "í‚¢‘±‚¯‚È‚³‚¢A‰i‰“‚ÉB\n" +
-                                    "‚ ‚È‚½‚ª‰^–½‚ð•Ï‚¦‚é‚Â‚à‚è‚ª–³‚¢‚Ì‚È‚ç‚ËB";
+                                Messagetext.text = "æˆ¦ã„ç¶šã‘ãªã•ã„ã€æ°¸é ã«ã€‚\n" +
+                                    "ã‚ãªãŸãŒé‹å‘½ã‚’å¤‰ãˆã‚‹ã¤ã‚‚ã‚ŠãŒç„¡ã„ã®ãªã‚‰ã­ã€‚";
+                                break;
+                            case 11:
+                                Messagetext.text = "ã‚¢ãƒ¬ãƒ¼ã‚¹ãŒã„ã‚‹é™ã‚Šã€æ „å…‰ã‚’ç›®æŒ‡ã™é™ã‚Šã€\n" +
+                                    "ã‚ãªãŸã¯æ®ºæˆ®ã—ç¶šã‘ã‚‹ã®ã§ã—ã‚‡ã†ï¼Ÿ";
+                                break;
+                            case 12:
+                                Messagetext.text = "æ…ˆæ‚²ã‚’æ¨ã¦ãªã•ã„ã€æŒ‘æˆ¦è€…ã€‚\n" +
+                                    "æœ‰è±¡ç„¡è±¡ãŒã‚ãªãŸã«ãã†ã™ã‚‹ã‚ˆã†ã«ã€‚";
+                                break;
+                            case 13:
+                                Messagetext.text = "æ­»ã‚’æã‚Œã‚‹å¿…è¦ã¯ãªã„ã‚ã€‚\n" +
+                                    "æ—¢ã«ã‚ãªãŸã¯ã€ãã‚Œã‚’ä½“é¨“ã—ã€çŸ¥ã£ã¦ã„ã‚‹ã¯ãšã‚ˆã€‚";
+                                break;
+                            case 14:
+                                Messagetext.text = "å‹ã¤ã“ã¨ãŒå…¨ã¦ã§ã¯ãªã„ã€‚\n" +
+                                    "å‹è€…ã«ã‚‚ã€æ•—è€…ã«ã‚‚ã€æœªæ¥ã¯ã‚ã‚‹ã‚‚ã®ã‚ˆã€‚";
+                                break;
+                            case 15:
+                                Messagetext.text = "ç›®ã‚’è¦šã¾ã—ã¦ã€‚ã¾ã ã‚ãªãŸã«ã¯ã€\n" +
+                                    "ã‚„ã‚‹ã¹ãã“ã¨ãŒæ²¢å±±ã‚ã‚‹ã€‚";
                                 break;
                         }
                         break;
@@ -221,6 +277,25 @@ public class StarterManager : MonoBehaviour
                                 Messagetext.text = "Keep fighting?forever.\n" +
                                     "That is, unless you have no intention of changing your fate.";
                                 break;
+                            case 11:
+                                Messagetext.text = "As long as Ares is with you, and as long as you strive for glory," +
+                                    "you will go on slaughtering, won't you?";
+                                break;
+                            case 12:
+                                Messagetext.text = "Abandon mercy, challenger.\n" +
+                                    "Just as the motley crew do to you.";
+                                break;
+                            case 13:
+                                Messagetext.text = "There is no need to fear death. You have already\n" +
+                                    "experienced itâ€”you should know it well.";
+                                break;
+                            case 14:
+                                Messagetext.text = "Winning isn't everything.\n" +
+                                    "Both winners and losers have a future.";
+                                break;
+                            case 15:
+                                Messagetext.text = "Wake up. You still have so much left to do.";
+                                break;
                         }
                         break;
                 }
@@ -232,38 +307,53 @@ public class StarterManager : MonoBehaviour
                         switch (Judge)
                         {
                             case 0:
-                                Messagetext.text = "’§íŽÒ‚©H\n" +
-                                    "‰´‚Ì–¼‚Íƒtƒ@ƒtƒjƒ‹B‚¨‘O‚ÉAj•Ÿ‚ð‚â‚ë‚¤I";
+                                Messagetext.text = "æŒ‘æˆ¦è€…ã‹ï¼Ÿ\n" +
+                                    "ä¿ºã®åã¯ãƒ•ã‚¡ãƒ•ãƒ‹ãƒ«ã€‚ãŠå‰ã«ã€ç¥ç¦ã‚’ã‚„ã‚ã†ï¼";
                                 break;
                             case 1:
-                                Messagetext.text = "“z‚ç‚ðŽE‚»‚¤‚ºI";
+                                Messagetext.text = "å¥´ã‚‰ã‚’æ®ºãã†ãœï¼";
                                 break;
                             case 2:
-                                Messagetext.text = "‚»‚ñ‚È‚à‚Ì‚ª•Ší‚¾‚Á‚ÄH";
+                                Messagetext.text = "ãã‚“ãªã‚‚ã®ãŒæ­¦å™¨ã ã£ã¦ï¼Ÿ";
                                 break;
                             case 3:
-                                Messagetext.text = "ƒAƒŒ[ƒXH“z‚Í•ª‚©‚Á‚Ä‚È‚¢‚Ècc";
+                                Messagetext.text = "ã‚¢ãƒ¬ãƒ¼ã‚¹ï¼Ÿå¥´ã¯åˆ†ã‹ã£ã¦ãªã„ãªâ€¦â€¦";
                                 break;
                             case 4:
-                                Messagetext.text = "—ÍI–\—ÍIŽE‚µ‚ÌŒÀ‚è‚ðs‚­‚¹II";
+                                Messagetext.text = "åŠ›ï¼æš´åŠ›ï¼æ®ºã—ã®é™ã‚Šã‚’å°½ãã›ï¼ï¼";
                                 break;
                             case 5:
-                                Messagetext.text = "ƒAƒŒ[ƒX‚¾‚Á‚ÄŽE‚µ‚Ä‚Ý‚¹‚é‚¼I";
+                                Messagetext.text = "ã‚¢ãƒ¬ãƒ¼ã‚¹ã ã£ã¦æ®ºã—ã¦ã¿ã›ã‚‹ãžï¼";
                                 break;
                             case 6:
-                                Messagetext.text = "“z‚ç‚Í‚Ç‚±‚É‚¢‚éH";
+                                Messagetext.text = "å¥´ã‚‰ã¯ã©ã“ã«ã„ã‚‹ï¼Ÿ";
                                 break;
                             case 7:
-                                Messagetext.text = "ŽEˆÓ‚ª‘«‚è‚È‚¢I";
+                                Messagetext.text = "æ®ºæ„ãŒè¶³ã‚Šãªã„ï¼";
                                 break;
                             case 8:
-                                Messagetext.text = "•Ší‚ðŽæ‚é‚Ì‚¾AŽE‚¹I";
+                                Messagetext.text = "æ­¦å™¨ã‚’å–ã‚‹ã®ã ã€æ®ºã›ï¼";
                                 break;
                             case 9:
-                                Messagetext.text = "‚»‚Ì•ŠíA‚¨‘O‚ÉŽ—‡‚Á‚Ä‚é‚¼H";
+                                Messagetext.text = "ãã®æ­¦å™¨ã€ãŠå‰ã«ä¼¼åˆã£ã¦ã‚‹ãžï¼Ÿ";
                                 break;
                             case 10:
-                                Messagetext.text = "Žn‚ß‚æ‚¤‚Å‚Í‚È‚¢‚©I";
+                                Messagetext.text = "å§‹ã‚ã‚ˆã†ã§ã¯ãªã„ã‹ï¼";
+                                break;
+                            case 11:
+                                Messagetext.text = "çµ‚ã‚ã‚Šãªãæ®ºæˆ®ã‚’è®ƒãˆã‚ˆï¼";
+                                break;
+                            case 12:
+                                Messagetext.text = "é‚ªé­”ã™ã‚‹è€…ã¯å©ãæ½°ã›ï¼";
+                                break;
+                            case 13:
+                                Messagetext.text = "æ­»ã¯æ–°ã—ã„å§‹ã¾ã‚Šã ï¼";
+                                break;
+                            case 14:
+                                Messagetext.text = "è¡€ãŒæ»¾ã‚‹â€¦â€¦æˆ¦ã„ãŸã„ãªã‚ï¼";
+                                break;
+                            case 15:
+                                Messagetext.text = "ä¿ºã®åŠ›ã‚’ä½¿ã„ã“ãªã™ã¨ã¯ãªã€æ°—ã«å…¥ã£ãŸãžï¼";
                                 break;
                         }
                         break;
@@ -304,6 +394,21 @@ public class StarterManager : MonoBehaviour
                             case 10:
                                 Messagetext.text = "Let us begin!";
                                 break;
+                            case 11:
+                                Messagetext.text = "Praise the endless slaughter!";
+                                break;
+                            case 12:
+                                Messagetext.text = "Crush anyone who stands in your way!";
+                                break;
+                            case 13:
+                                Messagetext.text = "Death is a new beginning!";
+                                break;
+                            case 14:
+                                Messagetext.text = "My blood is boiling... I want to fight!";
+                                break;
+                            case 15:
+                                Messagetext.text = "To think you've mastered my power... I like you!";
+                                break;
                         }
                         break;
                 }
@@ -315,46 +420,46 @@ public class StarterManager : MonoBehaviour
                         switch (Judge)
                         {
                             case 0:
-                                Messagetext.text = "‰ä‚ªˆ¤‚·‚éMŽÒ‚æA‚æ‚­‚¼—ˆ‚½B\n" +
-                                    "‹°‚ê‚é‚±‚Æ‚Í‚È‚¢A‚³‚ A‘O‚Öi‚Ýo‚Å‚æB";
+                                Messagetext.text = "æˆ‘ãŒæ„›ã™ã‚‹ä¿¡è€…ã‚ˆã€ã‚ˆããžæ¥ãŸã€‚\n" +
+                                    "æã‚Œã‚‹ã“ã¨ã¯ãªã„ã€ã•ã‚ã€å‰ã¸é€²ã¿å‡ºã§ã‚ˆã€‚";
                                 break;
                             case 1:
-                                Messagetext.text = "j•Ÿ‚Í–œl‚É—^‚¦‚ç‚ê‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B\n" +
-                                    "íŽm‚æA“ð‚ª–]‚Þ‚à‚Ì‚ðŽæ‚èA‚»‚ÌŽè’†‚Æ‚·‚é‚Ì‚¾B";
+                                Messagetext.text = "ç¥ç¦ã¯ä¸‡äººã«ä¸Žãˆã‚‰ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„ã€‚\n" +
+                                    "æˆ¦å£«ã‚ˆã€æ±ãŒæœ›ã‚€ã‚‚ã®ã‚’å–ã‚Šã€ãã®æ‰‹ä¸­ã¨ã™ã‚‹ã®ã ã€‚";
                                 break;
                             case 2:
-                                Messagetext.text = "—Í‚©H•x‚©H‰hŒõ‚©H\n" +
-                                    "‰ä‚É’‰½‚ð¾‚¤‚Ì‚¾A‚³‚·‚ê‚Î‘S‚Ä‚ªŽè‚É“ü‚é‚¾‚ë‚¤B";
+                                Messagetext.text = "åŠ›ã‹ï¼Ÿå¯Œã‹ï¼Ÿæ „å…‰ã‹ï¼Ÿ\n" +
+                                    "æˆ‘ã«å¿ èª ã‚’èª“ã†ã®ã ã€ã•ã™ã‚Œã°å…¨ã¦ãŒæ‰‹ã«å…¥ã‚‹ã ã‚ã†ã€‚";
                                 break;
                             case 3:
-                                Messagetext.text = "—EŠ¸‚È‚é‚à‚Ì‚æA“ð‚Ìí‚¢‚Æ—EŽp‚ð\n" +
-                                    "‰ä‚Íí‚ÉŒ©Žç‚Á‚Ä‚¢‚é‚¼B";
+                                Messagetext.text = "å‹‡æ•¢ãªã‚‹ã‚‚ã®ã‚ˆã€æ±ã®æˆ¦ã„ã¨å‹‡å§¿ã‚’\n" +
+                                    "æˆ‘ã¯å¸¸ã«è¦‹å®ˆã£ã¦ã„ã‚‹ãžã€‚";
                                 break;
                             case 4:
-                                Messagetext.text = "“ð‚É‚Í‚Ü‚¾¬’·‚Ì—]’n‚ª‚ ‚éB\n" +
-                                    "Ž„‚Ì‰º‚Ü‚Å’H‚è’…‚¢‚Ä‚Ý‚é‚ª‚¢‚¢B";
+                                Messagetext.text = "æ±ã«ã¯ã¾ã æˆé•·ã®ä½™åœ°ãŒã‚ã‚‹ã€‚\n" +
+                                    "ç§ã®ä¸‹ã¾ã§è¾¿ã‚Šç€ã„ã¦ã¿ã‚‹ãŒã„ã„ã€‚";
                                 break;
                             case 5:
-                                Messagetext.text = "ƒAƒrƒXAƒGƒLƒ\ƒfƒBƒEƒ€Aƒtƒ@ƒtƒjƒ‹cc\n" +
-                                    "‚ ‚ÌŽÒ‚½‚¿‚Í‘§Ð‚Å‚ ‚é‚©H";
+                                Messagetext.text = "ã‚¢ãƒ“ã‚¹ã€ã‚¨ã‚­ã‚½ãƒ‡ã‚£ã‚¦ãƒ ã€ãƒ•ã‚¡ãƒ•ãƒ‹ãƒ«â€¦â€¦\n" +
+                                    "ã‚ã®è€…ãŸã¡ã¯æ¯ç½ã§ã‚ã‚‹ã‹ï¼Ÿ";
                                 break;
                             case 6:
-                                Messagetext.text = "‹°•|‚ðŽ•ž‚¹‚æA•Ç‚ð‘Å‚¿”j‚é‚Ì‚¾cc\n" +
-                                    "‰hŒõ‚ð’Í‚ÝŽæ‚éŒ —˜‚ÍAŠF•½“™‚É‚ ‚é‚Ì‚¾‚©‚ç‚ÈB";
+                                Messagetext.text = "ææ€–ã‚’å…‹æœã›ã‚ˆã€å£ã‚’æ‰“ã¡ç ´ã‚‹ã®ã â€¦â€¦\n" +
+                                    "æ „å…‰ã‚’æŽ´ã¿å–ã‚‹æ¨©åˆ©ã¯ã€çš†å¹³ç­‰ã«ã‚ã‚‹ã®ã ã‹ã‚‰ãªã€‚";
                                 break;
                             case 7:
-                                Messagetext.text = "í—F‚ª‘Ò‚Á‚Ä‚¢‚é‚¼B\n" +
-                                    "î‚¯‚È‚Ç‚¢‚ç‚ÊA‚»‚ê‚ª‘ŠŽè‚Ö‚ÌŒhˆÓ‚È‚Ì‚¾B";
+                                Messagetext.text = "æˆ¦å‹ãŒå¾…ã£ã¦ã„ã‚‹ãžã€‚\n" +
+                                    "æƒ…ã‘ãªã©ã„ã‚‰ã¬ã€ãã‚ŒãŒç›¸æ‰‹ã¸ã®æ•¬æ„ãªã®ã ã€‚";
                                 break;
                             case 8:
                                 Messagetext.text = "\n" +
                                     "";
                                 break;
                             case 9:
-                                Messagetext.text = "‚»‚Ì•ŠíA‚¨‘O‚ÉŽ—‡‚Á‚Ä‚é‚¼H";
+                                Messagetext.text = "ãã®æ­¦å™¨ã€ãŠå‰ã«ä¼¼åˆã£ã¦ã‚‹ãžï¼Ÿ";
                                 break;
                             case 10:
-                                Messagetext.text = "Žn‚ß‚æ‚¤‚Å‚Í‚È‚¢‚©I";
+                                Messagetext.text = "å§‹ã‚ã‚ˆã†ã§ã¯ãªã„ã‹ï¼";
                                 break;
                         }
                         break;
@@ -421,8 +526,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "ŽçŒìŽÒ";
-                            DescriptionText[i].text = "Å‘åHP‚ª15%‘‰Á‚·‚éB";
+                            NameText[i].text = "å®ˆè­·è€…";
+                            DescriptionText[i].text = "æœ€å¤§HPãŒ15%å¢—åŠ ã™ã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Guardian";
@@ -434,8 +539,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "”ç•†d‰»";
-                            DescriptionText[i].text = "í“¬ŠJŽnŽžAÅ‘åHP‚Ì30%‚É‚ ‚½‚éƒV[ƒ‹ƒh‚ð“¾‚éB";
+                            NameText[i].text = "çš®è†šç¡¬åŒ–";
+                            DescriptionText[i].text = "æˆ¦é—˜é–‹å§‹æ™‚ã€æœ€å¤§HPã®30%ã«ã‚ãŸã‚‹ã‚·ãƒ¼ãƒ«ãƒ‰ã‚’å¾—ã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Skin Hardening";
@@ -447,8 +552,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "’´‰ñ•œ‘Ì";
-                            DescriptionText[i].text = "HP‚ð‰ñ•œ‚·‚é‚½‚ÑA‰ñ•œ—Ê‚Ì10%‚É‚ ‚½‚éÅ‘åHP‘‰Á‚ð“¾‚éB";
+                            NameText[i].text = "è¶…å›žå¾©ä½“";
+                            DescriptionText[i].text = "HPã‚’å›žå¾©ã™ã‚‹ãŸã³ã€å›žå¾©é‡ã®10%ã«ã‚ãŸã‚‹æœ€å¤§HPå¢—åŠ ã‚’å¾—ã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Super Recovering";
@@ -460,12 +565,12 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "Šæ‹­‚È‚é“÷‘Ì";
-                            DescriptionText[i].text = "í“¬I—¹ŽžAÅ‘åHP‚Ì10%‚ð‰ñ•œ‚·‚éB";
+                            NameText[i].text = "é ‘å¼·ãªã‚‹è‚‰ä½“";
+                            DescriptionText[i].text = "æˆ¦é—˜çµ‚äº†æ™‚ã€æœ€å¤§HPã®12%ã‚’å›žå¾©ã™ã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Robust Body";
-                            DescriptionText[i].text = "At the end of battle, restore 10% of your maximum HP.";
+                            DescriptionText[i].text = "At the end of battle, restore 12% of your maximum HP.";
                             break;
                     }
                     break;
@@ -473,8 +578,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "[•£‚ÌÎ";
-                            DescriptionText[i].text = "ƒTƒtƒ@ƒCƒA‚ðƒZƒŒƒXƒ^ƒCƒg‚Æ’u‚«Š·‚¦‚éB";
+                            NameText[i].text = "æ·±æ·µã®çŸ³";
+                            DescriptionText[i].text = "ã‚µãƒ•ã‚¡ã‚¤ã‚¢ã‚’ã‚»ãƒ¬ã‚¹ã‚¿ã‚¤ãƒˆã¨ç½®ãæ›ãˆã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Abyssal Stone";
@@ -486,8 +591,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "‘æ˜ZŽw";
-                            DescriptionText[i].text = "ƒ^[ƒ“ŠJŽnŽžAƒnƒ“ƒh”+1B";
+                            NameText[i].text = "ç¬¬å…­æŒ‡";
+                            DescriptionText[i].text = "ã‚¿ãƒ¼ãƒ³é–‹å§‹æ™‚ã€ãƒãƒ³ãƒ‰æ•°+1ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Sixth finger";
@@ -499,8 +604,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "¬‚³‚È•óÎ” ";
-                            DescriptionText[i].text = "ƒGƒƒ‰ƒ‹ƒh‚ðƒyƒŠƒhƒbƒg‚Æ’u‚«Š·‚¦‚éB";
+                            NameText[i].text = "å°ã•ãªå®çŸ³ç®±";
+                            DescriptionText[i].text = "ã‚¨ãƒ¡ãƒ©ãƒ«ãƒ‰ã‚’ãƒšãƒªãƒ‰ãƒƒãƒˆã¨ç½®ãæ›ãˆã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Small Jewelry box";
@@ -512,8 +617,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "Œ¤–";
-                            DescriptionText[i].text = "‘S‚Ä‚ÌƒXƒ^[ƒ^[•óÎ‚ÌŒø‰Ê‚ª1‘‰Á‚·‚éB";
+                            NameText[i].text = "ç ”ç£¨";
+                            DescriptionText[i].text = "å…¨ã¦ã®ã‚¹ã‚¿ãƒ¼ã‚¿ãƒ¼å®çŸ³ã®åŠ¹æžœãŒ1å¢—åŠ ã™ã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Polishing";
@@ -525,12 +630,12 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "œ’›";
-                            DescriptionText[i].text = "3‰ñ–Ú‚Ü‚Å‚Ìí“¬I—¹ŽžAHP‚ð15%‰ñ•œ‚·‚éB";
+                            NameText[i].text = "ææƒš";
+                            DescriptionText[i].text = "3å›žç›®ã¾ã§ã®æˆ¦é—˜çµ‚äº†æ™‚ã€HPã‚’18%å›žå¾©ã™ã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Ecstasy";
-                            DescriptionText[i].text = "After the first 3 battles, recover 15% of your HP.";
+                            DescriptionText[i].text = "After the first 3 battles, recover 18% of your HP.";
                             break;
                     }
                     break;
@@ -538,8 +643,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "‘æŽO‚ÌŠá";
-                            DescriptionText[i].text = "ƒnƒ“ƒh‚·‚é–ˆ‚ÉHP‚ð2‰ñ•œ‚·‚éB";
+                            NameText[i].text = "ç¬¬ä¸‰ã®çœ¼";
+                            DescriptionText[i].text = "ãƒãƒ³ãƒ‰ã™ã‚‹æ¯Žã«HPã‚’2å›žå¾©ã™ã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Third Eye";
@@ -551,8 +656,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "Œ[Ž¦";
-                            DescriptionText[i].text = "–ˆ‰ñƒVƒ‡ƒbƒv‚Ìƒ‰ƒ“ƒ_ƒ€‚È¤•i1‚Â‚ÉŠ„ˆø‚ª”­¶‚·‚éB";
+                            NameText[i].text = "å•“ç¤º";
+                            DescriptionText[i].text = "æ¯Žå›žã‚·ãƒ§ãƒƒãƒ—ã®ãƒ©ãƒ³ãƒ€ãƒ ãªå•†å“1ã¤ã«å‰²å¼•ãŒç™ºç”Ÿã™ã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Revelation";
@@ -564,8 +669,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "•x‹";
-                            DescriptionText[i].text = "ƒƒ_ƒ‹‚ð2–‡Šl“¾‚·‚éB";
+                            NameText[i].text = "å¯Œè±ª";
+                            DescriptionText[i].text = "ãƒ¡ãƒ€ãƒ«ã‚’2æžšç²å¾—ã™ã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Rich";
@@ -577,12 +682,12 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "“÷‘Ì§Œä";
-                            DescriptionText[i].text = "HP‚ª25%ˆÈ‰º‚Ìó‘Ô‚Åí“¬‚ðI—¹‚µ‚½ŽžAHP‚ð40%‚Ü‚Å‰ñ•œ‚·‚éB";
+                            NameText[i].text = "è‚‰ä½“åˆ¶å¾¡";
+                            DescriptionText[i].text = "HPãŒ40%ä»¥ä¸‹ã®çŠ¶æ…‹ã§æˆ¦é—˜ã‚’çµ‚äº†ã—ãŸæ™‚ã€HPã‚’40%ã¾ã§å›žå¾©ã™ã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Body control";
-                            DescriptionText[i].text = "When a battle ends with HP at 25% or less, HP is restored to 40%.";
+                            DescriptionText[i].text = "When a battle ends with HP at 40% or less, HP is restored to 40%.";
                             break;
                     }
                     break;
@@ -590,12 +695,12 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "‹¶íŽm";
-                            DescriptionText[i].text = "Å‘åHP‚ª25%‘‰Á‚·‚éBHP‚ð50%Ž¸‚¤B";
+                            NameText[i].text = "ç‹‚æˆ¦å£«";
+                            DescriptionText[i].text = "æœ€å¤§HPãŒ30%å¢—åŠ ã™ã‚‹ã€‚HPã‚’50%å¤±ã†ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Berserker";
-                            DescriptionText[i].text = "Maximum HP increases by 25%. Lose 50% of HP.";
+                            DescriptionText[i].text = "Maximum HP increases by 30%. Lose 50% of HP.";
                             break;
                     }
                     break;
@@ -603,8 +708,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "–\‹s‚ÌÔÎ";
-                            DescriptionText[i].text = "ƒ‹ƒr[‚ðƒK[ƒlƒbƒg‚Æ’u‚«Š·‚¦‚éB";
+                            NameText[i].text = "æš´è™ã®èµ¤çŸ³";
+                            DescriptionText[i].text = "ãƒ«ãƒ“ãƒ¼ã‚’ã‚¬ãƒ¼ãƒãƒƒãƒˆã¨ç½®ãæ›ãˆã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Redstone of Tyranny";
@@ -616,8 +721,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "‰ö—Í";
-                            DescriptionText[i].text = "“G‚Éƒ_ƒ[ƒW‚ð—^‚¦‚½ŽžA‚»‚Ì’l‚ª1‘‰Á‚·‚éB";
+                            NameText[i].text = "æ€ªåŠ›";
+                            DescriptionText[i].text = "æ•µã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ŽãˆãŸæ™‚ã€ãã®å€¤ãŒ1å¢—åŠ ã™ã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Superhuman Strength";
@@ -629,8 +734,8 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "”jÓ";
-                            DescriptionText[i].text = "ƒV[ƒ‹ƒh‚ðŽ‚Â“G‚É—^‚¦‚éƒ_ƒ[ƒW‚ª2”{‚É‚È‚éB";
+                            NameText[i].text = "ç ´ç •";
+                            DescriptionText[i].text = "ã‚·ãƒ¼ãƒ«ãƒ‰ã‚’æŒã¤æ•µã«ä¸Žãˆã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸ãŒ2å€ã«ãªã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Crushing";
@@ -642,12 +747,90 @@ public class StarterManager : MonoBehaviour
                     switch (Language)
                     {
                         case 1:
-                            NameText[i].text = "•œQ‚Ì‰Š";
-                            DescriptionText[i].text = "ƒŠƒxƒ“ƒW‚É•K—v‚Èƒ_ƒ[ƒW‚ª15%Œ¸­‚·‚éB";
+                            NameText[i].text = "å¾©è®ã®ç‚Ž";
+                            DescriptionText[i].text = "ãƒªãƒ™ãƒ³ã‚¸ã«å¿…è¦ãªãƒ€ãƒ¡ãƒ¼ã‚¸ãŒ15%æ¸›å°‘ã™ã‚‹ã€‚";
                             break;
                         case 2:
                             NameText[i].text = "Flames of Revenge";
                             DescriptionText[i].text = "The damage required for Revenge is reduced by 15%.";
+                            break;
+                    }
+                    break;
+                case 19:
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText[i].text = "æ·±æ·µã®å£°";
+                            DescriptionText[i].text = $"ä¼‘æ†©ã™ã‚‹æ¯Žã«æœ€å¤§HPãŒ50å¢—åŠ ã™ã‚‹ã€‚";
+                            break;
+                        case 2:
+                            NameText[i].text = "Voice of the Abyss";
+                            DescriptionText[i].text = $"Maximum HP increases by 50 each time you rest.";
+                            break;
+                    }
+                    break;
+                case 20:
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText[i].text = "ä¸æ­»";
+                            DescriptionText[i].text = $"HPãŒ0ã«ãªã‚‹ã¨ã€ä¸€åº¦ã®ã¿HP20%ã§å¾©æ´»ã™ã‚‹ã€‚";
+                            break;
+                        case 2:
+                            NameText[i].text = "Undead";
+                            DescriptionText[i].text = $"When HP reaches 0, you revive once with HP equal to 20%.";
+                            break;
+                    }
+                    break;
+                case 21:
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText[i].text = "å·§å¦™";
+                            DescriptionText[i].text = $"å„æˆ¦é—˜ã§æœ€åˆã«ã‚¹ã‚­ãƒ«ã‚’ä½¿ç”¨ã—ãŸã¨ãã€ãã®åŠ¹æžœã¯2å€ã«ãªã‚‹ã€‚";
+                            break;
+                        case 2:
+                            NameText[i].text = "Ingenious";
+                            DescriptionText[i].text = $"When a skill is used for the first time in each battle, its effect is multiplied by 2.";
+                            break;
+                    }
+                    break;
+                case 22:
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText[i].text = "è¡€å¡—ã‚Œã®å¥‘ç´„";
+                            DescriptionText[i].text = $"æˆ¦é—˜é–‹å§‹æ™‚ã€ãƒªãƒ™ãƒ³ã‚¸ã‚’30%ãƒãƒ£ãƒ¼ã‚¸ã™ã‚‹ã€‚";
+                            break;
+                        case 2:
+                            NameText[i].text = "Bloody contract";
+                            DescriptionText[i].text = $"At the start of battle, charge Revenge by 30%.";
+                            break;
+                    }
+                    break;
+                case 23:
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText[i].text = "äº¤æ¸‰è¡“";
+                            DescriptionText[i].text = $"ã‚·ãƒ§ãƒƒãƒ—ã«è¿½åŠ ã§1ã¤ã®å®çŸ³ã¨ç¥ç¦ãŒä¸¦ã¶ã€‚";
+                            break;
+                        case 2:
+                            NameText[i].text = "Negotiation Techniques";
+                            DescriptionText[i].text = $"An additional 1 gems and blessings will appear in the shop.";
+                            break;
+                    }
+                    break;
+                case 24:
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText[i].text = "è»¢ç¦";
+                            DescriptionText[i].text = $"ã‚·ãƒ§ãƒƒãƒ—ã®å†…å®¹ã‚’2å›žã¾ã§ãƒªãƒ­ãƒ¼ãƒ«å‡ºæ¥ã‚‹ã‚ˆã†ã«ãªã‚‹ã€‚";
+                            break;
+                        case 2:
+                            NameText[i].text = "Turning Misfortune";
+                            DescriptionText[i].text = $"The shop contents can be rerolled up to 2 times.";
                             break;
                     }
                     break;
@@ -685,30 +868,17 @@ public class StarterManager : MonoBehaviour
     }
     void E()
     {
-        if (Crown >= 3 && PlayerPrefs.GetInt("StarterCount", 0) == 0)
+        Iscript.BattleBGM.Play();
+        Iscript.SilentBGM.Play();
+        int Judge = Random.Range(0, BattleObj.Length);
+        if (FirstContact == 0)
         {
-            int Judge = Random.Range(0, StarterObj.Length);
-            GameObject g = Instantiate(StarterObj[Judge]);
-            g.transform.position = StarterObj[Judge].transform.position;
-            g.SetActive(true);
-            PlayerPrefs.SetInt("StarterCount", 1);
-            PlayerPrefs.Save();
-            Destroy(this.gameObject);
+            Judge = 0;
         }
-        else
-        {
-            Iscript.BattleBGM.Play();
-            Iscript.SilentBGM.Play();
-            int Judge = Random.Range(0, BattleObj.Length);
-            if (FirstContact == 0)
-            {
-                Judge = 0;
-            }
-            Iscript.EnemyPool[Judge] = 1;
-            GameObject g = Instantiate(BattleObj[Judge]);
-            g.transform.position = BattleObj[Judge].transform.position;
-            g.SetActive(true);
-            Destroy(this.gameObject);
-        }
+        Iscript.EnemyPool[Judge] = 1;
+        GameObject g = Instantiate(BattleObj[Judge]);
+        g.transform.position = BattleObj[Judge].transform.position;
+        g.SetActive(true);
+        Destroy(this.gameObject);
     }
 }

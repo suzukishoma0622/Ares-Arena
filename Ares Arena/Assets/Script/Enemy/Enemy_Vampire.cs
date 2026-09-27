@@ -35,22 +35,13 @@ public class Enemy_Vampire : MonoBehaviour
     {
         Language = PlayerPrefs.GetInt("Language", 2);
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 2900;
+                Bscript.EnemyMaxHP = 3000;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 3100;
-                break;
-            case 3:
                 Bscript.EnemyMaxHP = 3300;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 3500;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 3700;
                 break;
         }
         Bscript.EnemyHP = Bscript.EnemyMaxHP;
@@ -73,8 +64,8 @@ public class Enemy_Vampire : MonoBehaviour
         {
             case 1:
                 AttackText[0].text = "盤上の宝石7つをメノウに変化させる。";
-                AttackText[1].text = ((400 + Bscript.Iscript.Crown * 50) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。麻痺" + (5 + Bscript.AbilityLevel).ToString() + "を付与する。";
-                AttackText[2].text = "弱体化" + (100 + Bscript.AbilityLevel * 10).ToString() + "を付与する。";
+                AttackText[1].text = ((400 + Bscript.AttackLevel * 50) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。麻痺" + (5 + Bscript.AbilityLevel).ToString() + "を付与する。";
+                AttackText[2].text = "弱体化" + (100 + Bscript.AbilityLevel * 20).ToString() + "を付与する。";
                 AttackText[3].text = "30%の攻撃激化を得る。メノウの効果が50増加する。";
                 DebuffDesc[0].text = "消去後に再出現する。一番下の行に到達したとき、" + Agate + "ダメージを受け、自動で消去される。";
                 DebuffDesc[1].text = "次に消去する" + Pscript.Debuff_Weak + "個の宝石の効果が50%減少する。";
@@ -83,8 +74,8 @@ public class Enemy_Vampire : MonoBehaviour
                 break;
             case 2:
                 AttackText[0].text = "Transform the 7 gems on the board into Agate.";
-                AttackText[1].text = "Deal " + ((400 + Bscript.Iscript.Crown * 50) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflict Paralysis " + (5 + Bscript.AbilityLevel).ToString() + ".";
-                AttackText[2].text = "Inflict Weak " + (100 + Bscript.AbilityLevel * 10).ToString() + ".";
+                AttackText[1].text = "Deal " + ((400 + Bscript.AttackLevel * 50) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflict Paralysis " + (5 + Bscript.AbilityLevel).ToString() + ".";
+                AttackText[2].text = "Inflict Weak " + (100 + Bscript.AbilityLevel * 20).ToString() + ".";
                 AttackText[3].text = "Gain a 30% Intensified. The effect of agate increases by 50.";
                 DebuffDesc[0].text = "It reappears after being cast. When it reaches the bottom row, take " + Agate + " Damage.";
                 DebuffDesc[1].text = "The effect of the next " + Pscript.Debuff_Weak + " gems you cast will be reduced by 50%.";
@@ -294,7 +285,7 @@ public class Enemy_Vampire : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((400 + Bscript.Iscript.Crown * 50) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((400 + Bscript.AttackLevel * 50) * AttackRate * StrengthRate);
     }
     void Act2_3()
     {
@@ -309,7 +300,7 @@ public class Enemy_Vampire : MonoBehaviour
     }
     void Act3_2()
     {
-        Pscript.Debuff_Weak += 100 + Bscript.AbilityLevel * 10;
+        Pscript.Debuff_Weak += 100 + Bscript.AbilityLevel * 20;
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
     }
     void Act4_1()

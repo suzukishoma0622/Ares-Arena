@@ -14,10 +14,15 @@ public class TitleController : MonoBehaviour
     public CanvasGroup StartModeCG;
     public GameObject OptionObj;
     public CanvasGroup OptionCG;
+    public GameObject CreditCG;
+    public GameObject LibraryCG;
     public GameObject QuitCG;
     public TMP_Text[] VolumeText;
     public Slider[] VolumeSlider;
     public TMP_Text LanguageText;
+    public TMP_Text FullScreenText;
+    public TMP_Text VSnycText;
+    public TMP_Text ResolutionText;
     public Slider DeleteSlider;
     public CanvasGroup DeleteCG;
     bool IsDelete;
@@ -26,6 +31,10 @@ public class TitleController : MonoBehaviour
     int TitleNum = 0;
     int Difficulty = 0;
     int Language;
+    int FullScreen;
+    bool IsFS;
+    int Vsnyc;
+    int Resolution;
 
     public AudioMixer Mixer;
     public AudioSource BGM;
@@ -44,6 +53,9 @@ public class TitleController : MonoBehaviour
         PlayerPrefs.SetInt("Tutorial", 0);
         PlayerPrefs.Save();
         Language = PlayerPrefs.GetInt("Language", 2);
+        FullScreen = PlayerPrefs.GetInt("FullScreen", 1);
+        Vsnyc = PlayerPrefs.GetInt("Vsnyc", 1);
+        Resolution = PlayerPrefs.GetInt("Resolution", 3);
         Mixer.GetFloat("Master_Volume", out float mastervolume);
         VolumeSlider[0].value = Mathf.Pow(10, mastervolume / 20);
         Mixer.GetFloat("BGM_Volume", out float bgmvolume);
@@ -57,6 +69,46 @@ public class TitleController : MonoBehaviour
                 break;
             case 2:
                 LanguageText.text = "English";
+                break;
+        }
+        if(FullScreen == 1)
+        {
+            Screen.fullScreen = true;
+            FullScreenText.text = "ON";
+            
+        }
+        else
+        {
+            Screen.fullScreen = false;
+            FullScreenText.text = "OFF";
+        }
+        if(Vsnyc == 1)
+        {
+            QualitySettings.vSyncCount = 1;
+            VSnycText.text = "ON";
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+            VSnycText.text = "OFF";
+        }
+        switch (Resolution)
+        {
+            case 1:
+                ResolutionText.text = "960x540";
+                Screen.SetResolution(960, 540, Screen.fullScreen);
+                break;
+            case 2:
+                ResolutionText.text = "1280x720";
+                Screen.SetResolution(1280, 720, Screen.fullScreen);
+                break;
+            case 3:
+                ResolutionText.text = "1920x1080";
+                Screen.SetResolution(1920, 1080, Screen.fullScreen);
+                break;
+            case 4:
+                ResolutionText.text = "3840x2160";
+                Screen.SetResolution(3840, 2160, Screen.fullScreen);
                 break;
         }
     }
@@ -118,6 +170,22 @@ public class TitleController : MonoBehaviour
                     {
                         QuitCG.SetActive(false);
                     }
+                    if (CreditCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        CreditCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        CreditCG.SetActive(false);
+                    }
+                    if (LibraryCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        LibraryCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        LibraryCG.SetActive(false);
+                    }
                     break;
                 case 1:
                     StartModeObj.SetActive(true);
@@ -132,6 +200,30 @@ public class TitleController : MonoBehaviour
                     else
                     {
                         TitleButtonObj.SetActive(false);
+                    }
+                    if (QuitCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        QuitCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        QuitCG.SetActive(false);
+                    }
+                    if (CreditCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        CreditCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        CreditCG.SetActive(false);
+                    }
+                    if (LibraryCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        LibraryCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        LibraryCG.SetActive(false);
                     }
                     break;
                 case 2:
@@ -148,6 +240,30 @@ public class TitleController : MonoBehaviour
                     {
                         TitleButtonObj.SetActive(false);
                     }
+                    if (QuitCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        QuitCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        QuitCG.SetActive(false);
+                    }
+                    if (CreditCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        CreditCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        CreditCG.SetActive(false);
+                    }
+                    if (LibraryCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        LibraryCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        LibraryCG.SetActive(false);
+                    }
                     break;
                 case 3:
                     QuitCG.SetActive(true);
@@ -162,6 +278,100 @@ public class TitleController : MonoBehaviour
                     else
                     {
                         TitleButtonObj.SetActive(false);
+                    }
+                    if (CreditCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        CreditCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        CreditCG.SetActive(false);
+                    }
+                    if (LibraryCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        LibraryCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        LibraryCG.SetActive(false);
+                    }
+                    break;
+                case 4:
+                    CreditCG.SetActive(true);
+                    if (CreditCG.GetComponent<CanvasGroup>().alpha < 1f)
+                    {
+                        CreditCG.GetComponent<CanvasGroup>().alpha += Time.deltaTime * 3f;
+                    }
+                    if (TitleButtonCG.alpha > 0f)
+                    {
+                        TitleButtonCG.alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        TitleButtonObj.SetActive(false);
+                    }
+                    if (OptionCG.alpha > 0f)
+                    {
+                        OptionCG.alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        OptionObj.SetActive(false);
+                    }
+                    if (QuitCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        QuitCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        QuitCG.SetActive(false);
+                    }
+                    if (LibraryCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        LibraryCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        LibraryCG.SetActive(false);
+                    }
+                    break;
+                case 5:
+                    LibraryCG.SetActive(true);
+                    if (LibraryCG.GetComponent<CanvasGroup>().alpha < 1f)
+                    {
+                        LibraryCG.GetComponent<CanvasGroup>().alpha += Time.deltaTime * 3f;
+                    }
+                    if (TitleButtonCG.alpha > 0f)
+                    {
+                        TitleButtonCG.alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        TitleButtonObj.SetActive(false);
+                    }
+                    if (OptionCG.alpha > 0f)
+                    {
+                        OptionCG.alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        OptionObj.SetActive(false);
+                    }
+                    if (QuitCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        QuitCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        QuitCG.SetActive(false);
+                    }
+                    if (CreditCG.GetComponent<CanvasGroup>().alpha > 0f)
+                    {
+                        CreditCG.GetComponent<CanvasGroup>().alpha -= Time.deltaTime * 3f;
+                    }
+                    else
+                    {
+                        CreditCG.SetActive(false);
                     }
                     break;
             }
@@ -207,6 +417,40 @@ public class TitleController : MonoBehaviour
     {
         TitleNum = i;
         SE.PlayOneShot(OkSE);
+        FullScreen = PlayerPrefs.GetInt("FullScreen", 1);
+        Vsnyc = PlayerPrefs.GetInt("VSnyc", 1);
+        Resolution = PlayerPrefs.GetInt("Resolution", 3);
+        if (FullScreen == 1)
+        {
+            Screen.fullScreen = true;
+        }
+        else
+        {
+            Screen.fullScreen = false;
+        }
+        if (Vsnyc == 1)
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+        }
+        switch(Resolution)
+        {
+            case 1:
+                Screen.SetResolution(960, 540, Screen.fullScreen);
+                break;
+            case 2:
+                Screen.SetResolution(1280, 720, Screen.fullScreen);
+                break;
+            case 3:
+                Screen.SetResolution(1920, 1080, Screen.fullScreen);
+                break;
+            case 4:
+                Screen.SetResolution(3840, 2160, Screen.fullScreen);
+                break;
+        }
     }
     public void ModeChoose(int i)
     {
@@ -272,6 +516,82 @@ public class TitleController : MonoBehaviour
         PlayerPrefs.SetInt("Language", Language);
         PlayerPrefs.Save();
         SE.PlayOneShot(OkSE);
+    }
+    public void FullScreenChange()
+    {
+        switch(PlayerPrefs.GetInt("FullScreen", 1))
+        {
+            case 0:
+                PlayerPrefs.SetInt("FullScreen", 1);
+                FullScreenText.text = "ON";
+                break;
+            case 1:
+                PlayerPrefs.SetInt("FullScreen", 0);
+                FullScreenText.text = "OFF";
+                break;
+        }
+        PlayerPrefs.Save();
+    }
+    public void VSnycChange()
+    {
+        switch (PlayerPrefs.GetInt("VSnyc", 1))
+        {
+            case 0:
+                PlayerPrefs.SetInt("VSnyc", 1);
+                VSnycText.text = "ON";
+                break;
+            case 1:
+                PlayerPrefs.SetInt("VSnyc", 0);
+                VSnycText.text = "OFF";
+                break;
+        }
+        PlayerPrefs.Save();
+    }
+    public void ResolutionUP()
+    {
+        if(PlayerPrefs.GetInt("Resolution", 3) < 4)
+        {
+            PlayerPrefs.SetInt("Resolution", PlayerPrefs.GetInt("Resolution", 3) + 1);
+            PlayerPrefs.Save();
+        }
+        switch (PlayerPrefs.GetInt("Resolution", 3))
+        {
+            case 1:
+                ResolutionText.text = "960x540";
+                break;
+            case 2:
+                ResolutionText.text = "1280x720";
+                break;
+            case 3:
+                ResolutionText.text = "1920x1080";
+                break;
+            case 4:
+                ResolutionText.text = "3840x2160";
+                break;
+        }
+    }
+    public void ResolutionDown()
+    {
+        if (PlayerPrefs.GetInt("Resolution", 3) > 0)
+        {
+            PlayerPrefs.SetInt("Resolution", PlayerPrefs.GetInt("Resolution", 3) - 1);
+            PlayerPrefs.Save();
+        }
+        switch (PlayerPrefs.GetInt("Resolution", 3))
+        {
+            case 1:
+                ResolutionText.text = "960x540";
+                break;
+            case 2:
+                ResolutionText.text = "1280x720";
+                break;
+            case 3:
+                ResolutionText.text = "1920x1080";
+                break;
+            case 4:
+                ResolutionText.text = "3840x2160";
+                break;
+        }
     }
     public void InDelete()
     {

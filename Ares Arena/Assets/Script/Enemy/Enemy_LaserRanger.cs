@@ -21,22 +21,13 @@ public class Enemy_LaserRanger : MonoBehaviour
         Language = PlayerPrefs.GetInt("Language", 2);
         StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         Invoke("F", 1.5f);
-        switch(PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch(PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1220;
-                break;
-            case 2:
                 Bscript.EnemyMaxHP = 1300;
                 break;
-            case 3:
-                Bscript.EnemyMaxHP = 1380;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 1460;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1540;
+            case 2:
+                Bscript.EnemyMaxHP = 1400;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -47,12 +38,12 @@ public class Enemy_LaserRanger : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = (100 * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。" + ((200 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + "シールドを得る。";
-                AttackText[1].text = ((240 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
+                AttackText[0].text = (100 * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。" + ((200 + Bscript.HPLevel * 40) * AttackRate * StrengthRate).ToString("0") + "シールドを得る。";
+                AttackText[1].text = ((240 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
                 break;
             case 2:
-                AttackText[0].text = "Deal " + (100 * AttackRate * StrengthRate).ToString("0") + " Damage. Gain " + ((200 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + " Shield.";
-                AttackText[1].text = "Deal " + ((240 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + " Damage.";
+                AttackText[0].text = "Deal " + (100 * AttackRate * StrengthRate).ToString("0") + " Damage. Gain " + ((200 + Bscript.HPLevel * 40) * AttackRate * StrengthRate).ToString("0") + " Shield.";
+                AttackText[1].text = "Deal " + ((240 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate).ToString("0") + " Damage.";
                 break;
         }
         if (IsChat)
@@ -162,7 +153,7 @@ public class Enemy_LaserRanger : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = false;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((200 + Bscript.Iscript.Crown * 20) * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((200 + Bscript.HPLevel * 40) * StrengthRate);
     }
     void Act1_2()
     {
@@ -190,6 +181,6 @@ public class Enemy_LaserRanger : MonoBehaviour
         GameObject g = Instantiate(AttackObj[1]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((240 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((240 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate);
     }
 }

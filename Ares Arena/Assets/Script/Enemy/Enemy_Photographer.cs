@@ -31,22 +31,13 @@ public class Enemy_Photographer : MonoBehaviour
         Language = PlayerPrefs.GetInt("Language", 2);
         StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1240;
+                Bscript.EnemyMaxHP = 1270;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 1300;
-                break;
-            case 3:
                 Bscript.EnemyMaxHP = 1360;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 1420;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1490;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -57,18 +48,18 @@ public class Enemy_Photographer : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = ((150 + Bscript.Iscript.Crown * 20) * StrengthRate).ToString("0") + "シールドを得る。失魂を付与する。";
-                AttackText[1].text = ((210 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。与えたダメージに等しいHPを回復する。";
-                AttackText[2].text = "弱体化" + (40 + Bscript.AbilityLevel * 10).ToString() + $"を付与する。{(200 + Bscript.Iscript.Crown * 20) * StrengthRate}シールドを得る。";
-                AttackText[3].text = $"最大HPを{40 * StrengthRate}奪う。HPを{(40 + Bscript.Iscript.Crown * 10) * StrengthRate}回復する。";
+                AttackText[0].text = ((150 + Bscript.HPLevel * 30) * StrengthRate).ToString("0") + "シールドを得る。失魂を付与する。";
+                AttackText[1].text = ((210 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。与えたダメージに等しいHPを回復する。";
+                AttackText[2].text = "弱体化" + (40 + Bscript.AbilityLevel * 10).ToString() + $"を付与する。{(200 + Bscript.HPLevel * 20) * StrengthRate}シールドを得る。";
+                AttackText[3].text = $"最大HPを{40 * StrengthRate}奪う。HPを{(40 + Bscript.HPLevel * 10) * StrengthRate}回復する。";
                 DebuffName.text = "弱体化";
                 DebuffDesc.text = "次に消去する" + Pscript.Debuff_Weak + "個の宝石の効果が50%減少する。";
                 break;
             case 2:
-                AttackText[0].text = $"Gain {(150 + Bscript.Iscript.Crown * 20) * StrengthRate} Shield. Inflict LostSoul.";
-                AttackText[1].text = $"Deal {(210 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate} Damage. Restores HP equal to the damage dealt.";
-                AttackText[2].text = $"Inflict {(40 + Bscript.AbilityLevel * 10) * StrengthRate} Weak. Gain {(200 + Bscript.Iscript.Crown * 30) * StrengthRate} Shield.";
-                AttackText[3].text = $"Steals {40 * StrengthRate} Max HP. Restores {(40 + Bscript.Iscript.Crown * 10) * StrengthRate} HP.";
+                AttackText[0].text = $"Gain {(150 + Bscript.HPLevel * 30) * StrengthRate} Shield. Inflict LostSoul.";
+                AttackText[1].text = $"Deal {(210 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate} Damage. Restores HP equal to the damage dealt.";
+                AttackText[2].text = $"Inflict {(40 + Bscript.AbilityLevel * 10) * StrengthRate} Weak. Gain {(200 + Bscript.HPLevel * 20) * StrengthRate} Shield.";
+                AttackText[3].text = $"Steals {40 * StrengthRate} Max HP. Restores {(40 + Bscript.HPLevel * 10) * StrengthRate} HP.";
                 DebuffName.text = "Weak";
                 DebuffDesc.text = "The effect of the next " + Pscript.Debuff_Weak + " gems you cast will be reduced by 50%.";
                 break;
@@ -227,7 +218,7 @@ public class Enemy_Photographer : MonoBehaviour
         GameObject g = Instantiate(AttackObj[1]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = false;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((150 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((150 + Bscript.HPLevel * 30) * AttackRate * StrengthRate);
         IsDebuff = true;
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
     }
@@ -243,11 +234,11 @@ public class Enemy_Photographer : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((210 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((210 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate);
         GameObject g2 = Instantiate(AttackObj[2]);
         g2.transform.position = this.transform.position;
         g2.GetComponent<BlockTrail>().GoPlayer = false;
-        g2.GetComponent<EffectScript>().EffectNum = Mathf.Max(Mathf.FloorToInt(((210 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate) - Bscript.PlayerShield), 0);
+        g2.GetComponent<EffectScript>().EffectNum = Mathf.Max(Mathf.FloorToInt(((210 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate) - Bscript.PlayerShield), 0);
     }
     void Act3_1()
     {
@@ -263,7 +254,7 @@ public class Enemy_Photographer : MonoBehaviour
         GameObject g = Instantiate(AttackObj[1]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = false;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((200 + Bscript.Iscript.Crown * 30) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((200 + Bscript.HPLevel * 20) * AttackRate * StrengthRate);
     }
     void Act4_1()
     {
@@ -286,6 +277,6 @@ public class Enemy_Photographer : MonoBehaviour
         GameObject g2 = Instantiate(AttackObj[2]);
         g2.transform.position = this.transform.position;
         g2.GetComponent<BlockTrail>().GoPlayer = false;
-        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((40 + Bscript.Iscript.Crown * 10) * StrengthRate);
+        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((40 + Bscript.HPLevel * 10) * StrengthRate);
     }
 }

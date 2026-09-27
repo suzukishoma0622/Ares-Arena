@@ -38,22 +38,13 @@ public class Enemy_StoneCastle : MonoBehaviour
     {
         Language = PlayerPrefs.GetInt("Language", 2);
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 3200;
+                Bscript.EnemyMaxHP = 3300;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 3400;
-                break;
-            case 3:
                 Bscript.EnemyMaxHP = 3600;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 3800;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 4000;
                 break;
         }
         Bscript.EnemyHP = Bscript.EnemyMaxHP;
@@ -63,25 +54,25 @@ public class Enemy_StoneCastle : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = ((360 + Bscript.Iscript.Crown * 30) * AttackRate).ToString("0") + "ダメージを与える。";
-                AttackText[1].text = ((210 + Bscript.Iscript.Crown * 20) * AttackRate).ToString("0") + "ダメージを与える。弱体化" + (30 + Bscript.AbilityLevel * 5).ToString() + "を付与する。";
+                AttackText[0].text = ((360 + Bscript.AttackLevel * 30) * AttackRate).ToString("0") + "ダメージを与える。";
+                AttackText[1].text = ((210 + Bscript.AttackLevel * 20) * AttackRate).ToString("0") + "ダメージを与える。弱体化" + (30 + Bscript.AbilityLevel * 5).ToString() + "を付与する。";
                 AttackText[2].text = $"ランダムな宝石{8 + Bscript.AbilityLevel * 2}つを瓦礫に変化させる。";
-                AttackText[3].text = $"{400 + Bscript.Iscript.Crown * 20}シールドを得る。10%の攻撃激化を得る。";
-                AttackText[4].text = ((250 + Bscript.Iscript.Crown * 20) * AttackRate).ToString("0") + "ダメージを与える。";
-                AttackText[5].text = $"{150 + Bscript.Iscript.Crown * 20}シールドを得る。HPを{300 + Bscript.Iscript.Crown * 30}回復する。";
-                AttackText[6].text = $"{500 + Bscript.Iscript.Crown * 50}シールドを得る。";
+                AttackText[3].text = $"{400 + Bscript.HPLevel * 40}シールドを得る。10%の攻撃激化を得る。";
+                AttackText[4].text = ((250 + Bscript.AttackLevel * 20) * AttackRate).ToString("0") + "ダメージを与える。";
+                AttackText[5].text = $"{150 + Bscript.HPLevel * 20}シールドを得る。HPを{300 + Bscript.HPLevel * 30}回復する。";
+                AttackText[6].text = $"{500 + Bscript.HPLevel * 50}シールドを得る。";
                 AttackText[7].text = $"20%の攻撃激化を得る。";
                 DebuffDesc.text = "次に消去する" + Pscript.Debuff_Weak + "個の宝石の効果が50%減少する。";
                 BuffDesc.text = "与えるダメージが" + ((AttackRate - 1f) * 100f).ToString("0") + "%増加する。";
                 break;
             case 2:
-                AttackText[0].text = $"Deal {(360 + Bscript.Iscript.Crown * 30) * AttackRate} Damage.";
-                AttackText[1].text = $"Deal {(210 + Bscript.Iscript.Crown * 20) * AttackRate} Damage. Inflict Weak {30 + (Bscript.AbilityLevel * 5)}.";
+                AttackText[0].text = $"Deal {(360 + Bscript.AttackLevel * 30) * AttackRate} Damage.";
+                AttackText[1].text = $"Deal {(210 + Bscript.AttackLevel * 20) * AttackRate} Damage. Inflict Weak {30 + (Bscript.AbilityLevel * 5)}.";
                 AttackText[2].text = $"Transforms {8 + Bscript.AbilityLevel * 2} random gems into Rubble.";
-                AttackText[3].text = $"Gain {(400 + Bscript.Iscript.Crown * 20) * AttackRate} Shield. Gain a 20% Intensified.";
-                AttackText[4].text = $"Deal {(250 + Bscript.Iscript.Crown * 30) * AttackRate} Damage.";
-                AttackText[5].text = $"Gain {(150 + Bscript.Iscript.Crown * 20) * AttackRate} Shield. Restores {300 + Bscript.Iscript.Crown * 30} HP.";
-                AttackText[6].text = $"Gain {(500 + Bscript.Iscript.Crown * 50) * AttackRate} Shield.";
+                AttackText[3].text = $"Gain {(400 + Bscript.HPLevel * 40) * AttackRate} Shield. Gain a 20% Intensified.";
+                AttackText[4].text = $"Deal {(250 + Bscript.AttackLevel * 30) * AttackRate} Damage.";
+                AttackText[5].text = $"Gain {(150 + Bscript.HPLevel * 20) * AttackRate} Shield. Restores {300 + Bscript.HPLevel * 30} HP.";
+                AttackText[6].text = $"Gain {(500 + Bscript.HPLevel * 50) * AttackRate} Shield.";
                 AttackText[7].text = "Gain a 20% Intensified.";
                 DebuffDesc.text = "The effect of the next " + Pscript.Debuff_Weak + " gems you cast will be reduced by 50%.";
                 BuffDesc.text = "Damage dealt is increased by " + ((AttackRate - 1f) * 100f).ToString("0") + "%.";
@@ -243,7 +234,7 @@ public class Enemy_StoneCastle : MonoBehaviour
         GameObject g2 = Instantiate(AttackObj[0]);
         g2.transform.position = this.transform.position;
         g2.GetComponent<BlockTrail>().GoPlayer = true;
-        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((360 + Bscript.Iscript.Crown * 30) * AttackRate * StrengthRate);
+        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((360 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate);
     }
     void Act2_1()
     {
@@ -257,7 +248,7 @@ public class Enemy_StoneCastle : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((210 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((210 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate);
         Pscript.Debuff_Weak += 30 + Bscript.AbilityLevel * 5;
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
     }
@@ -301,7 +292,7 @@ public class Enemy_StoneCastle : MonoBehaviour
         GameObject g = Instantiate(AttackObj[1]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = false;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((400 + Bscript.Iscript.Crown * 20) * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((400 + Bscript.HPLevel * 40) * StrengthRate);
         GameObject g2 = Instantiate(Counter);
         g2.transform.position = this.transform.position;
         switch (Language)
@@ -332,7 +323,7 @@ public class Enemy_StoneCastle : MonoBehaviour
         GameObject g2 = Instantiate(AttackObj[0]);
         g2.transform.position = this.transform.position;
         g2.GetComponent<BlockTrail>().GoPlayer = true;
-        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((250 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate);
+        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((250 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate);
     }
     void Act6_1()
     {
@@ -346,11 +337,11 @@ public class Enemy_StoneCastle : MonoBehaviour
         GameObject g = Instantiate(AttackObj[1]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = false;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((150 + Bscript.Iscript.Crown * 20) * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((150 + Bscript.AttackLevel * 20) * StrengthRate);
         GameObject g2 = Instantiate(AttackObj[2]);
         g2.transform.position = this.transform.position;
         g2.GetComponent<BlockTrail>().GoPlayer = false;
-        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((300 + Bscript.Iscript.Crown * 30) * StrengthRate);
+        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((300 + Bscript.HPLevel * 30) * StrengthRate);
     }
     void Act7_1()
     {
@@ -364,7 +355,7 @@ public class Enemy_StoneCastle : MonoBehaviour
         GameObject g = Instantiate(AttackObj[1]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = false;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((150 + Bscript.Iscript.Crown * 20) * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((500 + Bscript.HPLevel * 50) * StrengthRate);
     }
     void Act8_1()
     {

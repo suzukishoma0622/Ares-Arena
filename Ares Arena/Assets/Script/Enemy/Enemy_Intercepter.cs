@@ -32,22 +32,13 @@ public class Enemy_Intercepter : MonoBehaviour
             StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         }
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1360;
+                Bscript.EnemyMaxHP = 1400;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 1420;
-                break;
-            case 3:
-                Bscript.EnemyMaxHP = 1480;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 1540;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1600;
+                Bscript.EnemyMaxHP = 1500;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -58,13 +49,13 @@ public class Enemy_Intercepter : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = $"虚空{15 + Bscript.AbilityLevel * 5}を付与する。";
-                AttackText[1].text = ((190 + Bscript.Iscript.Crown * 10) * AttackRate).ToString("0") + "ダメージを与える。";
+                AttackText[0].text = $"虚空{10 + Bscript.AbilityLevel * 2}を付与する。";
+                AttackText[1].text = ((220 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
                 DebuffDesc[0].text = "毎ターン、最初に消去する" + VoidNum + "個の宝石の効果が消える。";
                 break;
             case 2:
-                AttackText[0].text = $"Inflicts Void {15 + Bscript.AbilityLevel * 5}.";
-                AttackText[1].text = $"Deal {(190 + Bscript.Iscript.Crown * 10) * AttackRate} Damage.";
+                AttackText[0].text = $"Inflicts Void {10 + Bscript.AbilityLevel * 2}.";
+                AttackText[1].text = $"Deal {(220 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate} Damage.";
                 DebuffDesc[0].text = "At the start of each turn, the effects of the first " + VoidNum + " gems cast are removed.";
                 break;
         }
@@ -176,7 +167,7 @@ public class Enemy_Intercepter : MonoBehaviour
     }
     void Act1_2()
     {
-        VoidNum += 15 + Bscript.AbilityLevel * 5;
+        VoidNum += 10 + Bscript.AbilityLevel * 2;
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
     }
     void Act2_1()
@@ -194,6 +185,6 @@ public class Enemy_Intercepter : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((190 + Bscript.Iscript.Crown * 10) * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((220 + Bscript.AttackLevel * 10) * StrengthRate);
     }
 }

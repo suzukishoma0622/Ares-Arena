@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip PoizonSE;
     public AudioClip HealSE;
     public AudioClip RevengeSE;
+
     void Start()
     {
         
@@ -78,7 +79,6 @@ public class PlayerHealth : MonoBehaviour
                         if (collision.gameObject.GetComponent<EffectScript>().Attack_Execution)
                         {
                             Iscript.PlayerHP = 0;
-                            Bscript.DeadEffect();
                         }
                     }
                 }
@@ -147,12 +147,19 @@ public class PlayerHealth : MonoBehaviour
         if (collision.gameObject.tag == "ShieldEffect")
         {
             int d = collision.gameObject.GetComponent<EffectScript>().EffectNum;
-            Bscript.PlayerShield += d;
+            if(Iscript.Saint == 9 && Iscript.Crown >= 4 && d > 0)
+            {
+                d -= 1;
+            }
+            if (Bscript.Pscript.Gem136 != 2)
+            {
+                Bscript.PlayerShield += d;
+            }
             GameObject g = Instantiate(Effect[1]);
             g.transform.position = this.transform.position;
             g.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             g.SetActive(true);
-            if (Bscript.Iscript.Bless[39] == 1)
+            if (Bscript.Iscript.Bless[39] == 1 && Bscript.Pscript.Gem136 != 2)
             {
                 Bscript.PlayerShield += 1;
             }

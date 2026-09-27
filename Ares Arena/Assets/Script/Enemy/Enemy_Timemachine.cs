@@ -27,26 +27,18 @@ public class Enemy_TimeMachine : MonoBehaviour
     {
         Language = PlayerPrefs.GetInt("Language", 2);
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 3400;
+                Bscript.EnemyMaxHP = 3500;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 3600;
-                break;
-            case 3:
                 Bscript.EnemyMaxHP = 3800;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 4000;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 4200;
                 break;
         }
         Bscript.EnemyHP = Bscript.EnemyMaxHP;
         Moment = 10 + Bscript.AbilityLevel * 5;
+        MomentStuck.text = Moment.ToString();
         switch (Language)
         {
             case 1:
@@ -62,14 +54,14 @@ public class Enemy_TimeMachine : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = ((250 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
+                AttackText[0].text = ((300 + Bscript.AttackLevel * 40) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
                 AttackText[1].text = "刻一刻の効果が10増加する。";
-                AttackText[2].text = $"{(130 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate}ダメージを与える。HPを{500 + Bscript.Iscript.Crown * 40}回復する。";
+                AttackText[2].text = $"{(130 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate}ダメージを与える。HPを{500 + Bscript.HPLevel * 50}回復する。";
                 break;
             case 2:
-                AttackText[0].text = "Deal " + ((250 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + " Damage.";
+                AttackText[0].text = "Deal " + ((300 + Bscript.AttackLevel * 40) * AttackRate * StrengthRate).ToString("0") + " Damage.";
                 AttackText[1].text = "The effect of Moment by Moment increases by 10.";
-                AttackText[2].text = "Deal " + ((130 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate).ToString("0") + $" Damage. Restore {500 + Bscript.Iscript.Crown * 40} HP.";
+                AttackText[2].text = "Deal " + ((130 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + $" Damage. Restore {500 + Bscript.HPLevel * 50} HP.";
                 break;
         }
         if (Bscript.IsDefeat)
@@ -152,7 +144,7 @@ public class Enemy_TimeMachine : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((250 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((300 + Bscript.AttackLevel * 40) * AttackRate * StrengthRate);
     }
     void Act2_1()
     {
@@ -203,11 +195,11 @@ public class Enemy_TimeMachine : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((130 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((130 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate);
         GameObject g2 = Instantiate(AttackObj[1]);
         g2.transform.position = this.transform.position;
         g2.GetComponent<BlockTrail>().GoPlayer = false;
-        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((500 + Bscript.Iscript.Crown * 40) * AttackRate * StrengthRate);
+        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((500 + Bscript.HPLevel * 50) * AttackRate * StrengthRate);
     }
     public void MomentHand()
     {

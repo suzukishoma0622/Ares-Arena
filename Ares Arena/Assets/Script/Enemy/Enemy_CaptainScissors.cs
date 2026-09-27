@@ -32,22 +32,13 @@ public class Enemy_CaptainScissors : MonoBehaviour
             StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         }
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1260;
+                Bscript.EnemyMaxHP = 1270;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 1320;
-                break;
-            case 3:
-                Bscript.EnemyMaxHP = 1380;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 1440;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1500;
+                Bscript.EnemyMaxHP = 1340;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -58,14 +49,14 @@ public class Enemy_CaptainScissors : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = $"{(140 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate}ダメージを与える。反射{Mathf.FloorToInt((4 + Bscript.AbilityLevel + Bscript.CurrentRound) * StrengthRate)}を得る。";
-                AttackText[1].text = $"{(90 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate}ダメージを2回与える。{(300 + Bscript.Iscript.Crown * 20) * StrengthRate}シールドを得る。";
+                AttackText[0].text = $"{(140 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate}ダメージを与える。反射{Mathf.FloorToInt((4 + Bscript.AbilityLevel + Bscript.CurrentRound) * StrengthRate)}を得る。";
+                AttackText[1].text = $"{(60 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate}ダメージを2回与える。{(200 + Bscript.HPLevel * 20) * StrengthRate}シールドを得る。";
                 DebuffName[0].text = "反射";
                 DebuffDesc[0].text = $"このターン、ダメージを受ける毎に、{Refrect}の反撃ダメージを与える。";
                 break;
             case 2:
-                AttackText[0].text = $"Deal {(140 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate} Damage. Gain {Mathf.FloorToInt((4 + Bscript.AbilityLevel + Bscript.CurrentRound) * StrengthRate)} Refrect.";
-                AttackText[1].text = $"Deal {(90 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate} Damage twice. Gain {(300 + Bscript.Iscript.Crown * 20) * StrengthRate} Shield.";
+                AttackText[0].text = $"Deal {(140 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate} Damage. Gain {Mathf.FloorToInt((4 + Bscript.AbilityLevel + Bscript.CurrentRound) * StrengthRate)} Refrect.";
+                AttackText[1].text = $"Deal {(60 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate} Damage twice. Gain {(200 + Bscript.HPLevel * 20) * StrengthRate} Shield.";
                 DebuffName[0].text = "Refrect";
                 DebuffDesc[0].text = $"This turn, deal {Refrect} counter-damage each time damage is taken.";
                 break;
@@ -172,7 +163,7 @@ public class Enemy_CaptainScissors : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((140 + Bscript.Iscript.Crown * 10) * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((140 + Bscript.AttackLevel * 10) * StrengthRate);
         Refrect = Mathf.FloorToInt((4 + Bscript.AbilityLevel + Bscript.CurrentRound) * StrengthRate);
         GameObject g2 = Instantiate(Counter);
         g2.transform.position = this.transform.position;
@@ -202,13 +193,13 @@ public class Enemy_CaptainScissors : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((90 + Bscript.Iscript.Crown * 10) * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((60 + Bscript.AttackLevel * 10) * StrengthRate);
     }
     void Act2_3()
     {
         GameObject g = Instantiate(AttackObj[1]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = false;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((300 + Bscript.Iscript.Crown * 20) * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((200 + Bscript.HPLevel * 20) * StrengthRate);
     }
 }

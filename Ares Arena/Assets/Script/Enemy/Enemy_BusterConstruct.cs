@@ -34,46 +34,37 @@ public class Enemy_BusterConstruct : MonoBehaviour
     {
         Language = PlayerPrefs.GetInt("Language", 2);
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 5200;
+                Bscript.EnemyMaxHP = 5300;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 5400;
-                break;
-            case 3:
                 Bscript.EnemyMaxHP = 5600;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 5800;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 6000;
                 break;
         }
         Bscript.EnemyHP = Bscript.EnemyMaxHP;
-        MetalBoby = 400 + Bscript.AbilityLevel * 100;
+        MetalBoby = 400 + PlayerPrefs.GetInt("EnemyHPLevel", 0) * 50;
     }
     void Update()
     {
         switch (Language)
         {
             case 1:
-                AttackText[0].text = ((450 + Bscript.Iscript.Crown * 30) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
-                AttackText[1].text = ((180 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。弱体化" + (50 + Bscript.AbilityLevel * 10).ToString() + "を付与する。";
+                AttackText[0].text = ((450 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
+                AttackText[1].text = ((180 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。弱体化" + (50 + Bscript.AbilityLevel * 10).ToString() + "を付与する。";
                 AttackText[2].text = "金属体の効果が200増加する。";
-                AttackText[3].text = ((1200 + Bscript.Iscript.Crown * 40) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
+                AttackText[3].text = ((1200 + Bscript.AttackLevel * 100) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
                 AttackText[4].text = "20%の攻撃激化を得る。";
                 DebuffDesc.text = "次に消去する" + Pscript.Debuff_Weak + "個の宝石の効果が50%減少する。";
                 MetalDesc.text = "ターン終了時、" + MetalBoby + "シールドを得る。";
                 BuffDesc.text = "与えるダメージが" + ((AttackRate - 1f) * 100f).ToString("0") + "%増加する。";
                 break;
             case 2:
-                AttackText[0].text = "Deal " + ((450 + Bscript.Iscript.Crown * 30) * AttackRate * StrengthRate).ToString("0") + " Damage.";
-                AttackText[1].text = "Deal " + ((180 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflict Weak " + (50 + Bscript.AbilityLevel * 10).ToString() + ".";
+                AttackText[0].text = "Deal " + ((450 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate).ToString("0") + " Damage.";
+                AttackText[1].text = "Deal " + ((180 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflict Weak " + (50 + Bscript.AbilityLevel * 10).ToString() + ".";
                 AttackText[2].text = "Gain Metal Body 200.";
-                AttackText[3].text = "Deal " + ((1200 + Bscript.Iscript.Crown * 40) * AttackRate * StrengthRate).ToString("0") + " Damage.";
+                AttackText[3].text = "Deal " + ((1200 + Bscript.AttackLevel * 40) * AttackRate * StrengthRate).ToString("0") + " Damage.";
                 AttackText[4].text = "Gain a 20% Intensified.";
                 DebuffDesc.text = "The effect of the next " + Pscript.Debuff_Weak + " gems you cast will be reduced by 50%.";
                 MetalDesc.text = "At the end of turn, gain " + MetalBoby + " Shield.";
@@ -199,7 +190,7 @@ public class Enemy_BusterConstruct : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((450 + Bscript.Iscript.Crown * 30) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((450 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate);
     }
     void Act2_1()
     {
@@ -213,7 +204,7 @@ public class Enemy_BusterConstruct : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((180 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((180 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate);
     }
     void Act2_3()
     {
@@ -268,7 +259,7 @@ public class Enemy_BusterConstruct : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((1200 + Bscript.Iscript.Crown * 50) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((1200 + Bscript.AttackLevel * 100) * AttackRate * StrengthRate);
     }
     void Act5_1()
     {

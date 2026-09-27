@@ -31,22 +31,13 @@ public class Enemy_Experiment : MonoBehaviour
     {
         Language = PlayerPrefs.GetInt("Language", 2);
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 5600;
-                break;
-            case 2:
                 Bscript.EnemyMaxHP = 5800;
                 break;
-            case 3:
-                Bscript.EnemyMaxHP = 6000;
-                break;
-            case 4:
+            case 2:
                 Bscript.EnemyMaxHP = 6200;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 6400;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -57,17 +48,17 @@ public class Enemy_Experiment : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = ((300 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。光輝を付与する。";
-                AttackText[1].text = ((640 + Bscript.Iscript.Crown * 40) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
-                AttackText[2].text = (600 + Bscript.Iscript.Crown * 40).ToString() + "シールドを得る。HPを" + (600 + Bscript.Iscript.Crown * 40).ToString() + "回復する。";
+                AttackText[0].text = ((300 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。光輝を付与する。";
+                AttackText[1].text = ((640 + Bscript.AttackLevel * 60) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
+                AttackText[2].text = (600 + Bscript.HPLevel * 100).ToString() + "シールドを得る。HPを600回復する。";
                 AttackText[3].text = "光輝の効果が10%加算される。";
                 DebuffDesc[0].text = "宝石が出現時、" + Daybreak + "%の確率で極光に変化する。";
                 DebuffDesc[1].text = "効果なし。";
                 break;
             case 2:
-                AttackText[0].text = "Deal " + ((300 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflict Radiance.";
-                AttackText[1].text = "Deal " + ((640 + Bscript.Iscript.Crown * 40) * AttackRate * StrengthRate).ToString("0") + " Damage.";
-                AttackText[2].text = "Gain " + (600 + Bscript.Iscript.Crown * 40).ToString() + " Shield. Restore " + (600 + Bscript.Iscript.Crown * 40).ToString() + " HP.";
+                AttackText[0].text = "Deal " + ((300 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflict Radiance.";
+                AttackText[1].text = "Deal " + ((640 + Bscript.AttackLevel * 60) * AttackRate * StrengthRate).ToString("0") + " Damage.";
+                AttackText[2].text = "Gain " + (600 + Bscript.HPLevel * 100).ToString() + " Shield. Restore 600 HP.";
                 AttackText[3].text = "The effect of Radiance is increased by 10%.";
                 DebuffDesc[0].text = "It reappears after being cast. When it reaches the bottom row, take " + Daybreak + " Damage.";
                 DebuffDesc[1].text = "No effects.";
@@ -183,7 +174,7 @@ public class Enemy_Experiment : MonoBehaviour
         GameObject g2 = Instantiate(AttackObj[0]);
         g2.transform.position = this.transform.position;
         g2.GetComponent<BlockTrail>().GoPlayer = true;
-        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((300 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate);
+        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((300 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate);
         GameObject g = Instantiate(Counter);
         g.transform.position = this.transform.position;
         switch (Language)
@@ -216,7 +207,7 @@ public class Enemy_Experiment : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((640 + Bscript.Iscript.Crown * 40) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((640 + Bscript.AttackLevel * 60) * AttackRate * StrengthRate);
     }
     void Act3_1()
     {
@@ -233,11 +224,11 @@ public class Enemy_Experiment : MonoBehaviour
         GameObject g2 = Instantiate(AttackObj[1]);
         g2.transform.position = this.transform.position;
         g2.GetComponent<BlockTrail>().GoPlayer = false;
-        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((600 + Bscript.Iscript.Crown * 40) * AttackRate * StrengthRate);
+        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((600 + Bscript.HPLevel * 100) * AttackRate * StrengthRate);
         GameObject g3 = Instantiate(AttackObj[2]);
         g3.transform.position = this.transform.position;
         g3.GetComponent<BlockTrail>().GoPlayer = false;
-        g3.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((600 + Bscript.Iscript.Crown * 40) * AttackRate * StrengthRate);
+        g3.GetComponent<EffectScript>().EffectNum = 600;
     }
     void Act4_1()
     {

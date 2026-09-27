@@ -35,22 +35,13 @@ public class Enemy_ThirdGeneral : MonoBehaviour
     {
         Language = PlayerPrefs.GetInt("Language", 2);
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 3100;
+                Bscript.EnemyMaxHP = 3200;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 3300;
-                break;
-            case 3:
                 Bscript.EnemyMaxHP = 3500;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 3700;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 3900;
                 break;
         }
         Bscript.EnemyHP = Bscript.EnemyMaxHP;
@@ -60,19 +51,19 @@ public class Enemy_ThirdGeneral : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = $"{(300 + Bscript.Iscript.Crown * 20) * AttackRate}ダメージを与える。洗脳を付与する。";
-                AttackText[1].text = ((450 + Bscript.Iscript.Crown * 30) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。麻痺" + (4 + Bscript.AbilityLevel).ToString() + "を付与する。";
-                AttackText[2].text = (800 + Bscript.AbilityLevel * 40).ToString() + "シールドを得る。";
-                AttackText[3].text = $"{(200 + Bscript.Iscript.Crown * 10) * AttackRate}ダメージを与える。25%の攻撃激化を得る。";
+                AttackText[0].text = $"{(300 + Bscript.AttackLevel * 30) * AttackRate}ダメージを与える。洗脳を付与する。";
+                AttackText[1].text = ((450 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。麻痺" + (4 + Bscript.AbilityLevel).ToString() + "を付与する。";
+                AttackText[2].text = (800 + Bscript.HPLevel * 100).ToString() + "シールドを得る。";
+                AttackText[3].text = $"{(200 + Bscript.AttackLevel * 20) * AttackRate}ダメージを与える。25%の攻撃激化を得る。";
                 DebuffDesc[0].text = "この戦闘中、全ての祝福が無効化される。";
                 DebuffDesc[1].text = "このターン、ハンド数が" + Pscript.Debuff_Lightning + "減少する。";
                 BuffDesc.text = "与えるダメージが" + ((AttackRate - 1f) * 100f).ToString("0") + "%増加する。";
                 break;
             case 2:
-                AttackText[0].text = $"Deal {(300 + Bscript.Iscript.Crown * 20) * AttackRate} Damage. Inflict Brainwashing.";
-                AttackText[1].text = "Deal " + ((450 + Bscript.Iscript.Crown * 30) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflict Paralysis " + (4 + Bscript.AbilityLevel).ToString() + ".";
-                AttackText[2].text = "Gain " + (800 + Bscript.Iscript.Crown * 40).ToString() + " Shield.";
-                AttackText[3].text = $"Deal {(200 + Bscript.Iscript.Crown * 10) * AttackRate} Damage. Gain 25% Intensified.";
+                AttackText[0].text = $"Deal {(300 + Bscript.AttackLevel * 30) * AttackRate} Damage. Inflict Brainwashing.";
+                AttackText[1].text = "Deal " + ((450 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflict Paralysis " + (4 + Bscript.AbilityLevel).ToString() + ".";
+                AttackText[2].text = "Gain " + (800 + Bscript.HPLevel * 40).ToString() + " Shield.";
+                AttackText[3].text = $"Deal {(200 + Bscript.AttackLevel * 20) * AttackRate} Damage. Gain 25% Intensified.";
                 DebuffDesc[0].text = "All blessings are nullified during this battle.";
                 DebuffDesc[1].text = "This turn, the number of hand decreases by " + Pscript.Debuff_Lightning + ".";
                 BuffDesc.text = "Damage dealt is increased by " + ((AttackRate - 1f) * 100f).ToString("0") + "%.";
@@ -237,7 +228,7 @@ public class Enemy_ThirdGeneral : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((300 + Bscript.Iscript.Crown * 20) * AttackRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((300 + Bscript.AttackLevel * 30) * AttackRate);
         for (int i = 0; i < 12; i++)
         {
             if (Pscript.Iscript.BlessList[i] > 0)
@@ -261,7 +252,7 @@ public class Enemy_ThirdGeneral : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((450 + Bscript.Iscript.Crown * 30) * AttackRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((450 + Bscript.AttackLevel * 30) * AttackRate);
         Pscript.Debuff_Lightning = 4 + Bscript.AbilityLevel;
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
     }
@@ -277,7 +268,7 @@ public class Enemy_ThirdGeneral : MonoBehaviour
         GameObject g = Instantiate(AttackObj[1]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = false;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(800 + Bscript.Iscript.Crown * 40);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(800 + Bscript.HPLevel * 100);
     }
     void Act4_1()
     {
@@ -291,7 +282,7 @@ public class Enemy_ThirdGeneral : MonoBehaviour
         GameObject g2 = Instantiate(AttackObj[0]);
         g2.transform.position = this.transform.position;
         g2.GetComponent<BlockTrail>().GoPlayer = true;
-        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((200 + Bscript.Iscript.Crown * 20) * AttackRate);
+        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((200 + Bscript.AttackLevel * 20) * AttackRate);
         GameObject g = Instantiate(Counter);
         g.transform.position = this.transform.position;
         switch (Language)

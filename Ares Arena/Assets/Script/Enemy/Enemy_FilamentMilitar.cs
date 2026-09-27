@@ -1,4 +1,3 @@
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -33,22 +32,13 @@ public class Enemy_FilamentMilitar : MonoBehaviour
         Language = PlayerPrefs.GetInt("Language", 2);
         StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1350;
-                break;
-            case 2:
                 Bscript.EnemyMaxHP = 1400;
                 break;
-            case 3:
-                Bscript.EnemyMaxHP = 1450;
-                break;
-            case 4:
+            case 2:
                 Bscript.EnemyMaxHP = 1500;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1550;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -59,16 +49,16 @@ public class Enemy_FilamentMilitar : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = $"{(90 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate}ダメージを与える。捕縛{Mathf.FloorToInt((60 + Bscript.AbilityLevel * 20) * StrengthRate)}を付与する。";
-                AttackText[1].text = $"{20 * AttackRate * StrengthRate}ダメージを7回与える。";
-                AttackText[2].text = $"捕縛{Mathf.FloorToInt((50 + Bscript.Iscript.Crown * 5) * StrengthRate)}を付与する。";
+                AttackText[0].text = $"{(90 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate}ダメージを与える。捕縛{Mathf.FloorToInt((60 + Bscript.AbilityLevel * 10) * StrengthRate)}を付与する。";
+                AttackText[1].text = $"{20 * AttackRate * StrengthRate}ダメージを{7 + Bscript.AttackLevel}回与える。";
+                AttackText[2].text = $"捕縛{Mathf.FloorToInt((50 + Bscript.AbilityLevel * 10) * StrengthRate)}を付与する。";
                 DebuffName.text = "捕縛";
                 DebuffDesc.text = "ターン終了時、" + Bind + "ダメージを受ける。";
                 break;
             case 2:
-                AttackText[0].text = $"Deal {(90 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate} Damage. Inflict {Mathf.FloorToInt((60 + Bscript.AbilityLevel * 20) * StrengthRate)} Bind.";
-                AttackText[1].text = $"Deal {20 * AttackRate * StrengthRate} Damage 7 times.";
-                AttackText[2].text = $"Inflict {Mathf.FloorToInt((50 + Bscript.Iscript.Crown * 5) * StrengthRate)} Bind.";
+                AttackText[0].text = $"Deal {(90 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate} Damage. Inflict {Mathf.FloorToInt((60 + Bscript.AbilityLevel * 10) * StrengthRate)} Bind.";
+                AttackText[1].text = $"Deal {20 * AttackRate * StrengthRate} Damage {7 + Bscript.AttackLevel} times.";
+                AttackText[2].text = $"Inflict {Mathf.FloorToInt((50 + Bscript.AbilityLevel * 10) * StrengthRate)} Bind.";
                 DebuffName.text = "Bind";
                 DebuffDesc.text = "At the end of turn, take " + Bind + " Damage.";
                 break;
@@ -146,7 +136,7 @@ public class Enemy_FilamentMilitar : MonoBehaviour
             {
                 case 0:
                     Act2_1();
-                    for(int i = 0; i < 7; i++)
+                    for(int i = 0; i < 7 + Bscript.AttackLevel; i++)
                     {
                         Invoke("Act2_2", 0.3f + i * 0.1f);
                     }
@@ -173,12 +163,12 @@ public class Enemy_FilamentMilitar : MonoBehaviour
         GameObject g2 = Instantiate(AttackObj[0]);
         g2.transform.position = this.transform.position;
         g2.GetComponent<BlockTrail>().GoPlayer = true;
-        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((90 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate);
+        g2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((90 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate);
     }
     void Act1_2()
     {
         IsDebuff = true;
-        Bind += Mathf.FloorToInt((60 + Bscript.AbilityLevel * 20) * StrengthRate);
+        Bind += Mathf.FloorToInt((60 + Bscript.AbilityLevel * 10) * StrengthRate);
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
         AJ = Random.Range(0, 2);
     }
@@ -206,7 +196,7 @@ public class Enemy_FilamentMilitar : MonoBehaviour
     }
     void Act3_2()
     {
-        Bind += Mathf.FloorToInt((50 + Bscript.AbilityLevel * 5) * StrengthRate);
+        Bind += Mathf.FloorToInt((50 + Bscript.AbilityLevel * 10) * StrengthRate);
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
         AJ = Random.Range(0, 2);
     }

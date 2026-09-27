@@ -30,22 +30,13 @@ public class Enemy_ZapKnight : MonoBehaviour
             StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         }
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1200;
+                Bscript.EnemyMaxHP = 1230;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 1260;
-                break;
-            case 3:
                 Bscript.EnemyMaxHP = 1320;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 1380;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1440;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -56,12 +47,12 @@ public class Enemy_ZapKnight : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = ((150 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。麻痺" + Mathf.Min(Bscript.CurrentRound + 2 + Bscript.AbilityLevel, 7).ToString("0") + "を付与する。";
+                AttackText[0].text = ((150 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。麻痺" + Mathf.Min(Bscript.CurrentRound + 2 + Bscript.AbilityLevel, 7).ToString("0") + "を付与する。";
                 DebuffName[0].text = "麻痺";
                 DebuffDesc[0].text = "このターン、ハンド数が" + Pscript.Debuff_Lightning + "減少する。";
                 break;
             case 2:
-                AttackText[0].text = "Deal " + ((150 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflicts Paralisys " + Mathf.Min(Bscript.CurrentRound + 2 + Bscript.AbilityLevel, 7).ToString("0") + " Shield.";
+                AttackText[0].text = "Deal " + ((150 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflicts Paralisys " + Mathf.Min(Bscript.CurrentRound + 2 + Bscript.AbilityLevel, 7).ToString("0") + " Shield.";
                 DebuffName[0].text = "Paralysis";
                 DebuffDesc[0].text = "This turn, the number of hand decreases by " + Pscript.Debuff_Lightning + ".";
                 break;
@@ -195,7 +186,7 @@ public class Enemy_ZapKnight : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((150 + Bscript.Iscript.Crown * 10) * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((150 + Bscript.AttackLevel * 10) * StrengthRate);
     }
     void Act1_3()
     {

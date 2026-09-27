@@ -82,7 +82,8 @@ public class SaintSelectController : MonoBehaviour
                         CrownDesc.text = "Default difficulty.";
                         break;
                 }
-                PlayerPrefs.SetInt("EnemyStatusLevel", 0);
+                PlayerPrefs.SetInt("EnemyHPLevel", 0);
+                PlayerPrefs.SetInt("EnemyAttackLevel", 0);
                 PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
                 break;
             case 1:
@@ -90,16 +91,15 @@ public class SaintSelectController : MonoBehaviour
                 {
                     case 1:
                         CrownName.text = "クラウン I";
-                        CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。(Lv.1)\n" +
-                            "メダルを1枚所持した状態でランを開始する。";
+                        CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。";
                         break;
                     case 2:
                         CrownName.text = "Crown I";
-                        CrownDesc.text = "Enemy durability increases, and attacks intensify. (Lv.1)\n" +
-                            "Start the run with 1 medal in your possession.";
+                        CrownDesc.text = "Enemy durability increases, and attacks intensify.";
                         break;
                 }
-                PlayerPrefs.SetInt("EnemyStatusLevel", 1);
+                PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                PlayerPrefs.SetInt("EnemyAttackLevel", 1);
                 PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
                 break;
             case 2:
@@ -107,92 +107,1120 @@ public class SaintSelectController : MonoBehaviour
                 {
                     case 1:
                         CrownName.text = "クラウン II";
-                        CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。(Lv.2)\n" +
-                            "メダルを1枚所持した状態でランを開始する。\n" +
-                            "ショップにより多くの宝石と祝福が並ぶ。";
                         break;
                     case 2:
                         CrownName.text = "Crown II";
-                        CrownDesc.text = "Enemy durability increases, and attacks intensify. (Lv.2)\n" +
-                            "Start the run with 1 medals in your possession.\n" +
-                            "More gems and blessings are available in the shop.";
                         break;
                 }
-                PlayerPrefs.SetInt("EnemyStatusLevel", 2);
-                PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                switch (Saint1)
+                {
+                    case 1:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "最大HPが10%減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "Maximum HP is reduced by 10%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 2:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が3減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 3.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 3:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The damage required for Revenge increases by 20%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 4:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が1減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 1.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 5:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "全ての敵の耐久力が更に上昇する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The durability of all enemies increases further.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 2);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 6:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が5減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 5.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 7:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が1減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 1.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 8:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "ショップの商品が値上がりする。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The prices of items in the shop are going up.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 9:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "全ての敵の攻撃がさらに激化する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "All enemy attacks intensify further.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 2);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 10:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "リベンジの効果が2減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The effect of Revenge is reduced by 2.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 11:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The damage required for Revenge increases by 20%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 12:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルを使用後のみターンを終了できる。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "You can end your turn only after using a skill.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 13:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "ポーションスロットの数が1減少。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The number of potion slots is reduced by 1.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 14:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "同じ種類のドロイドを3体までしか出せなくなる。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "You can generate no more than 3 droids of the same type.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                }
                 break;
             case 3:
                 switch (Language)
                 {
                     case 1:
                         CrownName.text = "クラウン III";
-                        CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。(Lv.3)\n" +
-                            "敵が使用する特殊能力が強化される。(Lv.1)\n" +
-                            "メダルを2枚所持した状態でランを開始する。\n" +
-                            "ショップにより多くの宝石と祝福が並ぶ。\n" +
-                            "ラン開始時、スターター祝福を2つ獲得する。";
                         break;
                     case 2:
                         CrownName.text = "Crown III";
-                        CrownDesc.text = "Enemy durability increases, and attacks intensify. (Lv.3)\n" +
-                            "Special abilities used by enemies are enhanced. (Lv.1)\n" +
-                            "Start the run with 2 medals in your possession." +
-                            "More gems and blessings are available in the shop.\n" +
-                            "Gain 2 Starter Blessings at the start of the run.";
                         break;
                 }
-                PlayerPrefs.SetInt("EnemyStatusLevel", 3);
-                PlayerPrefs.SetInt("EnemyAbilityLevel", 1);
+                switch (Saint1)
+                {
+                    case 1:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "最大HPが10%減少する。\n" +
+                                    "HP75%でランを開始する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "Maximum HP is reduced by 10%.\n" +
+                                    "Start the run at 75% HP.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 2:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が3減少する。\n" +
+                                    "ターン開始時、ハンド数-1。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 3.\n" +
+                                    "At the start of the turn, Hand -1.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 3:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "休憩時に回復できるHPが失った分の75%に減少。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The damage required for revenge increases by 20%.\n" +
+                                    "The HP recovered by resting is reduced to 75% of the amount lost.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 4:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が1減少する。\n" +
+                                    "リベンジの効果が2減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 1.\n" +
+                                    "The revenge's effect is reduced by 2.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 5:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "全ての敵の耐久力が更に上昇する。\n" +
+                                    "最大HPが10%減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The durability of all enemies increases further.\n" +
+                                    "Maximum HP is reduced by 10%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 2);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 6:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が5減少する。\n" +
+                                    "最大HPが10%減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                   "The skill's effect is reduced by 5.\n" +
+                                   "Maximum HP is reduced by 10%.\n";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 7:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が1減少する。\n" +
+                                    "スロットの各宝石の所持上限が3までになる。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 1.\n" +
+                                    "The maximum number of each type of gem held in the slots becomes 3.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 8:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "ショップの商品が値上がりする。\n" +
+                                    "スキルの効果が1減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The prices of items in the shop are going up.\n" +
+                                    "The skill's effect is reduced by 1.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 9:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "全ての敵の攻撃がさらに激化する。\n" +
+                                    "スキル発動時、シールドの40%を失う。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "All enemy attacks intensify further.\n" +
+                                    "Upon skill activation, lose 40% of the shield.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 2);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 10:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "リベンジの効果が2減少する。\n" +
+                                    "スキルに失敗すると、即座にターンを終了する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The revenge's effect is reduced by 2.\n" +
+                                    "If the skill fails, the turn ends immediately.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 11:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "セルをハンドした時、追加でハンドを1失う。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The damage required for Revenge increases by 20%.\n" +
+                                    "When you hand Cell, you lose an additional 1 hand.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 12:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルを使用後のみターンを終了できる。\n" +
+                                    "リベンジの効果が1減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "You can end your turn only after using a skill.\n" +
+                                    "The revenge's effect is reduced by 1.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 13:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "ポーションスロットの数が1減少。\n" +
+                                    "リベンジに必要なダメージが20%増加する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The number of potion slots is reduced by 1.\n" +
+                                    "The damage required for revenge increases by 20%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 14:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "同じ種類のドロイドを3体までしか出せなくなる。\n" +
+                                    "リベンジに必要なダメージが20%増加する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "You can generate no more than 3 droids of the same type.\n" +
+                                    "The damage required for revenge increases by 20%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                }
                 break;
             case 4:
                 switch (Language)
                 {
                     case 1:
                         CrownName.text = "クラウン IV";
-                        CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。(Lv.4)\n" +
-                            "敵が使用する特殊能力が強化される。(Lv.1)\n" +
-                            "2体のエリートと戦闘する。\n" +
-                            "メダルを2枚所持した状態でランを開始する。\n" +
-                            "ショップにより多くの宝石と祝福が並ぶ。\n" +
-                            "ラン開始時、スターター祝福を2つ獲得する。";
                         break;
                     case 2:
                         CrownName.text = "Crown IV";
-                        CrownDesc.text = "Enemy durability increases, and attacks intensify. (Lv.4)\n" +
-                            "Special abilities used by enemies are enhanced. (Lv.1)\n" +
-                            "Fight 2 Elites.\n" +
-                            "Start the run with 2 medals in your possession.\n" +
-                            "More gems and blessings are available in the shop.\n" +
-                            "Gain 2 Starter Blessings at the start of the run.";
                         break;
                 }
-                PlayerPrefs.SetInt("EnemyStatusLevel", 4);
-                PlayerPrefs.SetInt("EnemyAbilityLevel", 1);
+                switch (Saint1)
+                {
+                    case 1:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "最大HPが10%減少する。\n" +
+                                    "HP75%でランを開始する。\n" +
+                                    "リベンジの効果が2減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "Maximum HP is reduced by 10%.\n" +
+                                    "Start the run at 75% HP.\n" +
+                                    "The revenge's effect is reduced by 2.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 2:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が3減少する。\n" +
+                                    "ターン開始時、ハンド数-1。\n" +
+                                    "スキルの効果がさらに3減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 3.\n" +
+                                    "At the start of the turn, Hand -1.\n" +
+                                    "The skill's effect is reduced by an additional 3.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 3:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "休憩時に回復できるHPが失った分の75%に減少。\n" +
+                                    "HP75%でランを開始する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The damage required for revenge increases by 20%.\n" +
+                                    "The HP recovered by resting is reduced to 75% of the amount lost.\n" +
+                                    "Start the run at 75% HP.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 4:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が1減少する。\n" +
+                                    "リベンジの効果が2減少する。\n" +
+                                    "全ての敵の特殊能力が強化される。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 1.\n" +
+                                    "The revenge's effect is reduced by 2.\n" +
+                                    "All enemies' special abilities are enhanced.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 1);
+                        break;
+                    case 5:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "全ての敵の耐久力が更に上昇する。\n" +
+                                    "最大HPが10%減少する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The durability of all enemies increases further.\n" +
+                                    "Maximum HP is reduced by 10%.\n" +
+                                    "The damage required for revenge increases by 20%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 2);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 6:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が5減少する。\n" +
+                                    "最大HPが10%減少する。\n" +
+                                    "2体のエリートと戦闘する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                   "The skill's effect is reduced by 5.\n" +
+                                   "Maximum HP is reduced by 10%.\n" +
+                                   "Fight 2 elites.\n";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 7:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が1減少する。\n" +
+                                    "スロットの各宝石の所持上限が3までになる。\n" +
+                                    "全ての敵の特殊能力が強化される。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 1.\n" +
+                                    "The maximum number of each type of gem held in the slots becomes 3.\n" +
+                                    "All enemies' special abilities are enhanced.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 1);
+                        break;
+                    case 8:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "ショップの商品が値上がりする。\n" +
+                                    "スキルの効果が1減少する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The prices of items in the shop are going up.\n" +
+                                    "The skill's effect is reduced by 1.\n" +
+                                    "The damage required for revenge increases by 20%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 9:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "全ての敵の攻撃がさらに激化する。\n" +
+                                    "スキル発動時、シールドの40%を失う。\n" +
+                                    "シールドを得た時、その値が1減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "All enemy attacks intensify further.\n" +
+                                    "Upon skill activation, lose 40% of the shield.\n" +
+                                    "When you gain shield, its value decreases by 1.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 2);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 10:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "リベンジの効果が2減少する。\n" +
+                                    "スキルに失敗すると、即座にターンを終了する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The revenge's effect is reduced by 2.\n" +
+                                    "If the skill fails, the turn ends immediately.\n" +
+                                    "The damage required for revenge increases by 20%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 11:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "セルをハンドした時、追加でハンドを1失う。\n" +
+                                    "鍛えた時のHP増加効果が15%に減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The damage required for revenge increases by 20%.\n" +
+                                    "When you hand Cell, you lose an additional 1 hand.\n" +
+                                    "The HP increase effect when trained is reduced to 15%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 12:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルを使用後のみターンを終了できる。\n" +
+                                    "リベンジの効果が1減少する。\n" +
+                                    "ターン開始時、ハンド数-1。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "You can end your turn only after using a skill.\n" +
+                                    "The revenge's effect is reduced by 1.\n" +
+                                    "At the start of the turn, Hand -1.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 13:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "ポーションスロットの数が1減少。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "全ての敵の攻撃がさらに激化する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The number of potion slots is reduced by 1.\n" +
+                                    "The damage required for revenge increases by 20%.\n" +
+                                    "All enemy attacks intensify further.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 2);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 14:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "同じ種類のドロイドを3体までしか出せなくなる。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "全ての敵の特殊能力が強化される。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "You can generate no more than 3 droids of the same type.\n" +
+                                    "The damage required for revenge increases by 20%.\n" +
+                                    "All enemies' special abilities are enhanced.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 1);
+                        break;
+                }
                 break;
             case 5:
                 switch (Language)
                 {
                     case 1:
                         CrownName.text = "クラウン V";
-                        CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。(Lv.5)\n" +
-                            "敵が使用する特殊能力が強化される。(Lv.2)\n" +
-                            "2体のエリートと戦闘する。\n" +
-                            "メダルを3枚所持した状態でランを開始する。\n" +
-                            "ショップにより多くの宝石と祝福が並ぶ。\n" +
-                            "ラン開始時、スターター祝福を2つ獲得する。";
                         break;
                     case 2:
                         CrownName.text = "Crown V";
-                        CrownDesc.text = "Enemy durability increases, and attacks intensify. (Lv.5)\n" +
-                            "Special abilities used by enemies are enhanced. (Lv.2)\n" +
-                            "Fight 2 Elites.\n" +
-                            "Start the run with 3 medals in your possession.\n" +
-                            "More gems and blessings are available in the shop.\n" +
-                            "Gain 2 Starter Blessings at the start of the run.";
                         break;
                 }
-                PlayerPrefs.SetInt("EnemyStatusLevel", 5);
-                PlayerPrefs.SetInt("EnemyAbilityLevel", 2);
+                switch (Saint1)
+                {
+                    case 1:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "最大HPが10%減少する。\n" +
+                                    "HP75%でランを開始する。\n" +
+                                    "リベンジの効果が2減少する。\n" +
+                                    "ボスのHPが25%増加する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "Maximum HP is reduced by 10%.\n" +
+                                    "Start the run at 75% HP.\n" +
+                                    "The revenge's effect is reduced by 2.\n" +
+                                    "The boss's HP increases by 25%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 2:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が3減少する。\n" +
+                                    "ターン開始時、ハンド数-1。\n" +
+                                    "スキルの効果がさらに3減少する。\n" +
+                                    "全ての敵の特殊能力が強化される。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 3.\n" +
+                                    "At the start of the turn, Hand -1.\n" +
+                                    "The skill's effect is reduced by an additional 3.\n" +
+                                    "All enemies' special abilities are enhanced.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 1);
+                        break;
+                    case 3:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "休憩時に回復できるHPが失った分の75%に減少。\n" +
+                                    "HP75%でランを開始する。\n" +
+                                    "2体のエリートと戦闘する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The damage required for revenge increases by 20%.\n" +
+                                    "The HP recovered by resting is reduced to 75% of the amount lost.\n" +
+                                    "Start the run at 75% HP.\n" +
+                                    "Fight 2 elites.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 4:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が1減少する。\n" +
+                                    "リベンジの効果が2減少する。\n" +
+                                    "全ての敵の特殊能力が強化される。\n" +
+                                    "プリズムを消去する毎に、最大HPを1失う。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 1.\n" +
+                                    "The revenge's effect is reduced by 2.\n" +
+                                    "All enemies' special abilities are enhanced.\n" +
+                                    "Lose 1 Max HP each time you cast Prism.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 1);
+                        break;
+                    case 5:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "全ての敵の耐久力が更に上昇する。\n" +
+                                    "最大HPが10%減少する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "リベンジの永続強化効果が20減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The durability of all enemies increases further.\n" +
+                                    "Maximum HP is reduced by 10%.\n" +
+                                    "The damage required for revenge increases by 20%.\n" +
+                                    "The permanent buff effect of revenge is reduced by 20.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 2);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 6:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が5減少する。\n" +
+                                    "最大HPが10%減少する。\n" +
+                                    "2体のエリートと戦闘する。\n" +
+                                    "全ての敵の特殊能力が強化される。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 5.\n" +
+                                    "Maximum HP is reduced by 10%.\n" +
+                                    "Fight 2 elites.\n" +
+                                    "All enemies' special abilities are enhanced.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 1);
+                        break;
+                    case 7:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルの効果が1減少する。\n" +
+                                    "スロットの各宝石の所持上限が3までになる。\n" +
+                                    "全ての敵の特殊能力が強化される。\n" +
+                                    "リベンジの効果が1減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The skill's effect is reduced by 1.\n" +
+                                    "The maximum number of each type of gem held in the slots becomes 3.\n" +
+                                    "All enemies' special abilities are enhanced.\n" +
+                                    "The revenge's effect is reduced by 1.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 1);
+                        break;
+                    case 8:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "ショップの商品が値上がりする。\n" +
+                                    "スキルの効果が1減少する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "ボスのHPが25%増加する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The prices of items in the shop are going up.\n" +
+                                    "The skill's effect is reduced by 1.\n" +
+                                    "The damage required for revenge increases by 20%.\n" +
+                                    "The boss's HP increases by 25%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 9:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "全ての敵の攻撃がさらに激化する。\n" +
+                                    "スキル発動時、シールドの40%を失う。\n" +
+                                    "シールドを得た時、その値が1減少する。\n" +
+                                    "最大HPが10%減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "All enemy attacks intensify further.\n" +
+                                    "Upon skill activation, lose 40% of the shield.\n" +
+                                    "When you gain shield, its value decreases by 1.\n" +
+                                    "Maximum HP is reduced by 10%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 2);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 10:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "リベンジの効果が2減少する。\n" +
+                                    "スキルに失敗すると、即座にターンを終了する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "2体のエリートと戦闘する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The revenge's effect is reduced by 2.\n" +
+                                    "If the skill fails, the turn ends immediately.\n" +
+                                    "The damage required for revenge increases by 20%.\n" +
+                                    "Fight 2 elites.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 11:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "セルをハンドした時、追加でハンドを1失う。\n" +
+                                    "鍛えた時のHP増加効果が15%に減少する。\n" +
+                                    "セルは3段階目までしか成長しない。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The damage required for revenge increases by 20%.\n" +
+                                    "When you hand Cell, you lose an additional 1 hand.\n" +
+                                    "The HP increase effect when trained is reduced to 15%.\n" +
+                                    "Cell only grows up to the 3rd stage.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 12:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "スキルを使用後のみターンを終了できる。\n" +
+                                    "リベンジの効果が1減少する。\n" +
+                                    "ターン開始時、ハンド数-1。\n" +
+                                    "全ての敵の特殊能力が強化される。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "You can end your turn only after using a skill.\n" +
+                                    "The revenge's effect is reduced by 1.\n" +
+                                    "At the start of the turn, Hand -1.\n" +
+                                    "All enemies' special abilities are enhanced.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 1);
+                        break;
+                    case 13:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "ポーションスロットの数が1減少。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "全ての敵の攻撃がさらに激化する。\n" +
+                                    "最大HPが10%減少する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "The number of potion slots is reduced by 1.\n" +
+                                    "The damage required for revenge increases by 20%.\n" +
+                                    "All enemy attacks intensify further.\n" +
+                                    "Maximum HP is reduced by 10%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 2);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 0);
+                        break;
+                    case 14:
+                        switch (Language)
+                        {
+                            case 1:
+                                CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
+                                    "同じ種類のドロイドを3体までしか出せなくなる。\n" +
+                                    "リベンジに必要なダメージが20%増加する。\n" +
+                                    "全ての敵の特殊能力が強化される。\n" +
+                                    "ボスのHPが25%増加する。";
+                                break;
+                            case 2:
+                                CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
+                                    "You can generate no more than 3 droids of the same type.\n" +
+                                    "The damage required for revenge increases by 20%.\n" +
+                                    "All enemies' special abilities are enhanced.\n" +
+                                    "The boss's HP increases by 25%.";
+                                break;
+                        }
+                        PlayerPrefs.SetInt("EnemyHPLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAttackLevel", 1);
+                        PlayerPrefs.SetInt("EnemyAbilityLevel", 1);
+                        break;
+                }
                 break;
         }
     }
@@ -322,6 +1350,15 @@ public class SaintSelectController : MonoBehaviour
                             RevengeName.text = "禁断の調合";
                             RevengeDesc.text = "空のポーションスロットをランダムなポーションで埋めつくす。";
                             break;
+                        case 14:
+                            SaintName.text = "フォーミュラ";
+                            SaintExplain.text = "兵器に改造された自律思考AI。\n" +
+                                "戦いの場では、ドロイドと共に行動する。";
+                            SkillName.text = "センチネル";
+                            SkillDesc.text = "選択したドロイドを1つ生成する。同時に生成出来るのは5つまで。";
+                            RevengeName.text = "機械学習";
+                            RevengeDesc.text = "選択したドロイドを永続的に1段階アップグレードする。";
+                            break;
                     }
                     break;
                 case 2:
@@ -444,6 +1481,15 @@ public class SaintSelectController : MonoBehaviour
                             RevengeName.text = "Forbidden Brewing";
                             RevengeDesc.text = "Fill all empty potion slots with random potions.";
                             break;
+                        case 14:
+                            SaintName.text = "The Formula";
+                            SaintExplain.text = "An autonomous AI modified into a weapon.\n" +
+                                "It operates alongside its droids on the battlefield.";
+                            SkillName.text = "Sentinel";
+                            SkillDesc.text = "Generate a selected droid. You can generate up to five at a time.";
+                            RevengeName.text = "Machine Learning";
+                            RevengeDesc.text = "Permanently upgrades a selected droid by 1 Lv.";
+                            break;
                     }
                     break;
             }
@@ -488,6 +1534,9 @@ public class SaintSelectController : MonoBehaviour
                 case 13:
                     SaintHP.text = "HP: 350";
                     break;
+                case 14:
+                    SaintHP.text = "HP: 380";
+                    break;
             }
             Choosing = i;
             Saint1 = Choosing;
@@ -512,7 +1561,7 @@ public class SaintSelectController : MonoBehaviour
     }
     public void CrownUp()
     {
-        if(Crown < MaxCrown && Saint1 <= 7)
+        if(Crown < MaxCrown)
         {
             Crown += 1;
             PlayerPrefs.SetInt($"SaintCrown{Saint1}", Crown);

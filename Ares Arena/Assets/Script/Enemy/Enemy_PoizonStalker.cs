@@ -28,22 +28,13 @@ public class Enemy_PoizonStalker : MonoBehaviour
         Language = PlayerPrefs.GetInt("Language", 2);
         StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1380;
+                Bscript.EnemyMaxHP = 1430;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 1440;
-                break;
-            case 3:
-                Bscript.EnemyMaxHP = 1500;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 1560;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1620;
+                Bscript.EnemyMaxHP = 1540;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -54,12 +45,12 @@ public class Enemy_PoizonStalker : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = ((160 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。ランダムな宝石" + (7 + Bscript.CurrentRound + Bscript.AbilityLevel * 2).ToString("0") + "つを致死毒に変化させる。";
-                AttackText[1].text = ((110 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
+                AttackText[0].text = ((160 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。ランダムな宝石" + (7 + Bscript.CurrentRound + Bscript.AbilityLevel * 2).ToString("0") + "つを致死毒に変化させる。";
+                AttackText[1].text = ((110 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
                 break;
             case 2:
-                AttackText[0].text = "Deal " + ((160 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate).ToString("0") + " Damage. Transforms " + (7 + Bscript.CurrentRound + Bscript.AbilityLevel * 2).ToString("0") + " random gems into Poison.";
-                AttackText[1].text = "Deal " + ((110 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate).ToString("0") + " Damage.";
+                AttackText[0].text = "Deal " + ((160 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + " Damage. Transforms " + (7 + Bscript.CurrentRound + Bscript.AbilityLevel * 2).ToString("0") + " random gems into Poison.";
+                AttackText[1].text = "Deal " + ((110 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + " Damage.";
                 break;
         }
         if (Bscript.IsDefeat)
@@ -159,7 +150,7 @@ public class Enemy_PoizonStalker : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((160 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((160 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate);
         IsDebuff = true;
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
         for (int i = 0; i < 7 + Bscript.CurrentRound + Bscript.AbilityLevel * 2; i++)
@@ -191,7 +182,7 @@ public class Enemy_PoizonStalker : MonoBehaviour
         GameObject g = Instantiate(AttackObj[1]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((110 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((110 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate);
     }
     public void Poizon()
     {

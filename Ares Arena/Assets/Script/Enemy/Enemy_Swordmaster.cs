@@ -40,22 +40,13 @@ public class Enemy_Swordmaster : MonoBehaviour
     {
         Language = PlayerPrefs.GetInt("Language", 2);
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 6800;
+                Bscript.EnemyMaxHP = 7000;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 7200;
-                break;
-            case 3:
                 Bscript.EnemyMaxHP = 7600;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 8000;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 8400;
                 break;
         }
         Bscript.EnemyHP = Bscript.EnemyMaxHP;
@@ -66,21 +57,21 @@ public class Enemy_Swordmaster : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = ((280 + Bscript.Iscript.Crown * 40) * AttackRate * StrengthRate).ToString("0") + $"ダメージを与える。ランダムな宝石{10 + Bscript.AbilityLevel * 5}つを血のオーブに変化させる。";
-                AttackText[1].text = (300 * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。弱体化のスタック1つにつき、追加で" + (10 + Bscript.Iscript.Crown * 4).ToString() + "ダメージを与える。";
+                AttackText[0].text = ((280 + Bscript.AttackLevel * 40) * AttackRate * StrengthRate).ToString("0") + $"ダメージを与える。ランダムな宝石{10 + Bscript.AbilityLevel * 2}つを血のオーブに変化させる。";
+                AttackText[1].text = (300 * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。弱体化のスタック1つにつき、追加で" + (10 + Bscript.AttackLevel * 2).ToString() + "ダメージを与える。";
                 AttackText[2].text = "カウンターの効果が5増加する。";
                 AttackText[3].text = "20%の攻撃激化を得る。HPを50%まで回復する。";
-                AttackText[4].text = ((400 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。この攻撃を防ぎきれなかった場合、即死する。";
+                AttackText[4].text = ((340 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。この攻撃を防ぎきれなかった場合、即死する。";
                 DebuffDesc.text = "次に消去する" + Pscript.Debuff_Weak + "個の宝石の効果が50%減少する。";
                 CounterDesc.text = "スキルを使用する毎に、" + CounterPerc + "%の攻撃激化を得る。";
                 BuffDesc.text = "与えるダメージが" + ((AttackRate - 1f) * 100f).ToString("0") + "%増加する。";
                 break;
             case 2:
-                AttackText[0].text = "Deal " + ((280 + Bscript.Iscript.Crown * 40) * AttackRate * StrengthRate).ToString("0") + " Damage.";
-                AttackText[1].text = "Deal " + (300 * AttackRate * StrengthRate).ToString("0") + " Damage. Deals an additional " + (10 + Bscript.Iscript.Crown * 4).ToString() + "damage for each stack of Weak.";
+                AttackText[0].text = "Deal " + ((280 + Bscript.AttackLevel * 40) * AttackRate * StrengthRate).ToString("0") + $" Damage.Transform {10 + Bscript.AbilityLevel * 2} random gems into Blood Orb.";
+                AttackText[1].text = "Deal " + (300 * AttackRate * StrengthRate).ToString("0") + " Damage. Deals an additional " + (10 + Bscript.AttackLevel * 2).ToString() + "damage for each stack of Weak.";
                 AttackText[2].text = "Gain Counter 5.";
                 AttackText[3].text = "Gain 20% Intensified. Restores HP to 50%.";
-                AttackText[4].text = $"Deal {(400 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate} Damage. If you fail to fully block this attack, you will die instantly.";
+                AttackText[4].text = $"Deal {(340 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate} Damage. If you fail to fully block this attack, you will die instantly.";
                 DebuffDesc.text = "The effect of the next " + Pscript.Debuff_Weak + " gems you cast will be reduced by 50%.";
                 CounterDesc.text = "Gain " + CounterPerc + "% Intensified each time a skill is used.";
                 BuffDesc.text = "Damage dealt is increased by " + ((AttackRate - 1f) * 100f).ToString("0") + "%.";
@@ -354,8 +345,8 @@ public class Enemy_Swordmaster : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((280 + Bscript.Iscript.Crown * 40) * AttackRate * StrengthRate);
-        for (int i = 0; i < 10 + Bscript.AbilityLevel * 5; i++)
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((280 + Bscript.AttackLevel * 40) * AttackRate * StrengthRate);
+        for (int i = 0; i < 10 + Bscript.AbilityLevel * 2; i++)
         {
             int Judge = Random.Range(0, 49);
             for (; Pscript.JewelNum[Judge] == 304;)
@@ -392,7 +383,7 @@ public class Enemy_Swordmaster : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(300 * AttackRate * StrengthRate + (10 + Bscript.Iscript.Crown * 4));
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(300 * AttackRate * StrengthRate + Pscript.Debuff_Weak * (10 + Bscript.AttackLevel * 2));
     }
     void Act3_1()
     {
@@ -408,7 +399,7 @@ public class Enemy_Swordmaster : MonoBehaviour
         switch(Language)
         {
             case 1:
-                CounterDesc.text = "スキルを使用する毎に、、" + CounterPerc.ToString() + "%の攻撃激化を得る。";
+                CounterDesc.text = "スキルを使用する毎に、" + CounterPerc.ToString() + "%の攻撃激化を得る。";
                 break;
             case 2:
                 CounterDesc.text = "Gain " + CounterPerc.ToString() + "% Intensified each time a skill is used.";
@@ -470,7 +461,7 @@ public class Enemy_Swordmaster : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((400 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((340 + Bscript.AttackLevel * 30) * AttackRate * StrengthRate);
         g.GetComponent<EffectScript>().Attack_Execution = true;
     }
 }

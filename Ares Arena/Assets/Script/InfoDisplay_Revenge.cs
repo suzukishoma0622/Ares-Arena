@@ -12,10 +12,12 @@ public class InfoDisplay_Revenge : MonoBehaviour
     int Language;
 
     public int SentryRevenge;
+    int Crown;
     private void Start()
     {
         Language = PlayerPrefs.GetInt("Language", 2);
         Saint = PlayerPrefs.GetInt("Saint1", 1);
+        Crown = PlayerPrefs.GetInt("Crown", 0);
     }
     void Update()
     {
@@ -26,11 +28,25 @@ public class InfoDisplay_Revenge : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "プライムハンド" + $"({RevengeSlider.maxValue - RevengeSlider.value}被ダメージ必要)";
-                        DescriptionText.text = "ハンド数 +5。";
+                        if (Crown >= 4)
+                        {
+                            DescriptionText.text = "ハンド数 +3。";
+                        }
+                        else
+                        {
+                            DescriptionText.text = "ハンド数 +5。";
+                        }
                         break;
                     case 2:
                         NameText.text = "Prime Hand" + $"(Need {RevengeSlider.maxValue - RevengeSlider.value} Damage)";
-                        DescriptionText.text = "Hand +5.";
+                        if (Crown >= 4)
+                        {
+                            DescriptionText.text = "Hand +3。";
+                        }
+                        else
+                        {
+                            DescriptionText.text = "Hand +5。";
+                        }
                         break;
                 }
                 break;
@@ -65,11 +81,25 @@ public class InfoDisplay_Revenge : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "乱反射" + $"({RevengeSlider.maxValue - RevengeSlider.value}被ダメージ必要)";
-                        DescriptionText.text = "ランダムな宝石8つをプリズムに変化させる。";
+                        if (Crown >= 3)
+                        {
+                            DescriptionText.text = "ランダムな宝石6つをプリズムに変化させる。";
+                        }
+                        else
+                        {
+                            DescriptionText.text = "ランダムな宝石8つをプリズムに変化させる。";
+                        }
                         break;
                     case 2:
                         NameText.text = "Diffuse Reflection" + $"(Need {RevengeSlider.maxValue - RevengeSlider.value} Damage)";
-                        DescriptionText.text = "Transforms 8 random gems into Prism.";
+                        if (Crown >= 3)
+                        {
+                            DescriptionText.text = "Transforms 6 random gems into Prism.";
+                        }
+                        else
+                        {
+                            DescriptionText.text = "Transforms 8 random gems into Prism.";
+                        }
                         break;
                 }
                 break;
@@ -104,11 +134,26 @@ public class InfoDisplay_Revenge : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "展覧会" + $"({RevengeSlider.maxValue - RevengeSlider.value}被ダメージ必要)";
-                        DescriptionText.text = "全ての種類の宝石をスロットに2つずつ追加する。";
+                        if (Crown >= 5)
+                        {
+                            DescriptionText.text = "全ての種類の宝石をスロットに1つずつ追加する。";
+                        }
+                        else
+                        {
+                            DescriptionText.text = "全ての種類の宝石をスロットに2つずつ追加する。";
+                        }
+                        
                         break;
                     case 2:
                         NameText.text = "Exhibition" + $"(Need {RevengeSlider.maxValue - RevengeSlider.value} Damage)";
-                        DescriptionText.text = "Adds 2 of every type of gem to the slots.";
+                        if (Crown >= 5)
+                        {
+                            DescriptionText.text = "Adds 1 of every type of gem to the slots.";
+                        }
+                        else
+                        {
+                            DescriptionText.text = "Adds 2 of every type of gem to the slots.";
+                        }
                         break;
                 }
                 break;
@@ -143,11 +188,25 @@ public class InfoDisplay_Revenge : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "剣の舞" + $"({RevengeSlider.maxValue - RevengeSlider.value}被ダメージ必要)";
-                        DescriptionText.text = "ランダムな6箇所をマーキングする。このターン中、マーキングの順番は無視される。";
+                        if (Crown >= 2)
+                        {
+                            DescriptionText.text = "ランダムな4箇所をマーキングする。このターン中、マーキングの順番は無視される。";
+                        }
+                        else
+                        {
+                            DescriptionText.text = "ランダムな6箇所をマーキングする。このターン中、マーキングの順番は無視される。";
+                        }
                         break;
                     case 2:
                         NameText.text = "Sword Dance" + $"(Need {RevengeSlider.maxValue - RevengeSlider.value} Damage)";
-                        DescriptionText.text = "Mark 6 random locations. The order of marking is ignored during this turn.";
+                        if (Crown >= 2)
+                        {
+                            DescriptionText.text = "Mark 4 random locations. The order of marking is ignored during this turn.";
+                        }
+                        else
+                        {
+                            DescriptionText.text = "Mark 6 random locations. The order of marking is ignored during this turn.";
+                        }
                         break;
                 }
                 break;
@@ -169,11 +228,25 @@ public class InfoDisplay_Revenge : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "記憶改竄" + $"({RevengeSlider.maxValue - RevengeSlider.value}被ダメージ必要)";
-                        DescriptionText.text = "記憶した配列内の宝石を2箇所に設置する。";
+                        if (Crown >= 3)
+                        {
+                            DescriptionText.text = "記憶した配列内の宝石を1箇所に設置する。";
+                        }
+                        else
+                        {
+                            DescriptionText.text = "記憶した配列内の宝石を2箇所に設置する。";
+                        }
                         break;
                     case 2:
                         NameText.text = "Alteration" + $"(Need {RevengeSlider.maxValue - RevengeSlider.value} Damage)";
-                        DescriptionText.text = "Place the gems from the memorized arrangement at 2 locations.";
+                        if (Crown >= 3)
+                        {
+                            DescriptionText.text = "Place the gems from the memorized arrangement at 1 locations.";
+                        }
+                        else
+                        {
+                            DescriptionText.text = "Place the gems from the memorized arrangement at 2 locations.";
+                        }
                         break;
                 }
                 break;
@@ -187,6 +260,19 @@ public class InfoDisplay_Revenge : MonoBehaviour
                     case 2:
                         NameText.text = "Forbidden Brewing" + $"(Need {RevengeSlider.maxValue - RevengeSlider.value} Damage)";
                         DescriptionText.text = "Fill all empty potion slots with random potions.";
+                        break;
+                }
+                break;
+            case 14:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "機械学習" + $"({RevengeSlider.maxValue - RevengeSlider.value}被ダメージ必要)";
+                        DescriptionText.text = "選択したドロイドを永続的に1段階アップグレードする。";
+                        break;
+                    case 2:
+                        NameText.text = "Machine Learning" + $"(Need {RevengeSlider.maxValue - RevengeSlider.value} Damage)";
+                        DescriptionText.text = "Permanently upgrades a selected droid by 1 Lv.";
                         break;
                 }
                 break;

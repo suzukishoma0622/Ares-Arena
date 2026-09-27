@@ -15,6 +15,9 @@ public class EnemyHealth : MonoBehaviour
 
     public bool IsCaptainScissors;
     public Enemy_CaptainScissors Cscript;
+    public bool IsStaticBeast;
+    public Enemy_StaticBeast Sscript;
+    public int Evasion;
     void Start()
     {
         Invoke("Bless_CleverScheme", 0.1f);
@@ -30,7 +33,13 @@ public class EnemyHealth : MonoBehaviour
             }
             if(Gaze)
             {
-                d *= 2 + Iscript.Bless[54];
+                d *= 2 + Bscript.Pscript.Bless22;
+                d += Iscript.Bless[54];
+            }
+            d += Bscript.Pscript.Gem135;
+            if (Evasion > 0 && d > Evasion)
+            {
+                d = Evasion;
             }
             Bscript.Pscript.DamageSum += d;
             if (Bscript.EnemyShield > 0)
@@ -54,6 +63,10 @@ public class EnemyHealth : MonoBehaviour
                     d -= Bscript.EnemyShield;
                     Bscript.EnemyShield = 0;
                     Bscript.EnemyHP -= d;
+                    if (IsStaticBeast)
+                    {
+                        Sscript.AttackRate += 0.01f;
+                    }
                     Iscript.SE.PlayOneShot(GuardBreakSE);
                     Iscript.SE.PlayOneShot(HitSE);
                     GameObject g3 = Instantiate(Effect[3]);
@@ -66,6 +79,10 @@ public class EnemyHealth : MonoBehaviour
             {
                 Bscript.EnemyHP -= d;
                 Iscript.SE.PlayOneShot(HitSE);
+                if (IsStaticBeast)
+                {
+                    Sscript.AttackRate += 0.01f;
+                }
             }
             if (Bscript.EnemyHP <= 0)
             {

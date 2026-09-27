@@ -61,11 +61,11 @@ public class InfoDisplay_Bless : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "頑強なる肉体";
-                        DescriptionText.text = $"戦闘終了時、最大HPの{10 * (1 + Iscript.Bless[54])}%を回復する。";
+                        DescriptionText.text = $"戦闘終了時、最大HPの{12 * (1 + Iscript.Bless[54])}%を回復する。";
                         break;
                     case 2:
                         NameText.text = "Robust Body";
-                        DescriptionText.text = $"At the end of battle, restore {10 * (1 + Iscript.Bless[54])}% of your maximum HP.";
+                        DescriptionText.text = $"At the end of battle, restore {12 * (1 + Iscript.Bless[54])}% of your maximum HP.";
                         break;
                 }
                 break;
@@ -126,11 +126,11 @@ public class InfoDisplay_Bless : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "恍惚";
-                        DescriptionText.text = $"3回目までの戦闘終了時、HPを{15 * (1 + Iscript.Bless[54])}%回復する。";
+                        DescriptionText.text = $"3回目までの戦闘終了時、HPを{20 * (1 + Iscript.Bless[54])}%回復する。";
                         break;
                     case 2:
                         NameText.text = "Ecstasy";
-                        DescriptionText.text = $"After the first 3 battles, recover {15 * (1 + Iscript.Bless[54])}% of your HP.";
+                        DescriptionText.text = $"After the first 3 battles, recover {20 * (1 + Iscript.Bless[54])}% of your HP.";
                         break;
                 }
                 break;
@@ -178,11 +178,11 @@ public class InfoDisplay_Bless : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "肉体制御";
-                        DescriptionText.text = $"HPが25%以下の状態で戦闘を終了した時、HPを{40 * (1 + Iscript.Bless[54])}%まで回復する。";
+                        DescriptionText.text = $"HPが40%以下の状態で戦闘を終了した時、HPを{40 * (1 + Iscript.Bless[54])}%まで回復する。";
                         break;
                     case 2:
                         NameText.text = "Body control";
-                        DescriptionText.text = $"When a battle ends with HP at 25% or less, HP is restored to {40 * (1 + Iscript.Bless[54])}%.";
+                        DescriptionText.text = $"When a battle ends with HP at 40% or less, HP is restored to {40 * (1 + Iscript.Bless[54])}%.";
                         break;
                 }
                 break;
@@ -191,11 +191,11 @@ public class InfoDisplay_Bless : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "狂戦士";
-                        DescriptionText.text = $"最大HPが{25 * (1 + Iscript.Bless[54])}%増加する。HPを50%失う。";
+                        DescriptionText.text = $"最大HPが{30 * (1 + Iscript.Bless[54])}%増加する。HPを50%失う。";
                         break;
                     case 2:
                         NameText.text = "Berserker";
-                        DescriptionText.text = $"Maximum HP increases by {25 * (1 + Iscript.Bless[54])}%. Lose 50% of HP.";
+                        DescriptionText.text = $"Maximum HP increases by {30 * (1 + Iscript.Bless[54])}%. Lose 50% of HP.";
                         break;
                 }
                 break;
@@ -248,6 +248,98 @@ public class InfoDisplay_Bless : MonoBehaviour
                     case 2:
                         NameText.text = "Flames of Revenge";
                         DescriptionText.text = $"The damage required for Revenge is reduced by {15 * (1 + Iscript.Bless[54])}%.";
+                        break;
+                }
+                break;
+            case 19:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "深淵の声";
+                        DescriptionText.text = $"休憩する毎に最大HPが{50 * (1 + Iscript.Bless[54])}増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Voice of the Abyss";
+                        DescriptionText.text = $"Maximum HP increases by {50 * (1 + Iscript.Bless[54])} each time you rest.";
+                        break;
+                }
+                break;
+            case 20:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "不死";
+                        if(Iscript.Bless20 == 1)
+                        {
+                            DescriptionText.text = "この祝福の能力は発動済み。";
+                        }
+                        else
+                        {
+                            DescriptionText.text = $"HPが0になると、一度のみHP{20 * (1 + Iscript.Bless[54])}%で復活する。";
+                        }
+                        break;
+                    case 2:
+                        NameText.text = "Undead";
+                        if (Iscript.Bless20 == 1)
+                        {
+                            DescriptionText.text = "This bless's ability has already been activated.";
+                        }
+                        else
+                        {
+                            DescriptionText.text = $"When HP reaches 0, you revive once with HP equal to {20 * (1 + Iscript.Bless[54])}%.";
+                        }
+                        break;
+                }
+                break;
+            case 21:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "巧妙";
+                        DescriptionText.text = $"各戦闘で最初にスキルを使用したとき、その効果は{2 + Iscript.Bless[54]}倍になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Ingenious";
+                        DescriptionText.text = $"When a skill is used for the first time in each battle, its effect is multiplied by {2 + Iscript.Bless[54]}.";
+                        break;
+                }
+                break;
+            case 22:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "血塗れの契約";
+                        DescriptionText.text = $"戦闘開始時、リベンジを{30 * (1 + Iscript.Bless[54])}%チャージする。";
+                        break;
+                    case 2:
+                        NameText.text = "Bloody contract";
+                        DescriptionText.text = $"At the start of battle, charge Revenge by {30 * (1 + Iscript.Bless[54])}%.";
+                        break;
+                }
+                break;
+            case 23:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "交渉術";
+                        DescriptionText.text = $"ショップに追加で{1 * (1 + Iscript.Bless[54])}つの宝石と祝福が並ぶ。";
+                        break;
+                    case 2:
+                        NameText.text = "Negotiation Techniques";
+                        DescriptionText.text = $"An additional {1 * (1 + Iscript.Bless[54])} gems and blessings will appear in the shop.";
+                        break;
+                }
+                break;
+            case 24:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "転禍";
+                        DescriptionText.text = $"ショップの内容を{2 * (1 + Iscript.Bless[54])}回までリロール出来るようになる。";
+                        break;
+                    case 2:
+                        NameText.text = "Turning Misfortune";
+                        DescriptionText.text = $"The shop contents can be rerolled up to {2 * (1 + Iscript.Bless[54])} times.";
                         break;
                 }
                 break;
@@ -772,11 +864,15 @@ public class InfoDisplay_Bless : MonoBehaviour
                 }
                 break;
         }
-        GetComponent<Animator>().Play($"Bless{BlessNum}");
+        if (GetComponent<Animator>() != null)
+        {
+            GetComponent<Animator>().Play($"Bless{BlessNum}");
+        }
     }
     public void OnDisplay()
     {
         DisplayObj.SetActive(true);
+        Language = PlayerPrefs.GetInt("Language", 2);
     }
     public void OffDisplay()
     {

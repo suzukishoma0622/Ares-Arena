@@ -36,22 +36,13 @@ public class Enemy_SlimeParasite : MonoBehaviour
         Language = PlayerPrefs.GetInt("Language", 2);
         StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1420;
+                Bscript.EnemyMaxHP = 1470;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 1480;
-                break;
-            case 3:
-                Bscript.EnemyMaxHP = 1540;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 1600;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1660;
+                Bscript.EnemyMaxHP = 1580;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -63,14 +54,14 @@ public class Enemy_SlimeParasite : MonoBehaviour
         {
             case 1:
                 AttackText[0].text = "ランダムな宝石25つを粘液に変化させる。";
-                AttackText[1].text = ((180 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。ランダムな宝石10つを粘液に変化させる。";
+                AttackText[1].text = ((180 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。ランダムな宝石10つを粘液に変化させる。";
                 AttackText[2].text = "25%の攻撃激化を得る。ランダムな宝石20つを粘液に変化させる。";
                 BuffDesc.text = "与えるダメージが" + ((AttackRate - 1f) * 100f).ToString("0") + "%増加する。";
                 break;
             case 2:
                 AttackText[0].text = "Transforms 25 random gems into Poison.";
-                AttackText[1].text = "Deal " + ((180 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + " Damage. Transforms 10 random gems into Poison.";
-                AttackText[1].text = "Gain a 25% Intensified. Transforms 20 random gems into Poison.";
+                AttackText[1].text = "Deal " + ((180 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate).ToString("0") + " Damage. Transforms 10 random gems into Poison.";
+                AttackText[2].text = "Gain a 25% Intensified. Transforms 20 random gems into Poison.";
                 BuffDesc.text = "Damage dealt is increased by " + ((AttackRate - 1f) * 100f).ToString("0") + "%.";
                 break;
         }
@@ -231,7 +222,7 @@ public class Enemy_SlimeParasite : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((180 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((180 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate);
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
         for (int i = 0; i < 10; i++)
         {

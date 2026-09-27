@@ -36,22 +36,13 @@ public class Enemy_AetherRizer : MonoBehaviour
     {
         Language = PlayerPrefs.GetInt("Language", 2);
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 6800;
+                Bscript.EnemyMaxHP = 7000;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 7100;
-                break;
-            case 3:
-                Bscript.EnemyMaxHP = 7400;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 7700;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 8000;
+                Bscript.EnemyMaxHP = 7500;
                 break;
         }
         Bscript.EnemyHP = Bscript.EnemyMaxHP;
@@ -61,17 +52,17 @@ public class Enemy_AetherRizer : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = $"{400 + Bscript.Iscript.Crown * 30 + Momentum}ダメージを与える。悠風{30 + Bscript.AbilityLevel * 5}を付与する。";
-                AttackText[2].text = $"{250 + Bscript.Iscript.Crown * 20 + Momentum}ダメージを与える。悠風15を付与する。";
-                AttackText[1].text = $"{40 + Bscript.Iscript.Crown * 10 + Momentum}ダメージを5回与える。";
+                AttackText[0].text = $"{400 + Bscript.AttackLevel * 50 + Momentum}ダメージを与える。悠風{30 + Bscript.AbilityLevel * 5}を付与する。";
+                AttackText[2].text = $"{250 + Bscript.AttackLevel * 20 + Momentum}ダメージを与える。悠風15を付与する。";
+                AttackText[1].text = $"{40 + Bscript.AttackLevel * 5 + Momentum}ダメージを5回与える。";
                 AttackText[3].text = $"上昇{80 + Bscript.AbilityLevel * 10}を得る。";
                 DebuffDesc.text = $"ハンドする毎に、盤上に風が発生する。風内の宝石を消去する毎に{Wind}ダメージを受ける。";
                 BuffDesc.text = $"与えるダメージが{Momentum}加算される。";
                 break;
             case 2:
-                AttackText[0].text = $"Deal {400 + Bscript.Iscript.Crown * 30 + Momentum} Damage. Inflict {30 + Bscript.AbilityLevel * 5} Leisurewind.";
-                AttackText[1].text = $"Deal {40 + Bscript.Iscript.Crown * 10 + Momentum} Damage 5 times.";
-                AttackText[2].text = $"Deal {250 + Bscript.Iscript.Crown * 20 + Momentum} Damage. Inflict 15 Leisurewind.";
+                AttackText[0].text = $"Deal {400 + Bscript.AttackLevel * 50 + Momentum} Damage. Inflict {30 + Bscript.AbilityLevel * 5} Leisurewind.";
+                AttackText[1].text = $"Deal {40 + Bscript.AttackLevel * 5 + Momentum} Damage 5 times.";
+                AttackText[2].text = $"Deal {250 + Bscript.AttackLevel * 20 + Momentum} Damage. Inflict 15 Leisurewind.";
                 AttackText[3].text = $"Gain {80 + Bscript.AbilityLevel * 10} Ascension.";
                 DebuffDesc.text = $"Wind is generated each time you hand. Take {Wind} damage each time you cast a gem within the wind.";
                 BuffDesc.text = $"Damage dealt is increased by {Momentum}.";
@@ -212,7 +203,7 @@ public class Enemy_AetherRizer : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(400 + Bscript.Iscript.Crown * 30 + Momentum);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(400 + Bscript.AttackLevel * 50 + Momentum);
         Wind += 30 + Bscript.AbilityLevel * 5;
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
         IsDebuff = true;
@@ -229,7 +220,7 @@ public class Enemy_AetherRizer : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(40 + Bscript.Iscript.Crown * 10 + Momentum);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(40 + Bscript.AttackLevel * 5 + Momentum);
     }
     void Act3_1()
     {
@@ -243,7 +234,7 @@ public class Enemy_AetherRizer : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(250 + Bscript.Iscript.Crown * 20 + Momentum);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(250 + Bscript.AttackLevel * 20 + Momentum);
         Wind += 15;
         Bscript.Iscript.SE.PlayOneShot(Bscript.Iscript.DebuffSE);
     }

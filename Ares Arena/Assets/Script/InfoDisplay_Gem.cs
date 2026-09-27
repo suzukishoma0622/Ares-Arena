@@ -12,6 +12,7 @@ public class InfoDisplay_Gem : MonoBehaviour
     int Gem53;
     int Gem54;
     int Gem70;
+    int Gem133;
     private void Start()
     {
         Language = PlayerPrefs.GetInt("Language", 2);
@@ -1435,7 +1436,7 @@ public class InfoDisplay_Gem : MonoBehaviour
                             break;
                         case 2:
                             NameText.text = "Garden Quartz";
-                            DescriptionText.text = "Deals 24 damage. While this gem is equipped, the effects of all starter gems are increased by 3.";
+                            DescriptionText.text = "Deal 24 damage. While this gem is equipped, the effects of all starter gems are increased by 3.";
                             break;
                     }
                 }
@@ -1449,7 +1450,7 @@ public class InfoDisplay_Gem : MonoBehaviour
                             break;
                         case 2:
                             NameText.text = "Garden Quartz";
-                            DescriptionText.text = "Deals 16 damage. While this gem is equipped, the effects of all starter gems are increased by 2.";
+                            DescriptionText.text = "Deal 16 damage. While this gem is equipped, the effects of all starter gems are increased by 2.";
                             break;
                     }
                 }
@@ -1476,7 +1477,7 @@ public class InfoDisplay_Gem : MonoBehaviour
                         break;
                     case 2:
                         NameText.text = "Mithril";
-                        DescriptionText.text = "Deals 18 damage. If the last two digits of the current HP are 00, the effect is multiplied by 5.";
+                        DescriptionText.text = "Deal 18 damage. If the last two digits of the current HP are 00, the effect is multiplied by 5.";
                         break;
                 }
                 break;
@@ -1489,7 +1490,7 @@ public class InfoDisplay_Gem : MonoBehaviour
                         break;
                     case 2:
                         NameText.text = "Right Fragment";
-                        DescriptionText.text = "Deals 16 damage. If equipped alongside \"Left Fragment,\" the effect is doubled.";
+                        DescriptionText.text = "Deal 16 damage. If equipped alongside \"Left Fragment,\" the effect is doubled.";
                         break;
                 }
                 break;
@@ -1515,8 +1516,562 @@ public class InfoDisplay_Gem : MonoBehaviour
                         break;
                     case 2:
                         NameText.text = "Aventurine";
-                        DescriptionText.text = "Deals 30 damage. Using a skill will cause its effect to disappear until the end of the turn.";
+                        DescriptionText.text = "Deal 30 damage. Using a skill will cause its effect to disappear until the end of the turn.";
                         break;
+                }
+                break;
+            case 100:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "グラファイト";
+                        DescriptionText.text = "10ダメージを与える。右隣に装備した宝石の出現確率を2倍にする。";
+                        break;
+                    case 2:
+                        NameText.text = "Graphite";
+                        DescriptionText.text = "Deal 10 damage. Doubles the appearance rate of the gem equipped to the immediate right.";
+                        break;
+                }
+                break;
+            case 101:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "チタン";
+                        DescriptionText.text = "5シールドを得る。左隣に装備した宝石の出現確率を半減させる。";
+                        break;
+                    case 2:
+                        NameText.text = "Titanium";
+                        DescriptionText.text = "Gain 5 Shield. Halves the appearance rate of the gem equipped to the immediate left.";
+                        break;
+                }
+                break;
+            case 102:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "アウイナイト";
+                        DescriptionText.text = "16ダメージを与える。チェーンが4の状態から始まる。";
+                        break;
+                    case 2:
+                        NameText.text = "Hauyne";
+                        DescriptionText.text = "Deal 16 damage. It starts with the chain at a state of 4.";
+                        break;
+                }
+                break;
+            case 103:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ドロマイト";
+                        DescriptionText.text = "前回のハンドのチェーン数x2シールドを得る。";
+                        break;
+                    case 2:
+                        NameText.text = "Dolomite";
+                        DescriptionText.text = "Gain Shield equal to twice the number of chains from the previous hand.";
+                        break;
+                }
+                break;
+            case 104:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ジェムシリカ";
+                        DescriptionText.text = "7シールドを得る。前回のチェーン数が10以上の場合、効果が2倍になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Gem Silica";
+                        DescriptionText.text = "Gain 7 Shield. If the previous chain count was 10 or higher, the effect is doubled.";
+                        break;
+                }
+                break;
+            case 105:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "モアッサナイト";
+                        DescriptionText.text = "14ダメージを与える。敵のHPが50%以上残っている場合、効果が2倍になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Moissanite";
+                        DescriptionText.text = "Deal 14 damage. The effect is doubled if the enemy has 50% or more of their HP remaining.";
+                        break;
+                }
+                break;
+            case 106:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "リバーストーン";
+                        DescriptionText.text = "23ダメージを与える。この宝石は1度装備すると外せなくなる。";
+                        break;
+                    case 2:
+                        NameText.text = "Riverstone";
+                        DescriptionText.text = "Deal 23 damage. Once equipped, this gem cannot be removed.";
+                        break;
+                }
+                break;
+            case 107:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "アパタイト";
+                        DescriptionText.text = "HPを4回復する。HPが100%の場合、7シールドを追加で得る。";
+                        break;
+                    case 2:
+                        NameText.text = "Apatite";
+                        DescriptionText.text = "Restore 4 HP. If HP is at 100%, gain an additional 7 Shield.";
+                        break;
+                }
+                break;
+            case 108:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "プレナイト";
+                        DescriptionText.text = "HPが50%以上の時、21ダメージを与える。そうでない場合、11シールドを得る。";
+                        break;
+                    case 2:
+                        NameText.text = "Prehnite";
+                        DescriptionText.text = "If HP is 50% or higher, deal 21 damage. Otherwise, gain 11 Shield.";
+                        break;
+                }
+                break;
+            case 109:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "イーグルアイ";
+                        DescriptionText.text = "所持している祝福の数x4ダメージを与える。";
+                        break;
+                    case 2:
+                        NameText.text = "Eagle Eye";
+                        DescriptionText.text = "Deal damage equal to the number of Blessings you possess multiplied by 4.";
+                        break;
+                }
+                break;
+            case 110:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "メタモルフォーゼス";
+                        DescriptionText.text = "12シールドを得る。ターン開始時、ランダムな装備中の宝石に変化する。";
+                        break;
+                    case 2:
+                        NameText.text = "Metamorphoses";
+                        DescriptionText.text = "Gain 12 Shield. At the start of the turn, transform into a random equipped Gem.";
+                        break;
+                }
+                break;
+            case 111:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ネフライト";
+                        DescriptionText.text = "13ダメージを与える。この宝石のチェーン数は10で固定される。";
+                        break;
+                    case 2:
+                        NameText.text = "Nephrite";
+                        DescriptionText.text = "Deals 13 damage. The number of chains for this gem is fixed at 10.";
+                        break;
+                }
+                break;
+            case 112:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "グラニット";
+                        DescriptionText.text = "5シールドを得る。ターン終了時、この宝石の効果が2増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Granite";
+                        DescriptionText.text = "Gain 5 Shield. At the end of the turn, the effect of this gem increases by 2.";
+                        break;
+                }
+                break;
+            case 113:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "スーパーセブン";
+                        DescriptionText.text = "自分と敵のHPを7回復する。";
+                        break;
+                    case 2:
+                        NameText.text = "Super Seven";
+                        DescriptionText.text = "Restore 7 HP to yourself and the enemy.";
+                        break;
+                }
+                break;
+            case 114:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "インディゴライト";
+                        DescriptionText.text = "シールド値が250以下の場合、13シールドを得る。";
+                        break;
+                    case 2:
+                        NameText.text = "Indigolite";
+                        DescriptionText.text = "If your shield value is 250 or less, gain 13 shield.";
+                        break;
+                }
+                break;
+            case 115:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "タングステン";
+                        DescriptionText.text = "現在のターンでリベンジを発動していない場合、リベンジを14ダメージ分チャージする。";
+                        break;
+                    case 2:
+                        NameText.text = "Tungsten";
+                        DescriptionText.text = "If Revenge has not been activated during the current turn, charge Revenge for 14 damage.";
+                        break;
+                }
+                break;
+            case 116:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ウラン";
+                        DescriptionText.text = "現在の残りハンド数x3ダメージを与える。";
+                        break;
+                    case 2:
+                        NameText.text = "Uranium";
+                        DescriptionText.text = "Deal damage equal to the number of current hand.";
+                        break;
+                }
+                break;
+            case 117:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "コール";
+                        DescriptionText.text = "リベンジを6ダメージ分チャージする。リベンジを発動時、この宝石を消去する。";
+                        break;
+                    case 2:
+                        NameText.text = "Coal";
+                        DescriptionText.text = "Charge Revenge for 6 damage. This gem is removed when Revenge is activated.";
+                        break;
+                }
+                break;
+            case 118:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "パイライト";
+                        DescriptionText.text = "15ダメージを与える。各ターンで最初にこの宝石をハンドした時、効果が2倍になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Pyrite";
+                        DescriptionText.text = "Deal 15 damage. The effect doubles the first time you hand this gem each turn.";
+                        break;
+                }
+                break;
+            case 119:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ソーダライト";
+                        DescriptionText.text = "7シールドを得る。前回のハンドで消去した宝石がこの宝石ならば、効果が2倍になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Sodalite";
+                        DescriptionText.text = "Gain 7 Shield. If this gem is the same type as the gem cast in the previous hand, the effect is doubled.";
+                        break;
+                }
+                break;
+            case 120:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "オルゴナイト";
+                        DescriptionText.text = "15ダメージを与える。5%の確率で効果が10倍になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Orgonite";
+                        DescriptionText.text = "Deal 15 damage. Has a 5% chance to multiply the effect by 10.";
+                        break;
+                }
+                break;
+            case 121:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "フリント";
+                        DescriptionText.text = "45ダメージを与える。消去時、追加でハンドを4失う。";
+                        break;
+                    case 2:
+                        NameText.text = "Flint";
+                        DescriptionText.text = "Deal 45 damage. When cleared, additionally lose 4 hand.";
+                        break;
+                }
+                break;
+            case 122:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "オーロベルディ";
+                        DescriptionText.text = "7シールドを得る。ターン開始時、30%の確率でプリズムに変化する。";
+                        break;
+                    case 2:
+                        NameText.text = "Auroverdi";
+                        DescriptionText.text = "Gain 7 Shield. At the start of the turn, there is a 30% chance to transform into a Prism.";
+                        break;
+                }
+                break;
+            case 123:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "マディラ";
+                        DescriptionText.text = "盤上にあるこの宝石の数x2ダメージを与える。";
+                        break;
+                    case 2:
+                        NameText.text = "Madeira";
+                        DescriptionText.text = "Deal damage equal to twice the number of these gems on the board.";
+                        break;
+                }
+                break;
+            case 124:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "アンデサイト";
+                        DescriptionText.text = "24ダメージを与える。3シールドを失う。";
+                        break;
+                    case 2:
+                        NameText.text = "Andesite";
+                        DescriptionText.text = "Deal 24 damage. Lose 3 Shield.";
+                        break;
+                }
+                break;
+            case 125:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "セラフィナイト";
+                        DescriptionText.text = "14ダメージを与える。9チェーン以上繋げると、盤上にあるこの宝石を全て消す。";
+                        break;
+                    case 2:
+                        NameText.text = "Seraphinite";
+                        DescriptionText.text = "Deal 14 damage. If you chain 9 or more, cast all gems of this type from the board.";
+                        break;
+                }
+                break;
+            case 126:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ティファニーストーン";
+                        DescriptionText.text = "15ダメージを与える。盤上の一番上の行で消去した場合、効果が2倍になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Tiffany Stone";
+                        DescriptionText.text = "Deal 15 damage. The effect is doubled if cast from the top row of the board.";
+                        break;
+                }
+                break;
+            case 127:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "マリアライト";
+                        DescriptionText.text = "HPを2～10回復する。残りHPが少ない程効果が上がる。";
+                        break;
+                    case 2:
+                        NameText.text = "Marialite";
+                        DescriptionText.text = "Restore 2～10 HP. The effect increases as remaining HP decreases.";
+                        break;
+                }
+                break;
+            case 128:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ゼオライト";
+                        DescriptionText.text = "7シールドを得る。毎ターン最初にこの宝石を消去時、再出現する。";
+                        break;
+                    case 2:
+                        NameText.text = "Zeolite";
+                        DescriptionText.text = "Gain 7 Shield. Reappears the first time this gem is cast each turn.";
+                        break;
+                }
+                break;
+            case 129:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "バーミキュライト";
+                        DescriptionText.text = "次のターン、12シールドを得る。";
+                        break;
+                    case 2:
+                        NameText.text = "Vermiculite";
+                        DescriptionText.text = "Gain 12 Shield next turn.";
+                        break;
+                }
+                break;
+            case 130:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "アイスクリスタル";
+                        DescriptionText.text = "通常の敵及びエリートにのみ25ダメージを与える。";
+                        break;
+                    case 2:
+                        NameText.text = "Ice Crystal";
+                        DescriptionText.text = "Deal 25 damage only to normal enemies and elites.";
+                        break;
+                }
+                break;
+            case 131:
+                if (Iscript != null && Iscript.Bless[29] == 1)
+                {
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText.text = "オーロラクォーツ";
+                            DescriptionText.text = "9シールドを得る。消去時、ランダムな宝石3つをプリズムに変化させる。";
+                            break;
+                        case 2:
+                            NameText.text = "Aurora Quartz";
+                            DescriptionText.text = "Gain 9 Shield. When cast, transform 3 random Gems into Prism.";
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText.text = "オーロラクォーツ";
+                            DescriptionText.text = "6シールドを得る。消去時、ランダムな宝石2つをプリズムに変化させる。";
+                            break;
+                        case 2:
+                            NameText.text = "Aurora Quartz";
+                            DescriptionText.text = "Gain 6 Shield. When cast, transform 2 random Gems into Prism.";
+                            break;
+                    }
+                }
+                break;
+            case 132:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ピンクアメシスト";
+                        DescriptionText.text = "7シールドを得る。盤上の一番下の行で消去した場合、効果が2倍になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Pink Amethyst";
+                        DescriptionText.text = "Gain 7 Shield. The effect is doubled if cast from the bottom row of the board.";
+                        break;
+                }
+                break;
+            case 133:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ルベライト";
+                        DescriptionText.text = $"{Gem133}ダメージを与える。この宝石を装備して戦闘を終了した時、効果が永続的に5増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Rubellite";
+                        DescriptionText.text = $"Deal {Gem133} damage. When battle ends while this gem is equipped, the effect increases by 5 permanently.";
+                        break;
+                }
+                break;
+            case 134:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ブラッドストーン";
+                        DescriptionText.text = "40ダメージを与える。この宝石を取得時、最大HPを50%失う。";
+                        break;
+                    case 2:
+                        NameText.text = "Bloodstone";
+                        DescriptionText.text = "Deal 40 damage. Lose 50% of your maximum HP upon acquiring this gem.";
+                        break;
+                }
+                break;
+            case 135:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ラーヴァ";
+                        DescriptionText.text = "14ダメージを与える。この宝石をハンドする毎に、ターン終了まで与える全てのダメージが2増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Lava";
+                        DescriptionText.text = "Deal 14 damage. Each time this gem is handed, all damage dealt increases by 2 until the end of the turn.";
+                        break;
+                }
+                break;
+            case 136:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "バイオタイト";
+                        DescriptionText.text = "24シールドを得る。ターン終了時までシールドを得られなくなる。";
+                        break;
+                    case 2:
+                        NameText.text = "Biotite";
+                        DescriptionText.text = "Gain 24 Shield. You cannot gain Shield until the end of the turn.";
+                        break;
+                }
+                break;
+            case 137:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "イリジウム";
+                        DescriptionText.text = "13ダメージを与える。4ターン目以降、この宝石は出現しなくなる。";
+                        break;
+                    case 2:
+                        NameText.text = "Iridium";
+                        DescriptionText.text = "Deal 13 damage. This gem will no longer appear from the 4th turn onwards.";
+                        break;
+                }
+                break;
+            case 138:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "セカンダリアメシスト";
+                        DescriptionText.text = "5シールドを得る。「アメシスト」とチェーンを繋げられる。";
+                        break;
+                    case 2:
+                        NameText.text = "Secondary Amethyst";
+                        DescriptionText.text = "Gain 5 Shield. Can link a chain to Amethyst.";
+                        break;
+                }
+                break;
+            case 139:
+                if (Iscript != null && Iscript.Bless[29] == 1)
+                {
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText.text = "セカンダリクォーツ";
+                            DescriptionText.text = "15ダメージを与える。「クォーツ」とチェーンを繋げられる。";
+                            break;
+                        case 2:
+                            NameText.text = "Secondary Quartz";
+                            DescriptionText.text = "Deal 15 Damage. Can link a chain to Quartz.";
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText.text = "セカンダリクォーツ";
+                            DescriptionText.text = "10ダメージを与える。「クォーツ」とチェーンを繋げられる。";
+                            break;
+                        case 2:
+                            NameText.text = "Secondary Quartz";
+                            DescriptionText.text = "Deal 10 Damage. Can link a chain to Quartz.";
+                            break;
+                    }
                 }
                 break;
 
@@ -1654,9 +2209,11 @@ public class InfoDisplay_Gem : MonoBehaviour
     }
     public void OnDisplay()
     {
+        Language = PlayerPrefs.GetInt("Language", 2);
         Gem53 = PlayerPrefs.GetInt("Gem53", 5);
         Gem54 = PlayerPrefs.GetInt("Gem54", 32);
         Gem70 = PlayerPrefs.GetInt("Gem70", 50);
+        Gem133 = PlayerPrefs.GetInt("Gem133", 10);
         if (GemNum >= 0)
         {
             DisplayObj.SetActive(true);

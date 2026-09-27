@@ -31,22 +31,13 @@ public class Enemy_WingJailer : MonoBehaviour
         Language = PlayerPrefs.GetInt("Language", 2);
         StrengthRate = 1f + (Bscript.Iscript.CurrentRound - 1) * 0.2f;
         Invoke("F", 1.5f);
-        switch (PlayerPrefs.GetInt("EnemyStatusLevel", 0))
+        switch (PlayerPrefs.GetInt("EnemyHPLevel", 0))
         {
             case 1:
-                Bscript.EnemyMaxHP = 1640;
+                Bscript.EnemyMaxHP = 1680;
                 break;
             case 2:
-                Bscript.EnemyMaxHP = 1720;
-                break;
-            case 3:
                 Bscript.EnemyMaxHP = 1800;
-                break;
-            case 4:
-                Bscript.EnemyMaxHP = 1880;
-                break;
-            case 5:
-                Bscript.EnemyMaxHP = 1960;
                 break;
         }
         Bscript.EnemyMaxHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * StrengthRate);
@@ -57,15 +48,15 @@ public class Enemy_WingJailer : MonoBehaviour
         switch (Language)
         {
             case 1:
-                AttackText[0].text = ((120 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。盤上の縁にある全ての箇所に牢獄を付与する。";
-                AttackText[1].text = ((200 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
+                AttackText[0].text = ((120 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。盤上の縁にある全ての箇所に牢獄を付与する。";
+                AttackText[1].text = ((200 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate).ToString("0") + "ダメージを与える。";
                 AttackText[2].text = "弱体化" + (50 + Bscript.AbilityLevel * 10).ToString() + "を付与する。";
                 DebuffName.text = "弱体化";
                 DebuffDesc.text = "次に消去する" + Pscript.Debuff_Weak + "個の宝石の効果が50%減少する。";
                 break;
             case 2:
-                AttackText[0].text = "Deal " + ((120 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflict Prizon to all squares on the edge of the board.";
-                AttackText[1].text = "Deal " + ((200 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate).ToString("0") + " Damage. ";
+                AttackText[0].text = "Deal " + ((120 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate).ToString("0") + " Damage. Inflict Prizon to all squares on the edge of the board.";
+                AttackText[1].text = "Deal " + ((200 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate).ToString("0") + " Damage. ";
                 AttackText[2].text = "Inflict Weak " + (50 + Bscript.AbilityLevel * 10).ToString() + ".";
                 DebuffName.text = "Weak";
                 DebuffDesc.text = "The effect of the next " + Pscript.Debuff_Weak + " gems you cast will be reduced by 50%.";
@@ -196,7 +187,7 @@ public class Enemy_WingJailer : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((120 + Bscript.Iscript.Crown * 10) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((120 + Bscript.AttackLevel * 10) * AttackRate * StrengthRate);
     }
     void Act1_3()
     {
@@ -217,7 +208,7 @@ public class Enemy_WingJailer : MonoBehaviour
         GameObject g = Instantiate(AttackObj[0]);
         g.transform.position = this.transform.position;
         g.GetComponent<BlockTrail>().GoPlayer = true;
-        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((200 + Bscript.Iscript.Crown * 20) * AttackRate * StrengthRate);
+        g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((200 + Bscript.AttackLevel * 20) * AttackRate * StrengthRate);
     }
     void Act3_1()
     {
