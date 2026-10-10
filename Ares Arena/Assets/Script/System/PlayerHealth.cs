@@ -15,6 +15,9 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip HealSE;
     public AudioClip RevengeSE;
 
+    public bool IsAres;
+    public Enemy_Ares Ascript;
+
     void Start()
     {
         
@@ -68,6 +71,32 @@ public class PlayerHealth : MonoBehaviour
                         {
                             Iscript.Revenge = Mathf.FloorToInt(100 * Iscript.PlayerHPRate);
                         }
+                        if(Iscript.Bless65 == 1 && d >= 200 * Iscript.Bless[54] + 200)
+                        {
+                            d = 0;
+                            Iscript.Bless65 = 0;
+                        }
+                        if(Iscript.Bless69 > 0)
+                        {
+                            Iscript.Bless69 -= 5;
+                        }
+                        if (Bscript.Iscript.Bless[77] == 1)
+                        {
+                            GameObject g2 = Instantiate(Pscript.AttackEffect);
+                            g2.GetComponent<EffectScript>().EffectNum = 50;
+                            g2.GetComponent<EffectScript>().Bless77 = true;
+                            g2.transform.position = this.transform.position;
+                            g2.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                            g2.SetActive(true);
+                        }
+                        if (Iscript.Bless[70] == 1)
+                        {
+                            Iscript.Bless70 = true;
+                        }
+                        if (Iscript.Bless[79] == 1 && d >= 20)
+                        {
+                            d -= 10;
+                        }
                         Iscript.PlayerHP -= d;
                         Iscript.SE.PlayOneShot(GuardBreakSE);
                         Iscript.SE.PlayOneShot(HitSE);
@@ -87,6 +116,32 @@ public class PlayerHealth : MonoBehaviour
                     if (Bscript.Iscript.Bless[60] == 1 && Iscript.PlayerHP == Iscript.PlayerMaxHP)
                     {
                         Iscript.Revenge = Mathf.FloorToInt(100 * Iscript.PlayerHPRate);
+                    }
+                    if (Iscript.Bless65 == 1 && d >= 200 * Iscript.Bless[54] + 200)
+                    {
+                        d = 0;
+                        Iscript.Bless65 = 0;
+                    }
+                    if (Iscript.Bless69 > 0)
+                    {
+                        Iscript.Bless69 -= 5;
+                    }
+                    if (Bscript.Iscript.Bless[77] == 1)
+                    {
+                        GameObject g2 = Instantiate(Pscript.AttackEffect);
+                        g2.GetComponent<EffectScript>().EffectNum = 50;
+                        g2.GetComponent<EffectScript>().Bless77 = true;
+                        g2.transform.position = this.transform.position;
+                        g2.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                        g2.SetActive(true);
+                    }
+                    if (Iscript.Bless[70] == 1)
+                    {
+                        Iscript.Bless70 = true;
+                    }
+                    if (Iscript.Bless[79] == 1 && d >= 20)
+                    {
+                        d -= 10;
                     }
                     Iscript.PlayerHP -= d;
                     Iscript.SE.PlayOneShot(HitSE);
@@ -108,7 +163,14 @@ public class PlayerHealth : MonoBehaviour
             if (d > 0)
             {
                 g.GetComponent<InfoDisplay_Counter>().Thisnum = d.ToString();
-                Iscript.Revenge += d;
+                if (Pscript.Debuff_Exhaustion > 0)
+                {
+                    Pscript.Debuff_Exhaustion--;
+                }
+                else
+                {
+                    Iscript.Revenge += d;
+                }
                 if (Bscript.Iscript.Bless[26] == 1)
                 {
                     Iscript.Revenge += Mathf.FloorToInt(100 * Iscript.PlayerHPRate * 0.25f);
@@ -163,28 +225,39 @@ public class PlayerHealth : MonoBehaviour
             {
                 Bscript.PlayerShield += 1;
             }
+            if (Bscript.Iscript.Bless[72] == 1)
+            {
+                GameObject g2 = Instantiate(Pscript.HealEffect);
+                g2.GetComponent<EffectScript>().EffectNum = 1;
+                g2.transform.position = this.transform.position;
+                g2.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                g2.SetActive(true);
+            }
             Iscript.SE.PlayOneShot(ShieldSE);
         }
         if (collision.gameObject.tag == "HealEffect")
         {
-            int d = collision.gameObject.GetComponent<EffectScript>().EffectNum;
-            GameObject g = Instantiate(Counter);
-            g.transform.position = this.transform.position;
-            g.GetComponent<InfoDisplay_Counter>().Thisnum = d.ToString();
-            g.GetComponent<InfoDisplay_Counter>().Coloring_R = 0;
-            g.GetComponent<InfoDisplay_Counter>().Coloring_G = 1;
-            g.GetComponent<InfoDisplay_Counter>().Coloring_B = 0;
-            g.SetActive(true);
-            if (Bscript.Iscript.Bless[49] == 1)
+            if (!IsAres || (IsAres && !Ascript.IsRigid))
             {
-                d = Mathf.FloorToInt(d * 1.25f);
+                int d = collision.gameObject.GetComponent<EffectScript>().EffectNum;
+                GameObject g = Instantiate(Counter);
+                g.transform.position = this.transform.position;
+                g.GetComponent<InfoDisplay_Counter>().Thisnum = d.ToString();
+                g.GetComponent<InfoDisplay_Counter>().Coloring_R = 0;
+                g.GetComponent<InfoDisplay_Counter>().Coloring_G = 1;
+                g.GetComponent<InfoDisplay_Counter>().Coloring_B = 0;
+                g.SetActive(true);
+                if (Bscript.Iscript.Bless[49] == 1)
+                {
+                    d = Mathf.FloorToInt(d * 1.4f);
+                }
+                Iscript.PlayerHP += d;
+                if (Iscript.PlayerHP > Iscript.PlayerMaxHP)
+                {
+                    Iscript.PlayerHP = Iscript.PlayerMaxHP;
+                }
+                Iscript.SE.PlayOneShot(HealSE);
             }
-            Iscript.PlayerHP += d;
-            if(Iscript.PlayerHP > Iscript.PlayerMaxHP)
-            {
-                Iscript.PlayerHP = Iscript.PlayerMaxHP;
-            }
-            Iscript.SE.PlayOneShot(HealSE);
         }
         if (collision.gameObject.tag == "RevengeEffect")
         {

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class RestManager : MonoBehaviour
 {
+    SaveData data;
     public GameObject ParentObj;
     public InfoDisplay Iscript;
     public Slider HpSlider;
@@ -63,8 +64,11 @@ public class RestManager : MonoBehaviour
     public CanvasGroup RerollFlash;
     public GameObject RerollButton;
     public TMP_Text RerollText;
+
+    public GameObject AresFlash;
     void Start()
     {
+        data = Iscript.GetComponent<DataManager>().Dscript;
         Iscript.BGMnum = 2;
         Crown = PlayerPrefs.GetInt("Crown", 0);
         if((Iscript.Saint == 6 && Iscript.Crown >= 5) || (Iscript.Saint == 6 && Iscript.Crown >= 4) || (Iscript.Saint == 10 && Iscript.Crown >= 5))
@@ -242,23 +246,68 @@ public class RestManager : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            ShopBless[i] = Random.Range(25, 65);
+            int j1 = Random.Range(0, 5);
+            if (j1 == 0)
+            {
+                ShopBless[i] = Random.Range(71, 81);
+            }
+            else
+            {
+                ShopBless[i] = Random.Range(25, 65);
+            }
         }
         for (; ShopBless[0] == ShopBless[1];)
         {
-            ShopBless[1] = Random.Range(25, 65);
+            int j1 = Random.Range(0, 5);
+            if (j1 == 0)
+            {
+                ShopBless[1] = Random.Range(71, 81);
+            }
+            else
+            {
+                ShopBless[1] = Random.Range(25, 65);
+            }
         }
         for (; ShopBless[0] == ShopBless[2] || ShopBless[1] == ShopBless[2];)
         {
-            ShopBless[2] = Random.Range(25, 65);
+            int j1 = Random.Range(0, 5);
+            if (j1 == 0)
+            {
+                ShopBless[2] = Random.Range(71, 81);
+            }
+            else
+            {
+                ShopBless[2] = Random.Range(25, 65);
+            }
         }
         for (; ShopBless[0] == ShopBless[3] || ShopBless[1] == ShopBless[3] || ShopBless[2] == ShopBless[3];)
         {
-            ShopBless[3] = Random.Range(25, 65);
+            int j1 = Random.Range(0, 5);
+            if (j1 == 0)
+            {
+                ShopBless[3] = Random.Range(71, 81);
+            }
+            else
+            {
+                ShopBless[3] = Random.Range(25, 65);
+            }
         }
         for (; ShopBless[0] == ShopBless[4] || ShopBless[1] == ShopBless[4] || ShopBless[2] == ShopBless[4] || ShopBless[3] == ShopBless[4];)
         {
-            ShopBless[4] = Random.Range(25, 65);
+            int j1 = Random.Range(0, 5);
+            if (j1 == 0)
+            {
+                ShopBless[4] = Random.Range(71, 81);
+            }
+            else
+            {
+                ShopBless[4] = Random.Range(25, 65);
+            }
+        }
+        if(Iscript.Bless81 > 0 && Iscript.Bless81 == Iscript.CurrentRound)
+        {
+            int i = Random.Range(0, 3);
+            ShopBless[i] = 81;
         }
     }
     void Update()
@@ -354,7 +403,6 @@ public class RestManager : MonoBehaviour
             Medal += 2;
             MedalText.text = Medal.ToString();
             PlayerPrefs.SetInt("Medal", Medal);
-            PlayerPrefs.Save();
         }
         if (Iscript.Saint == 3 && Iscript.Crown >= 3)
         {
@@ -366,6 +414,8 @@ public class RestManager : MonoBehaviour
         }
         HpSlider.value = Iscript.PlayerHP;
         HpText.text = Iscript.PlayerHP + "/" + Iscript.PlayerMaxHP;
+        PlayerPrefs.SetInt("RestCount", PlayerPrefs.GetInt("RestCount", 0) + 1);
+        PlayerPrefs.Save();
     }
     public void Train()
     {
@@ -387,6 +437,8 @@ public class RestManager : MonoBehaviour
         HpText.text = Iscript.PlayerHP + "/" + Iscript.PlayerMaxHP;
         Iscript.PlayerHPRate *= TrainNum;
         Iscript.Revenge = Mathf.FloorToInt(Iscript.Revenge * TrainNum) + 1;
+        PlayerPrefs.SetInt("TrainCount", PlayerPrefs.GetInt("TrainCount", 0) + 1);
+        PlayerPrefs.Save();
     }
     public void RestDescOn()
     {
@@ -455,7 +507,7 @@ public class RestManager : MonoBehaviour
             Medal -= ShopGemValue[i];
             MedalText.text = Medal.ToString();
             PlayerPrefs.SetInt("Medal", Medal);
-            PlayerPrefs.SetInt($"GemUnlock{ShopGem[i] + 1}", 1);
+            data.GemUnlock[ShopGem[i] + 1] = 1;
             for (int j = 0; j < GemBox.Length; j++)
             {
                 if (GemBox[j] == -1)
@@ -497,6 +549,19 @@ public class RestManager : MonoBehaviour
                     AlchemyGem();
                 }
             }
+            if (ShopBless[i] == 75)
+            {
+                for (int j = 0; j < 2; j++)
+                {
+                    Offering();
+                }
+            }
+            if (ShopBless[i] == 81)
+            {
+                AresFlash.SetActive(true);
+                Bossanim.Play($"Boss6");
+            }
+
         }
     }
     public void GemHold(int i)
@@ -530,6 +595,7 @@ public class RestManager : MonoBehaviour
             GemInfo[ChoosedBox].GemNum = GemBox[ChoosedBox];
             PlayerPrefs.SetInt($"GemBox{ChoosedBox}", GemBox[ChoosedBox]);
             PlayerPrefs.SetInt($"GemEquip{i}", Iscript.JewelNum[i]);
+            PlayerPrefs.SetInt("A18", 1);
             PlayerPrefs.Save();
             ChoosedBox = -1;
             ChoosedGem = -1;
@@ -581,8 +647,60 @@ public class RestManager : MonoBehaviour
                 GemButton[j].GetComponent<Animator>().Play($"Gem{GemBox[j]}");
                 GemInfo[j].GemNum = GemBox[j];
                 PlayerPrefs.SetInt($"GemBox{j}", Agem);
-                PlayerPrefs.SetInt($"GemUnlock{Agem + 1}", 1);
                 PlayerPrefs.Save();
+                data.GemUnlock[Agem + 1] = 1;
+                break;
+            }
+        }
+    }
+    public void Offering()
+    {
+        int b;
+        int j1 = Random.Range(0, 5);
+        if (j1 == 0)
+        {
+            b = Random.Range(71, 81);
+        }
+        else
+        {
+            b = Random.Range(25, 65);
+        }
+        int k = 1;
+        for (; k > 0;)
+        {
+            j1 = Random.Range(0, 5);
+            if (j1 == 0)
+            {
+                b = Random.Range(71, 81);
+            }
+            else
+            {
+                b = Random.Range(25, 65);
+            }
+            k = 0;
+            for (int j = 0; j < 12; j++)
+            {
+                if (b == Iscript.BlessList[j])
+                {
+                    k += 1;
+                    break;
+                }
+            }
+            for (int j = 0; j < 3; j++)
+            {
+                if (b == ShopBless[j])
+                {
+                    k += 1;
+                    break;
+                }
+            }
+        }
+        for (int j = 0; j < Iscript.BlessList.Length; j++)
+        {
+            if (Iscript.BlessList[j] == 0)
+            {
+                Iscript.BlessAdd(b);
+                data.BlessUnlock[b + 1] = 1;
                 break;
             }
         }

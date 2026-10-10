@@ -834,6 +834,84 @@ public class StarterManager : MonoBehaviour
                             break;
                     }
                     break;
+                case 65:
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText[i].text = "アビスの恩寵";
+                            DescriptionText[i].text = $"最初に受ける200以上のダメージを無効化する。";
+                            break;
+                        case 2:
+                            NameText[i].text = "Grace of the Abyss";
+                            DescriptionText[i].text = $"Negates the first damage taken equal to or greater than 200.";
+                            break;
+                    }
+                    break;
+                case 66:
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText[i].text = "漆黒の護符";
+                            DescriptionText[i].text = $"2回目までの戦闘において、敵のHPが25%減少する。";
+                            break;
+                        case 2:
+                            NameText[i].text = "Jet-black Amulet";
+                            DescriptionText[i].text = $"In battles up to the 2 one, the enemy's HP is reduced by 25%.";
+                            break;
+                    }
+                    break;
+                case 67:
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText[i].text = "ほろ酔い";
+                            DescriptionText[i].text = $"最初のターンにおいて、ランダムな宝石1種類の出現確率が0%になる。";
+                            break;
+                        case 2:
+                            NameText[i].text = "Tipsy";
+                            DescriptionText[i].text = $"On the first turn, the appearance probability of 1 random type of gem becomes 0%.";
+                            break;
+                    }
+                    break;
+                case 68:
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText[i].text = "賭博師";
+                            DescriptionText[i].text = $"スキル使用時、10%の確率で再度スキルが使用可能になる。";
+                            break;
+                        case 2:
+                            NameText[i].text = "Gambler";
+                            DescriptionText[i].text = $"When using a skill, there is a 10% chance that the skill becomes available for use again.";
+                            break;
+                    }
+                    break;
+                case 69:
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText[i].text = "虐殺者";
+                            DescriptionText[i].text = $"与えるダメージが25%増加する。ダメージを受ける毎に効果が5%ずつ減少する。";
+                            break;
+                        case 2:
+                            NameText[i].text = "Slaughterer";
+                            DescriptionText[i].text = $"Damage dealt increases by 25%. The effect decreases by 5% each time damage is taken.";
+                            break;
+                    }
+                    break;
+                case 70:
+                    switch (Language)
+                    {
+                        case 1:
+                            NameText[i].text = "一触即発";
+                            DescriptionText[i].text = $"ダメージを受けた次のターン、ハンド数+2。";
+                            break;
+                        case 2:
+                            NameText[i].text = "Critical Situation";
+                            DescriptionText[i].text = $"The turn after taking damage, Hand +2.";
+                            break;
+                    }
+                    break;
             }
         }
         Iscript.SE.PlayOneShot(StarterSE1);

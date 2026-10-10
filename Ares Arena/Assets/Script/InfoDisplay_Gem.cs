@@ -305,11 +305,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "マラカイト";
-                        DescriptionText.text = "5シールドを得る。ターン終了時に自動で消える。";
+                        DescriptionText.text = "6シールドを得る。ターン終了時に自動で消える。";
                         break;
                     case 2:
                         NameText.text = "Malachite";
-                        DescriptionText.text = "Gain 5 Shield. Cast automatically at the end of the turn.";
+                        DescriptionText.text = "Gain 6 Shield. Cast automatically at the end of the turn.";
                         break;
                 }
                 break;
@@ -344,11 +344,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "アポフィライト";
-                        DescriptionText.text = "7ダメージを与える。現在のターンでハンドした回数x2ダメージを追加で与える。";
+                        DescriptionText.text = "8ダメージを与える。現在のターンでハンドした回数x2ダメージを追加で与える。";
                         break;
                     case 2:
                         NameText.text = "Apophylite";
-                        DescriptionText.text = "Deals 7 damage. Deals an additional Damage equal to 2 times the number of times you have been handed this turn.";
+                        DescriptionText.text = "Deals 8 damage. Deals an additional Damage equal to 2 times the number of times you have been handed this turn.";
                         break;
                 }
                 break;
@@ -370,11 +370,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "ダイヤモンド";
-                        DescriptionText.text = "18シールドを得る。この宝石は通常の50%の確率で降ってくる。";
+                        DescriptionText.text = "17シールドを得る。この宝石は通常の50%の確率で降ってくる。";
                         break;
                     case 2:
                         NameText.text = "Diamond";
-                        DescriptionText.text = "Gain 18 Shield. This gem appears with a 50% probability compared to normal.";
+                        DescriptionText.text = "Gain 17 Shield. This gem appears with a 50% probability compared to normal.";
                         break;
                 }
                 break;
@@ -383,11 +383,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "インビジブライト";
-                        DescriptionText.text = "6シールドを得る。この宝石は通常の20%の確率で降ってくる。";
+                        DescriptionText.text = "5シールドを得る。この宝石は通常の20%の確率で降ってくる。";
                         break;
                     case 2:
                         NameText.text = "Invisiblight";
-                        DescriptionText.text = "Gain 6 Shield. This gem appears with a 20% probability compared to normal.";
+                        DescriptionText.text = "Gain 5 Shield. This gem appears with a 20% probability compared to normal.";
                         break;
                 }
                 break;
@@ -448,11 +448,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "ダイナモライト";
-                        DescriptionText.text = "盤面にあるこの宝石の数と同値のシールドを得る。この宝石はチェーンの影響を受けない。";
+                        DescriptionText.text = "盤面にあるこの宝石の数と同値のシールドを得る。";
                         break;
                     case 2:
                         NameText.text = "Dynamolite";
-                        DescriptionText.text = "Gain a Shield equal to the number of these gems on the board. These gems are unaffected by chains.";
+                        DescriptionText.text = "Gain a Shield equal to the number of these gems on the board.";
                         break;
                 }
                 break;
@@ -478,7 +478,7 @@ public class InfoDisplay_Gem : MonoBehaviour
                         break;
                     case 2:
                         NameText.text = "Beryl";
-                        DescriptionText.text = "Gain 6 Shield. Restore 5 HP.";
+                        DescriptionText.text = "Gain 6 Shield. Restore 2 HP.";
                         break;
                 }
                 break;
@@ -487,11 +487,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "サルファー";
-                        DescriptionText.text = "27ダメージを与える。HPを2失う。";
+                        DescriptionText.text = "26ダメージを与える。HPを2失う。";
                         break;
                     case 2:
                         NameText.text = "Sulfer";
-                        DescriptionText.text = "Deals 27 Damage. Lose 2 HP.";
+                        DescriptionText.text = "Deals 26 Damage. Lose 2 HP.";
                         break;
                 }
                 break;
@@ -543,7 +543,7 @@ public class InfoDisplay_Gem : MonoBehaviour
                         break;
                     case 2:
                         NameText.text = "Tormaline";
-                        DescriptionText.text = "Deals 5?40 damage. The damage value is random.";
+                        DescriptionText.text = "Deals 5~40 damage. The damage value is random.";
                         break;
                 }
                 break;
@@ -552,11 +552,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "ビスマス";
-                        DescriptionText.text = "13シールドを得る。HPを1失う。";
+                        DescriptionText.text = "12シールドを得る。HPを1失う。";
                         break;
                     case 2:
                         NameText.text = "Bismuth";
-                        DescriptionText.text = "Gain 13 Shield. Lose 1 HP.";
+                        DescriptionText.text = "Gain 12 Shield. Lose 1 HP.";
                         break;
                 }
                 break;
@@ -565,11 +565,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "ラブラドライト";
-                        DescriptionText.text = "30ダメージを与える。7チェーン以上繋げると、ハンド数-2。";
+                        DescriptionText.text = "28ダメージを与える。7チェーン以上繋げると、ハンド数-2。";
                         break;
                     case 2:
                         NameText.text = "Labradorite";
-                        DescriptionText.text = "Deals 30 damage. If you chain 7 or more, hand -2.";
+                        DescriptionText.text = "Deals 28 damage. If you chain 7 or more, hand -2.";
                         break;
                 }
                 break;
@@ -617,11 +617,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "リビアングラス";
-                        DescriptionText.text = "12ダメージを与える。16チェーン以上繋げると、スキルが回復する。";
+                        DescriptionText.text = "14ダメージを与える。16チェーン以上繋げると、スキルが回復する。";
                         break;
                     case 2:
                         NameText.text = "Libyanglass";
-                        DescriptionText.text = "Deals 12 damage. If you chain 16 or more, restores the skill.";
+                        DescriptionText.text = "Deals 14 damage. If you chain 16 or more, restores the skill.";
                         break;
                 }
                 break;
@@ -630,11 +630,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "アレキサンドライト";
-                        DescriptionText.text = "32ダメージを与える。最大HPを2失う。";
+                        DescriptionText.text = "30ダメージを与える。最大HPを2失う。";
                         break;
                     case 2:
                         NameText.text = "Alexandrite";
-                        DescriptionText.text = "Deal 32 damage. Lose 2 max HP.";
+                        DescriptionText.text = "Deal 30 damage. Lose 2 max HP.";
                         break;
                 }
                 break;
@@ -643,11 +643,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "シトリン";
-                        DescriptionText.text = "15ダメージを与える。5チェーン以下だった場合、消えた宝石が再出現する。";
+                        DescriptionText.text = "16ダメージを与える。5チェーン以下だった場合、消えた宝石が再出現する。";
                         break;
                     case 2:
                         NameText.text = "Citrine";
-                        DescriptionText.text = "Deals 15 damage. If the chain is 5 or less, the cleared gems reappear.";
+                        DescriptionText.text = "Deals 16 damage. If the chain is 5 or less, the cleared gems reappear.";
                         break;
                 }
                 break;
@@ -721,11 +721,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "コランダム";
-                        DescriptionText.text = "18ダメージを与える。弱体化を追加で4スタック解除する。";
+                        DescriptionText.text = "17ダメージを与える。弱体化を追加で4スタック解除する。";
                         break;
                     case 2:
                         NameText.text = "Corundum";
-                        DescriptionText.text = "Deals 18 damage. Removes 4 additional stacks of Weak.";
+                        DescriptionText.text = "Deals 17 damage. Removes 4 additional stacks of Weak.";
                         break;
                 }
                 break;
@@ -833,7 +833,7 @@ public class InfoDisplay_Gem : MonoBehaviour
                         break;
                     case 2:
                         NameText.text = "Larimar";
-                        DescriptionText.text = $"Deals {Gem54} damage. The effect is reduced by 1 until the end of the turn.";
+                        DescriptionText.text = $"Deal {Gem54} damage. The effect is reduced by 1 until the end of the turn.";
                         break;
                 }
                 break;
@@ -842,11 +842,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "モルダバイト";
-                        DescriptionText.text = "17ダメージを与える。15チェーン以上繋げると、出現確率が2倍になる。";
+                        DescriptionText.text = "15ダメージを与える。17チェーン以上繋げると、出現確率が2倍になる。";
                         break;
                     case 2:
                         NameText.text = "Moldavite";
-                        DescriptionText.text = "Deals 17 damage. If you chain 15 or more, doubles the appearance rate.";
+                        DescriptionText.text = "Deal 15 damage. If you chain 17 or more, doubles the appearance rate.";
                         break;
                 }
                 break;
@@ -855,11 +855,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "シェル";
-                        DescriptionText.text = "現在のターンでHPを失った回数に等しいダメージを与える。";
+                        DescriptionText.text = "現在のターンでHPを失った回数の2倍に等しいダメージを与える。";
                         break;
                     case 2:
                         NameText.text = "Shell";
-                        DescriptionText.text = "Deals damage equal to the number of times HP was lost during the current turn.";
+                        DescriptionText.text = "Deal damage equal to twice the number of times HP was lost during the current turn.";
                         break;
                 }
                 break;
@@ -959,11 +959,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "ブラックダイヤモンド";
-                        DescriptionText.text = "18ダメージを与える。この宝石の出現確率が15%以下ならば、効果が2倍になる。";
+                        DescriptionText.text = "17ダメージを与える。この宝石の出現確率が15%以下ならば、効果が2倍になる。";
                         break;
                     case 2:
                         NameText.text = "Black Diamond";
-                        DescriptionText.text = "Deals 18 damage. If the appearance rate of this gem is 15% or less, the effect is doubled.";
+                        DescriptionText.text = "Deals 17 damage. If the appearance rate of this gem is 15% or less, the effect is doubled.";
                         break;
                 }
                 break;
@@ -985,11 +985,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "ハウライト";
-                        DescriptionText.text = "5の倍数チェーンを繋げる毎にハンド数+1。";
+                        DescriptionText.text = "4の倍数チェーンを繋げる毎にハンド数+1。";
                         break;
                     case 2:
                         NameText.text = "Howlite";
-                        DescriptionText.text = "Hand +1 for every chain that is a multiple of 5.";
+                        DescriptionText.text = "Hand +1 for every chain that is a multiple of 4.";
                         break;
                 }
                 break;
@@ -1158,11 +1158,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "アズライト";
-                        DescriptionText.text = "16ダメージを与える。シールドを持つ敵に対しては効果が2倍になる。";
+                        DescriptionText.text = "17ダメージを与える。シールドを持つ敵に対しては効果が2倍になる。";
                         break;
                     case 2:
                         NameText.text = "Azurite";
-                        DescriptionText.text = "Deals 16 damage. The effect is doubled against enemies with shields.";
+                        DescriptionText.text = "Deals 17 damage. The effect is doubled against enemies with shields.";
                         break;
                 }
                 break;
@@ -1296,11 +1296,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "チャロアイト";
-                        DescriptionText.text = "HPを8回復する。最大HPを1失う。";
+                        DescriptionText.text = "HPを7回復する。最大HPを1失う。";
                         break;
                     case 2:
                         NameText.text = "Charoite";
-                        DescriptionText.text = "Restore 8 HP. Lose 1 max HP.";
+                        DescriptionText.text = "Restore 7 HP. Lose 1 max HP.";
                         break;
                 }
                 break;
@@ -1417,11 +1417,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "スイートテンダイヤモンド";
-                        DescriptionText.text = "HPを7回復する。3ダメージ分のリベンジを失う。";
+                        DescriptionText.text = "HPを7回復する。4ダメージ分のリベンジを失う。";
                         break;
                     case 2:
                         NameText.text = "Sweet Ten Diamond";
-                        DescriptionText.text = "Restore 7 HP. Lose 3 damages of Revenge.";
+                        DescriptionText.text = "Restore 7 HP. Lose 4 damages of Revenge.";
                         break;
                 }
                 break;
@@ -1655,11 +1655,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "メタモルフォーゼス";
-                        DescriptionText.text = "12シールドを得る。ターン開始時、ランダムな装備中の宝石に変化する。";
+                        DescriptionText.text = "7シールドを得る。ターン開始時、ランダムな装備中の宝石に変化する。";
                         break;
                     case 2:
                         NameText.text = "Metamorphoses";
-                        DescriptionText.text = "Gain 12 Shield. At the start of the turn, transform into a random equipped Gem.";
+                        DescriptionText.text = "Gain 7 Shield. At the start of the turn, transform into a random equipped Gem.";
                         break;
                 }
                 break;
@@ -1863,11 +1863,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "ティファニーストーン";
-                        DescriptionText.text = "15ダメージを与える。盤上の一番上の行で消去した場合、効果が2倍になる。";
+                        DescriptionText.text = "16ダメージを与える。盤上の一番上の行で消去した場合、効果が2倍になる。";
                         break;
                     case 2:
                         NameText.text = "Tiffany Stone";
-                        DescriptionText.text = "Deal 15 damage. The effect is doubled if cast from the top row of the board.";
+                        DescriptionText.text = "Deal 16 damage. The effect is doubled if cast from the top row of the board.";
                         break;
                 }
                 break;
@@ -1958,11 +1958,11 @@ public class InfoDisplay_Gem : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "ピンクアメシスト";
-                        DescriptionText.text = "7シールドを得る。盤上の一番下の行で消去した場合、効果が2倍になる。";
+                        DescriptionText.text = "8シールドを得る。盤上の一番下の行で消去した場合、効果が2倍になる。";
                         break;
                     case 2:
                         NameText.text = "Pink Amethyst";
-                        DescriptionText.text = "Gain 7 Shield. The effect is doubled if cast from the bottom row of the board.";
+                        DescriptionText.text = "Gain 8 Shield. The effect is doubled if cast from the bottom row of the board.";
                         break;
                 }
                 break;
@@ -2198,6 +2198,19 @@ public class InfoDisplay_Gem : MonoBehaviour
                     case 2:
                         NameText.text = "Dummy Gem";
                         DescriptionText.text = "No Effects.";
+                        break;
+                }
+                break;
+            case 310:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ブラックスター";
+                        DescriptionText.text = "10ダメージを受ける。";
+                        break;
+                    case 2:
+                        NameText.text = "Black Star";
+                        DescriptionText.text = "Take 10 Damage.";
                         break;
                 }
                 break;

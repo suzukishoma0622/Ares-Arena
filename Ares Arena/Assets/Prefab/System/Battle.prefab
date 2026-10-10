@@ -18627,6 +18627,8 @@ MonoBehaviour:
   PoizonSE: {fileID: 8300000, guid: 473acabdaa3f458bbbf90a94cdc6863b, type: 3}
   HealSE: {fileID: 8300000, guid: 762edaef32804a009a75ab0d43acd8e5, type: 3}
   RevengeSE: {fileID: 8300000, guid: 3b6fc3037bf24f89855f978c45ff7243, type: 3}
+  IsAres: 0
+  Ascript: {fileID: 0}
 --- !u!58 &5585706470664204102
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -32124,6 +32126,7 @@ MonoBehaviour:
   Debuff_Lightning: 0
   Debuff_Weak: 0
   Debuff_Void: 0
+  Debuff_Exhaustion: 0
   IsAgate: 0
   IsCitrine: 0
   IsTimemachine: 0
@@ -32142,6 +32145,7 @@ MonoBehaviour:
   IsBlackSniper: 0
   Bscript2: {fileID: 0}
   DayBreak: 0
+  Blackstar: 0
   Gem54: 32
   Gem133: 0
   Gem135: 0
@@ -32267,6 +32271,7 @@ MonoBehaviour:
   SentrySE: {fileID: 8300000, guid: 9982ffbed88c46159b8c064c6435def4, type: 3}
   GolemSE: {fileID: 8300000, guid: 33e7a5f360c44d5c90bb59b227d84ccd, type: 3}
   RevenantSE: {fileID: 8300000, guid: 11178207a9344716a4c97c7da41f4392, type: 3}
+  GamblerSE: {fileID: 8300000, guid: 84f0bcc022c140468428d6865a3dce1c, type: 3}
 --- !u!1 &5343362865526453094
 GameObject:
   m_ObjectHideFlags: 0
@@ -37664,6 +37669,8 @@ MonoBehaviour:
   Cscript: {fileID: 0}
   IsStaticBeast: 0
   Sscript: {fileID: 0}
+  IsAres: 0
+  Ascript: {fileID: 0}
   Evasion: 0
 --- !u!58 &5421173481401525899
 CircleCollider2D:

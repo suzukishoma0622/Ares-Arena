@@ -60,7 +60,7 @@ public class Enemy_Experiment : MonoBehaviour
                 AttackText[1].text = "Deal " + ((640 + Bscript.AttackLevel * 60) * AttackRate * StrengthRate).ToString("0") + " Damage.";
                 AttackText[2].text = "Gain " + (600 + Bscript.HPLevel * 100).ToString() + " Shield. Restore 600 HP.";
                 AttackText[3].text = "The effect of Radiance is increased by 10%.";
-                DebuffDesc[0].text = "It reappears after being cast. When it reaches the bottom row, take " + Daybreak + " Damage.";
+                DebuffDesc[0].text = "When a gem appears, there is a " + Daybreak + "% chance it will transform into a Daybreak.";
                 DebuffDesc[1].text = "No effects.";
                 break;
         }

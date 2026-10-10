@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class InfoDisplay : MonoBehaviour
 {
+    SaveData data;
     public int PlayerMaxHP;
     public int PlayerHP;
     int HP2;
@@ -28,6 +29,7 @@ public class InfoDisplay : MonoBehaviour
     public Animator Crownanim;
 
     public int Crown;
+    public int Casual;
     public int Boss;
 
     public AudioSource BGM;
@@ -35,6 +37,7 @@ public class InfoDisplay : MonoBehaviour
     public AudioSource BattleBGM;
     public AudioSource SilentBGM;
     public AudioSource BossBGM;
+    public AudioSource AresBGM;
     public int BGMnum;
     public AudioClip OKSE;
     public AudioClip BlessSE;
@@ -62,14 +65,27 @@ public class InfoDisplay : MonoBehaviour
 
     public int Bless20;
     public int Bless24;
+    public int Bless65;
+    public int Bless69;
+    public bool Bless70;
+    public int Bless81;
 
     void Start()
     {
+        data = GetComponent<DataManager>().Dscript;
         Crown = PlayerPrefs.GetInt("Crown", 0);
+        Casual = PlayerPrefs.GetInt("Casual", 0);
         Boss = Random.Range(0, 5);
         if (Crown == 0)
         {
-            Crownanim.gameObject.SetActive(false);
+            if(Casual == 1)
+            {
+                Crownanim.Play("Casual");
+            }
+            else
+            {
+                Crownanim.gameObject.SetActive(false);
+            }
         }
         else
         {
@@ -135,6 +151,10 @@ public class InfoDisplay : MonoBehaviour
                 PlayerMaxHP = 380;
                 break;
         }
+        if(Casual == 1)
+        {
+            PlayerMaxHP = Mathf.FloorToInt(PlayerMaxHP * 1.25f);
+        }
         if((Saint == 1 && Crown >= 2) || (Saint == 5 && Crown >= 3) || (Saint == 6 && Crown >= 4) || (Saint == 9 && Crown >= 5) || (Saint == 13 && Crown >= 5))
         {
             PlayerMaxHP = Mathf.FloorToInt(PlayerMaxHP * 0.9f);
@@ -160,10 +180,13 @@ public class InfoDisplay : MonoBehaviour
         PlayerPrefs.SetInt("Medal", 0);
         PlayerPrefs.SetInt("StarterCount", 0);
         PlayerPrefs.SetInt("Gem53", 5);
-        PlayerPrefs.SetInt("Gem70", 50);
+        PlayerPrefs.SetInt("Gem70", 60);
         PlayerPrefs.SetInt("Gem133", 10);
         PlayerPrefs.SetInt("SentryRevenge", 0);
-        for(int i = 0; i < 4; i++)
+        PlayerPrefs.SetInt("RestCount", 0);
+        PlayerPrefs.SetInt("TrainCount", 0);
+        PlayerPrefs.SetInt("A18", 0);
+        for (int i = 0; i < 4; i++)
         {
             PlayerPrefs.SetInt($"Potion{i}", 0);
         }
@@ -172,6 +195,10 @@ public class InfoDisplay : MonoBehaviour
             PlayerPrefs.SetInt($"Droid{i}", 1);
         }
         PlayerPrefs.Save();
+        if(PlayerPrefs.GetInt("Tutorial5", 0) == 2 && PlayerPrefs.GetInt("Casual", 0) == 0)
+        {
+            Bless81 = Random.Range(2, 7);
+        }
         BGnum = Random.Range(0, BGMPool1.Length);
         BGanim[0].Play($"GameBG1_{BGnum + 1}");
         BGanim[1].Play($"GameBG2_{BGnum + 1}");
@@ -201,6 +228,7 @@ public class InfoDisplay : MonoBehaviour
                 BattleBGM.volume -= Time.deltaTime;
                 SilentBGM.volume -= Time.deltaTime;
                 BossBGM.volume -= Time.deltaTime * 2f;
+                AresBGM.volume -= Time.deltaTime * 2f;
                 break;
             case 1:
                 BattleBGM.volume += Time.deltaTime;
@@ -216,6 +244,11 @@ public class InfoDisplay : MonoBehaviour
                 BattleBGM.volume -= Time.deltaTime;
                 SilentBGM.volume -= Time.deltaTime;
                 BossBGM.volume = 1f;
+                break;
+            case 4:
+                BattleBGM.volume -= Time.deltaTime;
+                SilentBGM.volume -= Time.deltaTime;
+                AresBGM.volume = 1f;
                 break;
         }
         for(int i = 0; i < JewelNum.Length; i++)
@@ -284,8 +317,7 @@ public class InfoDisplay : MonoBehaviour
         BlessObj[BlessGain].GetComponent<InfoDisplay_Bless>().BlessNum = i;
         BlessGain += 1;
         SE.PlayOneShot(BlessSE);
-        PlayerPrefs.SetInt($"BlessUnlock{i}", 1);
-        PlayerPrefs.Save();
+        data.BlessUnlock[i] = 1;
         switch(i)
         {
             case 1:
@@ -348,6 +380,30 @@ public class InfoDisplay : MonoBehaviour
                 {
                     Bless24 += 2;
                 }
+                if (Bless[65] == 1)
+                {
+                    Bless65 += 1;
+                }
+                if (Bless[69] == 1)
+                {
+                    Bless69 += 25;
+                }
+                break;
+            case 65:
+                Bless65 = 1;
+                break;
+            case 69:
+                Bless69 = 25;
+                break;
+            case 71:
+                if (Bless[3] == 1)
+                {
+                    PlayerMaxHP += Mathf.FloorToInt((PlayerMaxHP - PlayerHP) * 0.1f);
+                }
+                PlayerHP = PlayerMaxHP;
+                break;
+            case 81:
+                Boss = 6;
                 break;
         }
     }

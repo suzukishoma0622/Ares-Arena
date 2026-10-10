@@ -2,9 +2,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+#if !UNITY_WEBGL
+using Steamworks;
+#endif
 
 public class BattleManager : MonoBehaviour
 {
+    SaveData data;
     public PuzzleManager Pscript;
     public InfoDisplay Iscript;
     public int CurrentRound;
@@ -73,13 +77,23 @@ public class BattleManager : MonoBehaviour
     public AudioClip DefeatBGM;
 
     public int Bless22;
+
     void Start()
     {
+        data = Iscript.GetComponent<DataManager>().Dscript;
         Iscript.SE.PlayOneShot(StartSE);
         if (Iscript.CurrentRound == 7)
         {
-            Iscript.BGMnum = 3;
-            Iscript.BossBGM.Play();
+            if (Iscript.Boss == 6)
+            {
+                Iscript.BGMnum = 4;
+                Iscript.AresBGM.Play();
+            }
+            else
+            {
+                Iscript.BGMnum = 3;
+                Iscript.BossBGM.Play();
+            }
         }
         else
         {
@@ -254,7 +268,7 @@ public class BattleManager : MonoBehaviour
         AbilityLevel = PlayerPrefs.GetInt("EnemyAbilityLevel", 0);
         if (Iscript.CurrentRound == 7 && (Iscript.Saint == 1 && Iscript.Crown >= 5) || (Iscript.Saint == 8 && Iscript.Crown >= 5) || (Iscript.Saint == 14 && Iscript.Crown >= 5))
         {
-            EnemyMaxHP *= Mathf.FloorToInt(EnemyMaxHP * 1.25f);
+            EnemyMaxHP = Mathf.FloorToInt(EnemyMaxHP * 1.25f);
             EnemyHP = EnemyMaxHP;
         }
     }
@@ -434,6 +448,78 @@ public class BattleManager : MonoBehaviour
             Iscript.SE.PlayOneShot(DefeatBGM);
             Iscript.BGMnum = 0;
         }
+        #if !UNITY_WEBGL
+
+        if(Iscript.CurrentRound == 7)
+        {
+            if (SteamManager.Initialized)
+            {
+                SteamUserStats.GetAchievement($"Achieve{Iscript.Boss + 7}", out bool isUnlocked);
+                if (!isUnlocked)
+                {
+                    SteamUserStats.SetAchievement($"Achieve{Iscript.Boss + 7}");
+                }
+
+                if (PlayerPrefs.GetInt("Damaged", 0) == 0)
+                {
+                    SteamUserStats.GetAchievement("Achieve21", out bool isUnlocked2);
+                    if (!isUnlocked2)
+                    {
+                        SteamUserStats.SetAchievement("Achieve21");
+                    }
+                }
+            }
+            SteamUserStats.StoreStats();
+        }
+        if(CurrentRound == 1)
+        {
+            if (SteamManager.Initialized)
+            {
+                SteamUserStats.GetAchievement("Achieve15", out bool isUnlocked);
+                if (!isUnlocked)
+                {
+                    SteamUserStats.SetAchievement("Achieve15");
+                }
+                SteamUserStats.StoreStats();
+            }
+        }
+        if (Iscript.CurrentRound == 7 && Iscript.BlessList[1] == 0)
+        {
+            if (SteamManager.Initialized)
+            {
+                SteamUserStats.GetAchievement("Achieve17", out bool isUnlocked);
+                if (!isUnlocked)
+                {
+                    SteamUserStats.SetAchievement("Achieve17");
+                }
+                SteamUserStats.StoreStats();
+            }
+        }
+        if (Iscript.CurrentRound == 3 && PlayerPrefs.GetInt("A18", 0) == 0)
+        {
+            if (SteamManager.Initialized)
+            {
+                SteamUserStats.GetAchievement("Achieve18", out bool isUnlocked);
+                if (!isUnlocked)
+                {
+                    SteamUserStats.SetAchievement("Achieve18");
+                }
+                SteamUserStats.StoreStats();
+            }
+        }
+        if (PlayerPrefs.GetInt("Skilled", 0) == 0)
+        {
+            if (SteamManager.Initialized)
+            {
+                SteamUserStats.GetAchievement("Achieve24", out bool isUnlocked);
+                if (!isUnlocked)
+                {
+                    SteamUserStats.SetAchievement("Achieve24");
+                }
+                SteamUserStats.StoreStats();
+            }
+        }
+#endif
     }
     public void RoundStart()
     {
@@ -501,7 +587,25 @@ public class BattleManager : MonoBehaviour
                 g3.GetComponent<BlockTrail>().GoPlayer = true;
                 g3.SetActive(true);
             }
-            if(Pscript.IsFilamentMilitar)
+            if (Iscript.Bless[78] == 1 && RevengeSlider.value == RevengeSlider.maxValue)
+            {
+                GameObject g = Instantiate(Pscript.HealEffect);
+                g.transform.position = this.transform.position;
+                g.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt(Iscript.PlayerMaxHP * 0.05f);
+                g.GetComponent<BlockTrail>().GoPlayer = true;
+                g.SetActive(true);
+                if (Iscript.Bless[3] == 1)
+                {
+                    Pscript.Bless3 += Iscript.PlayerMaxHP * 0.05f * 0.1f;
+                    if (Pscript.Bless3 >= 1f)
+                    {
+                        Iscript.PlayerMaxHP += Mathf.FloorToInt(Pscript.Bless3 * (1 + Iscript.Bless[54]));
+                        Iscript.PlayerHP += Mathf.FloorToInt(Pscript.Bless3 * (1 + Iscript.Bless[54]));
+                        Pscript.Bless3 -= Mathf.FloorToInt(Pscript.Bless3 * (1 + Iscript.Bless[54]));
+                    }
+                }
+            }
+            if (Pscript.IsFilamentMilitar)
             {
                 if(Pscript.Fscript.Bind > 0)
                 {
@@ -539,7 +643,12 @@ public class BattleManager : MonoBehaviour
         {
             RewardMedal += 1;
         }
-        for(int j = 0;j < 5; j++)
+        if (Iscript.Bless[74] == 1)
+        {
+            RewardMedal += 4;
+            Iscript.Bless[74] = 2;
+        }
+        for (int j = 0;j < 5; j++)
         {
             if (Pscript.EquipJewel[j] == 89)
             {
@@ -579,12 +688,9 @@ public class BattleManager : MonoBehaviour
     }
     public void GoTitle()
     {
-        int Played = PlayerPrefs.GetInt("Played");
-        if(Iscript.Saint == Played + 1)
+        if(Iscript.Saint == data.SaintUnlock + 1)
         {
-            Played = Iscript.Saint;
-            PlayerPrefs.SetInt("Played", Played);
-            PlayerPrefs.Save();
+            data.SaintUnlock = Iscript.Saint;
         }
         GameOverCG[2].gameObject.SetActive(true);
         Invoke("T", 1.5f);

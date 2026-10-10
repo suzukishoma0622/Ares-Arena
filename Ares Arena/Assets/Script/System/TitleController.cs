@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class TitleController : MonoBehaviour
 {
+    SaveData data;
     public bool[] IsSwitch;
     public float[] SwitchNum;
 
@@ -16,7 +17,9 @@ public class TitleController : MonoBehaviour
     public CanvasGroup OptionCG;
     public GameObject CreditCG;
     public GameObject LibraryCG;
+    public GameObject LibraryButton;
     public GameObject QuitCG;
+
     public TMP_Text[] VolumeText;
     public Slider[] VolumeSlider;
     public TMP_Text LanguageText;
@@ -49,7 +52,7 @@ public class TitleController : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.SetInt("CurrentDifficulty", 0);
+        data = GetComponent<DataManager>().Dscript;
         PlayerPrefs.SetInt("Tutorial", 0);
         PlayerPrefs.Save();
         Language = PlayerPrefs.GetInt("Language", 2);
@@ -111,6 +114,21 @@ public class TitleController : MonoBehaviour
                 Screen.SetResolution(3840, 2160, Screen.fullScreen);
                 break;
         }
+        if (PlayerPrefs.GetInt("RunClear", 0) == 0)
+        {
+            LibraryButton.SetActive(false);
+        }
+        if(!data.FirstLoad)
+        {
+            for(int i = 1; i < 30; i++)
+            {
+                data.MaxCrown[i] = PlayerPrefs.GetInt($"MaxCrown{i}", 0);
+                data.SaintCrown[i] = PlayerPrefs.GetInt($"SaintCrown{i}", 0);
+            }
+            data.SaintUnlock = PlayerPrefs.GetInt("Played", 0);
+            data.FirstLoad = true;
+        }
+        GetComponent<DataManager>().Save(data);
     }
     void Update()
     {

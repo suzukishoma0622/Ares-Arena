@@ -126,11 +126,11 @@ public class InfoDisplay_Bless : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "恍惚";
-                        DescriptionText.text = $"3回目までの戦闘終了時、HPを{20 * (1 + Iscript.Bless[54])}%回復する。";
+                        DescriptionText.text = $"3回目までの戦闘終了時、HPを{18 * (1 + Iscript.Bless[54])}%回復する。";
                         break;
                     case 2:
                         NameText.text = "Ecstasy";
-                        DescriptionText.text = $"After the first 3 battles, recover {20 * (1 + Iscript.Bless[54])}% of your HP.";
+                        DescriptionText.text = $"After the first 3 battles, recover {18 * (1 + Iscript.Bless[54])}% of your HP.";
                         break;
                 }
                 break;
@@ -426,11 +426,11 @@ public class InfoDisplay_Bless : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "深呼吸";
-                        DescriptionText.text = "ダメージを受けた次のターン、受けたダメージの20%にあたるシールドを得る。";
+                        DescriptionText.text = "ダメージを受けた次のターン、最大HPの10%にあたるシールドを得る。";
                         break;
                     case 2:
                         NameText.text = "Deep Breath";
-                        DescriptionText.text = "On the turn after taking damage, gain a shield equal to 20% of the damage received.";
+                        DescriptionText.text = "On the turn after taking damage, gain a shield equal to 10% of the maximum HP.";
                         break;
                 }
                 break;
@@ -478,11 +478,11 @@ public class InfoDisplay_Bless : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "縫合";
-                        DescriptionText.text = "ターン開始時、HPを2%回復する。";
+                        DescriptionText.text = "ターン開始時、HPを3%回復する。";
                         break;
                     case 2:
                         NameText.text = "Suture";
-                        DescriptionText.text = "At the start of the turn, restore 2% HP.";
+                        DescriptionText.text = "At the start of the turn, restore 3% HP.";
                         break;
                 }
                 break;
@@ -660,11 +660,11 @@ public class InfoDisplay_Bless : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "万能薬";
-                        DescriptionText.text = "HPの回復効果が25%増加する。";
+                        DescriptionText.text = "HPの回復効果が40%増加する。";
                         break;
                     case 2:
                         NameText.text = "Panacea";
-                        DescriptionText.text = "HP recovery effects are increased by 25%.";
+                        DescriptionText.text = "HP recovery effects are increased by 40%.";
                         break;
                 }
                 break;
@@ -860,6 +860,241 @@ public class InfoDisplay_Bless : MonoBehaviour
                     case 2:
                         NameText.text = "Ironman";
                         DescriptionText.text = "Gain 50 Shield each time Revenge is activated.";
+                        break;
+                }
+                break;
+            case 65:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "アビスの恩寵";
+                        if (Iscript.Bless65 == 0)
+                        {
+                            DescriptionText.text = "この祝福の能力は発動済み。";
+                        }
+                        else
+                        {
+                            DescriptionText.text = $"最初に受ける{200 * (1 + Iscript.Bless[54])}以上のダメージを無効化する。";
+                        }
+                        break;
+                    case 2:
+                        NameText.text = "Grace of the Abyss";
+                        if (Iscript.Bless65 == 0)
+                        {
+                            DescriptionText.text = "This bless's ability has already been activated.";
+                        }
+                        else
+                        {
+                            DescriptionText.text = $"Negates the first damage taken equal to or greater than {200 * (1 + Iscript.Bless[54])}.";
+                        }
+                        break;
+                }
+                break;
+            case 66:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "漆黒の護符";
+                        DescriptionText.text = $"{2 * (1 + Iscript.Bless[54])}回目までの戦闘において、敵のHPが25%減少する。";
+                        break;
+                    case 2:
+                        NameText.text = "Jet-black Amulet";
+                        DescriptionText.text = $"In battles up to the {2 * (1 + Iscript.Bless[54])} one, the enemy's HP is reduced by 25%.";
+                        break;
+                }
+                break;
+            case 67:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "ほろ酔い";
+                        DescriptionText.text = $"最初のターンにおいて、ランダムな宝石{1 + Iscript.Bless[54]}種類の出現確率が0%になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Tipsy";
+                        DescriptionText.text = $"On the first turn, the appearance probability of {1 + Iscript.Bless[54]} random type of gem becomes 0%.";
+                        break;
+                }
+                break;
+            case 68:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "賭博師";
+                        DescriptionText.text = $"スキル使用時、{10 + Iscript.Bless[54]}%の確率で再度スキルが使用可能になる。";
+                        break;
+                    case 2:
+                        NameText.text = "Gambler";
+                        DescriptionText.text = $"When using a skill, there is a {10 + Iscript.Bless[54]}% chance that the skill becomes available for use again.";
+                        break;
+                }
+                break;
+            case 69:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "虐殺者";
+                        DescriptionText.text = $"与えるダメージが{Iscript.Bless69}%増加する。ダメージを受ける毎に効果が5%ずつ減少する。";
+                        break;
+                    case 2:
+                        NameText.text = "Slaughterer";
+                        DescriptionText.text = $"Damage dealt increases by {Iscript.Bless69}%. The effect decreases by 5% each time damage is taken.";
+                        break;
+                }
+                break;
+            case 70:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "一触即発";
+                        DescriptionText.text = $"ダメージを受けた次のターン、ハンド数+{2 + Iscript.Bless[54]}。";
+                        break;
+                    case 2:
+                        NameText.text = "Critical Situation";
+                        DescriptionText.text = $"The turn after taking damage, Hand +{2 + Iscript.Bless[54]}.";
+                        break;
+                }
+                break;
+            case 71:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "楽園";
+                        DescriptionText.text = "取得時、HPを全回復する。";
+                        break;
+                    case 2:
+                        NameText.text = "Paradise";
+                        DescriptionText.text = "Fully restores HP when obtained.";
+                        break;
+                }
+                break;
+            case 72:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "要塞";
+                        DescriptionText.text = "シールドを得る毎に、HPを1回復する。";
+                        break;
+                    case 2:
+                        NameText.text = "Fortress";
+                        DescriptionText.text = "Restore 1 HP each time you gain a shield.";
+                        break;
+                }
+                break;
+            case 73:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "真理";
+                        DescriptionText.text = "ボスのHPが15%減少する。";
+                        break;
+                    case 2:
+                        NameText.text = "Verity";
+                        DescriptionText.text = "The boss's HP decreases by 15%.";
+                        break;
+                }
+                break;
+            case 74:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "投資家";
+                        DescriptionText.text = "次の戦闘終了時、追加で4枚のメダルを得る。";
+                        break;
+                    case 2:
+                        NameText.text = "Investor";
+                        DescriptionText.text = "At the start of the turn, restore 2% HP.";
+                        break;
+                }
+                break;
+            case 75:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "供物";
+                        DescriptionText.text = "取得時、ランダムな祝福を2つ獲得する。";
+                        break;
+                    case 2:
+                        NameText.text = "Offering";
+                        DescriptionText.text = "Gain 2 random blessings when obtained.";
+                        break;
+                }
+                break;
+            case 76:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "繚乱";
+                        DescriptionText.text = "リベンジを使用する毎に、ランダムな宝石4つをプリズムに変化させる。";
+                        break;
+                    case 2:
+                        NameText.text = "Riot of Bloom";
+                        DescriptionText.text = "Each time Revenge is used, random 4 gems transform into Prism.";
+                        break;
+                }
+                break;
+            case 77:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "反射";
+                        DescriptionText.text = "ダメージを受ける毎に、敵に50ダメージを与える。";
+                        break;
+                    case 2:
+                        NameText.text = "Reflect";
+                        DescriptionText.text = "Deals 50 damage to the enemy each time damage is taken.";
+                        break;
+                }
+                break;
+            case 78:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "洞察";
+                        DescriptionText.text = "ターン終了時、リベンジが発動可能だった場合、HPを5%回復する。";
+                        break;
+                    case 2:
+                        NameText.text = "Insight";
+                        DescriptionText.text = "At the end of the turn, if Revenge could be activated, restore 5% HP.";
+                        break;
+                }
+                break;
+            case 79:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "柔軟";
+                        DescriptionText.text = "20以上のHPを失うとき、その値を10軽減する。";
+                        break;
+                    case 2:
+                        NameText.text = "Flexiblity";
+                        DescriptionText.text = "When you would lose 20 or more HP, reduce that amount by 10.";
+                        break;
+                }
+                break;
+            case 80:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "激闘";
+                        DescriptionText.text = "与えるダメージが8%増加する。";
+                        break;
+                    case 2:
+                        NameText.text = "Fierce battle";
+                        DescriptionText.text = "Damage dealt increases by 8%.";
+                        break;
+                }
+                break;
+            case 81:
+                switch (Language)
+                {
+                    case 1:
+                        NameText.text = "永劫の忠誠";
+                        DescriptionText.text = "？？？";
+                        break;
+                    case 2:
+                        NameText.text = "Eternal Loyalty";
+                        DescriptionText.text = "???";
                         break;
                 }
                 break;

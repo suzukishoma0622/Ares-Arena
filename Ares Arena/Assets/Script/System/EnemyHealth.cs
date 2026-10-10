@@ -17,10 +17,14 @@ public class EnemyHealth : MonoBehaviour
     public Enemy_CaptainScissors Cscript;
     public bool IsStaticBeast;
     public Enemy_StaticBeast Sscript;
+    public bool IsAres;
+    public Enemy_Ares Ascript;
     public int Evasion;
     void Start()
     {
         Invoke("Bless_CleverScheme", 0.1f);
+        PlayerPrefs.SetInt("Damaged", 0);
+        PlayerPrefs.Save();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -31,7 +35,15 @@ public class EnemyHealth : MonoBehaviour
             {
                 d += 1 + Iscript.Bless[54];
             }
-            if(Gaze)
+            if(Iscript.Bless69 > 0)
+            {
+                d = Mathf.FloorToInt(d * (100f + Iscript.Bless69) / 100f);
+            }
+            if (Iscript.Bless[80] == 1)
+            {
+                d = Mathf.FloorToInt(d * 1.08f);
+            }
+            if (Gaze)
             {
                 d *= 2 + Bscript.Pscript.Bless22;
                 d += Iscript.Bless[54];
@@ -63,6 +75,8 @@ public class EnemyHealth : MonoBehaviour
                     d -= Bscript.EnemyShield;
                     Bscript.EnemyShield = 0;
                     Bscript.EnemyHP -= d;
+                    PlayerPrefs.SetInt("Damaged", PlayerPrefs.GetInt("Damaged", 0) + 1);
+                    PlayerPrefs.Save();
                     if (IsStaticBeast)
                     {
                         Sscript.AttackRate += 0.01f;
@@ -78,10 +92,24 @@ public class EnemyHealth : MonoBehaviour
             else
             {
                 Bscript.EnemyHP -= d;
+                PlayerPrefs.SetInt("Damaged", PlayerPrefs.GetInt("Damaged", 0) + 1);
+                PlayerPrefs.Save();
                 Iscript.SE.PlayOneShot(HitSE);
                 if (IsStaticBeast)
                 {
                     Sscript.AttackRate += 0.01f;
+                }
+            }
+            if (IsAres)
+            {
+                Ascript.Mastering -= d;
+                if(Ascript.Mastering <= 0)
+                {
+                    Ascript.Mastering = 2500;
+                    GameObject g2 = Instantiate(Ascript.AttackObj[1]);
+                    g2.transform.position = this.transform.position;
+                    g2.GetComponent<BlockTrail>().GoPlayer = false;
+                    g2.GetComponent<EffectScript>().EffectNum = 1000;
                 }
             }
             if (Bscript.EnemyHP <= 0)
@@ -119,7 +147,7 @@ public class EnemyHealth : MonoBehaviour
             }
             if(IsCaptainScissors)
             {
-                if(Cscript.Refrect > 0)
+                if(Cscript.Refrect > 0 && !collision.gameObject.GetComponent<EffectScript>().Bless77)
                 {
                     GameObject g2 = Instantiate(Cscript.AttackObj[0]);
                     g2.transform.position = this.transform.position;
@@ -162,6 +190,14 @@ public class EnemyHealth : MonoBehaviour
         {
             Bscript.EnemyHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * 0.5f);
             Iscript.Bless[50] = 2;
+        }
+        if (Iscript.Bless[66] == 1 && Iscript.CurrentRound <= 2 * Iscript.Bless[54] + 2)
+        {
+            Bscript.EnemyHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * 0.75f);
+        }
+        if (Iscript.Bless[73] == 1 && Iscript.CurrentRound == 7)
+        {
+            Bscript.EnemyHP = Mathf.FloorToInt(Bscript.EnemyMaxHP * 0.85f);
         }
     }
 }

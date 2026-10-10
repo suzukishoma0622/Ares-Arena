@@ -1,9 +1,12 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+#if !UNITY_WEBGL
+using Steamworks;
+#endif
 public class AresCrown : MonoBehaviour
 {
+    SaveData data;
     public InfoDisplay Iscript;
     public CanvasGroup AresCG;
     public CanvasGroup SaintCG;
@@ -35,6 +38,7 @@ public class AresCrown : MonoBehaviour
     public GameObject[] FrameObj;
     void Start()
     {
+        data = Iscript.GetComponent<DataManager>().Dscript;
         Language = PlayerPrefs.GetInt("Language", 2);
         Crown = PlayerPrefs.GetInt("Crown", 0);
         Invoke("NextText", 1.5f);
@@ -42,7 +46,7 @@ public class AresCrown : MonoBehaviour
         {
             TextPattern = 1;
         }
-        MaxCrown = PlayerPrefs.GetInt($"MaxCrown{Iscript.Saint}", 0);
+        MaxCrown = data.MaxCrown[Iscript.Saint];
         if(Crown == 5)
         {
             switch (Language)
@@ -58,8 +62,7 @@ public class AresCrown : MonoBehaviour
         else if(Crown == MaxCrown)
         {
             TextPattern = 1;
-            PlayerPrefs.SetInt($"MaxCrown{Iscript.Saint}", MaxCrown + 1);
-            PlayerPrefs.Save();
+            data.MaxCrown[Iscript.Saint] += 1;
             switch (Language)
             {
                 case 1:
@@ -86,6 +89,19 @@ public class AresCrown : MonoBehaviour
         if (Crown == 5)
         {
             TextPattern = 3;
+        }
+        if (Iscript.Bless[75] == 1)
+        {
+            TextPattern = 4;
+            switch (Language)
+            {
+                case 1:
+                    CrownText.text = "アレースを打ち倒した。";
+                    break;
+                case 2:
+                    CrownText.text = "You struck down Ares.";
+                    break;
+            }
         }
         for (int i = 0; i < FrameObj.Length; i++)
         {
@@ -248,7 +264,7 @@ public class AresCrown : MonoBehaviour
                         switch (Language)
                         {
                             case 1:
-                                AresText.text = $"遂に頂点へと立ったようだな、{SaintName_E[Iscript.Saint - 1]}。";
+                                AresText.text = $"遂に頂点へと立ったようだな、{SaintName_J[Iscript.Saint - 1]}。";
                                 break;
                             case 2:
                                 AresText.text = $"It seems you've finally reached the pinnacle, {SaintName_E[Iscript.Saint - 1]}.";
@@ -288,6 +304,63 @@ public class AresCrown : MonoBehaviour
                                 break;
                             case 2:
                                 AresText.text = "You are the true champion.";
+                                break;
+                        }
+                        break;
+                    case 5:
+                        TalkPattern = 0;
+                        IsCrown = true;
+                        break;
+                }
+                break;
+            case 4:
+                switch (DialogNum)
+                {
+                    case 1:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = $"待っていたぞ、{SaintName_J[Iscript.Saint - 1]}。汝のような者が現れるのを。";
+                                break;
+                            case 2:
+                                AresText.text = $"I've been waiting for you, {SaintName_J[Iscript.Saint - 1]}. someone like you to appear.";
+                                break;
+                        }
+                        break;
+                    case 2:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "遂に我を超えるものが現れた。";
+                                break;
+                            case 2:
+                                AresText.text = "At last, one who surpasses me has appeared.";
+                                break;
+                        }
+                        break;
+                    case 3:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "聖戦は幕を閉じる。";
+                                break;
+                            case 2:
+                                AresText.text = "The holy war comes to an end.";
+                                break;
+                        }
+                        break;
+                    case 4:
+                        TalkPattern = 1;
+                        switch (Language)
+                        {
+                            case 1:
+                                AresText.text = "我の役目も、これで終わりだ。";
+                                break;
+                            case 2:
+                                AresText.text = "My role ends here.";
                                 break;
                         }
                         break;
@@ -3045,17 +3118,68 @@ public class AresCrown : MonoBehaviour
         Iscript.Fade = true;
         Invoke("GoTitle", 1f);
         Iscript.SE.PlayOneShot(Iscript.OKSE);
+        PlayerPrefs.SetInt("RunClear", PlayerPrefs.GetInt("RunClear", 0) + 1);
+        PlayerPrefs.SetInt("ClearNum", PlayerPrefs.GetInt("ClearNum", 1) + 1);
+        if(PlayerPrefs.GetInt("RunClear", 0) >= 1 && PlayerPrefs.GetInt("Tutorial4", 0) == 0)
+        {
+            PlayerPrefs.SetInt("Tutorial4", 1);
+        }
+        if(Iscript.Crown == 5 && PlayerPrefs.GetInt("Tutorial5", 0) == 0)
+        {
+            PlayerPrefs.SetInt("Tutorial5", 1);
+        }
+        PlayerPrefs.Save();
+        #if !UNITY_WEBGL
+
+        if (SteamManager.Initialized)
+        {
+            SteamUserStats.GetAchievement($"Achieve{Iscript.Crown + 1}", out bool isUnlocked);
+            if (!isUnlocked)
+            {
+                SteamUserStats.SetAchievement($"Achieve{Iscript.Crown + 1}");
+            }
+            if(PlayerPrefs.GetInt("TrainCount", 0) == 0)
+            {
+                SteamUserStats.GetAchievement("Achieve13", out bool isUnlocked2);
+                if (!isUnlocked2)
+                {
+                    SteamUserStats.SetAchievement("Achieve13");
+                }
+            }
+            if (PlayerPrefs.GetInt("RestCount", 0) == 0)
+            {
+                SteamUserStats.GetAchievement("Achieve14", out bool isUnlocked2);
+                if (!isUnlocked2)
+                {
+                    SteamUserStats.SetAchievement("Achieve14");
+                }
+            }
+            if (PlayerPrefs.GetInt("ClearNum", 0) == 10)
+            {
+                SteamUserStats.GetAchievement("Achieve19", out bool isUnlocked2);
+                if (!isUnlocked2)
+                {
+                    SteamUserStats.SetAchievement("Achieve19");
+                }
+            }
+            if (PlayerPrefs.GetInt("ClearNum", 0) == 100)
+            {
+                SteamUserStats.GetAchievement("Achieve20", out bool isUnlocked2);
+                if (!isUnlocked2)
+                {
+                    SteamUserStats.SetAchievement("Achieve20");
+                }
+            }
+            SteamUserStats.StoreStats();
+        }
+        #endif
     }
     void GoTitle()
     {
-        int Played = PlayerPrefs.GetInt("Played");
-        if (Iscript.Saint == Played + 1)
+        if (Iscript.Saint == data.SaintUnlock + 1)
         {
-            Played = Iscript.Saint;
-            PlayerPrefs.SetInt("Played", Played);
+            data.SaintUnlock = Iscript.Saint;
         }
-        PlayerPrefs.SetInt("ClearNum", PlayerPrefs.GetInt("ClearNum", 1) + 1);
-        PlayerPrefs.Save();
         SceneManager.LoadScene("Title");
     }
 }
