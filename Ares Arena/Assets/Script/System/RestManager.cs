@@ -223,23 +223,23 @@ public class RestManager : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            ShopGem[i] = Random.Range(8, 140);
+            ShopGem[i] = Random.Range(8, 160);
         }
         for (; ShopGem[0] == ShopGem[1];)
         {
-            ShopGem[1] = Random.Range(8, 140);
+            ShopGem[1] = Random.Range(8, 160);
         }
         for (; ShopGem[0] == ShopGem[2] || ShopGem[1] == ShopGem[2];)
         {
-            ShopGem[2] = Random.Range(8, 140);
+            ShopGem[2] = Random.Range(8, 160);
         }
         for (; ShopGem[0] == ShopGem[3] || ShopGem[1] == ShopGem[3] || ShopGem[2] == ShopGem[3];)
         {
-            ShopGem[3] = Random.Range(8, 140);
+            ShopGem[3] = Random.Range(8, 160);
         }
         for (; ShopGem[0] == ShopGem[4] || ShopGem[1] == ShopGem[4] || ShopGem[2] == ShopGem[4] || ShopGem[3] == ShopGem[4];)
         {
-            ShopGem[4] = Random.Range(8, 140);
+            ShopGem[4] = Random.Range(8, 160);
         }
     }
     void ShopBlessJudge()
@@ -607,7 +607,7 @@ public class RestManager : MonoBehaviour
     }
     public void AlchemyGem()
     {
-        int Agem = Random.Range(8, 140);
+        int Agem = Random.Range(8, 160);
         int k = 1;
         for (; k > 0;)
         {

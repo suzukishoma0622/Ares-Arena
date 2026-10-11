@@ -327,9 +327,11 @@ public class InfoDisplay : MonoBehaviour
                 break;
             case 5:
                 JewelNum[3] = 6;
+                data.GemUnlock[6] = 1;
                 break;
             case 7:
                 JewelNum[1] = 7;
+                data.GemUnlock[7] = 1;
                 break;
             case 12:
                 PlayerPrefs.SetInt("Medal", PlayerPrefs.GetInt("Medal", 0) + 2);
@@ -342,6 +344,7 @@ public class InfoDisplay : MonoBehaviour
                 break;
             case 15:
                 JewelNum[0] = 5;
+                data.GemUnlock[5] = 1;
                 break;
             case 18:
                 PlayerHPRate *= 0.85f;

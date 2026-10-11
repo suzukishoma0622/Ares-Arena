@@ -68,11 +68,11 @@ public class InfoDisplay_Revenge : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "噴火" + $"({RevengeSlider.maxValue - RevengeSlider.value}被ダメージ必要)";
-                        DescriptionText.text = "下から3行目までの状態異常以外の宝石を全て消去する。";
+                        DescriptionText.text = "下から4行目までの状態異常以外の宝石を全て消去する。";
                         break;
                     case 2:
                         NameText.text = "Eruption" + $"(Need {RevengeSlider.maxValue - RevengeSlider.value} Damage)";
-                        DescriptionText.text = "Cast all gems on the board except those affected by status ailments.";
+                        DescriptionText.text = "Clear all gems except for ailments status located in the bottom 4 rows.";
                         break;
                 }
                 break;
@@ -175,11 +175,11 @@ public class InfoDisplay_Revenge : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "金属体" + $"({RevengeSlider.maxValue - RevengeSlider.value}被ダメージ必要)";
-                        DescriptionText.text = "200シールドを得る。";
+                        DescriptionText.text = "現在のシールドを2倍にする。次のターン開始時にシールドを失わない。";
                         break;
                     case 2:
                         NameText.text = "Metal Body" + $"(Need {RevengeSlider.maxValue - RevengeSlider.value} Damage)";
-                        DescriptionText.text = "Gain 200 Shield.";
+                        DescriptionText.text = "Double your current Shield. Do not lose Shield at the start of the next turn.";
                         break;
                 }
                 break;

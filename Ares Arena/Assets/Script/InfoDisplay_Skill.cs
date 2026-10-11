@@ -99,11 +99,11 @@ public class InfoDisplay_Skill : MonoBehaviour
                 {
                     case 1:
                         NameText.text = "凝視";
-                        DescriptionText.text = $"次のハンド時に与えるダメージが{Bless22 + 1}倍になる。";
+                        DescriptionText.text = $"次のハンド時に与えるダメージが{Mathf.FloorToInt(1f + Bless22 * 0.5f)}倍になる。";
                         break;
                     case 2:
                         NameText.text = "Gaze";
-                        DescriptionText.text = $"The damage dealt by the next hand is multiplied by {Bless22 + 1}.";
+                        DescriptionText.text = $"The damage dealt by the next hand is multiplied by {Mathf.FloorToInt(1f + Bless22 * 0.5f)}.";
                         break;
                 }
                 break;
@@ -195,22 +195,22 @@ public class InfoDisplay_Skill : MonoBehaviour
                         NameText.text = "シールドバッシュ";
                         if (Crown >= 3)
                         {
-                            DescriptionText.text = $"現在のシールド値の{Bless22 * 100}%に等しいダメージを与え、シールドの40%を失う。";
+                            DescriptionText.text = $"現在のシールド値の{Bless22 * 100}%に等しいダメージを与え、シールドの30%を失う。";
                         }
                         else
                         {
-                            DescriptionText.text = $"現在のシールド値の{Bless22 * 100}%に等しいダメージを与え、シールドの30%を失う。";
+                            DescriptionText.text = $"現在のシールド値の{Bless22 * 100}%に等しいダメージを与え、シールドの20%を失う。";
                         }
                         break;
                     case 2:
                         NameText.text = "Shield Bash";
                         if (Crown >= 3)
                         {
-                            DescriptionText.text = $"Deals damage equal to the {Bless22 * 100}% of current shield value and consumes 40% of the shield.";
+                            DescriptionText.text = $"Deals damage equal to the {Bless22 * 100}% of current shield value and consumes 30% of the shield.";
                         }
                         else
                         {
-                            DescriptionText.text = $"Deals damage equal to the {Bless22 * 100}% of current shield value and consumes 30% of the shield.";
+                            DescriptionText.text = $"Deals damage equal to the {Bless22 * 100}% of current shield value and consumes 20% of the shield.";
                         }
                         break;
                 }

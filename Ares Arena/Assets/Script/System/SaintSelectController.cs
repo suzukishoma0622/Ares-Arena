@@ -102,7 +102,7 @@ public class SaintSelectController : MonoBehaviour
             switch (Language)
             {
                 case 1:
-                    CrownDesc.text = "ターン開始時、ハンド数5。\n" +
+                    CrownDesc.text = "ターン開始時、ハンド数+5。\n" +
                         "最大HPが25%増加する。";
                     break;
                 case 2:
@@ -548,12 +548,12 @@ public class SaintSelectController : MonoBehaviour
                                 case 1:
                                     CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
                                         "全ての敵の攻撃がさらに激化する。\n" +
-                                        "スキル発動時、シールドの40%を失う。";
+                                        "スキル発動時、シールドの30%を失う。";
                                     break;
                                 case 2:
                                     CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
                                         "All enemy attacks intensify further.\n" +
-                                        "Upon skill activation, lose 40% of the shield.";
+                                        "Upon skill activation, lose 30% of the shield.";
                                     break;
                             }
                             PlayerPrefs.SetInt("EnemyHPLevel", 1);
@@ -830,13 +830,13 @@ public class SaintSelectController : MonoBehaviour
                                 case 1:
                                     CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
                                         "全ての敵の攻撃がさらに激化する。\n" +
-                                        "スキル発動時、シールドの40%を失う。\n" +
+                                        "スキル発動時、シールドの30%を失う。\n" +
                                         "シールドを得た時、その値が1減少する。";
                                     break;
                                 case 2:
                                     CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
                                         "All enemy attacks intensify further.\n" +
-                                        "Upon skill activation, lose 40% of the shield.\n" +
+                                        "Upon skill activation, lose 30% of the shield.\n" +
                                         "When you gain shield, its value decreases by 1.";
                                     break;
                             }
@@ -1140,14 +1140,14 @@ public class SaintSelectController : MonoBehaviour
                                 case 1:
                                     CrownDesc.text = "敵の耐久力が上昇し、攻撃が激化する。\n" +
                                         "全ての敵の攻撃がさらに激化する。\n" +
-                                        "スキル発動時、シールドの40%を失う。\n" +
+                                        "スキル発動時、シールドの30%を失う。\n" +
                                         "シールドを得た時、その値が1減少する。\n" +
                                         "最大HPが10%減少する。";
                                     break;
                                 case 2:
                                     CrownDesc.text = "Enemy durability increases, and attacks intensify.\n" +
                                         "All enemy attacks intensify further.\n" +
-                                        "Upon skill activation, lose 40% of the shield.\n" +
+                                        "Upon skill activation, lose 30% of the shield.\n" +
                                         "When you gain shield, its value decreases by 1.\n" +
                                         "Maximum HP is reduced by 10%.";
                                     break;
@@ -1305,7 +1305,7 @@ public class SaintSelectController : MonoBehaviour
                             SkillName.text = "バーニングハンド";
                             SkillDesc.text = "次のハンド時、宝石を消去する毎にリベンジを4%チャージする。";
                             RevengeName.text = "噴火";
-                            RevengeDesc.text = "下から3行目までの状態異常以外の宝石を全て消去する。";
+                            RevengeDesc.text = "下から4行目までの状態異常以外の宝石を全て消去する。";
                             break;
                         case 4:
                             SaintName.text = "フラクタル";
@@ -1321,7 +1321,7 @@ public class SaintSelectController : MonoBehaviour
                             SaintExplain.text = "戦の亡霊に取りつかれた召喚術士。\n" +
                                 "霊の耳鳴りに思考を操られている。";
                             SkillName.text = "凝視";
-                            SkillDesc.text = "次のハンド時に与えるダメージが2倍になる。";
+                            SkillDesc.text = "次のハンド時に与えるダメージが1.5倍になる。";
                             RevengeName.text = "一斉射撃";
                             RevengeDesc.text = "300ダメージを与える。この効果が永続的に60増加する。";
                             break;
@@ -1357,9 +1357,9 @@ public class SaintSelectController : MonoBehaviour
                             SaintExplain.text = "制御を失った防衛ドロイド。\n" +
                                 "守るものもなく、無痛の盾として永遠に立ち尽くす。";
                             SkillName.text = "シールドバッシュ";
-                            SkillDesc.text = "現在のシールド値に等しいダメージを与え、シールドの30%を失う。";
+                            SkillDesc.text = "現在のシールド値に等しいダメージを与え、シールドの20%を失う。";
                             RevengeName.text = "金属体";
-                            RevengeDesc.text = "200シールドを得る。";
+                            RevengeDesc.text = "現在のシールドを2倍にする。次のターン開始時にシールドを失わない。";
                             break;
                         case 10:
                             SaintName.text = "オーダー";
@@ -1436,7 +1436,7 @@ public class SaintSelectController : MonoBehaviour
                             SkillName.text = "Burning Hand";
                             SkillDesc.text = "During the next hand, charge Revenge by 4% each time a gem is cast.";
                             RevengeName.text = "Eruption";
-                            RevengeDesc.text = "Remove all gems except those with status effects from the bottom 3 rows.";
+                            RevengeDesc.text = "Remove all gems except those with status effects from the bottom 4 rows.";
                             break;
                         case 4:
                             SaintName.text = "The Fractal";
@@ -1452,7 +1452,7 @@ public class SaintSelectController : MonoBehaviour
                             SaintExplain.text = "A summoner possessed by the specter of a warrior.\n" +
                                 "His thoughts are being manipulated by the spirit's ringing in his ears.";
                             SkillName.text = "Gaze";
-                            SkillDesc.text = "The damage dealt by the next hand is doubled.";
+                            SkillDesc.text = "The damage dealt by the next hand is increased by 1.5 times.";
                             RevengeName.text = "Broadside";
                             RevengeDesc.text = "Deals 300 damage. This effect increases by 60 permanently.";
                             break;
@@ -1488,9 +1488,9 @@ public class SaintSelectController : MonoBehaviour
                             SaintExplain.text = "A defense droid that has lost all control." +
                                 "With nothing left to protect, it stands eternally as a painless shield.";
                             SkillName.text = "Shield Bash";
-                            SkillDesc.text = "Deals damage equal to the current shield value and consumes 30% of the shield.";
+                            SkillDesc.text = "Deals damage equal to the current shield value and consumes 20% of the shield.";
                             RevengeName.text = "Metal Body";
-                            RevengeDesc.text = "Gain 200 Shield.";
+                            RevengeDesc.text = "Double your current shield. Do not lose Shield at the start of your next turn.";
                             break;
                         case 10:
                             SaintName.text = "The Order";

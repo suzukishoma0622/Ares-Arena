@@ -45,7 +45,7 @@ public class EnemyHealth : MonoBehaviour
             }
             if (Gaze)
             {
-                d *= 2 + Bscript.Pscript.Bless22;
+                d = Mathf.FloorToInt(d * (1.5f + Bscript.Pscript.Bless22 * 0.5f));
                 d += Iscript.Bless[54];
             }
             d += Bscript.Pscript.Gem135;

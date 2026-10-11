@@ -78,6 +78,8 @@ public class BattleManager : MonoBehaviour
 
     public int Bless22;
 
+    public GameObject AttensionObj;
+
     void Start()
     {
         data = Iscript.GetComponent<DataManager>().Dscript;
@@ -533,7 +535,11 @@ public class BattleManager : MonoBehaviour
             PlayerPrefs.SetInt("HPLose", 0);
             PlayerPrefs.Save();
             Iscript.SE.PlayOneShot(PlayerTurnSE);
-            if (Iscript.Bless[51] == 1)
+            if(Pscript.MetalBody)
+            {
+                Pscript.MetalBody = false;
+            }
+            else if (Iscript.Bless[51] == 1)
             {
                 if(PlayerShield > 100)
                 {
@@ -620,6 +626,7 @@ public class BattleManager : MonoBehaviour
             {
                 Pscript.DroidActivate();
             }
+            AttensionOff();
         }
     }
     void R()
@@ -698,5 +705,16 @@ public class BattleManager : MonoBehaviour
     private void T()
     {
         SceneManager.LoadScene("Title");
+    }
+    public void AttensionOn()
+    {
+        if(Pscript.CurrentHand > 0 || Pscript.ActiveSkill > 0)
+        {
+            AttensionObj.SetActive(true);
+        }
+    }
+    public void AttensionOff()
+    {
+        AttensionObj?.SetActive(false);
     }
 }

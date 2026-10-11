@@ -109,6 +109,10 @@ public class PlayerHealth : MonoBehaviour
                         {
                             Iscript.PlayerHP = 0;
                         }
+                        if (Iscript.PlayerHP <= Iscript.PlayerMaxHP * 0.25f)
+                        {
+                            Pscript.RedAlert.alpha = 1f;
+                        }
                     }
                 }
                 else
@@ -150,6 +154,10 @@ public class PlayerHealth : MonoBehaviour
                     {
                         Iscript.PlayerHP = 0;
                         Bscript.DeadEffect();
+                    }
+                    if (Iscript.PlayerHP <= Iscript.PlayerMaxHP * 0.25f)
+                    {
+                        Pscript.RedAlert.alpha = 1f;
                     }
                 }
             }
