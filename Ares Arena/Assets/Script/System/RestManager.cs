@@ -144,6 +144,13 @@ public class RestManager : MonoBehaviour
         {
             ShopGemValue[J2] -= 1;
         }
+        for(int i = 0; i < 3; i++)
+        {
+            if (ShopGem[i] == 171)
+            {
+                ShopGemValue[i] += 2;
+            }
+        }
         int J4 = Random.Range(0, 3);
         int J5 = Random.Range(0, 3);
         int J6 = Random.Range(3, 5);
@@ -223,23 +230,23 @@ public class RestManager : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            ShopGem[i] = Random.Range(8, 160);
+            ShopGem[i] = Random.Range(8, 200);
         }
         for (; ShopGem[0] == ShopGem[1];)
         {
-            ShopGem[1] = Random.Range(8, 160);
+            ShopGem[1] = Random.Range(8, 200);
         }
         for (; ShopGem[0] == ShopGem[2] || ShopGem[1] == ShopGem[2];)
         {
-            ShopGem[2] = Random.Range(8, 160);
+            ShopGem[2] = Random.Range(8, 200);
         }
         for (; ShopGem[0] == ShopGem[3] || ShopGem[1] == ShopGem[3] || ShopGem[2] == ShopGem[3];)
         {
-            ShopGem[3] = Random.Range(8, 160);
+            ShopGem[3] = Random.Range(8, 200);
         }
         for (; ShopGem[0] == ShopGem[4] || ShopGem[1] == ShopGem[4] || ShopGem[2] == ShopGem[4] || ShopGem[3] == ShopGem[4];)
         {
-            ShopGem[4] = Random.Range(8, 160);
+            ShopGem[4] = Random.Range(8, 200);
         }
     }
     void ShopBlessJudge()
@@ -384,6 +391,10 @@ public class RestManager : MonoBehaviour
     public void Rest()
     {
         IsRest = true;
+        if(Iscript.IsGem190)
+        {
+            Iscript.Gem190 = 0;
+        }
         Iscript.SE.PlayOneShot(RestSE);
         for(int i = 0; i < ActButton.Length; i++)
         {
@@ -420,6 +431,10 @@ public class RestManager : MonoBehaviour
     public void Train()
     {
         IsTrain = true;
+        if (Iscript.IsGem181)
+        {
+            Iscript.Gem181 += 2;
+        }
         Iscript.SE.PlayOneShot(SmithSE);
         for (int i = 0; i < ActButton.Length; i++)
         {
@@ -526,8 +541,50 @@ public class RestManager : MonoBehaviour
                             Iscript.PlayerHP = Iscript.PlayerMaxHP;
                         }
                     }
+                    if (ShopGem[i] == 163)
+                    {
+                        for (int j2 = 0; j2 < GemBox.Length; j2++)
+                        {
+                            if (GemBox[j2] == -1)
+                            {
+                                GemBox[j2] = 164;
+                                GemButton[j2].SetActive(true);
+                                GemButton[j2].GetComponent<Animator>().Play($"Gem{GemBox[j]}");
+                                GemInfo[j2].GemNum = GemBox[j2];
+                                PlayerPrefs.SetInt($"GemBox{j2}", 164);
+                                PlayerPrefs.Save();
+                                data.GemUnlock[165] = 1;
+                                break;
+                            }
+                        }
+                    }
+                    if (ShopGem[i] == 164)
+                    {
+                        for (int j2 = 0; j2 < GemBox.Length; j2++)
+                        {
+                            if (GemBox[j2] == -1)
+                            {
+                                GemBox[j2] = 163;
+                                GemButton[j2].SetActive(true);
+                                GemButton[j2].GetComponent<Animator>().Play($"Gem{GemBox[j]}");
+                                GemInfo[j2].GemNum = GemBox[j2];
+                                PlayerPrefs.SetInt($"GemBox{j2}", 163);
+                                PlayerPrefs.Save();
+                                data.GemUnlock[164] = 1;
+                                break;
+                            }
+                        }
+                    }
                     break;
                 }
+            }
+            if (ShopGem[i] == 181)
+            {
+                Iscript.IsGem181 = true;
+            }
+            if (ShopGem[i] == 190)
+            {
+                Iscript.IsGem190 = true;
             }
         }
     }
@@ -607,11 +664,11 @@ public class RestManager : MonoBehaviour
     }
     public void AlchemyGem()
     {
-        int Agem = Random.Range(8, 160);
+        int Agem = Random.Range(8, 200);
         int k = 1;
         for (; k > 0;)
         {
-            Agem = Random.Range(8, 48);
+            Agem = Random.Range(8, 200);
             k = 0;
             for (int j = 0; j < 20; j++)
             {
@@ -651,6 +708,14 @@ public class RestManager : MonoBehaviour
                 data.GemUnlock[Agem + 1] = 1;
                 break;
             }
+        }
+        if(Agem == 181)
+        {
+            Iscript.IsGem181 = true;
+        }
+        if (Agem == 190)
+        {
+            Iscript.IsGem190 = true;
         }
     }
     public void Offering()
@@ -765,6 +830,13 @@ public class RestManager : MonoBehaviour
             ShopGemValue[J1] += 1;
             ShopGemValue[J2] -= 1;
             ShopGemValue[J3] -= 1;
+            for (int i = 0; i < 3; i++)
+            {
+                if (ShopGem[i] == 171)
+                {
+                    ShopGemValue[i] += 2;
+                }
+            }
             int J4 = Random.Range(0, 3);
             int J5 = Random.Range(0, 3);
             int J6 = Random.Range(3, 5);

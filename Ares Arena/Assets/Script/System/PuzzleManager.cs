@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.XR;
+
 #if !UNITY_WEBGL
 
 using Steamworks;
@@ -27,6 +29,7 @@ public class PuzzleManager : MonoBehaviour
 
     public int CurrentHand;
     public int Chain = 0;
+    public int MaxChain;
     float ChainTime;
     int C;
     int C3;
@@ -54,7 +57,7 @@ public class PuzzleManager : MonoBehaviour
     public TMP_Text SkillUseText;
     [SerializeField] GameObject[] SaintSkillEffect;
     [SerializeField] Transform[] SkillEffectPos;
-    [SerializeField] GameObject[] SaintRevengeEffect;
+    [SerializeField] public GameObject[] SaintRevengeEffect;
     [SerializeField] Transform[] RevengeEffectPos;
     public TMP_Text RevengeNameText;
     public BattleManager Bscript;
@@ -106,6 +109,10 @@ public class PuzzleManager : MonoBehaviour
     bool Gem141;
     int Gem144;
     int Gem152;
+    bool Gem167;
+    bool Gem168;
+    bool Gem170;
+    public bool Gem188;
     bool BurningHand;
     bool Gaze;
     bool Revenged;
@@ -224,6 +231,10 @@ public class PuzzleManager : MonoBehaviour
         {
             EquipJewel[i] = Iscript.JewelNum[i];
             CollectorSlot[i].Play($"Gem{EquipJewel[i]}");
+            if (EquipJewel[i] == 188)
+            {
+                Gem188 = true;
+            }
         }
         Probcalc();
         Shuffle();
@@ -338,6 +349,10 @@ public class PuzzleManager : MonoBehaviour
             if(ChainTime <= 0f)
             {
                 Chained = Chain;
+                if(Chain > MaxChain)
+                {
+                    MaxChain = Chain;
+                }
                 Chain = 0;
                 for (int i = 0; i < ChainNum.Length; i++)
                 {
@@ -721,7 +736,17 @@ public class PuzzleManager : MonoBehaviour
                 GameObject g4_2 = Instantiate(SaintRevengeEffect[2]);
                 g4_2.transform.position = JewelDisplay[i].transform.position;
             }
-
+            if (JewelNum[i] == 161 && Bscript.CurrentRound == 1)
+            {
+                JewelNum[i] = 200;
+                GameObject g4 = Instantiate(JewelObj[200]);
+                g4.transform.position = JewelDisplay[i].transform.position;
+                g4.transform.SetParent(gameObject.transform, true);
+                Destroy(JewelDisplay[i]);
+                JewelDisplay[i] = g4;
+                GameObject g4_2 = Instantiate(SaintRevengeEffect[2]);
+                g4_2.transform.position = JewelDisplay[i].transform.position;
+            }
         }
         if (OrderRev)
         {
@@ -1017,6 +1042,9 @@ public class PuzzleManager : MonoBehaviour
                         P[i] = 0;
                     }
                     break;
+                case 189:
+                    P[i] = Random.Range(0, 200);
+                    break;
             }
             if (Bscript.Iscript.Bless[63] == 1 && EquipJewel[i] <= 4)
             {
@@ -1239,6 +1267,22 @@ public class PuzzleManager : MonoBehaviour
                         }
                     }
                 }
+                if (JewelNum[i] == 173)
+                {
+                    float Judge2 = Random.Range(0f, 100f);
+                    if (Judge2 < 50f)
+                    {
+                        JewelNum[i] = 2;
+                    }
+                }
+                if (JewelNum[i] == 174)
+                {
+                    float Judge2 = Random.Range(0f, 100f);
+                    if (Judge2 < 50f)
+                    {
+                        JewelNum[i] = 4;
+                    }
+                }
                 if (IsCitrine)
                 {
                     JewelNum[i] = 40;
@@ -1274,6 +1318,9 @@ public class PuzzleManager : MonoBehaviour
         {
             Gem128 = 2;
         }
+        Gem167 = false;
+        Gem168 = false;
+        Gem170 = false;
     }
     public void JewelSelect(int i)
     {
@@ -1603,6 +1650,22 @@ public class PuzzleManager : MonoBehaviour
                             JewelDisplay[Judge] = g4;
                             GameObject g4_2 = Instantiate(SaintRevengeEffect[2]);
                             g4_2.transform.position = JewelDisplay[Judge].transform.position;
+                        }
+                    }
+                    if (JewelNum[C] == 179 && Chain == 0)
+                    {
+                        Iscript.PlayerHPRate += 0.05f;
+                    }
+                    if (JewelNum[C] == 195 && Chain == 0)
+                    {
+                        CurrentHand -= 1;
+                        for (int i8 = 0; i8 < 49; i8++)
+                        {
+                            if (JewelNum[i8] == 195)
+                            {
+                                Chain = 0;
+                                JewelVanish(i8);
+                            }
                         }
                     }
                     if (JewelNum[C] == 200 && Iscript.Saint == 4 && Iscript.Crown >= 5)
@@ -3791,7 +3854,7 @@ public class PuzzleManager : MonoBehaviour
                 case 148:
                     GameObject g148 = Instantiate(ShieldEffect);
                     g148.transform.position = JewelPos[j].position;
-                    g148.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((7 + (Chain - 1) * 7f) * WeakNum);
+                    g148.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((7 + (Chain - 1) * 0.7f) * WeakNum);
                     g148.GetComponent<BlockTrail>().GoPlayer = true;
                     g148.SetActive(true);
                     break;
@@ -3904,6 +3967,461 @@ public class PuzzleManager : MonoBehaviour
                         g159.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((40 + (Chain - 1) * 4f) * WeakNum);
                         g159.GetComponent<BlockTrail>().GoPlayer = false;
                         g159.SetActive(true);
+                    }
+                    break;
+                case 160:
+                    if (Chain % 2 == 0)
+                    {
+                        GameObject g160 = Instantiate(ShieldEffect);
+                        g160.transform.position = JewelPos[j].position;
+                        g160.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((22 + (Chain - 1) * 2.2f) * WeakNum);
+                        g160.GetComponent<BlockTrail>().GoPlayer = true;
+                        g160.SetActive(true);
+                    }
+                    break;
+                case 161:
+                    GameObject g161 = Instantiate(AttackEffect);
+                    g161.transform.position = JewelPos[j].position;
+                    g161.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((17 + (Chain - 1) * 1.7f) * WeakNum);
+                    g161.GetComponent<BlockTrail>().GoPlayer = false;
+                    g161.SetActive(true);
+                    break;
+                case 162:
+                    GameObject g162 = Instantiate(AttackEffect);
+                    g162.transform.position = JewelPos[j].position;
+                    g162.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((14 + (Chain - 1) * 1.4f) * WeakNum);
+                    g162.GetComponent<BlockTrail>().GoPlayer = false;
+                    g162.SetActive(true);
+                    GameObject g162_2 = Instantiate(HealEffect);
+                    g162_2.transform.position = JewelPos[j].position;
+                    g162_2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((2 + (Chain - 1) * 0.2f) * WeakNum);
+                    g162_2.GetComponent<BlockTrail>().GoPlayer = true;
+                    g162_2.SetActive(true);
+                    break;
+                case 163:
+                    GameObject g163 = Instantiate(AttackEffect);
+                    g163.transform.position = JewelPos[j].position;
+                    g163.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((16 + (Chain - 1) * 1.6f) * WeakNum);
+                    g163.GetComponent<BlockTrail>().GoPlayer = false;
+                    g163.SetActive(true);
+                    break;
+                case 164:
+                    GameObject g164 = Instantiate(ShieldEffect);
+                    g164.transform.position = JewelPos[j].position;
+                    g164.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((8 + (Chain - 1) * 0.8f) * WeakNum);
+                    g164.GetComponent<BlockTrail>().GoPlayer = true;
+                    g164.SetActive(true);
+                    break;
+                case 165:
+                    int Gem165 = 0;
+                    for(int g = 0; g < 49; g++)
+                    {
+                        if (JewelNum[g] == 165)
+                        {
+                            Gem165 += 1;
+                        }
+                    }
+                    GameObject g165 = Instantiate(AttackEffect);
+                    g165.transform.position = JewelPos[j].position;
+                    if (Gem165 >= 12)
+                    {
+                        g165.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((32 + (Chain - 1) * 3.2f) * WeakNum);
+                    }
+                    else
+                    {
+                        g165.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((16 + (Chain - 1) * 1.6f) * WeakNum);
+                    }
+                    g165.GetComponent<BlockTrail>().GoPlayer = false;
+                    g165.SetActive(true);
+                    break;
+                case 166:
+                    int Gem166 = 0;
+                    for (int g = 0; g < 49; g++)
+                    {
+                        if (JewelNum[g] == 166)
+                        {
+                            Gem166 += 1;
+                        }
+                    }
+                    GameObject g166 = Instantiate(ShieldEffect);
+                    g166.transform.position = JewelPos[j].position;
+                    if (Gem166 <= 8)
+                    {
+                        g166.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((14 + (Chain - 1) * 1.4f) * WeakNum);
+                    }
+                    else
+                    {
+                        g166.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((7 + (Chain - 1) * 0.7f) * WeakNum);
+                    }
+                    g166.GetComponent<BlockTrail>().GoPlayer = true;
+                    g166.SetActive(true);
+                    break;
+                case 167:
+                    GameObject g167 = Instantiate(RevengeEffect);
+                    g167.transform.position = JewelPos[j].position;
+                    g167.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((4 + (Chain - 1) * 0.4f) * WeakNum);
+                    g167.GetComponent<BlockTrail>().GoPlayer = true;
+                    g167.SetActive(true);
+                    if(Chain >= 7 && !Gem167)
+                    {
+                        Gem167 = true;
+                        CurrentHand += 2;
+                        for (int k = 0; k < 3; k++)
+                        {
+                            GameObject g167_2 = Instantiate(JewelFlash2[2]);
+                            g167_2.transform.position = JewelPos[C].position;
+                            g167_2.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(-180f, 180f));
+                            g167_2.SetActive(true);
+                        }
+                    }
+                    break;
+                case 168:
+                    GameObject g168 = Instantiate(RevengeEffect);
+                    g168.transform.position = JewelPos[j].position;
+                    g168.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((4 + (Chain - 1) * 0.4f) * WeakNum);
+                    g168.GetComponent<BlockTrail>().GoPlayer = true;
+                    g168.SetActive(true);
+                    if (Chain >= 11 && !Gem168)
+                    {
+                        Gem168 = true;
+                        if (Iscript.PlayerHPRate >= 0.1f)
+                        {
+                            Iscript.PlayerHPRate -= 0.05f;
+                            Bscript.RevengeSlider.maxValue -= 5;
+                        }
+                        for (int k = 0; k < 3; k++)
+                        {
+                            GameObject g168_2 = Instantiate(JewelFlash2[2]);
+                            g168_2.transform.position = JewelPos[C].position;
+                            g168_2.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(-180f, 180f));
+                            g168_2.SetActive(true);
+                        }
+                    }
+                    break;
+                case 169:
+                    GameObject g169 = Instantiate(RevengeEffect);
+                    g169.transform.position = JewelPos[j].position;
+                    g169.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((5 + (Chain - 1) * 0.5f) * WeakNum);
+                    g169.GetComponent<BlockTrail>().GoPlayer = true;
+                    g169.SetActive(true);
+                    if(Bscript.RevengeSlider.value == Bscript.RevengeSlider.maxValue)
+                    {
+                        GameObject g169_2 = Instantiate(AttackEffect);
+                        g169_2.transform.position = JewelPos[j].position;
+                        g169_2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((16 + (Chain - 1) * 1.6f) * WeakNum);
+                        g169_2.GetComponent<BlockTrail>().GoPlayer = false;
+                        g169_2.SetActive(true);
+                    }
+                    break;
+                case 170:
+                    GameObject g170 = Instantiate(AttackEffect);
+                    g170.transform.position = JewelPos[j].position;
+                    g170.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((15 + (Chain - 1) * 1.5f) * WeakNum);
+                    g170.GetComponent<BlockTrail>().GoPlayer = false;
+                    g170.SetActive(true);
+                    if (Chain >= 14 && !Gem170)
+                    {
+                        Gem170 = true;
+                        int Judge = Random.Range(0, 5);
+                        for (int g = 0; g < 49; i++)
+                        {
+                            if (JewelNum[i] == EquipJewel[Judge])
+                            {
+                                JewelVanish(i);
+                            }
+                        }
+                        for (int k = 0; k < 3; k++)
+                        {
+                            GameObject g168_2 = Instantiate(JewelFlash2[2]);
+                            g168_2.transform.position = JewelPos[C].position;
+                            g168_2.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(-180f, 180f));
+                            g168_2.SetActive(true);
+                        }
+                    }
+                    break;
+                case 171:
+                    GameObject g171 = Instantiate(AttackEffect);
+                    g171.transform.position = JewelPos[j].position;
+                    g171.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((36 + (Chain - 1) * 3.6f) * WeakNum);
+                    g171.GetComponent<BlockTrail>().GoPlayer = false;
+                    g171.SetActive(true);
+                    break;
+                case 172:
+                    GameObject g172 = Instantiate(AttackEffect);
+                    g172.transform.position = JewelPos[j].position;
+                    if (Iscript.BlessList[1] == 0)
+                    {
+                        g172.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((32 + (Chain - 1) * 3.2f) * WeakNum);
+                    }
+                    else
+                    {
+                        g172.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((16 + (Chain - 1) * 1.6f) * WeakNum);
+                    }
+                    g172.GetComponent<BlockTrail>().GoPlayer = false;
+                    g172.SetActive(true);
+                    break;
+                case 173:
+                    GameObject g173 = Instantiate(AttackEffect);
+                    g173.transform.position = JewelPos[j].position;
+                    g173.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((40 + (Chain - 1) * 4f) * WeakNum);
+                    g173.GetComponent<BlockTrail>().GoPlayer = false;
+                    g173.SetActive(true);
+                    break;
+                case 174:
+                    GameObject g174 = Instantiate(ShieldEffect);
+                    g174.transform.position = JewelPos[j].position;
+                    g174.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((20 + (Chain - 1) * 2f) * WeakNum);
+                    g174.GetComponent<BlockTrail>().GoPlayer = true;
+                    g174.SetActive(true);
+                    break;
+                case 175:
+                    if(Chain <= 7)
+                    {
+                        GameObject g175_1 = Instantiate(ShieldEffect);
+                        g175_1.transform.position = JewelPos[j].position;
+                        g175_1.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((8 + (Chain - 1) * 0.8f) * WeakNum);
+                        g175_1.GetComponent<BlockTrail>().GoPlayer = true;
+                        g175_1.SetActive(true);
+                    }
+                    else
+                    {
+                        GameObject g175_2 = Instantiate(AttackEffect);
+                        g175_2.transform.position = JewelPos[j].position;
+                        g175_2.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((24 + (Chain - 1) * 2.4f) * WeakNum);
+                        g175_2.GetComponent<BlockTrail>().GoPlayer = false;
+                        g175_2.SetActive(true);
+                    }
+                    break;
+                case 176:
+                    int h = 0;
+                    for(int g = 0; g < 5; g++)
+                    {
+                        if (Iscript.JewelNum[g] == 176)
+                        {
+                            h = Mathf.FloorToInt(GemProb[g]);
+                        }
+                    }
+                    GameObject g176 = Instantiate(AttackEffect);
+                    g176.transform.position = JewelPos[j].position;
+                    g176.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((h + (Chain - 1) * h * 0.1f) * WeakNum);
+                    g176.GetComponent<BlockTrail>().GoPlayer = false;
+                    g176.SetActive(true);
+                    if (Iscript.PlayerHP > 3)
+                    {
+                        Iscript.PlayerHP -= 3;
+                    }
+                    else
+                    {
+                        Iscript.PlayerHP = 1;
+                    }
+                    break;
+                case 178:
+                    GameObject g178 = Instantiate(ShieldEffect);
+                    g178.transform.position = JewelPos[j].position;
+                    g178.GetComponent<EffectScript>().EffectNum = 0;
+                    g178.GetComponent<BlockTrail>().GoPlayer = true;
+                    g178.SetActive(true);
+                    Bscript.PlayerShield = Mathf.FloorToInt(Bscript.PlayerShield * 1.04f);
+                    break;
+                case 179:
+                    GameObject g179 = Instantiate(RevengeEffect);
+                    g179.transform.position = JewelPos[j].position;
+                    g179.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((14 + (Chain - 1) * 1.4f) * WeakNum);
+                    g179.GetComponent<BlockTrail>().GoPlayer = true;
+                    g179.SetActive(true);
+                    break;
+                case 180:
+                    if(Chain == 1)
+                    {
+                        GameObject g180 = Instantiate(AttackEffect);
+                        g180.transform.position = JewelPos[j].position;
+                        g180.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((80 + (Chain - 1) * 8f) * WeakNum);
+                        g180.GetComponent<BlockTrail>().GoPlayer = false;
+                        g180.SetActive(true);
+                    }
+                    break;
+                case 181:
+                    GameObject g181 = Instantiate(ShieldEffect);
+                    g181.transform.position = JewelPos[j].position;
+                    g181.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((7 + Iscript.Gem181 + (Chain - 1) * (0.7f + (Iscript.Gem181 * 0.1f))) * WeakNum);
+                    g181.GetComponent<BlockTrail>().GoPlayer = true;
+                    g181.SetActive(true);
+                    break;
+                case 182:
+                    GameObject g182 = Instantiate(HealEffect);
+                    g182.transform.position = JewelPos[j].position;
+                    g182.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((3 + (Chain - 1) * 0.3f) * WeakNum);
+                    g182.GetComponent<BlockTrail>().GoPlayer = true;
+                    g182.SetActive(true);
+                    Iscript.PlayerMaxHP += Mathf.FloorToInt((1 + (Chain - 1) * 0.1f) * WeakNum);
+                    break;
+                case 183:
+                    GameObject g183 = Instantiate(AttackEffect);
+                    g183.transform.position = JewelPos[j].position;
+                    g183.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((MaxChain + (Chain - 1) * (MaxChain * 0.1f)) * WeakNum);
+                    g183.GetComponent<BlockTrail>().GoPlayer = false;
+                    g183.SetActive(true);
+                    break;
+                case 184:
+                    GameObject g184 = Instantiate(ShieldEffect);
+                    g184.transform.position = JewelPos[j].position;
+                    g184.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((CurrentHand + (Chain - 1) * (CurrentHand * 0.1f)) * WeakNum);
+                    g184.GetComponent<BlockTrail>().GoPlayer = true;
+                    g184.SetActive(true);
+                    break;
+                case 185:
+                    GameObject g185 = Instantiate(AttackEffect);
+                    g185.transform.position = JewelPos[j].position;
+                    g185.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((16 + (Chain - 1) * 1.6f) * WeakNum);
+                    g185.GetComponent<EffectScript>().Gem185 = true;
+                    g185.GetComponent<BlockTrail>().GoPlayer = false;
+                    g185.SetActive(true);
+                    break;
+                case 186:
+                    GameObject g186 = Instantiate(ShieldEffect);
+                    g186.transform.position = JewelPos[j].position;
+                    if (Bscript.PlayerDamaged)
+                    {
+                        g186.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((14 + (Chain - 1) * 1.4f) * WeakNum);
+                    }
+                    else
+                    {
+                        g186.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((7 + (Chain - 1) * 0.7f) * WeakNum);
+                    }
+                    g186.GetComponent<BlockTrail>().GoPlayer = true;
+                    g186.SetActive(true);
+                    break;
+                case 187:
+                    GameObject g187 = Instantiate(AttackEffect);
+                    g187.transform.position = JewelPos[j].position;
+                    g187.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((14 + (Chain - 1) * 1.4f) * WeakNum);
+                    g187.GetComponent<BlockTrail>().GoPlayer = false;
+                    g187.SetActive(true);
+                    break;
+                case 188:
+                    GameObject g188 = Instantiate(ShieldEffect);
+                    g188.transform.position = JewelPos[j].position;
+                    g188.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((25 + (Chain - 1) * 2.5f) * WeakNum);
+                    g188.GetComponent<BlockTrail>().GoPlayer = true;
+                    g188.SetActive(true);
+                    break;
+                case 189:
+                    GameObject g189 = Instantiate(AttackEffect);
+                    g189.transform.position = JewelPos[j].position;
+                    g189.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((23 + (Chain - 1) * 2.3f) * WeakNum);
+                    g189.GetComponent<BlockTrail>().GoPlayer = false;
+                    g189.SetActive(true);
+                    break;
+                case 190:
+                    GameObject g190 = Instantiate(AttackEffect);
+                    g190.transform.position = JewelPos[j].position;
+                    g190.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((Iscript.Gem190 + (Chain - 1) * Iscript.Gem190 * 0.1f) * WeakNum);
+                    g190.GetComponent<BlockTrail>().GoPlayer = false;
+                    g190.SetActive(true);
+                    break;
+                case 191:
+                    Bscript.PlayerShield -= 5;
+                    if(Bscript.PlayerShield < 0f)
+                    {
+                        Bscript.PlayerShield = 0;
+                    }
+                    Gem130 += Mathf.FloorToInt((17 + (Chain - 1) * 1.7f) * WeakNum);
+                    break;
+                case 192:
+                    Iscript.PlayerMaxHP += Mathf.FloorToInt((4 + (Chain - 1) * 0.4f) * WeakNum);
+                    if (Iscript.PlayerHP > 6)
+                    {
+                        Iscript.PlayerHP -= 6;
+                    }
+                    else
+                    {
+                        Iscript.PlayerHP = 1;
+                    }
+                    break;
+                case 193:
+                    GameObject g193 = Instantiate(AttackEffect);
+                    g193.transform.position = JewelPos[j].position;
+                    g193.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((Iscript.PlayerMaxHP * 0.03f + (Chain - 1) * Iscript.PlayerMaxHP * 0.003f) * WeakNum);
+                    g193.GetComponent<BlockTrail>().GoPlayer = false;
+                    g193.SetActive(true);
+                    break;
+                case 194:
+                    if(Bscript.CurrentRound >= 7)
+                    {
+                        GameObject g194 = Instantiate(AttackEffect);
+                        g194.transform.position = JewelPos[j].position;
+                        g194.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((60 + (Chain - 1) * 6f) * WeakNum);
+                        g194.GetComponent<BlockTrail>().GoPlayer = false;
+                        g194.SetActive(true);
+                    }
+                    break;
+                case 196:
+                    int[] k0 = new int[49];
+                    for (int m0 = 0; m0 < 2; m0++)
+                    {
+                        int Judge = Random.Range(0, 49);
+                        for (int i4 = 0; i4 < 100 && k0[Judge] == 1; i4++)
+                        {
+                            Judge = Random.Range(0, 49);
+                        }
+                        k0[Judge] = 1;
+                        if (JewelNum[Judge] < 200)
+                        {
+                            JewelVanish(Judge);
+                        }
+                    }
+                    break;
+                case 197:
+                    int Gem197 = 0;
+                    for (int g = 0; g < 49; g++)
+                    {
+                        if (JewelNum[g] == 200)
+                        {
+                            Gem197 += 1;
+                        }
+                    }
+                    GameObject g197 = Instantiate(AttackEffect);
+                    g197.transform.position = JewelPos[j].position;
+                    if (Gem197 >= 1)
+                    {
+                        g197.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((30 + (Chain - 1) * 3f) * WeakNum);
+                    }
+                    else
+                    {
+                        g197.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((15 + (Chain - 1) * 1.5f) * WeakNum);
+                    }
+                    g197.GetComponent<BlockTrail>().GoPlayer = false;
+                    g197.SetActive(true);
+                    break;
+                case 198:
+                    int Gem198 = 0;
+                    for (int g = 0; g < 49; g++)
+                    {
+                        if (JewelNum[g] == 200)
+                        {
+                            Gem198 += 3;
+                        }
+                    }
+                    GameObject g198 = Instantiate(ShieldEffect);
+                    g198.transform.position = JewelPos[j].position;
+                    g198.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((Gem198 + (Chain - 1) * Gem198 * 0.1f) * WeakNum);
+                    g198.GetComponent<BlockTrail>().GoPlayer = true;
+                    g198.SetActive(true);
+                    break;
+                case 199:
+                    GameObject g199 = Instantiate(AttackEffect);
+                    g199.transform.position = JewelPos[j].position;
+                    g199.GetComponent<EffectScript>().EffectNum = Mathf.FloorToInt((50 + (Chain - 1) * 5f) * WeakNum);
+                    g199.GetComponent<BlockTrail>().GoPlayer = false;
+                    g199.SetActive(true);
+                    int Judge2 = Random.Range(0, 100);
+                    if(Judge2 == 0)
+                    {
+                        GameObject g200 = Instantiate(AttackEffect);
+                        g200.transform.position = JewelPos[j].position;
+                        g200.GetComponent<EffectScript>().EffectNum = 999999;
+                        g200.GetComponent<BlockTrail>().GoPlayer = true;
+                        g200.SetActive(true);
                     }
                     break;
 

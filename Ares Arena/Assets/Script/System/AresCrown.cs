@@ -90,7 +90,7 @@ public class AresCrown : MonoBehaviour
         {
             TextPattern = 3;
         }
-        if (Iscript.Bless[75] == 1)
+        if (Iscript.Bless[80] == 1)
         {
             TextPattern = 4;
             switch (Language)

@@ -29,6 +29,7 @@ public class BattleManager : MonoBehaviour
     public CanvasGroup RevengeFlash;
     public GameObject RevengeGo;
     public bool IsG;
+    public bool PlayerDamaged;
     float HitStop;
 
     public int PatternNum;
@@ -569,6 +570,7 @@ public class BattleManager : MonoBehaviour
             Invoke("R2", 1f);
             IsE = true;
             Pscript.PlayerRound = false;
+            PlayerDamaged = false;
             EnemyShield = 0;
             Pscript.Debuff_Lightning = 0;
             for(int i = 0; i < 49; i++)

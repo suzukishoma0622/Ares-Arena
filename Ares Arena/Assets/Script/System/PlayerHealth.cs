@@ -31,6 +31,10 @@ public class PlayerHealth : MonoBehaviour
             {
                 Iscript.PlayerHP -= d;
                 Iscript.SE.PlayOneShot(PoizonSE);
+                if (Pscript.Gem188)
+                {
+                    Iscript.PlayerHP = 0;
+                }
             }
             else
             {
@@ -97,6 +101,21 @@ public class PlayerHealth : MonoBehaviour
                         {
                             d -= 10;
                         }
+                        for (int i = 0; i < 49; i++)
+                        {
+                            if (Pscript.JewelNum[i] == 177)
+                            {
+                                Pscript.JewelNum[i] = 200;
+                                GameObject g4 = Instantiate(Pscript.JewelObj[200]);
+                                g4.transform.position = Pscript.JewelDisplay[i].transform.position;
+                                g4.transform.SetParent(gameObject.transform, true);
+                                Destroy(Pscript.JewelDisplay[i]);
+                                Pscript.JewelDisplay[i] = g4;
+                                GameObject g4_2 = Instantiate(Pscript.SaintRevengeEffect[2]);
+                                g4_2.transform.position = Pscript.JewelDisplay[i].transform.position;
+                            }
+                        }
+                        Bscript.PlayerDamaged = true;
                         Iscript.PlayerHP -= d;
                         Iscript.SE.PlayOneShot(GuardBreakSE);
                         Iscript.SE.PlayOneShot(HitSE);
@@ -105,7 +124,7 @@ public class PlayerHealth : MonoBehaviour
                         g3.transform.position = this.transform.position;
                         g3.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                         g3.SetActive(true);
-                        if (collision.gameObject.GetComponent<EffectScript>().Attack_Execution)
+                        if (collision.gameObject.GetComponent<EffectScript>().Attack_Execution || Pscript.Gem188)
                         {
                             Iscript.PlayerHP = 0;
                         }
@@ -147,10 +166,25 @@ public class PlayerHealth : MonoBehaviour
                     {
                         d -= 10;
                     }
+                    for(int i = 0; i < 49; i++)
+                    {
+                        if (Pscript.JewelNum[i] == 177)
+                        {
+                            Pscript.JewelNum[i] = 200;
+                            GameObject g4 = Instantiate(Pscript.JewelObj[200]);
+                            g4.transform.position = Pscript.JewelDisplay[i].transform.position;
+                            g4.transform.SetParent(gameObject.transform, true);
+                            Destroy(Pscript.JewelDisplay[i]);
+                            Pscript.JewelDisplay[i] = g4;
+                            GameObject g4_2 = Instantiate(Pscript.SaintRevengeEffect[2]);
+                            g4_2.transform.position = Pscript.JewelDisplay[i].transform.position;
+                        }
+                    }
+                    Bscript.PlayerDamaged = true;
                     Iscript.PlayerHP -= d;
                     Iscript.SE.PlayOneShot(HitSE);
                     Iscript.SE.PlayOneShot(RevengeSE);
-                    if (collision.gameObject.GetComponent<EffectScript>().Attack_Execution)
+                    if (collision.gameObject.GetComponent<EffectScript>().Attack_Execution || Pscript.Gem188)
                     {
                         Iscript.PlayerHP = 0;
                         Bscript.DeadEffect();
@@ -278,5 +312,9 @@ public class PlayerHealth : MonoBehaviour
             Bscript.IsG = true;
             Iscript.SE.PlayOneShot(RevengeSE);
         }
+    }
+    void Damaged()
+    {
+
     }
 }

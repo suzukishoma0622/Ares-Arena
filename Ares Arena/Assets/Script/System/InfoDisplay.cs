@@ -70,6 +70,11 @@ public class InfoDisplay : MonoBehaviour
     public bool Bless70;
     public int Bless81;
 
+    public int Gem181;
+    public int Gem190 = 30;
+    public bool IsGem181;
+    public bool IsGem190;
+
     void Start()
     {
         data = GetComponent<DataManager>().Dscript;

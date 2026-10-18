@@ -121,6 +121,17 @@ public class EnemyHealth : MonoBehaviour
                     {
                         Bscript.RewardMedal += 1;
                     }
+                    if (collision.gameObject.GetComponent<EffectScript>().Gem185)
+                    {
+                        Iscript.PlayerMaxHP += 50;
+                    }
+                    for(int i = 0; i < 5; i++)
+                    {
+                        if (Iscript.JewelNum[i] == 187)
+                        {
+                            Bscript.RewardMedal += 1;
+                        }
+                    }
                     Bscript.DefeatEffect();
                 }
             }
